@@ -179,7 +179,7 @@ hr {
 }
 #finder-box {
   border: 0px solid black;
-  top: 150px;
+  top: 80px;
   height: 3%;
   width: 20%;
   padding: 10px;
@@ -190,7 +190,7 @@ hr {
   background-color: rgba(255, 255, 255, 0.93);
   border-radius: 0.6em;
   box-shadow: 2px 2px 15px grey;
-  top: 200px;
+  top: 100px;
   height: 50%;
   width: 23%;
   padding: 10px;
