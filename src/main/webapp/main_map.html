@@ -16,53 +16,55 @@
   </div>
 </div>
 
-
 <div id="friend-box">
   <div class="panel panel-info">
     <div class="panel-heading match-heading">
       BestMatch
     </div>
     <div class="panel-body">
-      <span id="img-in-box"><img src="images/seol2.png" 
-                     class="img-circle match-friendimg"></span>
+      <span id="img-in-box">
+      <img src="images/seol2.png" 
+           class="img-circle match-friendimg"></span>
        설현<br>
        50m 이내
       <button type="button" class="btn btn-info btn-xs addfriend-btn">
         친구 추가
       </button>
     </div>
-</div>
-   
-  
-    <div class="panel panel-info">
+  </div>
+
+
+  <div class="panel panel-info">
     <div class="panel-body">
-      <span id="img-in-box"><img src="images/hangain.jpg" 
-                     class="img-circle match-friendimg"></span>
-       한가인<br>
-       200m 이내
-      <button type="button" class="btn btn-info btn-xs addfriend-btn">
-        친구 추가
-      </button>
+      <span id="img-in-box">
+      <img src="images/hangain.jpg" 
+           class="img-circle match-friendimg"></span>
+      한가인<br>
+      200m 이내
+        <button type="button" class="btn btn-info btn-xs addfriend-btn">
+          친구 추가
+        </button>
     </div>
   </div>
-  
-  
   
   <div class="panel panel-info">
     <div class="panel-body">
-      <span id="img-in-box"><img src="images/kianu.jpeg" 
-                     class="img-circle match-friendimg"></span>
-       키아누리브쑤<br>
-       500m 이내
+      <span id="img-in-box">
+      <img src="images/kianu.jpeg" 
+           class="img-circle match-friendimg"></span>
+      키아누리브쑤<br>
+      500m 이내
       <button type="button" class="btn btn-info btn-xs addfriend-btn">
         친구 추가
       </button>
     </div>
   </div>
+</div>
   
 
 
 <script>
+  var friendMarkers = new Array;
   var friendLocArr = [
     ['friend0', 37.497129, 127.027612, 4],
     ['friend1', 37.496708, 127.026865, 5],
@@ -70,21 +72,17 @@
     ['friend3', 37.497380, 127.027294, 2],
     ['friend4', 37.498674, 127.028249, 1]
   ];
-  var notFriendLocArr = [
-    ['friend0', 37.496629, 127.027622, 4],
-    ['friend1', 37.495508, 127.026845, 5],
-    ['friend2', 37.497248, 127.026352, 3],
-    ['friend3', 37.499380, 127.027244, 2],
-    ['friend4', 37.497624, 127.028219, 1]
-  ];
-
-  var friendMarkers = new Array;
   var notFriendMarkers = new Array;
+  var notFriendLocArr = [
+    ['notFriend0', 37.496629, 127.027622, 4],
+    ['notFriend1', 37.495508, 127.026845, 5],
+    ['notFriend2', 37.497248, 127.026352, 3],
+    ['notFriend3', 37.499380, 127.027244, 2],
+    ['notFriend4', 37.497624, 127.028219, 1]
+  ];
 
   var map;
   var infowindow;
-
-
   var contentString = '<div id="content">' +
     '<table>' +
     '<tr><td><img src="images/seol.png" class="img-circle"></td><td rowspan="2">외출중..[남김말]</td></tr>' +
@@ -92,14 +90,17 @@
     '</table>' +
     '</div>';
 
-
   function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
       zoom: 17,
       center: {
         lat: 37.498129,
         lng: 127.027612
-      }
+      },
+      disableDefaultUI: true, 
+      panControl: false,
+      zoomControl: false,
+      scaleControl: false
     });
     infowindow = new google.maps.InfoWindow({
       content: contentString
@@ -112,7 +113,6 @@
       markNotFriends(i);
     }
   }
-
 
   function markFriends(i) {
     var friendLoc = friendLocArr[i];
@@ -153,13 +153,7 @@
     }, i * 100);
   }
 
-  function setContent(i) {
-    markers[i].addEventListener('click', function() {
-      infowindow.open(map, markers[i]);
-    });
-  }
-
 </script>
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?signed_in=true&callback=initMap"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?signed_in=false&callback=initMap"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
