@@ -9,6 +9,7 @@
   <title>1인가구를 위한 SNS - itTogether</title>
   <link rel='stylesheet' href="css/bootstrap.css" />
   <link rel='stylesheet' href="css/bootstrap-theme.css" />
+  <link href=“css/bootstrap-tour.min.css” rel=“stylesheet">
   <link rel='stylesheet' href="css/logo-nav.css" />
   <link rel='stylesheet' href="css/main.css" />
   <link rel='stylesheet' href="css/modal.css" />
@@ -188,15 +189,31 @@
       <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
-
-    <script type="text/javascript">
-      function toggleToMap() {
+<script>
+     /*  function toggleToMap() {
         $('#changeToMap').load('main_map.html');
-      }
-
-    </script>
+      } */
+      var tour = new Tour({
+        steps: [{
+                       element: "#backgroundImg", // string (jQuery selector) - html element next to which the step popover should be shown
+                       title: "Title of my step", // string - title of the popover
+                       content: "Content of my step" // string - content of the popover
+                     },
+                     {
+                       element: "#left-feed",
+                       title: "Title of my step",
+                       content: "Content of my step"
+                     }]
+      });
+      tour.init();
+      
+      $('#changeToMap').click(function(){
+        tour.start();
+      });
+</script>
     <script type="text/javascript" src="js/lib/jquery-1.11.3.js"></script>
     <script type="text/javascript" src="js/lib/bootstrap.js"></script>
+    <script type="text/javascript" src=“js/lib/bootstrap-tour.js”></script>
     <script type="text/javascript" src="js/lib/angular.js"></script>
     <script type="text/javascript" src="js/app/main.js"></script>
 </body>
