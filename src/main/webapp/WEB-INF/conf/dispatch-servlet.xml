@@ -13,6 +13,7 @@
        expression="org.springframework.stereotype.Service"/>  
   </context:component-scan>
   
+  
   <!-- 멀티파트 데이터를 처리할 객체를 준비한다. -->
   <bean id="multipartResolver"
         class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

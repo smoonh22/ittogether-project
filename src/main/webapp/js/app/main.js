@@ -9,9 +9,7 @@
     this.feeds = nonfriends;
   });
   
-  app.controller('toggleMainBgCtrl', function() {
-    this.map = pressBtn;
-  });
+  
   var friends = [
     {
       name: '송문혁',
@@ -69,11 +67,10 @@
       
     }
   ];
+   
   
-  var pressBtn = {
-    press: true 
-  };
-
+  
+    
 })();
 
 

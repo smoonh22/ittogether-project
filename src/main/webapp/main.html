@@ -12,11 +12,7 @@
   <link rel='stylesheet' href="css/logo-nav.css" />
   <link rel='stylesheet' href="css/main.css" />
   <link rel='stylesheet' href="css/modal.css" />
-    <script type='text/javascript' charset='utf-8'>
-    $(document).ready(function(){
-      $('.popbox').popbox();
-    });
-  </script>
+   
 </head>
 
 <body>
@@ -56,7 +52,7 @@
     <!-- /.container -->
   </nav>
   <div id="changeToMap">
-    <div id='backgroundImg' ng-controller="toggleMainBgCtrl as toglCtrl">
+    <div id='backgroundImg'>
       <div class="span6 col-sm-6  editorial-container">
         <div class="editorial-cell">
           <h1 class="editorial-title">동네에서 친구를 찾으시나요?</h1>
@@ -129,34 +125,6 @@
   </div>
 
  
-
-   <script type='text/javascript' charset='utf-8' src='js/lib/popbox.js'></script>
-        <link rel='stylesheet' href='css/popbox.css' type='text/css'>
-
-      <div class='popbox'>
-    <a class='open' href='#'>
-      <img src='images/plus.png' style='width:14px;position:relative;'> Click Here!
-    </a>
-
-    <div class='collapse'>
-      <div class='box'>
-        <div class='arrow'></div>
-        <div class='arrow-border'></div>
-
-        <form action="http://gristmill.createsend.com/t/j/s/zlldr/" method="post" id="subForm">
-          <p><small>Please complete the form to sign up for the <a href="http://gristmill.io" target="_blank">Gristmill</a> mailing list!</small></p>
-          <div class="input">
-            <input type="text" name="cm-name" id="name" placeholder="Name" />
-          </div>
-          <div class="input">
-            <input type="text" name="cm-zlldr-zlldr" id="zlldr-zlldr" placeholder="Email" />
-          </div>
-          <input type="submit" value="Sign Up" /> <a href="#" class="close">Cancel</a>
-        </form>
-
-      </div>
-    </div>
-  </div>
         
     <!-- modal start -->
   <div id="normalModal" class="modal fade">
@@ -225,6 +193,7 @@
     </div>
     <!-- /.modal -->
 
+    <script type="text/javascript" src="js/lib/jquery-1.11.3.js"></script>
     <script type="text/javascript">
       function toggleToMap() {
         $('#changeToMap').load('main_map.html');
@@ -234,7 +203,6 @@
   $(this).find(".modal-body").css("max-height", height);
 });
     </script>
-    <script type="text/javascript" src="js/lib/jquery-1.11.3.js"></script>
     <script type="text/javascript" src="js/lib/bootstrap.js"></script>
     <script type="text/javascript" src="js/lib/angular.js"></script>
     <script type="text/javascript" src="js/app/main.js"></script>
