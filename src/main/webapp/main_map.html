@@ -13,8 +13,14 @@
     <button type="button" class="btn btn-info btn-xs btn-on-map">취미</button>
     <button type="button" class="btn btn-info btn-xs btn-on-map">고향 </button>
     <button type="button" class="btn btn-info btn-xs btn-on-map">나이 </button>
+  <div class="btn-group" role="group" aria-label="...">
+    <button type="button" class="btn btn-info btn-xs">200m</button>
+    <button type="button" class="btn btn-info btn-xs">500m</button>
+    <button type="button" class="btn btn-info btn-xs">1km</button>
+  </div>
   </div>
 </div>
+
 
 <div id="friend-box">
   <div class="panel panel-info">
@@ -82,13 +88,15 @@
   ];
 
   var map;
-  var infowindow;
-  var contentString = '<div id="content">' +
+  var friendWindow;
+  var notFriendWindow;
+  var contentString1 = '<div id="content">' +
     '<table>' +
     '<tr><td><img src="images/seol.png" class="img-circle"></td><td rowspan="2">외출중..[남김말]</td></tr>' +
     '<tr><td>설현</td></tr>' +
     '</table>' +
     '</div>';
+  var contentString = ["check1", "check2"];
 
   function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -102,8 +110,11 @@
       zoomControl: false,
       scaleControl: false
     });
-    infowindow = new google.maps.InfoWindow({
-      content: contentString
+    friendWindow = new google.maps.InfoWindow({
+      content: friendLocArr[0][0]
+    });
+    notFriendWindow = new google.maps.InfoWindow({
+      content: notFriendLocArr[0][0]
     });
     //  clearMarkers();
     for (var i = 0; i < friendLocArr.length; i++) {
@@ -128,8 +139,7 @@
         icon: 'images/home.png'
       }));
       friendMarkers[i].addListener('click', function() {
-        infowindow.open(map, friendMarkers[i], friendLocArr[0]);
-        marker.setMap(map);
+        friendWindow.open(map, friendMarkers[i]);
       });
     }, i * 100);
   }
@@ -148,7 +158,7 @@
         icon: 'images/pin.png'
       }));
       notFriendMarkers[i].addListener('click', function() {
-        infowindow.open(map, notFriendMarkers[i]);
+        notFriendWindow.open(map, notFriendMarkers[i]);
       });
     }, i * 100);
   }
