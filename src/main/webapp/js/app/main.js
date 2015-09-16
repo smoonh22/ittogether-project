@@ -67,10 +67,9 @@
       
     }
   ];
+   
   
-
-
-  console.log(friends[0].name);  
+  
     
 })();
 
