@@ -83,16 +83,17 @@ function initAutocomplete() { /* 초기화 함수*/
   searchBox.addListener('places_changed', function() {
     var places = searchBox.getPlaces();
 
-    markers.forEach(function(marker) {
+   /*  markers.forEach(function(marker) {
       marker.setMap(null);
     });
     markers = [];
-
+ */
     var bounds = new google.maps.LatLngBounds();
     places.forEach(function(place) {
       markers.push(new google.maps.Marker({
         title: place.name,
-        position: place.geometry.location
+        position: place.geometry.location,
+        map: map
       }));
 
       if (place.geometry.viewport) {
@@ -113,6 +114,9 @@ function initAutocomplete() { /* 초기화 함수*/
     if (marker) {
       marker.setPosition(location);
     } else {
+      
+      markers[0].setPosition(null);
+      
       marker = new google.maps.Marker({
         position: location,
         map: map
