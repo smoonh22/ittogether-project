@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.bit.java72.dao.FeedDao">
+  <resultMap type="Feed" id="FeedMap">
+    <id     column="fno"      property="fno" />
+    <result column="categry"    property="category" />
+    <result column="contnt"      property="content" />
+    <result column="cre_dt"   property="createDate" />
+    <result column="max_headcnt" property="maxHeadCount"/>
+    <result column="cnt" property="stuffCount"/>
+    <result column="meet_time" property="meetTime"/>
+  </resultMap>
+  
+  <resultMap type="Join" id="JoinMap">
+    <id     column="fno"      property="fno" />
+    <result column="categry"    property="category" />
+    <result column="contnt"      property="content" />
+    <result column="cre_dt"   property="createDate" />
+    <result column="max_headcnt" property="maxHeadCount"/>
+    <result column="cnt" property="stuffCount"/>
+    <result column="meet_time" property="meetTime"/>
+    <result column="nicknm"    property="nickname" />
+    <result column="pwd"      property="password" />
+    <result column="hometwn" property="hometown"/>
+    <result column="lat" property="latitude"/>
+    <result column="lon" property="longitude"/>
+    <result column="addr" property="address"/>
+    <result column="mphoto" property="profilePicture"/>
+  </resultMap>
+  
+  <select id="list" resultMap="JoinMap">
+  select 
+	t1.NAME,
+	t1.MPHOTO,
+	t2.CATEGRY,
+	t2.MAX_HEADCNT,
+	t2.CNT,
+	t2.MEET_TIME,
+	t2.CONTNT,
+	t2.cre_dt,
+	t2.TITLE
+	from memb_t t1, feed_t t2
+	where t1.mno=t2.mno
+	ORDER by t2.cre_dt desc
+	limit 4;
+  </select>
+ 
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
