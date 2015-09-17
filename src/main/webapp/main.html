@@ -48,7 +48,7 @@
         </ul>
         
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" class="open"><span class="glyphicon glyphicon-user"></span> 내 친구들</a></li>
+          <li><a href="#" onclick="tour.start();"><span class="glyphicon glyphicon-user"></span> 내 친구들</a></li>
           <li><a data-toggle="modal" href="#normalModal"><span class="glyphicon glyphicon-cog"></span> 내 정보</a></li>
           <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
         </ul>
@@ -228,7 +228,6 @@
     </div>
     </div>
     <!-- /.modal -->
-    </div>
     
 
     <script type="text/javascript" src="js/lib/jquery-1.11.3.js"></script>
@@ -239,14 +238,11 @@
     <script type="text/javascript">
       function toggleToMap() {
         $('#changeToMap').load('main_map.html');
-        tour.start();
+        
       }
-      $(".modal-wide").on("show.bs.modal", function() {
-  var height = $(window).height() - 200;
-  $(this).find(".modal-body").css("max-height", height);
-});
+   
       // 도움말 시작
-      var tour = new Tour({
+       var tour = new Tour({
         storage: false,
         backdrop : true,
         steps: [
@@ -282,12 +278,9 @@
         
       ]});
       tour.init();
-
+ 
     </script>
     
-    <script type="text/javascript" src="js/lib/bootstrap.js"></script>
-    <script type="text/javascript" src="js/lib/angular.js"></script>
-    <script type="text/javascript" src="js/app/main.js"></script>
 </body>
 
 </html>
