@@ -2,18 +2,16 @@
 <html>
 
 <head>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <meta charset="UTF-8">
   <title>Login Form</title>
   <link rel='stylesheet' href="css/bootstrap.css" />
   <link rel='stylesheet' href="css/bootstrap-theme.css" />
   <link rel="stylesheet" href="css/login.css" />
   <link rel='stylesheet' href="css/modal.css" />
-
 </head>
 
 <body>
-
-  <body>
     <div class="login">
       <div class="login-screen">
         <div class="app-title">
@@ -43,8 +41,6 @@
       </div>
     </div>
 
-
-
     <!-- modal start -->
     <div id="normalModal" class="modal fade">
       <div class="modal-dialog">
@@ -55,6 +51,10 @@
           </div>
           <div class="modal-body">
             <form role="form" method="POST" action="/auth/signup.do">
+              <div class="form-group">
+                <label>이름</label>
+                <input class="form-control" id="name">
+              </div>
               <div class="form-group">
                 <label>닉네임</label>
                 <input class="form-control" id="nickname">
@@ -67,14 +67,20 @@
                 <label>비밀번호</label>
                 <input type="password" class="form-control" placeholder="비밀번호" id="password" >
               </div>
+<!--
               <div class="form-group">
-                <label>닉네임</label>
-                <input class="form-control" id="name">
+                <label>집 주소1</label>
+                <input class="form-control" id="address">
+              </div>
+-->
+              <div class="form-group">
+                <label>집 주소2</label>
+                <input id="pac-input" class="controls" type="text" placeholder="지역을 입력하세요">
+                <div id="map"></div>
+                <div><input type="text" hidden="true" value="lat" id="latitude">
+                <input type="text" hidden="true" value="lng" id="longitude"></div>
               </div>
             </form>
-
-
-
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" id="signup-button">가입하기</button>
@@ -175,12 +181,9 @@
   </script>
 -->
 
-    <script type="text/javascript" src="js/lib/jquery-1.11.3.js"></script>
-    <script type="text/javascript" src="js/lib/bootstrap.js"></script>
-    <script type="text/javascript" src="js/app/login.js"></script>
-
+<script type="text/javascript" src="js/lib/jquery-1.11.3.js"></script> 
+<script type="text/javascript" src="js/lib/bootstrap.js"></script>
+<script type="text/javascript" src="js/app/login.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&libraries=places&callback=initAutocomplete" async defer></script>
   </body>
-
-d
-
 </html>

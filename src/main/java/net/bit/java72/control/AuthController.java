@@ -48,7 +48,7 @@ public class AuthController {
     if (count > 0) {
       result.put("result", "success");
     } else {
-      result.put("result","failure");
+      result.put("result", "failure");
     }
     
     return result;

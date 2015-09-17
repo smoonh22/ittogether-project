@@ -59,7 +59,6 @@
   <body>
     <input id="pac-input" class="controls" type="text" placeholder="지역을 입력하세요">
     <div id="map"></div> <!-- 맵 -->
-    
     <div><input type="text" value="여기에 lat가 들어옴" id="lat"></div>
     <div><input type="text" value="여기에 lng가 들어옴" id="lng"></div>
     
@@ -114,13 +113,11 @@ function initAutocomplete() { /* 초기화 함수*/
     if (marker) {
       marker.setPosition(location);
     } else {
-      
-      markers[0].setPosition(null);
-      
-      marker = new google.maps.Marker({
-        position: location,
-        map: map
-      });
+        markers[0].setPosition(null);
+        marker = new google.maps.Marker({
+          position: location,
+          map: map
+        });
     }
     $("#lat").val(marker.position.H); /* 위도 경도 */
     $("#lng").val(marker.position.L);
@@ -130,9 +127,6 @@ function initAutocomplete() { /* 초기화 함수*/
 </script>
 <script type="text/javascript" src="../js/lib/jquery-1.11.3.js"></script> 
 <script type="text/javascript" src="../js/lib/bootstrap.js"></script>
-<script type="text/javascript" src="../js/lib/angular.js"></script>
-<script type="text/javascript" src="../js/app/main.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&libraries=places&callback=initAutocomplete"
-         async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&libraries=places&callback=initAutocomplete" async defer></script>
   </body>
 </html>
