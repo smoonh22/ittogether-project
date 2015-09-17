@@ -1,9 +1,14 @@
 (function () {
   var app = angular.module('main', []);
 
-  app.controller('friendFeedCtrl', function() {
-    this.feeds = friends;
-  });
+  app.controller('friendFeedCtrl', ['$http', function($http) {
+    var a = this;
+    $http.get('feed/list.do').success(function(result){
+      console.log("data : " +  result.data);
+       a.feeds = result.data;
+    });
+    
+  }]);
   
   app.controller('noneFriendFeedCtrl', function() {
     this.feeds = nonfriends;

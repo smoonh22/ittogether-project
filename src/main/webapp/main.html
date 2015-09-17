@@ -76,15 +76,15 @@
             </div>
             <div class="panel-body">
               <div class="img-div">
-               <span id="img-in-box"> <img src='{{feed.profile}}' id='friend-profileImg'
-                     class="img-circle">
+              <!--  <span id="img-in-box"> <img src='{{feed.profile}}' id='friend-profileImg'
+                     class="img-circle"> -->
               </div>
               <div class="content-div">
                 <p id="user-name">{{feed.name}}</p>
                 <h5 id="feed-info">
-            <small class="text-muted"><img src="images/icons/calendar.png"> {{feed.date}}   </small>
-            <small class="text-muted"><img src="images/icons/multiple.png"> {{feed.headcount}}  </small>
-            <small class="text-muted"><img src="images/icons/time.png"> {{feed.pasttime}}</small></h5>
+            <small class="text-muted"><img src="images/icons/calendar.png"> {{feed.createDate}}   </small>
+            <small class="text-muted"><img src="images/icons/multiple.png"> {{feed.maxHeadCount}}  </small>
+            <small class="text-muted"><img src="images/icons/time.png"> {{feed.stuffCount}}</small></h5>
                 <hr>
                 <div id="unfriend-content">{{feed.content}}</div>
               </div>
