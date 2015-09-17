@@ -1,57 +1,43 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Login Form</title>
+        <link rel="stylesheet" href="css/login.css">
+  </head>
+
+  <body>
+    <body>
+	<div class="login">
+		<div class="login-screen">
+			<div class="app-title">
+				<h1>ItTogether</h1>
+			</div>
+
+			<div class="login-form">
+				<div class="control-group">
+				<input type="text" class="login-field" value="" placeholder="username" id="login-name">
+				<label class="login-field-icon fui-user" for="login-name"></label>
+				</div>
+
+				<div class="control-group">
+				<input type="password" class="login-field" value="" placeholder="password" id="login-pass">
+				<label class="login-field-icon fui-lock" for="login-pass"></label>
+				</div>
+
+				<a class="btn btn-primary btn-large btn-block" href="#">login</a>
 <!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
+				<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button>
 -->
-<!DOCTYPE HTML>
-<html>
-<head>
-<title>The Facebook-Twitter-Google-Login Website Template | Home :: w3layouts</title>
-<link href="css/login.css" rel="stylesheet" type="text/css" media="all" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href='http://fonts.googleapis.com/css?family=Rokkitt' rel='stylesheet' type='text/css'>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-</head>
-<body>
-<div class="wrap">
-<!-- strat-contact-form -->	
-<div class="contact-form">
-<!-- start-form -->
-	<form class="contact_form" action="#" method="post" name="contact_form">
-		<h1>Login Into Your Account</h1>
-	    <ul>
-	        <li>
-	            <input type="email" class="textbox1" name="email" placeholder="ittogether@ittogether.com" required />
-	            <span class="form_hint">Enter a valid email</span>
-	             <p><img src="images/login/contact.png" alt=""></p>
-	        </li>
-	        <li>
-	            <input type="password" name="website" class="textbox2" placeholder="password">
-	            <p><img src="images/login/lock.png" alt=""></p>
-	        </li>
-         </ul>
-       	 	<input type="submit" name="Sign In" value="Sign In"/>
-			<div class="clear"></div>	
-			<label class="checkbox"><input type="checkbox" name="checkbox" checked><i></i>아이디 기억하기</label>
-			
-		<div class="clear"></div>	
-	</form>
-<!-- end-form -->
-<!-- start-account -->
-<div class="account">
-	<h2><a href="#">Don't have an account? Sign Up!</a></h2>
-  <div class="span"><a href="#" onclick="checkLoginState();"><img src="images/login/facebook.png" alt=""/><i>Sign In with Facebook</i><div class="clear"></div></a></div>
-    <div class="span1"><a href="#"><img src="images/login/twitter.png" alt=""/><i>Sign In with Twitter</i><div class="clear"></div></a></div>
-    <div class="span2"><a href="#"><img src="images/login/gplus.png" alt=""/><i>Sign In with Google+</i><div class="clear"></div></a></div>
-</div>	
-<!-- end-account -->
-<div class="clear"></div>	
-</div>
-
-</div>
-
-<script>
+        <a class="kakao-button" href="#"></a>
+				<a class="login-link" href="#">회원가입</a>
+			</div>
+		</div>
+	</div>
+	
+	
+	<script>
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
     console.log('statusChangeCallback');
@@ -65,13 +51,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
       testAPI();
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
-      //document.getElementById('status').innerHTML = 'Please log ' +
-      //  'into this app.';
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this app.';
     } else {
       // The person is not logged into Facebook, so we're not sure if
       // they are logged into this app or not.
-      //document.getElementById('status').innerHTML = 'Please log ' +
-      //  'into Facebook.';
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into Facebook.';
     }
   }
 
@@ -127,14 +113,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
       console.log('Successful login for: ' + response.name);
-      //location.replace("main.html");
+      document.getElementById('status').innerHTML =
+        'Thanks for logging in, ' + response.name + '!';
+      
+      console.log(response+ "hahahah");
     });
   }
   
   
   </script>
-
-
-
 </body>
+    
+    
+    
+    
+    
+  </body>
 </html>
