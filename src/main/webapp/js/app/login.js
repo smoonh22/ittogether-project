@@ -42,7 +42,8 @@ $('#signup-button').click(function (event) {
 function initAutocomplete() { /* 초기화 함수*/
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 37.497943, lng: 127.027622}, /* 처음 지도에서 비춰지는 지역 */
-    zoom: 15
+    zoom: 15,
+    disableDefaultUI: true
   });
   
   var input = document.getElementById('pac-input');
