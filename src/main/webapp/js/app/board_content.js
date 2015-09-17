@@ -1,9 +1,9 @@
 (function () {
-  var app = angular.module('main', []);
+  var app = angular.module('content', ["wu.masonry"]);
 
-  app.controller('friendFeedCtrl', ['$http', function($http) {
+  app.controller('FeedCtrl', ['$http', function($http) {
     var a = this;
-    $http.get('feed/join.do').success(function(result){
+    $http.get('feed/list.do').success(function(result){
        a.feeds = result.data;
     });
     
@@ -12,6 +12,8 @@
   app.controller('noneFriendFeedCtrl', function() {
     this.feeds = nonfriends;
   });
+  
+ 
 
   var nonfriends = [
     {
@@ -41,6 +43,8 @@
       
     }
   ];
+   
+  
   
     
 })();

@@ -5,6 +5,7 @@
 <mapper namespace="net.bit.java72.dao.MemberDao">
   <resultMap type="Member" id="MemberMap">
     <id     column="mno"      property="mno" />
+    <result column="email"    property="email"/>
     <result column="nicknm"    property="nickname" />
     <result column="pwd"      property="password" />
     <result column="cre_dt"   property="createDate" />
@@ -15,7 +16,17 @@
     <result column="mphoto" property="profilePicture"/>
   </resultMap>
   
- 
+  <select id="exist" 
+          parameterType="map" resultMap="MemberMap">
+    SELECT * 
+    FROM memb_t
+    WHERE email=#{email} and pwd=#{password}
+  </select>
+  
+  <insert id="signUp" parameterType="Member">
+    INSERT INTO MEMB_T(email, nicknm, pwd, cre_dt, name) 
+    VALUES(#{email}, #{nickname}, #{password}, now(), #{name})
+  </insert>
 </mapper>
 
 

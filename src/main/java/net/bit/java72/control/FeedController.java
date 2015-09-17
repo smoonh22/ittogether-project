@@ -1,7 +1,6 @@
 package net.bit.java72.control;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -11,7 +10,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import net.bit.java72.domain.Feed;
 import net.bit.java72.service.FeedService;
 
 @Controller("FeedController")
@@ -19,14 +17,14 @@ import net.bit.java72.service.FeedService;
 public class FeedController {
   @Autowired FeedService feedService;
   @Autowired ServletContext servletContext;
-  
-  @RequestMapping("/list")
+
+  @RequestMapping("/join")
   public Object list() {
   Map<String,Object> result = new HashMap<String,Object>();
   
   
-  result.put("data", feedService.list());
-  
+  result.put("data",feedService.list());
+    
   HttpHeaders headers = new HttpHeaders();
   headers.add("Content-type"
       , "text/plain;charset=UTF-8");

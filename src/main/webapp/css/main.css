@@ -221,3 +221,14 @@ hr {
    width:35%;
   margin-left:60%;
 }
+.boredTable {
+  border: 1px solid grey;
+  //background: #377CB6;
+  padding: 28px;
+}
+.friendBalloon {
+  border : 1px;
+}
+.photo-in-Ballon {
+  text-align: center;
+}

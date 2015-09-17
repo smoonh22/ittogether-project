@@ -8,6 +8,7 @@
   <meta name="author" content="">
   <title>1인가구를 위한 SNS - itTogether</title>
   <link rel='stylesheet' href="css/bootstrap.css" />
+  <link rel='stylesheet' href="css/bootstrap-tour.min.css" >
   <link rel='stylesheet' href="css/bootstrap-theme.css" />
   <link rel='stylesheet' href="css/logo-nav.css" />
   <link rel='stylesheet' href="css/main.css" />
@@ -38,11 +39,16 @@
             <a href="board_content.html">내 활동</a>
           </li>
           <li>
-            <a href="#">내가 만든 지도</a>
+            <a >내가 만든 지도</a>
+          </li>
+          <li>
+            <a data-toggle="modal" href="#boredModal">
+              <span class="glyphicon glyphicon-bullhorn"></span> 심심해</a>
           </li>
         </ul>
+        
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#" class="open"><span class="glyphicon glyphicon-user"></span> 내 친구들</a></li>
+          <li><a href="#" onclick="tour.start();"><span class="glyphicon glyphicon-user"></span> 내 친구들</a></li>
           <li><a data-toggle="modal" href="#normalModal"><span class="glyphicon glyphicon-cog"></span> 내 정보</a></li>
           <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
         </ul>
@@ -51,6 +57,7 @@
     </div>
     <!-- /.container -->
   </nav>
+  
   <div id="changeToMap">
     <div id='backgroundImg'>
       <div class="span6 col-sm-6  editorial-container">
@@ -64,6 +71,7 @@
       </div>
     </div>
   </div>
+  
   <div id="left-feed-title">친구들의 활동</div>
   <div id="right-feed-title">주변회원 활동</div>
 
@@ -76,15 +84,16 @@
             </div>
             <div class="panel-body">
               <div class="img-div">
-               <span id="img-in-box"> <img src='{{feed.profile}}' id='friend-profileImg'
+
+              <span id="img-in-box"> <img src='images/{{feed.profilePicture}}' id='friend-profileImg'
                      class="img-circle">
               </div>
               <div class="content-div">
                 <p id="user-name">{{feed.name}}</p>
                 <h5 id="feed-info">
-            <small class="text-muted"><img src="images/icons/calendar.png"> {{feed.date}}   </small>
-            <small class="text-muted"><img src="images/icons/multiple.png"> {{feed.headcount}}  </small>
-            <small class="text-muted"><img src="images/icons/time.png"> {{feed.pasttime}}</small></h5>
+            <small class="text-muted"><img src="images/icons/calendar.png"> {{feed.meetTime}}   </small>
+            <small class="text-muted"><img src="images/icons/multiple.png"> {{feed.stuffCount}}/{{feed.maxHeadCount}}  </small>
+            <small class="text-muted"><img src="images/icons/time.png"> {{feed.createDate}}</small></h5>
                 <hr>
                 <div id="unfriend-content">{{feed.content}}</div>
               </div>
@@ -124,67 +133,94 @@
     </div>
   </div>
 
- 
-        
+      <!-- modal start -->
+      <div id="normalModal" class="modal fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">내 정보</h4>
+            </div>
+            <div class="modal-body">
+              <form role="form">
+                <div class="form-group">
+                  <label>닉네임</label>
+                  <input class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>비밀번호</label>
+                  <input class="form-control" placeholder="비밀번호">
+                </div>
+                <div class="form-group">
+                  <label>이메일</label>
+                  <input class="form-control" readonly value="thdansgur@gmail.com">
+                </div>
+                <div class="form-group">
+                  <label>프로필사진</label>
+                  <input type="file">
+                </div>
+                <div class="form-group">
+                  <label>내 소개</label>
+                  <textarea class="form-control" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                  <label>성별</label>
+                  <label class="radio-inline">
+                    <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" checked="">남자
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">여자
+                  </label>
+                </div>
+                <div class="form-group">
+                  <label>나이</label>
+                  <input class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>취미</label>
+                  <input class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>고향</label>
+                  <input class="form-control">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+    </div>
+    
+    
     <!-- modal start -->
-  <div id="normalModal" class="modal fade">
-    <div class="modal-dialog">
+    <div id="boredModal" class="modal fade">
+      <div class="modal-dialog modal-sm">
       <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">내 정보</h4>
-        </div>
         <div class="modal-body">
-          <form role="form">
-            <div class="form-group">
-              <label>닉네임</label>
-              <input class="form-control">
-            </div>
-            <div class="form-group">
-              <label>비밀번호</label>
-              <input class="form-control" placeholder="비밀번호">
-            </div>
-            <div class="form-group">
-              <label>이메일</label>
-              <input class="form-control" readonly value="thdansgur@gmail.com">
-            </div>
-            <div class="form-group">
-              <label>프로필사진</label>
-              <input type="file">
-            </div>
-            <div class="form-group">
-              <label>내 소개</label>
-              <textarea class="form-control" rows="3"></textarea>
-            </div>
-            <div class="form-group">
-              <label>성별</label>
-              <label class="radio-inline">
-                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" checked="">남자
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">여자
-              </label>
-            </div>
-            <div class="form-group">
-              <label>나이</label>
-              <input class="form-control">
-            </div>
-            <div class="form-group">
-              <label>취미</label>
-              <input class="form-control">
-            </div>
-            <div class="form-group">
-              <label>고향</label>
-              <input class="form-control">
-            </div>
-          </form>
-
-
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <table class="boredTable">
+            <tr class="boredTable">
+              <td class="boredTable"><img src="images/icons/soccer.png"></td>
+              <td class="boredTable"><img src="images/icons/basketball.png"></td>   
+              <td class="boredTable"><img src="images/icons/badminton.png"></td>
+            </tr>
+            <tr class="boredTable">
+              <td class="boredTable"><img src="images/icons/coffee.png"></td>
+              <td class="boredTable"><img src="images/icons/beer.png"></td>   
+              <td class="boredTable"><img src="images/icons/meal.png"></td>
+            </tr>
+            <tr class="boredTable">
+              <td class="boredTable"><img src="images/icons/cook.png"></td>
+              <td class="boredTable"><img src="images/icons/shopping.png"></td>   
+              <td class="boredTable"><img src="images/icons/etc.png"></td>
+            </tr>
+          </table>
+          
         </div>
         <!-- /.modal-content -->
       </div>
@@ -192,20 +228,59 @@
     </div>
     </div>
     <!-- /.modal -->
+    
 
     <script type="text/javascript" src="js/lib/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/lib/bootstrap.js"></script>
+    <script type="text/javascript" src="js/lib/bootstrap-tour.js"></script>
+    <script type="text/javascript" src="js/lib/angular.js"></script>
+    <script type="text/javascript" src="js/app/main.js"></script>
     <script type="text/javascript">
       function toggleToMap() {
         $('#changeToMap').load('main_map.html');
+        
       }
-      $(".modal-wide").on("show.bs.modal", function() {
-  var height = $(window).height() - 200;
-  $(this).find(".modal-body").css("max-height", height);
-});
+   
+      // 도움말 시작
+       var tour = new Tour({
+        storage: false,
+        backdrop : true,
+        steps: [
+        {
+          element: "#left-feed",
+          title: "Title of my step",
+          content: "Content of my step"
+        },
+        {
+          element: "#right-feed",
+          placement: "left",
+          title: "Title of my step",
+          content: "Content of my step"
+        },
+        {
+          element: "#friend-box",
+          placement: "left",
+          title: "Title of my step",
+          content: "Content of my step"
+        },
+        {
+          element: "#finder-box",
+          placement: "bottom",
+          title: "Title of my step",
+          content: "Content of my step"
+        },
+        {
+          element: "#map",
+          placement: "bottom",
+          title: "Title of my step",
+          content: "Content of my step"
+        }
+        
+      ]});
+      tour.init();
+ 
     </script>
-    <script type="text/javascript" src="js/lib/bootstrap.js"></script>
-    <script type="text/javascript" src="js/lib/angular.js"></script>
-    <script type="text/javascript" src="js/app/main.js"></script>
+    
 </body>
 
 </html>
