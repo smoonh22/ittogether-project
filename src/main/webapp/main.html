@@ -8,10 +8,12 @@
   <meta name="author" content="">
   <title>1인가구를 위한 SNS - itTogether</title>
   <link rel='stylesheet' href="css/bootstrap.css" />
+  <link rel='stylesheet' href="css/bootstrap-tour.min.css" >
   <link rel='stylesheet' href="css/bootstrap-theme.css" />
   <link rel='stylesheet' href="css/logo-nav.css" />
   <link rel='stylesheet' href="css/main.css" />
   <link rel='stylesheet' href="css/modal.css" />
+   
 </head>
 
 <body>
@@ -46,7 +48,7 @@
         </ul>
         
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-user"></span>내 친구들</a></li>
+          <li><a href="#" class="open"><span class="glyphicon glyphicon-user"></span> 내 친구들</a></li>
           <li><a data-toggle="modal" href="#normalModal"><span class="glyphicon glyphicon-cog"></span> 내 정보</a></li>
           <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
         </ul>
@@ -56,7 +58,7 @@
     <!-- /.container -->
   </nav>
   
- <div id="changeToMap">
+  <div id="changeToMap">
     <div id='backgroundImg'>
       <div class="span6 col-sm-6  editorial-container">
         <div class="editorial-cell">
@@ -82,15 +84,16 @@
             </div>
             <div class="panel-body">
               <div class="img-div">
-              <!--  <span id="img-in-box"> <img src='{{feed.profile}}' id='friend-profileImg'
-                     class="img-circle"> -->
+
+              <span id="img-in-box"> <img src='images/{{feed.profilePicture}}' id='friend-profileImg'
+                     class="img-circle">
               </div>
               <div class="content-div">
                 <p id="user-name">{{feed.name}}</p>
                 <h5 id="feed-info">
-            <small class="text-muted"><img src="images/icons/calendar.png"> {{feed.createDate}}   </small>
-            <small class="text-muted"><img src="images/icons/multiple.png"> {{feed.maxHeadCount}}  </small>
-            <small class="text-muted"><img src="images/icons/time.png"> {{feed.stuffCount}}</small></h5>
+            <small class="text-muted"><img src="images/icons/calendar.png"> {{feed.meetTime}}   </small>
+            <small class="text-muted"><img src="images/icons/multiple.png"> {{feed.stuffCount}}/{{feed.maxHeadCount}}  </small>
+            <small class="text-muted"><img src="images/icons/time.png"> {{feed.createDate}}</small></h5>
                 <hr>
                 <div id="unfriend-content">{{feed.content}}</div>
               </div>
@@ -223,14 +226,62 @@
       </div>
       <!-- /.modal-dialog -->
     </div>
+    </div>
     <!-- /.modal -->
     </div>
     
+
     <script type="text/javascript" src="js/lib/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="js/lib/bootstrap.js"></script>
+    <script type="text/javascript" src="js/lib/bootstrap-tour.js"></script>
+    <script type="text/javascript" src="js/lib/angular.js"></script>
+    <script type="text/javascript" src="js/app/main.js"></script>
     <script type="text/javascript">
       function toggleToMap() {
         $('#changeToMap').load('main_map.html');
+        tour.start();
       }
+      $(".modal-wide").on("show.bs.modal", function() {
+  var height = $(window).height() - 200;
+  $(this).find(".modal-body").css("max-height", height);
+});
+      // 도움말 시작
+      var tour = new Tour({
+        storage: false,
+        backdrop : true,
+        steps: [
+        {
+          element: "#left-feed",
+          title: "Title of my step",
+          content: "Content of my step"
+        },
+        {
+          element: "#right-feed",
+          placement: "left",
+          title: "Title of my step",
+          content: "Content of my step"
+        },
+        {
+          element: "#friend-box",
+          placement: "left",
+          title: "Title of my step",
+          content: "Content of my step"
+        },
+        {
+          element: "#finder-box",
+          placement: "bottom",
+          title: "Title of my step",
+          content: "Content of my step"
+        },
+        {
+          element: "#map",
+          placement: "bottom",
+          title: "Title of my step",
+          content: "Content of my step"
+        }
+        
+      ]});
+      tour.init();
 
     </script>
     
