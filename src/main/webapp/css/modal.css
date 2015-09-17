@@ -15,3 +15,8 @@ body p {
 .modal-title {
   text-align: center;
 }
+
+#normalModal {
+  margin-top:10%;
+  
+}
