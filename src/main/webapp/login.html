@@ -36,13 +36,13 @@
 </fb:login-button>
 -->
           <a class="kakao-button" href="#"></a>
-          <a data-toggle="modal" role="button" class="login-link" id="abc" href="#normalModal">회원가입</a>
+          <a data-toggle="modal" role="button" class="login-link" id="abc" href="#signupModal">회원가입</a>
         </div>
       </div>
     </div>
 
     <!-- modal start -->
-    <div id="normalModal" class="modal fade">
+    <div id="signupModal" class="modal fade">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -68,11 +68,11 @@
                 <input type="password" class="form-control" placeholder="비밀번호" id="password" >
               </div>
               <div class="form-group">
-                <label>집 주소</label>
+                <label>집 주소(주소 입력 후 핀 조정으로 상세하게 지도에 위치 설정을 해주세요)</label>
                 <input id="pac-input" class="controls" type="text" placeholder="지역을 입력하세요">
                 <div id="map"></div>
-                <div><input type="text" hidden="true" value="lat" id="latitude">
-                <input type="text" hidden="true" value="lng" id="longitude"></div>
+                <div><input type="text" hidden="true" id="latitude">
+                <input type="text" hidden="true" id="longitude"></div>
               </div>
             </form>
           </div>
