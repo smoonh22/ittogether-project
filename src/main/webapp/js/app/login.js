@@ -54,15 +54,15 @@ function initAutocomplete() { /* 초기화 함수*/
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
   map.addListener('bounds_changed', function () {
-    
+
     searchBox.setBounds(map.getBounds());
-    
+
   });
 
-   var markers = [];
+  var markers = [];
   // Listen for the event fired when the user selects a prediction and retrieve
   // more details for that place.
-  searchBox.addListener('places_changed', function() {
+  searchBox.addListener('places_changed', function () {
     var places = searchBox.getPlaces();
 
     if (places.length == 0) {
@@ -70,14 +70,14 @@ function initAutocomplete() { /* 초기화 함수*/
     }
 
     // Clear out the old markers.
-    markers.forEach(function(marker) {
+    markers.forEach(function (marker) {
       marker.setMap(null);
     });
     markers = [];
 
     // For each place, get the icon, name and location.
     var bounds = new google.maps.LatLngBounds();
-    places.forEach(function(place) {
+    places.forEach(function (place) {
 
       // Create a marker for each place.
       markers.push(new google.maps.Marker({
@@ -93,19 +93,21 @@ function initAutocomplete() { /* 초기화 함수*/
         bounds.extend(place.geometry.location);
       }
     });
+    
     map.fitBounds(bounds);
     map.setZoom(18);
     $("#latitude").val(markers[0].position.H); /* 위도 경도 */
     $("#longitude").val(markers[0].position.L);
-  google.maps.event.addListener(map, 'click', function (event) {
-    addMarker(event.latLng, map); /* 마커 찍어주는 함수 */
-  });
+    
+    google.maps.event.addListener(map, 'click', function (event) {
+      addMarker(event.latLng, map); /* 마커 찍어주는 함수 */
+    });
 
-function addMarker(location, map) {
-    markers[0].setPosition(location);
-    $("#latitude").val(markers[0].position.H); /* 위도 경도 */
-    $("#longitude").val(markers[0].position.L);
-  }
+    function addMarker(location, map) {
+      markers[0].setPosition(location);
+      $("#latitude").val(markers[0].position.H); /* 위도 경도 */
+      $("#longitude").val(markers[0].position.L);
+    }
   });
 
 }

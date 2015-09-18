@@ -41,8 +41,8 @@
 	t2.CONTNT,
 	t2.cre_dt,
 	t2.TITLE
-	from memb_t t1, feed_t t2
-	where t1.mno=t2.mno
+	from memb_t t1 left outer join feed_t t2
+	on t1.mno=t2.mno
 	ORDER by t2.cre_dt desc
   </select>
  
