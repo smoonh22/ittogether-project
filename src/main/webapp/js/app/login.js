@@ -114,7 +114,7 @@ function initAutocomplete() { /* 초기화 함수*/
 
 
 // 모달창에서 구글맵 나오게 trigger
-$('#normalModal').on("shown.bs.modal", function () {
+$('#signupModal').on("shown.bs.modal", function () {
   google.maps.event.trigger(map, "resize");
 });
 
