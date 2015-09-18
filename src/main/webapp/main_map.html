@@ -57,7 +57,7 @@
       <span id="img-in-box">
       <img src="images/kianu.jpeg" 
            class="img-circle match-friendimg"></span>
-      키아누리브ddddddddddddddddddddddddddddd쑤<br>
+      키아누리브쑤<br>
       500m 이내
       <button type="button" class="btn btn-info btn-xs addfriend-btn">
         친구 추가
@@ -72,7 +72,6 @@
       function toggleToMap() {
         $('#changeToMap').load('main_map.html');
       }
-
     </script>
     
 <script>
@@ -96,10 +95,10 @@
   
   var map;
   var circle;
-  var friendWindow; <!-- 친구들 팝업창 -->
-  var notFriendWindow; <!-- 회원들 팝업창 -->
+  var friendWindow; /* 친구들 팝업창 */
+  var notFriendWindow; /* 회원들 팝업창 */
     
-  var myBalloon = '<div class="myBalloon">' + <!-- 팝업창의 내용 -->
+  var myBalloon = '<div class="myBalloon">' + /* 내 팝업창의 내용 */
     '<table>' +
     '<tr><td calss="photo-in-Ballon"><img src="images/myPhoto.png" class="img-circle"></td></tr>' +
     '<tr><td>송문혁</td></tr>'+
@@ -108,7 +107,7 @@
     '</table>' +
     '</div>';  
   
-  var friendBalloon = '<div class="friendBalloon">' + <!-- 팝업창의 내용 -->
+  var friendBalloon = '<div class="friendBalloon">' + /* 친구 팝업창의 내용 */
     '<table>' +
     '<tr><td calss="photo-in-Ballon"><img src="images/seol2.png" class="img-circle"></td></tr>' +
     '<tr><td>설현</td></tr>'+
@@ -116,54 +115,51 @@
     '</table>' +
     '</div>';
   
-  var notFriendBalloon = '<div class="notFriendBalloon">' + <!-- 팝업창의 내용 -->
+  var notFriendBalloon = '<div class="notFriendBalloon">' + /* 주변 회원 팝업창의 내용 */
     '<table border="1">' +
     '<tr><td calss="photo-in-Ballon"><img src="images/notFriend.png" class="img-circle"></td></tr>' +
     '<tr><td>...</td></tr>'+
     '<tr><td>친구가 되시면 보입니다.</td></tr>' +
     '</table>' +
     '</div>';
-      
-      
-
-  var radius = { <!-- 반경 보여줄 지점 -->
-  gangnamStation: {
-    <!-- 반경의 중심 -->
-    center: {lat: myLoc[0], lng: myLoc[1]}, 
-    <!-- 반경 설정 200m: 26, 500m: 65, 1km: 130 -->  
-    population: 26 
-  }
-};
+    
+  var radius = { /* 반경 보여줄 지점 */
+	  gangnamStation: {
+	    center: {lat: myLoc[0], lng: myLoc[1]}, /* 반경의 중심 */ 
+	    population: 26 /* 반경 설정 200m: 26, 500m: 65, 1km: 130 */ 
+	  }
+	};
   
   function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
       zoom: 17,
+      /* 처음 화면을 보여주는 위도, 경도 */
       center: {
-        lat: myLoc[0], <!-- 처음 화면을 보여주는 위도, 경도-->
+        lat: myLoc[0], 
         lng: myLoc[1]
       },
-      disableDefaultUI: true,  <!-- UI DEFAULT -->
+      disableDefaultUI: true, /* DEFAULT UI 사용*/
       panControl: false,
-      zoomControl: false, <!-- 줌 컨트롤 바 -->
-      scaleControl: false <!-- 척도 -->
+      zoomControl: false,
+      scaleControl: false /* 척도 */
     });
-    myWindow = new google.maps.InfoWindow({<!-- 팝업창 생성 -->
+    myWindow = new google.maps.InfoWindow({ /* 팝업창 생성 */
       content: myBalloon
     });
-    friendWindow = new google.maps.InfoWindow({<!-- 팝업창 생성 -->
+    friendWindow = new google.maps.InfoWindow({ /* 팝업창 생성 */
       content: friendBalloon
     });
-    notFriendWindow = new google.maps.InfoWindow({ <!-- 팝업창 생성 -->
+    notFriendWindow = new google.maps.InfoWindow({ /* 팝업창 생성 */
       content: notFriendBalloon
     });
     markMyLoc();
     for (var i = 0; i < friendLocArr.length; i++) {
-      markFriends(i); <!-- 친구 마킹 -->
+      markFriends(i); /* 친구 마킹 */
     }
     for (var i = 0; i < friendLocArr.length; i++) {
-      markNotFriends(i); <!-- 회원 마킹 -->
+      markNotFriends(i); /* 주변 회원 마킹 */
     }
-    markCircle(); <!-- 반경 렌더링 -->
+    markCircle(); /* 반경 렌더링 */
   }
   
   function markMyLoc () {
@@ -221,10 +217,10 @@
 function markCircle() {
     for (var city in radius) {
       circle = new google.maps.Circle({ 
-        strokeColor: '#000', <!-- 반경 렌더링 띠 -->
+        strokeColor: '#000', /* 반경 렌더링 보더 색*/
         strokeOpacity: 0.4,
         strokeWeight: 1,
-        fillColor: '#FFFFFF', <!-- 반경 렌더링 -->
+        fillColor: '#FFFFFF', /* 반경 렌더링 채움 색 */
         fillOpacity: 0.25,
         map: map,
         center: radius[city].center,
@@ -233,16 +229,15 @@ function markCircle() {
     }
   }
   
-function radiusDistance(m) { <!-- 반경 렌더링 거리 조정 함수 -->
-  radius = { <!-- 반경 보여줄때의 변수 -->
+function radiusDistance(m) { /* 반경 렌더링 거리 조정 함수 */
+  radius = { /* 반경 보여줄때의 변수 */
   gangnamStation: {
-    <!-- 반경의 중심 -->
+    /* 반경의 중심 */
     center: {
             lat: myLoc[0], 
             lng: myLoc[1]
            }, 
-    <!-- 반경 설정 200m: 26, 500m: 65, 1km: 130 -->  
-    population: m
+    population: m /* 반경 설정 200m: 26, 500m: 65, 1km: 130 */
   }
   };
   circle.setMap(null);
