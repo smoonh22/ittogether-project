@@ -30,7 +30,7 @@ $('#signup-button').click(function (event) {
     success: function (result) {
       if (result.result === 'success') {
         console.log('가입 축하드립니다.');
-        $('#normalModal').modal('toggle');
+        $('#signupModal').modal('toggle');
       }
     }
   });
