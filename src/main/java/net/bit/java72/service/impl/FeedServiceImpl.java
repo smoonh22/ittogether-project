@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import net.bit.java72.dao.FeedDao;
+import net.bit.java72.domain.Feed;
 import net.bit.java72.domain.Join;
 import net.bit.java72.service.FeedService;
 
@@ -17,6 +18,11 @@ public class FeedServiceImpl implements FeedService {
   public List<Join> list() {
     
     return feedDao.list();
+  }
+
+  @Override
+  public List<Feed> myActivityList() {
+    return feedDao.myActivityList();
   }
   
 }

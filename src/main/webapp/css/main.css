@@ -10,68 +10,73 @@ nav {
 #left-feed-title {
   margin-top: 30px;
   margin-bottom: 30px;
-  width: 50%;
   height: 80px;
   background-color: #ffffff;
   padding: 0.8em;
   text-align: center;
   font-size: 250%;
-  float: left;
-  margin-left: 3%;
 }
 #right-feed-title {
   margin-top: 30px;
   margin-bottom: 30px;
-  margin-right: 5%;
-  width: 37%;
   height: 80px;
   background-color: #ffffff;
   padding: 0.8em;
   text-align: center;
   font-size: 250%;
-  float: right;
 }
 #left-feed {
   background-color: #ffffff;
   padding: 1em;
   font-size: 200%;
-  float: left;
-  margin-left: 5%;
+  margin: 0px auto;
 }
 #right-feed {
   background-color: #ffffff;
   padding: 1em;
   text-align: center;
   font-size: 150%;
-  float: right;
   margin-right: 7%;
 }
 .friend-panel {
   display: inline-block;
-  width: 600px;
-  text-align: center;
+  width: 80%;
   box-shadow: 5px 5px 2px #888888;
   background-color: #ffffff;
+  text-align: center;
+/*   margin : 0px auto; */
 }
-.nofriend-panel {
+.test {
+	text-align: center;
+}
+.nonfriend-panel {
   display: inline-block;
-  width: 430px;
+  box-shadow: 5px 5px 2px #888888;
+  width: 100%;
+  margin-top : 2%;
+  height: 100%;
   text-align: center;
   box-shadow: 5px 5px 2px #888888;
   background-color: #ffffff;
 }
 #friend-profileImg {
   display: inline-block;
-  width: 120px;
-  height: 120px;
-  float: left;
+  width: 80%;
+  min-height:140px;
+  max-height:140px;
+  height : 75%;
+  min-width:140px;
+  max-width:140px;
   padding: 5px;
 }
 #nonfriend-profileImg {
   display: inline-block;
-  width: 100px;
-  height: 100px;
-  float: left;
+  width: 100%;
+  min-width:85px;
+  max-width:85px;
+  height: 100%;
+  min-height:83px;
+  max-height:83px;
   padding: 5px;
 }
 #category-color {
@@ -113,16 +118,6 @@ hr {
 #feed-info {
   margin: 0px;
   text-align: left;
-}
-.img-div {
-  float: left;
-  width: 25%;
-  height: 100%;
-}
-.content-div {
-  float: right;
-  width: 75%;
-  height: 100%;
 }
 .containerCentered {
   margin-right: auto;

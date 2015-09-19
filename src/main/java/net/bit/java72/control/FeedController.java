@@ -31,6 +31,16 @@ public class FeedController {
   
   return result;  
   }
+  
+  @RequestMapping("/list")
+  public Object feedlist() {
+  Map<String,Object> result = new HashMap<String,Object>();
+  HttpHeaders headers = new HttpHeaders();
+  headers.add("Content-type"
+      , "text/plain;charset=UTF-8");
+  result.put("data", feedService.myActivityList());
+  return  result;
+  }
 
 
 }
