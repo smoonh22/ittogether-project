@@ -1,3 +1,3 @@
 define(function() {
-  window.contextRoot = '/web2';
+  window.contextRoot = '/ittogether';
 });
