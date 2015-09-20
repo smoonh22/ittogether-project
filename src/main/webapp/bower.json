@@ -1,0 +1,32 @@
+{
+  "name": "ittogether",
+  "version": "0.0.0",
+  "homepage": "https://github.com/moonhyucksong/ittogether",
+  "authors": [
+    "moonhyucksong <smoonh22@gmail.com>"
+  ],
+  "moduleType": [
+    "amd",
+    "globals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.6",
+    "angular-masonry": "~0.12.0",
+    "bootstrap": "~3.3.5",
+    "bootstrap-tour": "~0.10.2",
+    "classie": "~1.0.1",
+    "imagesloaded": "~3.1.8",
+    "jquery": "~2.1.4",
+    "metisMenu": "~2.1.0",
+    "modernizr": "~3.0.0",
+    "requirejs": "~2.1.20",
+  }
+}
