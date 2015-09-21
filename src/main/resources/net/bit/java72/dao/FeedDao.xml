@@ -13,7 +13,7 @@
     <result column="meet_time" property="meetTime"/>
   </resultMap>
   
-  <resultMap type="Join" id="JoinMap">
+  <resultMap type="FriendFeed" id="FriendFeedMap">
     <id     column="fno"      property="fno" />
     <result column="categry"    property="category" />
     <result column="contnt"      property="content" />
@@ -30,7 +30,7 @@
     <result column="mphoto" property="profilePicture"/>
   </resultMap>
  
-  <select id="list" resultMap="JoinMap">
+  <select id="list" resultMap="FriendFeedMap">
   select 
 	t1.NAME,
 	t1.MPHOTO,
@@ -44,6 +44,11 @@
 	from memb_t t1 left outer join feed_t t2
 	on t1.mno=t2.mno
 	ORDER by t2.cre_dt desc
+  </select>
+ <!-- 내정보 에서 밑에 게시물 출력 -->
+   <select id="myActivityList" resultMap="FeedMap">
+  select * from feed_t 
+  ORDER by cre_dt desc;
   </select>
  
 </mapper>

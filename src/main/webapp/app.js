@@ -8,22 +8,33 @@
  */
 requirejs.config({
     paths: {
+        //라이브러리
         'jquery': 'bower_components/jquery/dist/jquery',
         'angular': 'bower_components/angular/angular',
-        'main': 'js/app/main',
-        'friendsFeed': 'js/app/friendsFeed',
-        'noneFriendsFeed': 'js/app/noneFriendsFeed',
-        'tour': 'js/app/tour',
         'bootstrap.min': 'bower_components/bootstrap/dist/js/bootstrap',
         'bootstrap-tour': 'bower_components/bootstrap-tour/build/js/bootstrap-tour',
+        'classie': 'bower_components/classie/classie',
+        'imagesloaded': 'bower_components/imagesloaded/imagesloaded',
+        'AnimOnScroll': 'js/lib/AnimOnScroll',
+        'metisMenu': 'bower_components/metisMenu/metisMenu',
+        'angular-route': 'bower_components/angular-route/angular-route',
+        //컨트롤러
+        'main': 'js/controllers/main',
+        'friendsFeed': 'js/controllers/friendsFeed',
+        'noneFriendsFeed': 'js/controllers/noneFriendsFeed',
+        'tour': 'js/controllers/tour',
+        'myActivities': 'js/controllers/myActivities'
     },
   
   shim: {
-    'tour': {
-      deps:['bootstrap-tour']
-    },
     'angular': {
         deps: ['jquery']
+    },
+    'angular-route': {
+      deps: ['angular']
+    },
+    'tour': {
+      deps:['bootstrap-tour']
     },
     'bootstrap.min': {
       deps: ['jquery']
@@ -32,12 +43,15 @@ requirejs.config({
       deps:['jquery']
     },
     'main': {
-      deps: ['angular', 'friendsFeed','noneFriendsFeed', 'bootstrap.min', 'tour']
+      deps: ['angular-route', 'friendsFeed','noneFriendsFeed', 'bootstrap.min', 'tour','myActivities']
     },
     'friendsFeed': {
       deps: ['angular']
     },
     'noneFriendsFeed': {
+      deps: ['angular']
+    },
+    'myActivities': {
       deps: ['angular']
     }
   }

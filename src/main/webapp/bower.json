@@ -20,6 +20,7 @@
   "dependencies": {
     "angular": "~1.4.6",
     "angular-masonry": "~0.12.0",
+    "angular-route": "~1.4.6",
     "bootstrap": "~3.3.5",
     "bootstrap-tour": "~0.10.2",
     "classie": "~1.0.1",
@@ -27,6 +28,6 @@
     "jquery": "~2.1.4",
     "metisMenu": "~2.1.0",
     "modernizr": "~3.0.0",
-    "requirejs": "~2.1.20",
+    "requirejs": "~2.1.20"
   }
 }
