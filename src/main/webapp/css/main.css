@@ -79,9 +79,17 @@ nav {
   max-height:83px;
   padding: 5px;
 }
-#category-color {
+#category-color-1 {
   height: 1px;
   background-color: #03A9F4;
+}
+#category-color-2 {
+  height: 1px;
+  background-color: #07CFE1;
+}
+#category-color-3 {
+  height: 1px;
+  background-color: #07E1B2;
 }
 hr {
   margin: 10px;

@@ -16,6 +16,7 @@
   var nonfriends = [
     {
       name: '한효주',
+      category: '1',
       profile: 'images/woman1.jpg',
       date:'오늘저녁6시',
       headcount: '1/2',
@@ -24,6 +25,7 @@
     },
     {
       name: '한지민',
+      category: '2',
       profile: 'images/woman2.jpg',
       date:'오늘저녁6시30분',
       headcount: '0/2',
@@ -33,6 +35,7 @@
     },
     {
       name: '한예슬',
+      category: '3',
       profile: 'images/woman4.jpg',
       date:'오늘저녁8시30분',
       headcount: '1/3',

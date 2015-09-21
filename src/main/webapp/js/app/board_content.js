@@ -1,7 +1,7 @@
 (function() {
   var myapp = angular.module('MyApp', []);
   
-  myapp.controller('MainCtrl',['$http', function($http) {
+  myapp.controller('myAct',['$http', function($http) {
     var a = this;
     $http.get('feed/list.do').success(function(result){
       
