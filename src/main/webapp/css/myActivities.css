@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+
+.act-profile-img{
+width:100%;
+height:100%;
+max-width : 140px;
+max-height : 140px;
+
+}
+
+#nametag {
+	font-size: 140%;
+}
+
+#feed-header{
+	padding : 10% 0 0 0;
+}
+#myactfeed{
+ margin-top : 5%;
+
+}

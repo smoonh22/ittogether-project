@@ -12,10 +12,47 @@
       </div>
    </div>
 
-  <div ng-controller="activityCtrl as actyCtrl">
-    <div ng-repeat="activity in actyCtrl.activities">
-      <p>{{activity.content}}</p>
-    </div>
-  </div>
-
+	<div class='row'>
+		<div ng-controller="activityCtrl as MCtrl">
+			<div  ng-repeat="myact in MCtrl.activities">
+				<div id="myactfeed" class="col-md-4">
+					<div class="masonry_title">
+							<div class="panel-heading" id='category-color-{{myact.category}}'></div>
+					<div class='row'>
+						<div class='col-md-3'>
+							<img src="images/cat01.jpg" class="img-circle act-profile-img" /><br> <br>
+						</div>
+						<div class='col-md-9'>
+						  <div id='feed-header'>
+							<b id="nametag">{{myact.content}}</b>님이 새로운 모임을 만드셧습니다.
+							</div>
+						</div>
+					</div>
+						<div class='row'>
+							<h5 id="feed-info">
+								<div class='col-md-3'>
+								<small class="text-muted"><img
+									src="images/icons/calendar.png">
+									</small>{{myact.createDate}}
+								</div>
+								<div class='col-md-3'>
+								<h5 id="feed-info">
+									<small class="text-muted"> <img
+										src="images/icons/multiple.png">
+									</small>{{myact.stuffCount}}/{{myact.maxHeadCount}}
+								</div>
+								<div class='col-md-3'>
+								<h5 id="feed-info">
+									<small class="text-muted"><img
+									src="images/icons/time.png">
+									</small>{{myact.meetTime}}
+								</div>
+						</h5>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
    

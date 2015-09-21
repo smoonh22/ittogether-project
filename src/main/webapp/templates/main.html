@@ -1,79 +1,109 @@
-
-  <div id="changeToMap">
-    <div id='backgroundImg'>
-      <div class="span6 col-sm-6  editorial-container">
-        <div class="editorial-cell">
-          <h1 class="editorial-title">동네에서 친구를 찾으시나요?</h1>
-          <p class="editorial-para">주소를 기반으로 하는 소셜네트워크. 지금바로 진정한 친구를 찾아보세요</p>
-          <div id="map-link-div">
-            <a class="btn btn-info btn-ms btn-block map-btn" id="toggleMap">친구 찾아보기</a>
-          </div>
+<div id="changeToMap">
+  <div id='backgroundImg'>
+    <div class="span6 col-sm-6  editorial-container">
+      <div class="editorial-cell">
+        <h1 class="editorial-title">동네에서 친구를 찾으시나요?</h1>
+        <p class="editorial-para">주소를 기반으로 하는 소셜네트워크. 지금바로 진정한 친구를 찾아보세요</p>
+        <div id="map-link-div">
+          <a class="btn btn-info btn-ms btn-block map-btn" id="toggleMap">친구 찾아보기</a>
         </div>
       </div>
     </div>
   </div>
-  
-  <div id="left-feed-title">친구들의 활동</div>
-  <div id="right-feed-title">주변회원 활동</div>
+</div>
 
-  <div id='left-feed' ng-controller="friendFeedCtrl as ffCtrl">
-    <div ng-repeat="feed in ffCtrl.feeds">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="panel friend-panel">
-            <div class="panel-heading" id='category-color'>
-            </div>
-            <div class="panel-body">
-              <div class="img-div">
 
-              <span id="img-in-box"> <img src='{{feed.profilePicture}}' id='friend-profileImg'
-                     class="img-circle">
-              </div>
-              <div class="content-div">
-                <p id="user-name">{{feed.name}}</p>
-                <h5 id="feed-info">
-            <small class="text-muted"><img src="images/icons/calendar.png"> {{feed.meetTime}}   </small>
-            <small class="text-muted"><img src="images/icons/multiple.png"> {{feed.stuffCount}}/{{feed.maxHeadCount}}  </small>
-            <small class="text-muted"><img src="images/icons/time.png"> {{feed.createDate}}</small></h5>
-                <hr>
-                <div id="unfriend-content">{{feed.content}}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div id='right-feed' ng-controller="noneFriendFeedCtrl as nffCtrl">
-    <div ng-repeat="feed in nffCtrl.feeds">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="panel nofriend-panel">
-            <div class="panel-heading" id='category-color'>
-            </div>
-            <div class="panel-body">
-              <div class="img-div">
-               <span id="img-in-box"> <img src='{{feed.profile}}' id='nonfriend-profileImg'
-                     class="img-circle"></span>
-               
-              </div>
-              <div class="content-div">
-                <p id="user-name">{{feed.name}}</p>
-                <h5 id="feed-info">
-            <small class="text-muted"><img src="images/icons/calendar.png"> {{feed.date}}   </small>
-            <small class="text-muted"><img src="images/icons/multiple.png"> {{feed.headcount}}  </small>
-            <small class="text-muted"><img src="images/icons/time.png"> {{feed.pasttime}}</small></h5>
-                <hr>
-                <div id="unfriend-content">{{feed.content}}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
+<div class='row'>
+  <div class="col-md-8" id='left-section'>
+    <div id="left-feed-title">친구들의 활동</div>
+    <div id='left-feed' ng-controller="friendFeedCtrl as ffCtrl">
+      <div ng-repeat="feed in ffCtrl.feeds">
+        <div class="test">
+          <div class='row'>
+            <div class='col-md-1'></div>
+            <div class='col-md-10'>
+              <div class="friend-panel">
+                <div class="panel-heading" id='category-color-{{feed.category}}'></div>
+                <div class='row'>
+                  <div class="panel-body">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                      <div class="img-div">
+                        <span id="img-in-box"> <img
+									src='images/{{feed.profilePicture}}' id='friend-profileImg'
+									class="img-circle">
+							</div>
+							</div>
+							<div class="col-md-6">
+							<div class="content-div">
+								<p id="user-name">{{feed.name}}</p>
+								<h5 id="feed-info">
+									<small class="text-muted"><img
+										src="images/icons/calendar.png"> {{feed.meetTime}} </small> <small
+										class="text-muted"><img
+										src="images/icons/multiple.png">
+										{{feed.stuffCount}}/{{feed.maxHeadCount}} </small> <small
+										class="text-muted"><img src="images/icons/time.png">
+										{{feed.createDate}}</small>
+								</h5>
+								<hr>
+								<div id="unfriend-content">{{feed.content}}</div>
+							</div>
+							</div>
+							<div class="col-md-2"></div>
+						</div>
+					</div>
+				</div>
+				</div>
+				<div class='col-md-1'></div>
+				</div>
+				</div>
+			</div>
+			</div>
+		</div>
+
+	<div class="col-md-4" id='right-section'>
+			<div id="right-feed-title">주변 회원들의 활동</div>
+			<div id='right-feed' ng-controller="noneFriendFeedCtrl as nffCtrl">
+				<div ng-repeat="feed in nffCtrl.feeds">
+				<div class="test">
+						<div class="nonfriend-panel">
+						<div class="panel-heading" id='category-color-{{feed.category}}'></div>
+						<div class='row'>
+						<div class="panel-body">
+							<div class="col-md-3">
+							<div class="img-div">
+								<span id="img-in-box"> <img
+									src='{{feed.profile}}' id='nonfriend-profileImg'
+									class="img-circle">
+							</div>
+							</div>
+							<div class="col-md-9">
+							<div class="content-div">
+								<p id="user-name">{{feed.name}}</p>
+								<h5 id="feed-info">
+									<small class="text-muted"><img
+										src="images/icons/calendar.png"> {{feed.date}} </small> <small
+										class="text-muted"><img
+										src="images/icons/multiple.png">
+										{{feed.headcount}} </small> <small
+										class="text-muted"><img src="images/icons/time.png">
+										{{feed.pasttime}}</small>
+								</h5>
+								<hr>
+								<div id="unfriend-content">{{feed.content}}</div>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		
   <script type="text/javascript">
 //메인화면 버튼 클릭시 구글맵으로 변경
   $('#toggleMap').click(function (event) {
