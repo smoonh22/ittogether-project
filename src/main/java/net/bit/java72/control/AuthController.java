@@ -23,17 +23,15 @@ public class AuthController {
   //로그인부분
   @RequestMapping("/login")
   public Object login(String email, String password,
-      HttpServletResponse response,
-      HttpSession session) throws Exception { 
+      HttpServletResponse response) throws Exception { 
 
     Map<String,Object> result = new HashMap<String,Object>();
     Member member = memberService.getUser(email, password);
     if (member == null) {
-      session.invalidate();
       result.put("data", "no");
     } else {
-      session.setAttribute("member", member);
       result.put("data", "yes");
+      result.put("member", member.getNickname());
     }
     return result;
   }
@@ -43,18 +41,45 @@ public class AuthController {
   public Object signUp(Member member) throws Exception {
     
     Map<String,Object> result = new HashMap<String,Object>();
-    int count = memberService.signUp(member);
     
-    if (count > 0) {
-      result.put("result", "success");
-    } else {
+    try {
+      int count = memberService.signUp(member);
+      if (count > 0) {
+        result.put("result", "success");
+      }
+    } catch (Exception e ) {
       result.put("result", "failure");
     }
     
     return result;
   }
   
+  @RequestMapping("/existEmail")
+  public Object existEmail(String email) throws Exception {
+    Map<String,Object> result = new HashMap<String,Object>();
+
+    if (!email.contains("@")) {
+     result.put("data", "invalid");
+     return result;
+   }
+    if (memberService.existEmail(email)) {
+      result.put("data", "yes");
+    } else {
+      result.put("data", "no");
+    }
+    return result;
+  }
   
+  @RequestMapping("/existNickName")
+  public Object existNickName(String nickname) throws Exception {
+    Map<String,Object> result = new HashMap<String,Object>();
+    if (memberService.existNickName(nickname)) {
+      result.put("data", "yes");
+    } else {
+      result.put("data", "no");
+    }
+    return result;
+  }
   
   
 }

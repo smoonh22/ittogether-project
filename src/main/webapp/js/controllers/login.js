@@ -5,16 +5,21 @@ function login() {
       password: $('#login-pass').val()
     },
     function (result) {
-
-      console.log(result.data);
       if (result.data === 'yes') {
-        window.location = "main.html";
+        sessionStorage.setItem('member', result.member);
+        window.location = "index.html";
+      } else {
+        alert('이메일 또는 비밀번호가 맞지 않습니다.');
       }
     });
 };
 
 
 $('#signup-button').click(function (event) {
+  
+ if($('#email').val() == '' || $('#name').val() =='' || $('#password').val() =='' || $('#pac-input').val()=='') {
+   alert('값을 모두 입력해 주세요');
+ } else {
   $.ajax('auth/signup.do', {
     method: 'POST',
     dataType: 'json',
@@ -29,12 +34,63 @@ $('#signup-button').click(function (event) {
     },
     success: function (result) {
       if (result.result === 'success') {
-        console.log('가입 축하드립니다.');
+        alert('가입 축하드립니다.');
         $('#signupModal').modal('toggle');
-      }
+    } else {
+      alert('값을 정확히 입력해주세요');
+    }
     }
   });
+ }
 });
+
+$('#email').on('keyup', function(event) {
+  $.ajax('auth/existEmail.do', {
+    method:'POST',
+    dataType: 'json',
+    data: {
+      email: $('#email').val()
+  },
+  success: function(result) {
+    if ( result.data === 'invalid' ) {
+          $('#check-email').css("color", "red");
+        $('#check-email').text(' 이메일을 정확히 입력해주세요(@포함)');
+      $('#signup-button').attr('disabled',true);
+    } else if (result.data === 'yes') {
+        $('#check-email').css("color", "red");
+        $('#check-email').text(' 이미 사용 중인 이메일입니다.');
+        $('#signup-button').attr('disabled',true);
+      } else {
+        $('#check-email').css("color", "blue");
+        $('#check-email').text(' 사용 가능한 이메일입니다.');
+        $('#signup-button').attr('disabled',false);
+      }
+  }
+  });
+});
+
+$('#nickname').on('keyup', function(event) {
+  $.ajax('auth/existNickName.do', {
+    method:'POST',
+    dataType: 'json',
+    data: {
+      nickname: $('#nickname').val()
+  },
+  success: function(result) {
+      if (result.data === 'yes') {
+        $('#check-nickname').css("color", "red");
+        $('#check-nickname').text(' 이미 사용 중인 닉네임입니다.');
+        $('#signup-button').attr('disabled',true);
+      } else {
+        $('#check-nickname').css("color", "blue");
+        $('#check-nickname').text(' 사용 가능한 닉네임입니다.');
+        $('#signup-button').attr('disabled',false);
+      }
+  }
+  });
+});
+
+
 
 
 // 지도 관련 시작 

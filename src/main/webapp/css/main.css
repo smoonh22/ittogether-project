@@ -236,3 +236,13 @@ hr {
   max-height: 50px;
   max-width: 50px;
 }
+
+
+/* 개인 정보 창*/
+
+#hobby1, #hobby2, #hobby3 {
+  display: inline-block;
+  width:100px;
+  margin-right:5px;
+  
+}

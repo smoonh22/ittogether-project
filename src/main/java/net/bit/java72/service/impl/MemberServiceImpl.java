@@ -26,6 +26,31 @@ public class MemberServiceImpl implements MemberService {
   public int signUp(Member member) {
     return memberDao.signUp(member);
   }
+  
+  @Override
+  public boolean existEmail(String email) {
+    if (memberDao.countEmail(email) > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  @Override
+  public boolean existNickName(String nickname) {
+    if (memberDao.countNickName(nickname) > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  @Override
+  public Member getUserInfo(String nickname) {
+    return memberDao.getUserInfo(nickname);
+  }
+  @Override
+  public int update(Member member) {
+    return memberDao.update(member);
+  }
  
 
 }

@@ -9,7 +9,7 @@ import net.bit.java72.domain.FriendFeed;
 public interface FeedService {
   List<FriendFeed> list();
   List<Feed> myActivityList();
-
+  
 }
 
 

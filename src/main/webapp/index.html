@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Czompatible" content="IE=edge">
@@ -7,28 +8,28 @@
   <meta name="author" content="">
   <title>1인가구를 위한 SNS - itTogether</title>
   <link rel='stylesheet' href="bower_components/bootstrap/dist/css/bootstrap.css" />
-  <link rel='stylesheet' href="bower_components/bootstrap-tour/build/css/bootstrap-tour.css" >
+  <link rel='stylesheet' href="bower_components/bootstrap-tour/build/css/bootstrap-tour.css">
   <link rel='stylesheet' href="bower_components/bootstrap/dist/css/bootstrap-theme.css" />
   <link rel='stylesheet' href="css/logo-nav.css" />
   <link rel='stylesheet' href="css/main.css" />
   <link rel='stylesheet' href="css/modal.css" />
   <link rel='stylesheet' href="css/myActivities.css" />
-  
+
 </head>
 
 <body>
-<!-- 네비게이션 directive-->
+  <!-- 네비게이션 directive-->
   <show-nav></show-nav>
-<!---->
-   <div ng-view></div>
-    <!-- 개인정보 모달 창  -->
-     <info-modal></info-modal>
-    
-<!--  심심해 모달창  -->
-   <bored-modal></bored-modal>
-    
-    <script data-main='app.js' src='bower_components/requirejs/require.js'></script>
+  <!---->
+  <div ng-view></div>
+  <!-- 개인정보 모달 창  -->
+  <info-modal></info-modal>
 
+  <!--  심심해 모달창  -->
+  <bored-modal></bored-modal>
+  <script data-main='app.js' src='bower_components/requirejs/require.js'></script>
+  
+    
 </body>
 
 </html>

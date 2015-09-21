@@ -18,7 +18,7 @@
   
   <select id="exist" 
           parameterType="map" resultMap="MemberMap">
-    SELECT * 
+    SELECT nicknm 
     FROM memb_t
     WHERE email=#{email} and pwd=#{password}
   </select>
@@ -27,6 +27,37 @@
     INSERT INTO MEMB_T(email, nicknm, pwd, cre_dt, name, addr, lat, lon) 
     VALUES(#{email}, #{nickname}, #{password}, now(), #{name}, #{address}, #{latitude}, #{longitude})
   </insert>
+  
+  <select id="countEmail" 
+      parameterType="string" 
+      resultType="int">
+    SELECT count(*)
+    FROM memb_t
+    WHERE email = #{value}
+  </select>
+  <select id="countNickName" 
+      parameterType="string" 
+      resultType="int">
+    SELECT count(*)
+    FROM memb_t
+    WHERE nicknm = #{value}
+  </select>
+  
+  
+  <select id="getUserInfo" 
+          parameterType="string" resultMap="MemberMap">
+    SELECT * 
+    FROM memb_t
+    WHERE nicknm = #{value}
+  </select>
+  
+  <update id="update" parameterType="Member">
+    UPDATE memb_t SET 
+      nicknm=#{nickname},
+      name=#{name},
+      pwd=#{password}
+    WHERE email = #{email}    
+  </update>
 </mapper>
 
 
