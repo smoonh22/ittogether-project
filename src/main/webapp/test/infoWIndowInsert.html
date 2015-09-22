@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Info windows</title>
+    <style>
+    </style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title">내가 가본 장소 등록하기...</h3>
+      </div>
+      <div class="panel-body">
+        <form>
+          <div class="form-group">
+            <label for="inputTitle">가게 이름</label>
+            <input type="txt" class="form-control" id="inputTitle" placeholder="ex) 카페베네 강남점">
+          </div>
+          <div class="form-group">
+            <label for="comment">한줄평</label>
+              <input type="text" class="form-control" id="inputComment" placeholder="ex) 여기 빙수가 참 맛있어요!!!">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputFile">사진 입력</label>
+            <input type="file" id="exampleInputFile">
+          </div>
+          <button type="submit" class="btn btn-default">등록</button>
+          <button type="submit" class="btn btn-default">취소</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

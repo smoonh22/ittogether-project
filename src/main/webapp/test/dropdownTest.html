@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Accessing arguments in UI events</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel='stylesheet' href="../bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel='stylesheet' href="../bower_components/bootstrap/dist/css/bootstrap-theme.css" />
+    <style>
+      </style>
+  </head>
+  
+  <body>
+<script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script> 
+<script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+      
+
+<a class="btn btn-default" href="#" role="button">Link</a>
+<button class="btn btn-default" type="submit">Button</button>
+<input class="btn btn-default" type="button" value="Input">
+<input class="btn btn-default" type="submit" value="Submit">      
+      
+<div class="dropdown" hidden="true">
+  <button class="btn btn-xs btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    분류
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li><a href="#">카페</a></li>
+    <li><a href="#">음식점</a></li>
+    <li><a href="#">수퍼, 편의점</a></li>
+    <li><a href="#">병원, 약국</a></li>
+    <li><a href="#">옷가게</a></li>
+    <li><a href="#"></a></li>
+  </ul>
+</div>      
+<script>
+$('.dropdown-toggle').dropdown()    
+var possible = $('.dropdown');
+  console.log(possible);
+</script>
+      
+</body>
+</html>

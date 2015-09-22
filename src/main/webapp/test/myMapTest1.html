@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Accessing arguments in UI events</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel='stylesheet' href="../bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel='stylesheet' href="../bower_components/bootstrap/dist/css/bootstrap-theme.css" />
+    <style>
+#map-canvas {
+    margin: 0;
+    padding: 0;
+    height: 600px;
+    max-width: none;
+}
+#map-canvas img {
+    max-width: none !important;
+}
+.gm-style-iw {
+    width: 250px !important; /* 건들면 화면 깨짐!! 기본값 350 */
+    top: 15px !important; /* 건들면 화면 깨짐!! */
+    left: 25px !important; /* 건들면 화면 깨짐 */
+    background-color: #fff;
+    box-shadow: 12px 15px 10px rgba(178, 178, 178, 0.9);
+    border: 1px solid rgba(72, 181, 233, 0.6);
+    border-radius: 10px 10px 10px 10px;
+}
+#iw-container {
+    margin-bottom: 0px;
+    width: 250px ;
+} 
+#iw-container .iw-title {
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    padding: 10px;
+    background-color: #48b5e9;
+    color: white;
+    margin: 0px;
+    border-radius: 2px 2px 0 0;
+}
+#iw-container .iw-content {
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: 400;
+    margin-right: 0px;
+    padding: 10px 10px 0px 10px;
+    max-height: 600px; /* 창 전체 맥스 길이*/
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.iw-content img {
+    float: ; /* 사진 위치 조정 */
+    margin: 10px 0px 10px 0px; 
+}
+.iw-subTitle {
+    font-size: 16px;
+    padding: 5px 0;
+}
+    </style>
+  </head>
+  
+  <body>
+    
+    <div id="map-canvas"></div>
+    
+    <div class="hiddenInfoWindow" hidden="true">
+    <div id="iw-container">
+      <div class="iw-title">나만의 장소 등록하기</div>
+      <div class="iw-content">
+        <form>
+          <div class="iw-subTitle">
+            <input type="txt" class="form-control" id="inputTitle" placeholder="상호명">
+          </div>
+         <div class="iw-subTitle">
+           <textarea class="form-control" rows="3"></textarea>
+         </div>
+         <div class="iw-subTitle">
+           <div class="form-group">
+             <input type="file" id="exampleInputFile">
+           </div>
+         </div>
+         <div class="iw-subTitle">
+           <button type="submit" class="btn btn-info btn-sm btn-block">   등록   </button>
+         </div>
+        </form>
+      </div>
+    </div>
+    </div>
+    
+<script async defer src="https://maps.googleapis.com/maps/api/js?signed_in=false&callback=initMap"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>    
+    
+<script>
+var myLoc = [37.497943, 127.027622];
+var map;
+var marker = [];
+  
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map-canvas'), {
+    zoom: 16,
+    center: {lat: myLoc[0], lng: myLoc[1]},
+    disableDefaultUI: true, /* DEFAULT UI 사용*/
+    panControl: false,
+    zoomControl: false,
+    scaleControl: false /* 척도 */
+  });
+  
+var hiddenInfoWindow = $('.hiddenInfoWindow');
+var myMarkInsert = hiddenInfoWindow[0].innerHTML;
+  
+  markMyLoc();
+  map.addListener('click', function(e) {
+    marker[0] = new google.maps.Marker({
+      position: e.latLng,
+      map: map,
+      title:"카페베네"
+    });
+    
+    var infowindow = new google.maps.InfoWindow({
+      content: myMarkInsert,
+      maxWidth: 450
+    });
+
+    google.maps.event.addListener(marker[0], 'click', function() {
+      infowindow.open(map,marker[0]);
+    });
+    
+    google.maps.event.addListener(map, 'click', function() {
+      infowindow.close();
+    });
+    
+    google.maps.event.addListener(infowindow, 'domready', function() {
+      var iwOuter = $('.gm-style-iw');
+      var iwBackground = iwOuter.prev();
+      iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+      iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+      iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
+      var iwCloseBtn = iwOuter.next();
+      iwCloseBtn.css({opacity: '1', right: '28px', top: '16px', border: '0px solid #48b5e9', 'border-radius': '4px'});
+      iwCloseBtn.mouseout(function(){
+        $(this).css({opacity: '1'});
+      });
+    });
+  });
+
+}
+//function deleteMarkers() {
+//    marker.setMap(null);
+//  marker = [];
+//}
+function markMyLoc () {
+    var marker = new google.maps.Marker({
+      position: {lat: myLoc[0], lng: myLoc[1]},
+      map: map,
+      icon: '../images/icons/myHome.png'
+    });
+    marker.addListener('click', function() {
+        myWindow.open(map, marker);
+      });
+  }
+</script>
+  </body>
+</html>
