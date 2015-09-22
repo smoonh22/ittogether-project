@@ -22,7 +22,7 @@ define(function () {
       controller: function () {
         var parent_scope = this;
         $.getJSON('member/userInfo.do', {
-          nickname: sessionStorage.getItem('member')
+          nickname: sessionStorage.getItem('member');
         }, function (result) {
           parent_scope.userDatas = result.data;
         });
@@ -61,7 +61,6 @@ define(function () {
   });
 
   app.directive('showNav', function () {
-    $('#userid').text(sessionStorage.getItem('member'));
     return {
       restrict: 'E',
       templateUrl: 'templates/header.html'
