@@ -173,3 +173,39 @@ html, body {
 #target {
   width: 345px;
 }
+
+.profile-info-div {
+  float:left;
+  width: 150px;
+  height: 150px;
+  margin-top: 30px;
+}
+#profile-img {
+  width:150px;
+  height:150px;
+}
+
+.basic-info-div {
+  float: right;
+  width:400px;
+  height: 250px;
+  margin-top: -13px;
+  margin-right: 10px;
+  
+}
+
+.basic-info-div label {
+  float: left;
+  display: inline-block;
+  margin-top:2px;
+  margin-bottom: 0px;
+}
+
+.basic-info-div:after {
+  float:none;
+}
+.signup-input {
+  display:inline-block;
+  width: 400px;
+  
+}

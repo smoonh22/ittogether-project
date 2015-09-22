@@ -55,22 +55,18 @@
         </div>
         <div class="modal-body">
           <form role="form" method="POST" action="/auth/signup.do">
-            <div class="form-group">
+            <div class="profile-info-div">
+              <img id="profile-img" src="images/cat01.jpg"/>
+            </div>
+              <div class="basic-info-div">
               <label>이름</label>
-              <input class="form-control" id="name">
-              <img id="profile-img" src=""/>
-            </div>
-            <div class="form-group">
+              <input class="form-control signup-input" id="name"><br>
               <label>닉네임</label><span id="check-nickname"></span>
-              <input class="form-control" id="nickname">
-            </div>
-            <div class="form-group">
+              <input class="form-control signup-input" id="nickname"><br>
               <label>이메일</label><span id="check-email"></span>
-              <input class="form-control" id="email">
-            </div>
-            <div class="form-group">
+              <input class="form-control signup-input" id="email"><br>
               <label>비밀번호</label>
-              <input type="password" class="form-control" placeholder="비밀번호" id="password">
+              <input type="password" class="form-control signup-input" placeholder="비밀번호" id="password"><br>
             </div>
             <div class="form-group">
               <label>집 주소(주소 입력 후 핀 조정으로 상세하게 지도에 위치 설정을 해주세요)</label>
