@@ -36,6 +36,7 @@ $('#signup-button').click(function (event) {
       if (result.result === 'success') {
         alert('가입 축하드립니다.');
         $('#signupModal').modal('toggle');
+        window.location.reload(true);
     } else {
       alert('값을 정확히 입력해주세요');
     }

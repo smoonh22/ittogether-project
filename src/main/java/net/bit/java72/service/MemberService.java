@@ -10,6 +10,7 @@ public interface MemberService {
   boolean existNickName(String nickname);
   Member getUserInfo(String nickname);
   int update(Member member);
+  Member getNickName(String email);
  
 }
 

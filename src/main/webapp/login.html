@@ -1,182 +1,103 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <meta charset="UTF-8">
   <title>Login Form</title>
   <link rel='stylesheet' href="bower_components/bootstrap/dist/css/bootstrap.css" />
   <link rel='stylesheet' href="bower_components/bootstrap/dist/css/bootstrap-theme.css" />
-  <link rel="stylesheet" href="css/login.css"/>
+  <link rel="stylesheet" href="css/login.css" />
   <link rel='stylesheet' href="css/modal.css" />
-  <link rel='stylesheet' href="bower_components/font-awesome/css/font-awesome.css"/>
-  <link rel='stylesheet' href="bower_components/bootstrap-social/bootstrap-social.css"/>
-  
+  <link rel='stylesheet' href="bower_components/font-awesome/css/font-awesome.css" />
+  <link rel='stylesheet' href="bower_components/bootstrap-social/bootstrap-social.css" />
+
 </head>
 
 <body>
-    <div class="login">
-      <div class="login-screen">
-        <div class="app-title">
-          <h1>ItTogether</h1>
+  <div class="login">
+    <div class="login-screen">
+      <div class="app-title">
+        <h1>ItTogether</h1>
+      </div>
+
+      <div class="login-form">
+       <div id="input-group">
+        <div class="control-group">
+          <input type="text" class="login-field" value="" placeholder="email" id="login-email">
+          <label class="login-field-icon fui-user" for="login-name"></label>
         </div>
 
-        <div class="login-form">
-          <div class="control-group">
-            <input type="text" class="login-field" value="" placeholder="email" id="login-email">
-            <label class="login-field-icon fui-user" for="login-name"></label>
-          </div>
-
-          <div class="control-group">
-            <input type="password" class="login-field" value="" placeholder="password" id="login-pass">
-            <label class="login-field-icon fui-lock" for="login-pass"></label>
-          </div>
-
-          <a class="btn btn-primary btn-large btn-block" href="#" onclick="login();">login</a>
-
-          <a class="btn btn-block btn-social btn-lg btn-facebook"><i class="fa fa-facebook"></i>페이스북으로 로그인</a>
-          <a class="kakao-button" href="#"></a>
-          <a data-toggle="modal" role="button" class="login-link" id="abc" href="#signupModal">회원가입</a>
+        <div class="control-group">
+          <input type="password" class="login-field" value="" placeholder="password" id="login-pass">
+          <label class="login-field-icon fui-lock" for="login-pass"></label>
         </div>
+        </div>
+        <div id="login-btn-group">
+        <a class="btn-login btn-primary btn-large btn-block" href="#" onclick="login();">로그인</a>
+
+        <a class="btn-login btn btn-block btn-social btn-lg btn-facebook" id="facebook-btn"><i class="fa fa-facebook"></i>페이스북으로 로그인</a>
+        <a data-toggle="modal" role="button" class="btn-signup btn-primary btn-large btn-block login-link" id="abc" href="#signupModal">회원가입</a>
+<!--      <a id="kakao-login-btn"></a>-->
+     </div>
       </div>
     </div>
+  </div>
 
-    <!-- modal start -->
-    <div id="signupModal" class="modal fade">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">회원가입</h4>
-          </div>
-          <div class="modal-body">
-            <form role="form" method="POST" action="/auth/signup.do">
-              <div class="form-group">
-                <label>이름</label>
-                <input class="form-control" id="name">
-              </div>
-              <div class="form-group">
-                <label>닉네임</label><span id="check-nickname"></span>
-                <input class="form-control" id="nickname">
-              </div>
-              <div class="form-group">
-                <label>이메일</label><span id="check-email"></span>
-                <input class="form-control" id="email">
-              </div>
-              <div class="form-group">
-                <label>비밀번호</label>
-                <input type="password" class="form-control" placeholder="비밀번호" id="password" >
-              </div>
-              <div class="form-group">
-                <label>집 주소(주소 입력 후 핀 조정으로 상세하게 지도에 위치 설정을 해주세요)</label>
-                <input id="pac-input" class="controls" type="text" placeholder="지역을 입력하세요">
-                <div id="map"></div>
-                <div><input type="text" hidden="true" id="latitude">
-                <input type="text" hidden="true" id="longitude"></div>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" id="signup-button">가입하기</button>
-          </div>
-          <!-- /.modal-content -->
+
+  <!-- modal start -->
+  <div id="signupModal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">회원가입</h4>
         </div>
-        <!-- /.modal-dialog -->
+        <div class="modal-body">
+          <form role="form" method="POST" action="/auth/signup.do">
+            <div class="form-group">
+              <label>이름</label>
+              <input class="form-control" id="name">
+              <img id="profile-img" src=""/>
+            </div>
+            <div class="form-group">
+              <label>닉네임</label><span id="check-nickname"></span>
+              <input class="form-control" id="nickname">
+            </div>
+            <div class="form-group">
+              <label>이메일</label><span id="check-email"></span>
+              <input class="form-control" id="email">
+            </div>
+            <div class="form-group">
+              <label>비밀번호</label>
+              <input type="password" class="form-control" placeholder="비밀번호" id="password">
+            </div>
+            <div class="form-group">
+              <label>집 주소(주소 입력 후 핀 조정으로 상세하게 지도에 위치 설정을 해주세요)</label>
+              <input id="pac-input" class="controls" type="text" placeholder="지역을 입력하세요">
+              <div id="map"></div>
+              <div>
+                <input type="text" hidden="true" id="latitude">
+                <input type="text" hidden="true" id="longitude">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="signup-button">가입하기</button>
+        </div>
+        <!-- /.modal-content -->
       </div>
+      <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal -->
+  </div>
+  <!-- /.modal -->
 
+  <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+  <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/controllers/facebook.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&libraries=places&callback=initAutocomplete" async defer></script>
+  <script type="text/javascript" src="js/controllers/login.js"></script>
+</body>
 
-    <!--
-	<script>
-  // This is called with the results from from FB.getLoginStatus().
-  function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
-    if (response.status === 'connected') {
-      // Logged into your app and Facebook.
-      testAPI();
-    } else if (response.status === 'not_authorized') {
-      // The person is logged into Facebook, but not your app.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
-    } else {
-      // The person is not logged into Facebook, so we're not sure if
-      // they are logged into this app or not.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into Facebook.';
-    }
-  }
-
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
-
-  window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '1646491478954069',
-    cookie     : true,  // enable cookies to allow the server to access 
-                        // the session
-    xfbml      : true,  // parse social plugins on this page
-    version    : 'v2.4' // use version 2.2
-  });
-
-  // Now that we've initialized the JavaScript SDK, we call 
-  // FB.getLoginStatus().  This function gets the state of the
-  // person visiting this page and can return one of three states to
-  // the callback you provide.  They can be:
-  //
-  // 1. Logged into your app ('connected')
-  // 2. Logged into Facebook, but not your app ('not_authorized')
-  // 3. Not logged into Facebook and can't tell if they are logged into
-  //    your app or not.
-  //
-  // These three cases are handled in the callback function.
-
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
-
-
-  };
-
-  // Load the SDK asynchronously
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-
-  // Here we run a very simple test of the Graph API after login is
-  // successful.  See statusChangeCallback() for when this call is made.
-  function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-      console.log('Successful login for: ' + response.name);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
-      
-      console.log(response+ "hahahah");
-    });
-  }
-  
-  
-  </script>
--->
-
-<script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script> 
-<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-<script type="text/javascript" src="js/controllers/login.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&libraries=places&callback=initAutocomplete" async defer></script>
-  </body>
 </html>

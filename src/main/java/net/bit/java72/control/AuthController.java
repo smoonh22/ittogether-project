@@ -57,7 +57,6 @@ public class AuthController {
   @RequestMapping("/existEmail")
   public Object existEmail(String email) throws Exception {
     Map<String,Object> result = new HashMap<String,Object>();
-
     if (!email.contains("@")) {
      result.put("data", "invalid");
      return result;
@@ -80,6 +79,17 @@ public class AuthController {
     }
     return result;
   }
-  
-  
+  //페이스북에서 로그인시 닉네임을 가져온다.
+  @RequestMapping("/getNickName")
+  public Object getNickName(String email) throws Exception {
+    Map<String,Object> result = new HashMap<String,Object>();
+    try {
+    Member member = memberService.getNickName(email);
+    result.put("data", "yes");
+    result.put("member", member);
+    } catch (Exception e) {
+      result.put("data", "no");
+    }
+    return result;
+  }
 }

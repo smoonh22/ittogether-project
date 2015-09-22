@@ -13,5 +13,6 @@ public interface MemberDao {
   //로그인후 메인 페이지에서 개인정보 누를
   Member getUserInfo(String nickname);
   int update(Member member);
+  Member getNickName(String email);
 
 }

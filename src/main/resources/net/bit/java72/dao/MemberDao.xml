@@ -58,6 +58,10 @@
       pwd=#{password}
     WHERE email = #{email}    
   </update>
+  
+  <select id="getNickName" parameterType="string" resultMap="MemberMap">
+  SELECT nicknm FROM memb_t WHERE email=#{email}
+  </select>
 </mapper>
 
 
