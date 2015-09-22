@@ -32,15 +32,16 @@ $('#facebook-btn').click(function (event) {
            email: response.email
          },
          function (result) {
-           if (result.data === 'yes') {
-             //데이터베이스에 이메일 값 있으면  이름 정보 세션에 저장 후 index.html로이동 
-            sessionStorage.setItem("member",result.member.nickname);  
-             window.location = "index.html";
-           } else {
+           if (result.data === 'no') {
              //데이터베이스에 없으면 모달창을 띄어서 회원가입하게 유도
              $('#email').val(response.email);
              $('#name').val(response.name);
              $('#signupModal').modal('toggle');
+           } else {
+             console.log(result.data);
+             //데이터베이스에 이메일 값 있으면  이름 정보 세션에 저장 후 index.html로이동 
+             sessionStorage.setItem("member",result.member.nickname);  
+             window.location = "index.html";
            }
          });
 
