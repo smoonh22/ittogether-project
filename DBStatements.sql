@@ -1,3 +1,13 @@
+insert into MARKER_T(MNO, MLAT, MLON, MTITLE, MCONTNT, MPHOTO)
+values('1', '37.496708', '127.026865', '카페베네', '여기 프라푸치노 개맛남','/images/markers/cafebene.png');
+insert into MARKER_T(MNO, MLAT, MLON, MTITLE, MCONTNT, MPHOTO)
+values('1', '37.498308', '127.026312', '세탁소', '여기 와이샤스 잘 펴요', '/images/markers/laundary.png');
+insert into MARKER_T(MNO, MLAT, MLON, MTITLE, MCONTNT, MPHOTO)
+values('1', '37.497380', '127.027294', '씨유 편의점', '여기 알바 예쁨', '/images/markers/cu.png');
+insert into MARKER_T(MNO, MLAT, MLON, MTITLE, MCONTNT, MPHOTO)
+values('1', '37.498674', '127.028249', '온누리 약국', '약은 약사에게..', '/images/markers/pharm.png');
+
+
 
 insert into memb_t(nicknm, email, pwd, name, addr, lat, lon)
 values('test01nickname', 'test01@test.com', '1234', 'test01name', '서울시 강남구 test1구', '37.497129', '127.027612');
