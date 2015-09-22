@@ -24,8 +24,8 @@
   </select>
   
   <insert id="signUp" parameterType="Member">
-    INSERT INTO MEMB_T(email, nicknm, pwd, cre_dt, name, addr, lat, lon) 
-    VALUES(#{email}, #{nickname}, #{password}, now(), #{name}, #{address}, #{latitude}, #{longitude})
+    INSERT INTO MEMB_T(email, nicknm, pwd, cre_dt, name, addr, lat, lon, mphoto) 
+    VALUES(#{email}, #{nickname}, #{password}, now(), #{name}, #{address}, #{latitude}, #{longitude}, #{profilePicture})
   </insert>
   
   <select id="countEmail" 

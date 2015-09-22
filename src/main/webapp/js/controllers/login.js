@@ -30,7 +30,8 @@ $('#signup-button').click(function (event) {
       name: $('#name').val(),
       address: $('#pac-input').val(),
       latitude: $('#latitude').val(),
-      longitude: $('#longitude').val()
+      longitude: $('#longitude').val(),
+      profilePicture: $('#profile-img').attr('src')
     },
     success: function (result) {
       if (result.result === 'success') {

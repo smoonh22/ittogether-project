@@ -39,7 +39,12 @@ public class AuthController {
   //회원가입 부분
   @RequestMapping("/signup")
   public Object signUp(Member member) throws Exception {
-    
+    System.out.println(member.getProfilePicture());
+    System.out.println(member.getLongitude());
+    System.out.println(member.getName());
+    System.out.println(member.getEmail());
+    System.out.println(member.getAddress());
+    System.out.println(member.getPassword());
     Map<String,Object> result = new HashMap<String,Object>();
     
     try {
@@ -85,10 +90,12 @@ public class AuthController {
     Map<String,Object> result = new HashMap<String,Object>();
     try {
     Member member = memberService.getNickName(email);
-    result.put("data", "yes");
     result.put("member", member);
+    result.put("data", "yes");
+    System.out.println(member.getNickname());
     } catch (Exception e) {
       result.put("data", "no");
+      return result;
     }
     return result;
   }
