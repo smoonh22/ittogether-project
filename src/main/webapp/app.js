@@ -24,7 +24,9 @@ requirejs.config({
         'friendsFeed': 'js/controllers/friendsFeed',
         'noneFriendsFeed': 'js/controllers/noneFriendsFeed',
         'tour': 'js/controllers/tour',
-        'myActivities': 'js/controllers/myActivities'
+        'myActivities': 'js/controllers/myActivities',
+        'myMap' : 'js/controllers/myMap',
+        'myFriendList': 'js/controllers/myFriendList'
     },
   
   shim: {
@@ -44,7 +46,7 @@ requirejs.config({
       deps:['jquery']
     },
     'main': {
-      deps: ['angular-route', 'friendsFeed','noneFriendsFeed', 'bootstrap.min', 'tour','myActivities','myFriendList']
+      deps: ['angular-route', 'friendsFeed','noneFriendsFeed', 'bootstrap.min', 'tour','myActivities', 'myMap', 'myFriendList']
     },
     'friendsFeed': {
       deps: ['angular']
@@ -53,6 +55,9 @@ requirejs.config({
       deps: ['angular']
     },
     'myActivities': {
+      deps: ['angular']
+    },
+    'myMap': {
       deps: ['angular']
     },
     'myFriendList': {

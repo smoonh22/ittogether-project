@@ -1,3 +1,56 @@
+insert into frd_t (frdno, mno, state, frd_dt) values(1,2,1,now());
+insert into frd_t (frdno, mno, state, frd_dt) values(2,1,1,now());
+insert into frd_t (frdno, mno, state, frd_dt) values(2,3,2,now());
+insert into frd_t (frdno, mno, state, frd_dt) values(2,4,2,now());
+insert into frd_t (frdno, mno, state, frd_dt) values(3,2,2,now());
+insert into frd_t (frdno, mno, state, frd_dt) values(4,2,2,now());
+
+- 친구
+DROP TABLE IF EXISTS `FRD_T` RESTRICT;
+
+-- 친구
+CREATE TABLE `FRD_T` (
+   `FRDNO`  INTEGER  NOT NULL COMMENT '친구번호', -- 친구번호
+   `MNO`    INTEGER  NOT NULL COMMENT '회원번호', -- 회원번호
+   `STATE`  INTEGER  NOT NULL COMMENT '상태', -- 상태
+   `FRD_DT` DATETIME NULL     COMMENT '날짜' -- 날짜
+)
+COMMENT '친구';
+
+-- 친구
+ALTER TABLE `FRD_T`
+   ADD CONSTRAINT `PK_FRD_T` -- 친구 기본키
+      PRIMARY KEY (
+         `FRDNO`, -- 친구번호
+         `MNO`    -- 회원번호
+      );
+
+-- 친구 유니크 인덱스
+CREATE UNIQUE INDEX `UIX_FRD_T`
+   ON `FRD_T` ( -- 친구
+   );
+
+-- 친구
+ALTER TABLE `FRD_T`
+   ADD CONSTRAINT `FK_MEMB_T_TO_FRD_T` -- MEMB_T -> 친구
+      FOREIGN KEY (
+         `MNO` -- 회원번호
+      )
+      REFERENCES `MEMB_T` ( -- MEMB_T
+         `MNO` -- 회원번호
+      );
+
+
+insert into MARKER_T(MNO, MLAT, MLON, MTITLE, MCONTNT, MPHOTO)
+values('1', '37.496708', '127.026865', '카페베네', '여기 프라푸치노 개맛남','/images/markers/cafebene.png');
+insert into MARKER_T(MNO, MLAT, MLON, MTITLE, MCONTNT, MPHOTO)
+values('1', '37.498308', '127.026312', '세탁소', '여기 와이샤스 잘 펴요', '/images/markers/laundary.png');
+insert into MARKER_T(MNO, MLAT, MLON, MTITLE, MCONTNT, MPHOTO)
+values('1', '37.497380', '127.027294', '씨유 편의점', '여기 알바 예쁨', '/images/markers/cu.png');
+insert into MARKER_T(MNO, MLAT, MLON, MTITLE, MCONTNT, MPHOTO)
+values('1', '37.498674', '127.028249', '온누리 약국', '약은 약사에게..', '/images/markers/pharm.png');
+
+
 
 insert into memb_t(nicknm, email, pwd, name, addr, lat, lon)
 values('test01nickname', 'test01@test.com', '1234', 'test01name', '서울시 강남구 test1구', '37.497129', '127.027612');
