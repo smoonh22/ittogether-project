@@ -40,7 +40,8 @@ $('#facebook-btn').click(function (event) {
            } else {
              console.log(result.data);
              //데이터베이스에 이메일 값 있으면  이름 정보 세션에 저장 후 index.html로이동 
-             sessionStorage.setItem("member",result.member.nickname);  
+             sessionStorage.setItem("nickname", result.nickname);  
+             sessionStorage.setItem("mno", result.mno);  
              window.location = "index.html";
            }
          });

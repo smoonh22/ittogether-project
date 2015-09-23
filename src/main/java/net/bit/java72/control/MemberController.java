@@ -4,20 +4,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import net.bit.java72.domain.Member;
 import net.bit.java72.service.MemberService;
 
+
+
 @Controller("MemberController")
 @RequestMapping("/member")
 public class MemberController {
   @Autowired MemberService memberService;
   @Autowired ServletContext servletContext;
+  @Autowired HttpSession  httpsession;
   
   
   //유저 정보 메뉴 눌렀을 시 정보 불러오기  
@@ -48,3 +51,6 @@ public class MemberController {
     return result;
   }
 }
+  
+
+

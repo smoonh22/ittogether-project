@@ -6,7 +6,8 @@ function login() {
     },
     function (result) {
       if (result.data === 'yes') {
-        sessionStorage.setItem('member', result.member);
+        sessionStorage.setItem('nickname', result.nickname);
+        sessionStorage.setItem('mno', result.mno);
         window.location = "index.html";
       } else {
         alert('이메일 또는 비밀번호가 맞지 않습니다.');

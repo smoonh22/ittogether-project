@@ -18,6 +18,7 @@ requirejs.config({
         'AnimOnScroll': 'js/lib/AnimOnScroll',
         'metisMenu': 'bower_components/metisMenu/metisMenu',
         'angular-route': 'bower_components/angular-route/angular-route',
+        'myFriendList': 'js/controllers/myFriendList',
         //컨트롤러
         'main': 'js/controllers/main',
         'friendsFeed': 'js/controllers/friendsFeed',
@@ -43,7 +44,7 @@ requirejs.config({
       deps:['jquery']
     },
     'main': {
-      deps: ['angular-route', 'friendsFeed','noneFriendsFeed', 'bootstrap.min', 'tour','myActivities']
+      deps: ['angular-route', 'friendsFeed','noneFriendsFeed', 'bootstrap.min', 'tour','myActivities','myFriendList']
     },
     'friendsFeed': {
       deps: ['angular']
@@ -53,6 +54,9 @@ requirejs.config({
     },
     'myActivities': {
       deps: ['angular']
+    },
+    'myFriendList': {
+      deps:['angular']
     }
   }
   

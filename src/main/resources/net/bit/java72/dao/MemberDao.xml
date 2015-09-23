@@ -15,10 +15,9 @@
     <result column="addr"     property="address"/>
     <result column="mphoto"   property="profilePicture"/>
   </resultMap>
-  
   <select id="exist" 
           parameterType="map" resultMap="MemberMap">
-    SELECT nicknm 
+    SELECT mno, nicknm 
     FROM memb_t
     WHERE email=#{email} and pwd=#{password}
   </select>
@@ -27,6 +26,10 @@
     INSERT INTO MEMB_T(email, nicknm, pwd, cre_dt, name, addr, lat, lon, mphoto) 
     VALUES(#{email}, #{nickname}, #{password}, now(), #{name}, #{address}, #{latitude}, #{longitude}, #{profilePicture})
   </insert>
+  
+  <select id="getOne" resultMap="MemberMap" parameterType="int">
+   SELECT * FROM memb_t where mno=#{values}
+  </select>
   
   <select id="countEmail" 
       parameterType="string" 

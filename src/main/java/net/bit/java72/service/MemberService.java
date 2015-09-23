@@ -11,6 +11,7 @@ public interface MemberService {
   Member getUserInfo(String nickname);
   int update(Member member);
   Member getNickName(String email);
+  Member getOne(int mno);
  
 }
 

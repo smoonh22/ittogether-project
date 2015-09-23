@@ -31,7 +31,8 @@ public class AuthController {
       result.put("data", "no");
     } else {
       result.put("data", "yes");
-      result.put("member", member.getNickname());
+      result.put("nickname", member.getNickname());
+      result.put("mno", member.getMno());
     }
     return result;
   }

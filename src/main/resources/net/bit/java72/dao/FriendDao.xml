@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.bit.java72.dao.FriendDao">
+
+
+  <select id="frdList" parameterType="Int" resultType="int">
+    SELECT *
+    FROM FRD_T
+    WHERE mno=#{values} and state=2
+  </select>
+  
+  <select id="applyList" parameterType="Int" resultType="int">
+    SELECT *
+    FROM FRD_T
+    WHERE mno=#{values} and state=1
+  </select>
+  
+  <select id="getFRD" parameterType="int">
+  	SELECT * 
+  	FROM memb_t
+  	where mno=#{values}
+  </select>
+  
+  <insert id="addFRD" parameterType="map">
+    INSERT INTO FRD_T(mno, frdno, state, frd_dt) 
+    VALUES(#{mno}, #{frdno},1, now())
+  </insert>
+  
+  <update id="acceptFRD" parameterType="map">
+  UPDATE frd_t set state=2 where mno=#{mno} and frdno=#{frdno} 
+  </update>
+  
+  <delete id="deleteFRD" parameterType="map">
+  DELETE from FRD_T where mno=#{mno} and frdno=#{frdno}
+  </delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
