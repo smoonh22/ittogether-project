@@ -1,6 +1,6 @@
 define(function () {
   //페이지가 완전히 로드된 뒤에 실행
-  var app = angular.module('main', ['ngRoute', 'friendsFeed', 'noneFriendsFeed', 'myActivities', 'myMap']);
+  var app = angular.module('main', ['ngRoute', 'friendsFeed', 'noneFriendsFeed', 'myActivities', 'myMap', 'myFriendList']);
 
   app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/home', {

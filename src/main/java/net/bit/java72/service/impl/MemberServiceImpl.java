@@ -55,6 +55,10 @@ public class MemberServiceImpl implements MemberService {
   public Member getNickName(String email) {
     return memberDao.getNickName(email);
   }
+  @Override
+  public Member getOne(int mno) {
+    return memberDao.getOne(mno);
+  }
  
 
 }
