@@ -86,7 +86,8 @@ public class AuthController {
     Map<String,Object> result = new HashMap<String,Object>();
     try {
     Member member = memberService.getNickName(email);
-    result.put("member", member);
+    result.put("nickname", member.getNickname());
+    result.put("mno", member.getMno());
     result.put("data", "yes");
     System.out.println(member.getNickname());
     } catch (Exception e) {
