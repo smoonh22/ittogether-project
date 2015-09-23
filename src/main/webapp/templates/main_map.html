@@ -37,8 +37,6 @@
       </button>
     </div>
   </div>
-
-
   <div class="panel panel-info">
     <div class="panel-body">
       <span id="img-in-box">
@@ -51,7 +49,6 @@
         </button>
     </div>
   </div>
-  
   <div class="panel panel-info">
     <div class="panel-body">
       <span id="img-in-box">
@@ -67,30 +64,85 @@
 </div>
   
 
-    
-    <script type="text/javascript">
-      function toggleToMap() {
-        $('#changeToMap').load('main_map.html');
-      }
-    </script>
-    
+<div id="friendLocArr" hidden="true">friend0,37.497129,127.027612/friend1,37.496708,127.026865/friend2,37.498308,127.026312/friend3,37.497380,127.027294/friend4,37.498674,127.028249</div>
+
+    <div id="myInfoWindow" hidden="true">
+    <div id="iw-container">
+      <div class="iw-title">송문혁</div>
+      <div class="iw-content">
+          <div class="iw-subTitle">
+           <img src="images/myPhoto.png" class="img-circle">
+          </div>
+          <div class="iw-subTitle">
+            <input type="txt" class="form-control input-sm" id="myInfoTitle" placeholder="음악 같이 들어요~">
+          </div>
+      </div>
+    </div>
+    </div>
+    <div id="friendInfoWindow" hidden="true">
+    <div id="iw-container">
+      <div class="iw-title">설현</div>
+      <div class="iw-content">
+          <div class="iw-subTitle">
+           <img src="images/seol2.png" class="img-circle">
+          </div>
+          <div class="iw-subTitle">
+            <input type="txt" class="form-control" id="myInfoTitle" placeholder="심쿵해">
+          </div>
+          <div class="iw-subTitle">
+           <button type="submit" class="btn btn-info btn-sm btn-block">프로필 보기</button>
+         </div>
+         <div class="iw-subTitle">
+           <button type="submit" class="btn btn-info btn-sm btn-block">메시지 보내기</button>
+         </div>
+      </div>
+    </div>
+    </div>
+    <div id="notFriendInfoWindow" hidden="true">
+    <div id="iw-container">
+      <div class="iw-title">...</div>
+      <div class="iw-content">
+          <div class="iw-subTitle">
+           <img src="images/notFriend.png" class="img-circle">
+          </div>
+          <div class="iw-subTitle">
+            <input type="txt" class="form-control" id="myInfoTitle" placeholder="친구가 되시면 보입니다. 친구 신청을 해보세요.">
+          </div>
+          <div class="iw-subTitle">
+           <button type="submit" class="btn btn-info btn-sm btn-block">친구 신청</button>
+         </div>
+      </div>
+    </div>
+    </div>
+
+
+<!--
+<div ng-controller="mainMapCtrl as mmCtrl">
+  <div id="friendLocArr" ng-repeat=" friend in mmCtrl.friends">{{friend.nickname}},{{friend.latitude}},{{friend.longitude}}/</div>
+</div>
+-->
+
 <script>
+  
   var myLoc = [37.497943, 127.027622];
+  
+  var hiddenInfoWindow = $('#friendLocArr')[0].innerHTML;;
+  var arr = hiddenInfoWindow.split('/');
+  var friendLocArr = [];
+  for (var i = 0; i < arr.length; i++) {
+    friendLocArr[i] = arr[i].split(',');
+    friendLocArr[i][1] = parseFloat(friendLocArr[i][1]);
+    friendLocArr[i][2] = parseFloat(friendLocArr[i][2]);
+  }
+  
   var friendMarkers = new Array; <!-- 팝업창 띄울 때의 마커들 -->
-  var friendLocArr = [ <!-- 친구들의 배열 -->
-    ['friend0', 37.497129, 127.027612, 4],
-    ['friend1', 37.496708, 127.026865, 5],
-    ['friend2', 37.498308, 127.026312, 3],
-    ['friend3', 37.497380, 127.027294, 2],
-    ['friend4', 37.498674, 127.028249, 1]
-  ];
   var notFriendMarkers = new Array; <!-- 팝업창 띄울 때의 마커들  -->
   var notFriendLocArr = [ <!-- 주변 회원들의 배열 -->
-    ['notFriend0', 37.496629, 127.027622, 4],
-    ['notFriend1', 37.495508, 127.026845, 5],
-    ['notFriend2', 37.497248, 127.026352, 3],
-    ['notFriend3', 37.499380, 127.027244, 2],
-    ['notFriend4', 37.497624, 127.028219, 1]
+    ['notFriend0', 37.496629, 127.027622],
+    ['notFriend1', 37.495508, 127.026845],
+    ['notFriend2', 37.497248, 127.026352],
+    ['notFriend3', 37.499380, 127.027244],
+    ['notFriend4', 37.497624, 127.028219]
   ];
   
   var map;
@@ -98,31 +150,15 @@
   var friendWindow; /* 친구들 팝업창 */
   var notFriendWindow; /* 회원들 팝업창 */
     
-  var myBalloon = '<div class="myBalloon">' + /* 내 팝업창의 내용 */
-    '<table>' +
-    '<tr><td calss="photo-in-Ballon"><img src="images/myPhoto.png" class="img-circle"></td></tr>' +
-    '<tr><td>송문혁</td></tr>'+
-    '<tr><td>외출중..[남김말]</td></tr>' +
-    '<tr><td><br><br><br><br><br> </td></tr>' +
-    '</table>' +
-    '</div>';  
+  var myInfoWindow = $('#myInfoWindow');
+  var myBalloon = myInfoWindow[0].innerHTML;
   
-  var friendBalloon = '<div class="friendBalloon">' + /* 친구 팝업창의 내용 */
-    '<table>' +
-    '<tr><td calss="photo-in-Ballon"><img src="images/seol2.png" class="img-circle"></td></tr>' +
-    '<tr><td>설현</td></tr>'+
-    '<tr><td>외출중..[남김말]</td></tr>' +
-    '</table>' +
-    '</div>';
+  var friendInfoWindow = $('#friendInfoWindow');
+  var friendBalloon = friendInfoWindow[0].innerHTML;
   
-  var notFriendBalloon = '<div class="notFriendBalloon">' + /* 주변 회원 팝업창의 내용 */
-    '<table border="1">' +
-    '<tr><td calss="photo-in-Ballon"><img src="images/notFriend.png" class="img-circle"></td></tr>' +
-    '<tr><td>...</td></tr>'+
-    '<tr><td>친구가 되시면 보입니다.</td></tr>' +
-    '</table>' +
-    '</div>';
-    
+  var notFriendInfoWindow = $('#notFriendInfoWindow');
+  var notFriendBalloon = notFriendInfoWindow[0].innerHTML;
+  
   var radius = { /* 반경 보여줄 지점 */
 	  gangnamStation: {
 	    center: {lat: myLoc[0], lng: myLoc[1]}, /* 반경의 중심 */ 
@@ -130,7 +166,7 @@
 	  }
 	};
   
-  function initMap() {
+  function initMap1() {
     map = new google.maps.Map(document.getElementById('map'), {
       zoom: 17,
       /* 처음 화면을 보여주는 위도, 경도 */
@@ -160,6 +196,45 @@
       markNotFriends(i); /* 주변 회원 마킹 */
     }
     markCircle(); /* 반경 렌더링 */
+    
+    google.maps.event.addListener(myWindow, 'domready', function() {
+      var iwOuter = $('.gm-style-iw');
+      var iwBackground = iwOuter.prev();
+      iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+      iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+      iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
+      var iwCloseBtn = iwOuter.next();
+      iwCloseBtn.css({opacity: '1', right: '28px', top: '16px', border: '0px solid #48b5e9', 'border-radius': '4px'});
+      iwCloseBtn.mouseout(function(){
+        $(this).css({opacity: '1'});
+      });
+    });
+    
+    google.maps.event.addListener(friendWindow, 'domready', function() {
+      var iwOuter = $('.gm-style-iw');
+      var iwBackground = iwOuter.prev();
+      iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+      iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+      iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
+      var iwCloseBtn = iwOuter.next();
+      iwCloseBtn.css({opacity: '1', right: '28px', top: '16px', border: '0px solid #48b5e9', 'border-radius': '4px'});
+      iwCloseBtn.mouseout(function(){
+        $(this).css({opacity: '1'});
+      });
+    });
+    
+    google.maps.event.addListener(notFriendWindow, 'domready', function() {
+      var iwOuter = $('.gm-style-iw');
+      var iwBackground = iwOuter.prev();
+      iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+      iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+      iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
+      var iwCloseBtn = iwOuter.next();
+      iwCloseBtn.css({opacity: '1', right: '28px', top: '16px', border: '0px solid #48b5e9', 'border-radius': '4px'});
+      iwCloseBtn.mouseout(function(){
+        $(this).css({opacity: '1'});
+      });
+    });
   }
   
   function markMyLoc () {
@@ -244,5 +319,6 @@ function radiusDistance(m) { /* 반경 렌더링 거리 조정 함수 */
   markCircle();
 }
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?signed_in=false&callback=initMap"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&callback=initMap1" async defer>
+</script>
+<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>-->
