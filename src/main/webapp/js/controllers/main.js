@@ -23,7 +23,7 @@ define(function () {
       controller: function () {
         var parent_scope = this;
         $.getJSON('member/userInfo.do', {
-          nickname: sessionStorage.getItem('member')
+          nickname: sessionStorage.getItem('nickname')
         }, function (result) {
           parent_scope.userDatas = result.data;
         });
