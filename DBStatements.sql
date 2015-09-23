@@ -1,10 +1,9 @@
 insert into frd_t (frdno, mno, state, frd_dt) values(1,2,1,now());
 insert into frd_t (frdno, mno, state, frd_dt) values(2,1,1,now());
-insert into frd_t (frdno, mno, state, frd_dt) values(2,3,1,now());
-insert into frd_t (frdno, mno, state, frd_dt) values(2,4,1,now());
-insert into frd_t (frdno, mno, state, frd_dt) values(3,2,1,now());
-insert into frd_t (frdno, mno, state, frd_dt) values(4,2,1,now());
-
+insert into frd_t (frdno, mno, state, frd_dt) values(2,3,2,now());
+insert into frd_t (frdno, mno, state, frd_dt) values(2,4,2,now());
+insert into frd_t (frdno, mno, state, frd_dt) values(3,2,2,now());
+insert into frd_t (frdno, mno, state, frd_dt) values(4,2,2,now());
 - 친구
 DROP TABLE IF EXISTS `FRD_T` RESTRICT;
 
