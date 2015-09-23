@@ -1,3 +1,14 @@
+친구 검색 조인문
+select 
+  mno, 
+  nicknm, 
+  lat, 
+  lon, 
+  frdno, 
+  state 
+from memb_t t1 join frd_t t2 using (mno) 
+where  mno=2 and state=2;
+
 insert into frd_t (frdno, mno, state, frd_dt) values(1,2,1,now());
 insert into frd_t (frdno, mno, state, frd_dt) values(2,1,1,now());
 insert into frd_t (frdno, mno, state, frd_dt) values(2,3,2,now());
