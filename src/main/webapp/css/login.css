@@ -178,11 +178,11 @@ html, body {
   float:left;
   width: 150px;
   height: 150px;
-  margin-top: 30px;
+  margin-top: 10px;
 }
 #profile-img {
   width:150px;
-  height:150px;
+  height:180px;
 }
 
 .basic-info-div {
