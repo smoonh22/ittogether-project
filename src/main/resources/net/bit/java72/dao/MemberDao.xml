@@ -6,16 +6,15 @@
   <resultMap type="Member" id="MemberMap">
     <id     column="mno"      property="mno" />
     <result column="email"    property="email"/>
-    <result column="nicknm"    property="nickname" />
+    <result column="nicknm"   property="nickname" />
     <result column="pwd"      property="password" />
     <result column="cre_dt"   property="createDate" />
-    <result column="hometwn" property="hometown"/>
-    <result column="lat" property="latitude"/>
-    <result column="lon" property="longitude"/>
-    <result column="addr" property="address"/>
-    <result column="mphoto" property="profilePicture"/>
+    <result column="hometwn"  property="hometown"/>
+    <result column="lat"      property="latitude"/>
+    <result column="lon"      property="longitude"/>
+    <result column="addr"     property="address"/>
+    <result column="mphoto"   property="profilePicture"/>
   </resultMap>
-  
   <select id="exist" 
           parameterType="map" resultMap="MemberMap">
     SELECT * 
@@ -27,6 +26,12 @@
     INSERT INTO MEMB_T(email, nicknm, pwd, cre_dt, name) 
     VALUES(#{email}, #{nickname}, #{password}, now(), #{name})
   </insert>
+
+  <select id="getOne" resultMap="MemberMap" parameterType="int">
+  	SELECT *
+  	FROM memb_t
+  	where mno=#{values}
+  </select>
 </mapper>
 
 

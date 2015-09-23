@@ -26,6 +26,10 @@ public class MemberServiceImpl implements MemberService {
   public int signUp(Member member) {
     return memberDao.signUp(member);
   }
+  @Override
+  public Member getOne(int mno) {
+    return memberDao.getOne(mno);
+  }
  
 
 }

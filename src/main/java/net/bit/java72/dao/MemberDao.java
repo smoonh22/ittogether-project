@@ -8,4 +8,5 @@ import net.bit.java72.domain.Member;
 public interface MemberDao {
   Member exist(Map<String,String> map);
   int signUp(Member member);
+  Member getOne(int mno);
 }

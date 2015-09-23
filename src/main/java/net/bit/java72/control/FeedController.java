@@ -18,13 +18,12 @@ public class FeedController {
   @Autowired FeedService feedService;
   @Autowired ServletContext servletContext;
 
-  @RequestMapping("/join")
+  @RequestMapping("/friendFeed")
   public Object list() {
   Map<String,Object> result = new HashMap<String,Object>();
   
   
   result.put("data",feedService.list());
-    
   HttpHeaders headers = new HttpHeaders();
   headers.add("Content-type"
       , "text/plain;charset=UTF-8");
@@ -32,13 +31,16 @@ public class FeedController {
   return result;  
   }
   
-  @RequestMapping("/list")
+
+  @RequestMapping("/myActivity")
   public Object feedlist() {
   Map<String,Object> result = new HashMap<String,Object>();
   HttpHeaders headers = new HttpHeaders();
   headers.add("Content-type"
       , "text/plain;charset=UTF-8");
-  result.put("data", feedService.myActivityList());
+  
+  
+  result.put("activity", feedService.myActivityList());
   return  result;
   }
 

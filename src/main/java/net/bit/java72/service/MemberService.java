@@ -6,7 +6,8 @@ public interface MemberService {
 
   Member getUser(String email, String password);
   int signUp(Member member);
- 
+  Member getOne(int mno);
+
 }
 
 
