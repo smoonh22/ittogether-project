@@ -1,0 +1,101 @@
+<div id='moim-Img'>
+   <div class="span6 col-sm-6  editorial-moim-container">
+      <div class="editorial-cell">
+         <h1 class="editorial-title">내 모든 활동들을 볼수 있습니다</h1>
+         <p class="editorial-para">친구들의 도움을 주고 받거나 모임을 만들고 싶으면 새 활동을 만들어
+            보세요</p>
+         <br><br><br><br><br><br>
+         <div id="map-link-div" >
+            <div class="btn btn-info btn-ms btn-block map-btn"
+               data-target="#layerpop" data-toggle="modal"   >새 활동 만들기</div>
+               
+            <div class="modal fade" id="layerpop" >
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <!-- header -->
+                     <div class="modal-header">
+                        <!-- 닫기(x) 버튼 -->
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                        <!-- header title -->
+                        <h4 class="modal-title">새 활동 만들기</h4>
+                     </div>
+                     <!-- body -->
+                     <div class="modal-body">
+                        <small class="text-muted"> <label>카테고리</label> <input
+                           type="text" name="datalist" list="datalist"
+                           class="form-control" value="{{feed.category}}"> <datalist
+                              id="datalist">
+                              <option value="나눔"></option>
+                              <option value="도움"></option>
+                              <option value="요청"></option>
+                           </datalist> <br> <br>
+                        </small> <small class="text-muted"> <label>제목</label> <input
+                           type="text" class="form-control" value="{{feed.title}}">
+                        </small> <small class="text-muted"> <label>내용</label> <input
+                           type="text" class="form-control" value="{{feed.content}}">
+                        </small><br> <small class="text-muted"> <label>인원수 </label> <input
+                           type="number" min="2" max="10" value="{{feed.maxHeadCount}}">
+                        </small> <small class="text-muted"> <label>날짜입력 </label> <input
+                           type="date" min="2015-09-01" max="2019-12-31"
+                           value="{{feed.meetTime}}" >
+                        </small> <small class="text-muted"> <label>시간입력</label> <input
+                           type="time" value="{{feed.meetTime}}">
+                        </small>
+
+                        <!-- Footer -->
+                        <div class="modal-footer">
+
+        <button type="button" class="btn btn-primary" id="save-changes">새 활동 만들기</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class='row'>
+      <div ng-controller="activityCtrl as MCtrl">
+         <div ng-repeat="myact in MCtrl.activities">
+            <div id="myactfeed" class="col-md-4">
+               <div class="masonry_title">
+                  <div class="panel-heading" id='category-color-{{myact.category}}'></div>
+                  <div class='row'>
+                     <div class='col-md-3'>
+                        <img src="images/cat01.jpg" class="img-circle act-profile-img" /><br>
+                        <br>
+                     </div>
+                     <div class='col-md-9'>
+                        <div id='feed-header'>
+                           <b id="nametag">{{myact.content}}</b>님이 새로운 모임을 만드셧습니다.
+                        </div>
+                     </div>
+                  </div>
+                  <div class='row'>
+                     <h5 id="feed-info">
+                        <div class='col-md-3'>
+                           <small class="text-muted"><img
+                              src="images/icons/calendar.png"> </small>{{myact.createDate}}
+                        </div>
+                        <div class='col-md-3'>
+                           <h5 id="feed-info">
+                              <small class="text-muted"> <img
+                                 src="images/icons/multiple.png">
+                              </small>{{myact.stuffCount}}/{{myact.maxHeadCount}}
+                        </div>
+                        <div class='col-md-3'>
+                           <h5 id="feed-info">
+                              <small class="text-muted"><img
+                                 src="images/icons/time.png"> </small>{{myact.meetTime}}
+                        </div>
+                     </h5>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   </div>

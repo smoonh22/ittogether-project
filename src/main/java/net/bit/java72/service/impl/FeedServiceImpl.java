@@ -19,7 +19,6 @@ public class FeedServiceImpl implements FeedService {
     
     return feedDao.list();
   }
-
   @Override
   public List<Feed> myActivityList() {
     return feedDao.myActivityList();

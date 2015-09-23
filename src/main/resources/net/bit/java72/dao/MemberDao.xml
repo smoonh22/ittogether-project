@@ -23,14 +23,47 @@
   </select>
   
   <insert id="signUp" parameterType="Member">
-    INSERT INTO MEMB_T(email, nicknm, pwd, cre_dt, name) 
-    VALUES(#{email}, #{nickname}, #{password}, now(), #{name})
+    INSERT INTO MEMB_T(email, nicknm, pwd, cre_dt, name, addr, lat, lon, mphoto) 
+    VALUES(#{email}, #{nickname}, #{password}, now(), #{name}, #{address}, #{latitude}, #{longitude}, #{profilePicture})
   </insert>
-
+  
   <select id="getOne" resultMap="MemberMap" parameterType="int">
-  	SELECT *
-  	FROM memb_t
-  	where mno=#{values}
+   SELECT * FROM memb_t where mno=#{values}
+  </select>
+  
+  <select id="countEmail" 
+      parameterType="string" 
+      resultType="int">
+    SELECT count(*)
+    FROM memb_t
+    WHERE email = #{value}
+  </select>
+  <select id="countNickName" 
+      parameterType="string" 
+      resultType="int">
+    SELECT count(*)
+    FROM memb_t
+    WHERE nicknm = #{value}
+  </select>
+  
+  
+  <select id="getUserInfo" 
+          parameterType="string" resultMap="MemberMap">
+    SELECT * 
+    FROM memb_t
+    WHERE nicknm = #{value}
+  </select>
+  
+  <update id="update" parameterType="Member">
+    UPDATE memb_t SET 
+      nicknm=#{nickname},
+      name=#{name},
+      pwd=#{password}
+    WHERE email = #{email}    
+  </update>
+  
+  <select id="getNickName" parameterType="string" resultMap="MemberMap">
+  SELECT nicknm FROM memb_t WHERE email=#{email}
   </select>
 </mapper>
 
