@@ -17,79 +17,79 @@ function login() {
 
 
 $('#signup-button').click(function (event) {
-  
- if($('#email').val() == '' || $('#name').val() =='' || $('#password').val() =='' || $('#pac-input').val()=='') {
-   alert('값을 모두 입력해 주세요');
- } else {
-  $.ajax('auth/signup.do', {
+
+  if ($('#email').val() == '' || $('#name').val() == '' || $('#password').val() == '' || $('#pac-input').val() == '') {
+    alert('값을 모두 입력해 주세요');
+  } else {
+    $.ajax('auth/signup.do', {
+      method: 'POST',
+      dataType: 'json',
+      data: {
+        email: $('#email').val(),
+        nickname: $('#nickname').val(),
+        password: $('#password').val(),
+        name: $('#name').val(),
+        address: $('#pac-input').val(),
+        latitude: $('#latitude').val(),
+        longitude: $('#longitude').val(),
+        profilePicture: $('#profile-img').attr('src')
+      },
+      success: function (result) {
+        if (result.result === 'success') {
+          alert('가입 축하드립니다.');
+          $('#signupModal').modal('toggle');
+          window.location.reload(true);
+        } else {
+          alert('값을 정확히 입력해주세요');
+        }
+      }
+    });
+  }
+});
+
+$('#email').on('keyup', function (event) {
+  $.ajax('auth/existEmail.do', {
     method: 'POST',
     dataType: 'json',
     data: {
-      email: $('#email').val(),
-      nickname: $('#nickname').val(),
-      password: $('#password').val(),
-      name: $('#name').val(),
-      address: $('#pac-input').val(),
-      latitude: $('#latitude').val(),
-      longitude: $('#longitude').val(),
-      profilePicture: $('#profile-img').attr('src')
+      email: $('#email').val()
     },
     success: function (result) {
-      if (result.result === 'success') {
-        alert('가입 축하드립니다.');
-        $('#signupModal').modal('toggle');
-        window.location.reload(true);
-    } else {
-      alert('값을 정확히 입력해주세요');
-    }
-    }
-  });
- }
-});
-
-$('#email').on('keyup', function(event) {
-  $.ajax('auth/existEmail.do', {
-    method:'POST',
-    dataType: 'json',
-    data: {
-      email: $('#email').val()
-  },
-  success: function(result) {
-    if ( result.data === 'invalid' ) {
-          $('#check-email').css("color", "red");
+      if (result.data === 'invalid') {
+        $('#check-email').css("color", "red");
         $('#check-email').text(' 이메일을 정확히 입력해주세요(@포함)');
-      $('#signup-button').attr('disabled',true);
-    } else if (result.data === 'yes') {
+        $('#signup-button').attr('disabled', true);
+      } else if (result.data === 'yes') {
         $('#check-email').css("color", "red");
         $('#check-email').text(' 이미 사용 중인 이메일입니다.');
-        $('#signup-button').attr('disabled',true);
+        $('#signup-button').attr('disabled', true);
       } else {
         $('#check-email').css("color", "blue");
         $('#check-email').text(' 사용 가능한 이메일입니다.');
-        $('#signup-button').attr('disabled',false);
+        $('#signup-button').attr('disabled', false);
       }
-  }
+    }
   });
 });
 
-$('#nickname').on('keyup', function(event) {
+$('#nickname').on('keyup', function (event) {
   $.ajax('auth/existNickName.do', {
-    method:'POST',
+    method: 'POST',
     dataType: 'json',
     data: {
       nickname: $('#nickname').val()
-  },
-  success: function(result) {
+    },
+    success: function (result) {
       if (result.data === 'yes') {
         $('#check-nickname').css("color", "red");
         $('#check-nickname').text(' 이미 사용 중인 닉네임입니다.');
-        $('#signup-button').attr('disabled',true);
+        $('#signup-button').attr('disabled', true);
       } else {
         $('#check-nickname').css("color", "blue");
         $('#check-nickname').text(' 사용 가능한 닉네임입니다.');
-        $('#signup-button').attr('disabled',false);
+        $('#signup-button').attr('disabled', false);
       }
-  }
+    }
   });
 });
 
@@ -152,12 +152,12 @@ function initAutocomplete() { /* 초기화 함수*/
         bounds.extend(place.geometry.location);
       }
     });
-    
+
     map.fitBounds(bounds);
     map.setZoom(18);
     $("#latitude").val(markers[0].position.H); /* 위도 경도 */
     $("#longitude").val(markers[0].position.L);
-    
+
     google.maps.event.addListener(map, 'click', function (event) {
       addMarker(event.latLng, map); /* 마커 찍어주는 함수 */
     });
@@ -175,6 +175,53 @@ function initAutocomplete() { /* 초기화 함수*/
 // 모달창에서 구글맵 나오게 trigger
 $('#signupModal').on("shown.bs.modal", function () {
   google.maps.event.trigger(map, "resize");
+  
+  init();
 });
 
+
+function init() {
+  console.log('djfkdjf');
+$('#fileupload').fileupload({
+          url: 'ittogether/file/upload.do',
+          dataType: 'json',
+          maxFileSize: 10000000,
+          disableImageResize: /Android(?!.*Chrome)|Opera/
+            .test(window.navigator.userAgent),
+          previewMaxWidth: 100,
+          previewMaxHeight: 100,
+          previewCrop: true,
+          fail : function(e, data) {
+            console.log(e);
+          }
+        }).on('fileuploadsubmit', function(e, data) {
+          // 서버에 일반 폼 데이터도 보내고 싶으면, submit 하기 전에
+          // 다음과 같이 formData 프로퍼티에 값을 설정하라!
+          /*
+          data.formData = {
+            data1: 'okok',
+            data2: 'nono'
+          };
+          */
+        }).on('fileuploaddone', function(e, data) {
+          console.log('dfdfdfdfd');
+          console.log(data.result);
+//          $('#files').html('');
+//          $.each(data.result.data, function (index, file) {
+//              $('<span/>')
+//              .text(file.name 
+//                  + '(' + file.originName + ')'
+//                  + ', ' + file.size)
+//                  .appendTo('#files');
+//              $('#fAttachFile').val(file.name);
+//          });
+        }).on('fileuploadprogressall', function (e, data) {
+          var progress = parseInt(
+              data.loaded / data.total * 100, 10);
+          $('#progress .progress-bar').css(
+              'width',
+              progress + '%'
+          );
+        });
+}
 // 지도 관련 끝
