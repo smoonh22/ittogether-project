@@ -1,6 +1,6 @@
 define(function () {
   //페이지가 완전히 로드된 뒤에 실행
-  var app = angular.module('main', ['ngRoute', 'friendsFeed', 'noneFriendsFeed', 'myActivities', 'myMap', 'myFriendList']);
+  var app = angular.module('main', ['ngRoute', 'friendsFeed', 'noneFriendsFeed', 'myActivities', 'myMap', 'myFriendList', 'main_map']);
 
   app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/home', {
@@ -12,6 +12,9 @@ define(function () {
     $routeProvider.when('/myMap', {
       templateUrl: 'templates/myMap.html'
     });
+//    $routeProvider.when('/main_map', {
+//      templateUrl: 'templates/main_map.html'
+//    });
     $routeProvider.otherwise({
       redirectTo: '/home'
     });

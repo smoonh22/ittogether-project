@@ -59,6 +59,10 @@ public class MemberServiceImpl implements MemberService {
   public Member getOne(int mno) {
     return memberDao.getOne(mno);
   }
+  @Override
+  public Member listFriend(int mno) {
+    return memberDao.listFriend(mno);
+  }
  
 
 }

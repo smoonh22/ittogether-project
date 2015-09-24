@@ -35,6 +35,7 @@
   <delete id="deleteFRD" parameterType="map">
   DELETE from FRD_T where mno=#{mno} and frdno=#{frdno}
   </delete>
+  
 </mapper>
 
 

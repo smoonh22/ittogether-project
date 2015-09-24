@@ -1,6 +1,5 @@
 <div id="map">
 </div>
-
 <div id="finder-box">
   <div class="dropdown">
     <button class="btn btn-info btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">모두
@@ -114,19 +113,20 @@
       </div>
     </div>
     </div>
-
-
-<!--
-<div ng-controller="mainMapCtrl as mmCtrl">
-  <div id="friendLocArr" ng-repeat=" friend in mmCtrl.friends">{{friend.nickname}},{{friend.latitude}},{{friend.longitude}}/</div>
+<div ng-app="main_map">
+  <div ng-controller="aCtrl as mmCtrl">
+    <div ng-repeat="friend in mmCtrl.friends">
+      {{friend.nickname}}, 
+      {{friend.latitude}}, 
+      {{friend.longitude}}/
+    </div>
+  </div>
 </div>
--->
-
 <script>
-  
   var myLoc = [37.497943, 127.027622];
   
   var hiddenInfoWindow = $('#friendLocArr')[0].innerHTML;;
+  console.log(hiddenInfoWindow);
   var arr = hiddenInfoWindow.split('/');
   var friendLocArr = [];
   for (var i = 0; i < arr.length; i++) {
@@ -321,4 +321,9 @@ function radiusDistance(m) { /* 반경 렌더링 거리 조정 함수 */
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&callback=initMap1" async defer>
 </script>
-<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>-->
+
+<script>
+require(['main_map'], function() {
+//  main_map.init();
+});
+</script> 

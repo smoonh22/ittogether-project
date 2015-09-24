@@ -65,6 +65,19 @@
   <select id="getNickName" parameterType="string" resultMap="MemberMap">
   SELECT nicknm FROM memb_t WHERE email=#{email}
   </select>
+  
+   <select id="listFriend" parameterType="int" resultMap="MemberMap"> 
+   select 
+     mno, 
+     nicknm, 
+     lat, 
+     lon, 
+     frdno, 
+     state 
+   from memb_t t1 join frd_t t2 using (mno) 
+   where  mno=#{value} and state=2;
+ </select>
+ 
 </mapper>
 
 

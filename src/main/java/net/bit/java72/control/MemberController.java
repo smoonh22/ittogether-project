@@ -50,6 +50,17 @@ public class MemberController {
     
     return result;
   }
+  
+  @RequestMapping("/markFriend")
+  public Object markFriend(int mno) {
+    Map<String,Object> result = new HashMap<String,Object>();
+    
+    System.out.println("회원번호다" + mno);
+    
+    result.put("data", memberService.listFriend(mno));
+    
+    return result; 
+  }
 }
   
 

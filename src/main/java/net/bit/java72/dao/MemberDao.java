@@ -16,4 +16,5 @@ public interface MemberDao {
   Member getNickName(String email);
   //유저 한명의 모든 정보 가져오기
   Member getOne(int mno);
+  Member listFriend(int mno);
 }

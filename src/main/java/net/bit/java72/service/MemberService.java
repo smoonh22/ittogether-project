@@ -12,6 +12,7 @@ public interface MemberService {
   int update(Member member);
   Member getNickName(String email);
   Member getOne(int mno);
+  Member listFriend(int mno);
  
 }
 

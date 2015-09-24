@@ -26,6 +26,7 @@ requirejs.config({
         'tour': 'js/controllers/tour',
         'myActivities': 'js/controllers/myActivities',
         'myMap' : 'js/controllers/myMap',
+        'main_map' : 'js/controllers/main_map',
         'myFriendList': 'js/controllers/myFriendList'
     },
   
@@ -46,7 +47,7 @@ requirejs.config({
       deps:['jquery']
     },
     'main': {
-      deps: ['angular-route', 'friendsFeed','noneFriendsFeed', 'bootstrap.min', 'tour','myActivities', 'myMap', 'myFriendList']
+      deps: ['angular-route', 'friendsFeed','noneFriendsFeed', 'bootstrap.min', 'tour','myActivities', 'myMap', 'main_map', 'myFriendList']
     },
     'friendsFeed': {
       deps: ['angular']
@@ -60,14 +61,17 @@ requirejs.config({
     'myMap': {
       deps: ['angular']
     },
+    'main_map': {
+      deps: ['angular']
+    },
     'myFriendList': {
-      deps:['angular']
+      deps: ['angular']
     }
   }
   
 });
 
-require(['main'], function() {
+requirejs(['main'], function() {
     angular.bootstrap(document, ['main']);
 });
 
