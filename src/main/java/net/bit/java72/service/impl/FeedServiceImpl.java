@@ -15,13 +15,17 @@ public class FeedServiceImpl implements FeedService {
 @Autowired FeedDao feedDao;
   
   @Override
-  public List<FriendFeed> list() {
+  public List<FriendFeed> list(int mno) {
     
-    return feedDao.list();
+    return feedDao.list(mno);
   }
   @Override
   public List<Feed> myActivityList() {
     return feedDao.myActivityList();
+  }
+  @Override
+  public FriendFeed noneFriendFeed(int mno) {
+    return feedDao.noneFriendFeed(mno);
   }
   
 }

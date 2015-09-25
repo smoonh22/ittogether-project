@@ -26,6 +26,17 @@ public class FriendFeed implements Serializable {
   protected String hometown;
   
 
+  @Override
+  public String toString() {
+    return "FriendFeed [fno=" + fno + ", mno=" + mno + ", category=" + category + ", content=" + content + ", title="
+        + title + ", createDate=" + createDate + ", maxHeadCount=" + maxHeadCount + ", stuffCount=" + stuffCount
+        + ", meetTime=" + meetTime + ", nickname=" + nickname + ", email=" + email + ", password=" + password
+        + ", name=" + name + ", address=" + address + ", latitude=" + latitude + ", longitude=" + longitude + ", sex="
+        + sex + ", hometown=" + hometown + ", profilePicture=" + profilePicture + "]";
+  }
+
+
+
   public int getFno() {
     return fno;
   }

@@ -1,5 +1,7 @@
 package net.bit.java72.service;
 
+import java.util.List;
+
 import net.bit.java72.domain.Member;
 
 public interface MemberService {
@@ -12,6 +14,7 @@ public interface MemberService {
   int update(Member member);
   Member getNickName(String email);
   Member getOne(int mno);
+  List<Member> getlatlon(int mno);  
  
 }
 

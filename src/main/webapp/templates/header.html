@@ -59,8 +59,32 @@
                       </div>
                       <div class='col-md-2'>
                       <br><br>
-                      <input type='hidden' ng-model='applyfrdmno' value='{{applyList.mno}}'/>
-                      <button ng-click="applyfrd()">수락</button>
+                      <button ng-click="applyfrd(applyList.mno)" >수락</button>
+                      </div>
+                   </div>
+                 </div>
+                 <div class="panel-body" ng-repeat="applyList2 in mFCtrl.applyList2s">
+                   <div class='row'>
+                      <div class='col-md-4'>
+                         <img class="img-circle header-image" src="images/{{applyList2.profilePicture}}"/>
+                      </div>
+                      <div class='col-md-6'>
+                         <table>
+                         <br>
+                            <tr>
+                               <td>이름 : {{applyList2.name}}</td>
+                            </tr>
+                            <tr>
+                               <td>주소 : {{applyList2.address}}</td>
+                            </tr>
+                            <tr>
+                               <td>이메일 : {{applyList2.email}}</td>
+                            </tr>
+                         </table>
+                      </div>
+                      <div class='col-md-2'>
+                      <br><br>
+                      	요청중...
                       </div>
                    </div>
                  </div>
@@ -71,15 +95,15 @@
                  <div class="panel-heading">
                    <h3 class="panel-title">친구 목록</h3>
                  </div>
-                 <div class="panel-body" ng-repeat="frdList in mFCtrl.frdLists">
-                       <div class='row'>
-                      <div class='col-md-4'>
+                 <div class="panel-body" >
+                       <div class='row'  ng-repeat-start="frdList in mFCtrl.frdLists">
+                      <div class='col-md-4' >
                          <img class="img-circle header-image" src="images/{{frdList.profilePicture}}"/>
                       </div>
                       <div class='col-md-6'>
                          <table>
                          <br>
-                            <tr>
+                            <tr>	
                                <td>이름 : {{frdList.name}}</td>
                             </tr>
                             <tr>
@@ -90,20 +114,19 @@
                             </tr>
                          </table>
                       </div>
-                      <div class='col-md-2'>
+                      <div class='col-md-2' >
                       <br><br>
-                      <input type='hidden' id='delfrdmno' ng-model='delfrdmno' value='{{frdList.mno}}'/>
-                      <button ng-click="delfrd()">삭제</button>
+                      <button href='#' ng-click='delfrd(frdList.mno)' class='delfrdbtn'>삭제</button>
                       </div>
                    </div>
-                 </div>
+                   <div  ng-repeat-end></div>
+                 </div >
             </div>
                </li>
              </ul>
           </li>
           <li><a data-toggle="modal" href="#infoModal"><span class="glyphicon glyphicon-cog"></span> 내 정보</a></li>
-          <li class="user-prof"><img class="img-circle" id="header-user-img" src=""> <span id="userid"></span></li>
-          <li><a href="login.html">로그아웃</a></li>
+          <li><a href="login.html"><span id="userid"></span><span class="glyphicon glyphicon-log-out"></span> 로그아웃</a></li>
        </ul>
       </div>
       <!-- /.navbar-collapse -->
@@ -113,8 +136,7 @@
 
 
   <script type="text/javascript">
-  $('#userid').text(" " + sessionStorage.getItem('nickname') + " 님 ");
-  $('#header-user-img').attr('src', sessionStorage.getItem('profile-pic'));
+  $('#userid').text(sessionStorage.getItem('nickname') + " 님 ");
   $('#startTour').click(function(event) {
     tour.start();
 }); 

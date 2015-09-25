@@ -7,8 +7,9 @@ import net.bit.java72.domain.FriendFeed;
 
 
 public interface FeedService {
-  List<FriendFeed> list();
+  List<FriendFeed> list(int mno);
   List<Feed> myActivityList();
+  FriendFeed noneFriendFeed(int mno);
   
 }
 

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import net.bit.java72.dao.FriendDao;
 import net.bit.java72.dao.MemberDao;
+import net.bit.java72.domain.FriendList;
 import net.bit.java72.domain.Member;
 import net.bit.java72.service.FriendService;
 import net.bit.java72.service.MemberService;
@@ -27,6 +28,21 @@ public ArrayList<Integer> frdList(int mno) {
 public ArrayList<Integer> applyList(int mno) {
   return friendDao.applyList(mno);
 }
+@Override
+public ArrayList<Integer> applyList2(int mno) {
+  return friendDao.applyList2(mno);
+}
+
+@Override
+public int deleteFRD(FriendList friendList) {
+  return friendDao.deleteFRD(friendList);
+}
+
+@Override
+public int acceptFRD(FriendList friendList) {
+  return friendDao.acceptFRD(friendList);
+}
+
 
 
 }

@@ -59,6 +59,10 @@ public class MemberServiceImpl implements MemberService {
   public Member getOne(int mno) {
     return memberDao.getOne(mno);
   }
+  @Override
+  public List<Member> getlatlon(int mno) {
+    return memberDao.getlatlon(mno);
+  }
  
 
 }
