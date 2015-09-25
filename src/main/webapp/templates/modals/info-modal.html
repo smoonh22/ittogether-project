@@ -34,11 +34,13 @@
           </div>
           <div class="form-group">
               <label>집 주소(주소 입력 후 핀 조정으로 상세하게 지도에 위치 설정을 해주세요)</label>
-              <input id="pac-input" class="controls" type="text" placeholder="지역을 입력하세요">
+              <input id="pac-input" class="controls" type="text" value="{{infoCtrl.userDatas.address}}">
+            <div>
               <div id="map"></div>
-              <div>
-                <input type="text" hidden="true" id="latitude">
-                <input type="text" hidden="true" id="longitude">
+              </div>
+              <div hidden="true">
+                <input type="text" id="latitude" value="{{infoCtrl.userDatas.latitude}}">
+                <input type="text" id="longitude" value="{{infoCtrl.userDatas.longitude}}">
               </div>
             </div>
           <div class="form-group">
@@ -48,10 +50,10 @@
           <div class="form-group">
             <label>성별</label>
             <label class="radio-inline">
-              <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" checked>남자
+              <input type="radio" name="optionsRadiosInline" id="radio1" value="1">남자
             </label>
             <label class="radio-inline">
-              <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">여자
+              <input type="radio" name="optionsRadiosInline" id="radio2" value="2">여자
             </label>
           </div>
           <div class="form-group">
@@ -86,31 +88,38 @@
     
 <script>
 
-// 지도 관련 시작 
 function initAutocomplete() { /* 초기화 함수*/
+  
+  var myHome = [];
+  
+  myHome[0] = parseFloat($('#latitude').val());
+  myHome[1] = parseFloat($('#longitude').val());
+console.log("myHome[0]: " + myHome[0] + "(lat)");
+console.log("myHome[1]: " + myHome[1] + "(lng)");
+  
   var map = new google.maps.Map(document.getElementById('map'), {
-    center: {
-      lat: 37.497943,
-      lng: 127.027622
-    },
+    center: { lat: myHome[0], lng: myHome[1] },
     /* 처음 지도에서 비춰지는 지역 */
-    zoom: 15,
+    zoom: 16,
     disableDefaultUI: true
   });
-
+  
   var input = document.getElementById('pac-input');
   var searchBox = new google.maps.places.SearchBox(input);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
   map.addListener('bounds_changed', function () {
-
     searchBox.setBounds(map.getBounds());
-
   });
 
   var markers = [];
-  // Listen for the event fired when the user selects a prediction and retrieve
-  // more details for that place.
+  
+  markers[0] = new google.maps.Marker({
+    position: { lat: myHome[0], lng: myHome[1] },
+    map: map,
+    title: 'Hello World!'
+  });
+  
   searchBox.addListener('places_changed', function () {
     var places = searchBox.getPlaces();
 
@@ -118,17 +127,15 @@ function initAutocomplete() { /* 초기화 함수*/
       return;
     }
 
-    // Clear out the old markers.
     markers.forEach(function (marker) {
       marker.setMap(null);
     });
     markers = [];
 
-    // For each place, get the icon, name and location.
     var bounds = new google.maps.LatLngBounds();
+console.log('bounds: ' + bounds);
+    
     places.forEach(function (place) {
-
-      // Create a marker for each place.
       markers.push(new google.maps.Marker({
         map: map,
         title: place.name,
@@ -136,7 +143,6 @@ function initAutocomplete() { /* 초기화 함수*/
       }));
 
       if (place.geometry.viewport) {
-        // Only geocodes have viewport.
         bounds.union(place.geometry.viewport);
       } else {
         bounds.extend(place.geometry.location);
@@ -144,20 +150,26 @@ function initAutocomplete() { /* 초기화 함수*/
     });
 
     map.fitBounds(bounds);
-    map.setZoom(18);
+    map.setZoom(16);
     $("#latitude").val(markers[0].position.H); /* 위도 경도 */
     $("#longitude").val(markers[0].position.L);
+console.log('markers[0].position.H: ' + markers[0].position.H);
+console.log('markers[0].position.L: ' + markers[0].position.L);
 
     google.maps.event.addListener(map, 'click', function (event) {
       addMarker(event.latLng, map); /* 마커 찍어주는 함수 */
+console.log(event.latLng);
     });
 
     function addMarker(location, map) {
+      markers[0].setPosition(location);
       markers[0].setPosition(location);
       $("#latitude").val(markers[0].position.H); /* 위도 경도 */
       $("#longitude").val(markers[0].position.L);
     }
   });
+
+}
 
   
   // 모달창에서 구글맵 나오게 trigger
@@ -165,5 +177,4 @@ function initAutocomplete() { /* 초기화 함수*/
     google.maps.event.trigger(map, "resize");
   });
   
-}
 </script>

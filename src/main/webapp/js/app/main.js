@@ -31,6 +31,10 @@ define(function () {
         var parent_scope = this;
         $.getJSON('member/userInfo.do', {
           nickname: sessionStorage.getItem('nickname')
+//          name: sessionStorage.getItem('name'),
+//          latitude: sessionStorage.getItem('nickname'),
+//          latitude: sessionStorage.getItem('latitude')
+//          
         }, function (result) {
           parent_scope.userDatas = result.data;
         });
@@ -45,7 +49,17 @@ define(function () {
                   name: $('#name').val(), 
                   email: $('#email').val(),
                   password: $('#password').val(),
-                  address: $('#address').val()
+                  address: $('#pac-input').val(),
+                  latitude: $('#latitude').val(),
+                  longitude: $('#longitude').val(),
+                  introduction: $('#introduction').val(),
+                  sex: $('radio1').checked ? 1:2,
+                  age: $('age').val(),
+                  hobby1: $('hobby1').val(),
+                  hobby2: $('hobby2').val(),
+                  hobby3: $('hobby3').val(),
+                  hometown: $('hometown').val()
+                  
                },
               success: function(result){
                  if (result.data == 'success') {

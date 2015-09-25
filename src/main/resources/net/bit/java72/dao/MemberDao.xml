@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.bit.java72.dao.MemberDao">
+
   <resultMap type="Member" id="MemberMap">
     <id     column="mno"      property="mno" />
     <result column="email"    property="email"/>
@@ -14,7 +15,14 @@
     <result column="lon"      property="longitude"/>
     <result column="addr"     property="address"/>
     <result column="mphoto"   property="profilePicture"/>
+    <result column="sex"      property="sex"/>
+    <result column="hb1"      property="hobby1"/>
+    <result column="hb2"      property="hobby2"/>
+    <result column="hb3"      property="hobby3"/>
+    <result column="intro"    property="introduction"/>
+    <result column="age"      property="age"/>
   </resultMap>
+  
   <select id="exist" 
           parameterType="map" resultMap="MemberMap">
     SELECT mno, nicknm, mphoto
@@ -38,6 +46,7 @@
     FROM memb_t
     WHERE email = #{value}
   </select>
+  
   <select id="countNickName" 
       parameterType="string" 
       resultType="int">
@@ -45,7 +54,6 @@
     FROM memb_t
     WHERE nicknm = #{value}
   </select>
-  
   
   <select id="getUserInfo" 
           parameterType="string" resultMap="MemberMap">
@@ -58,7 +66,15 @@
     UPDATE memb_t SET 
       nicknm=#{nickname},
       name=#{name},
-      pwd=#{password}
+      pwd=#{password},
+      mphoto=#{profilePicture},
+      intro=#{introduction},
+      sex=#{sex},
+      age=#{age},
+      hb1=#{hobby1},
+      hb2=#{hobby2},
+      hb3=#{hobby3},
+      hometwn=#{hometown}
     WHERE email = #{email}    
   </update>
   
