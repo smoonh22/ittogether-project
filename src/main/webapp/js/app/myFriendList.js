@@ -9,8 +9,6 @@ app.controller('myFriendCtrl',['$http','$scope', function($http,$scope) {
           mno: sessionStorage.getItem('mno')
         }
     }).success(function(result){
-      console.log("히히히 : " + result.data);
-      console.log("하하하: " + result.apply);
       parent_scope.frdLists = result.data;
       parent_scope.applyLists = result.apply;
       
@@ -19,7 +17,6 @@ app.controller('myFriendCtrl',['$http','$scope', function($http,$scope) {
     $scope.delfrd = function () {
       $http.get('frd/delete.do', { frdmno : parent_scope.delfrdmno },
           function(response) {
-            console.log("dbdbdbd");
           },
           function(failure) {
             console.log("failed :(", failure);

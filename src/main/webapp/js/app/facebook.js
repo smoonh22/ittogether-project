@@ -26,7 +26,6 @@ $('#facebook-btn').click(function (event) {
      FB.api('/me?fields=name,email,picture', function (response) {
        //response에 있는 name 데이터 저장
        var saveName = response.name;
-
        //getJSON으로 데이터베이스에 이메일정보가 있는지 확인
        $.getJSON('auth/getNickName.do', { 
            email: response.email
@@ -38,10 +37,9 @@ $('#facebook-btn').click(function (event) {
              $('#name').val(response.name);
              $('#signupModal').modal('toggle');
            } else {
-             console.log(result.data);
              //데이터베이스에 이메일 값 있으면  이름 정보 세션에 저장 후 index.html로이동 
              sessionStorage.setItem("nickname", result.nickname);  
-             sessionStorage.setItem("mno", result.mno);  
+             sessionStorage.setItem("mno", result.mno);
              window.location = "index.html";
            }
          });
@@ -53,6 +51,7 @@ $('#facebook-btn').click(function (event) {
      FB.api('/me/picture?type=normal', function (response) {
        //프로필사진 경로 가져오기  
        $('#profile-img').attr('src', response.data.url);
+       sessionStorage.setItem("profile-pic", response.data.url);
 
      });
 

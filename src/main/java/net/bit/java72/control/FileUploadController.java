@@ -26,16 +26,15 @@ public class FileUploadController {
   public Object upload(
       @RequestParam(required=false) MultipartFile[] file,
       HttpServletRequest request) throws Exception {
-         System.out.println("hahahahahah");
+    
       String filename = null;
       File newPath = null;
       ArrayList<FileItem> files = new ArrayList<FileItem>();
-      
       for (MultipartFile f : file) {
         filename = MultipartUtils.getFilename(
             f.getOriginalFilename());
         newPath = new File(
-            servletContext.getRealPath("/user_upload/profile") 
+            servletContext.getRealPath("/user_upload") 
             + "/" + filename);
         f.transferTo(newPath);
         
@@ -45,7 +44,7 @@ public class FileUploadController {
             .setOriginName(f.getOriginalFilename())
             .setSize(f.getSize())
             .setUrl(request.getContextPath()
-                + "/user_upload/profile/" + filename));
+                + "/user_upload/" + filename));
       }
       
       Map<String,Object> result = 

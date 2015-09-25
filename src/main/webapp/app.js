@@ -18,15 +18,15 @@ requirejs.config({
         'AnimOnScroll': 'js/lib/AnimOnScroll',
         'metisMenu': 'bower_components/metisMenu/metisMenu',
         'angular-route': 'bower_components/angular-route/angular-route',
-        'myFriendList': 'js/controllers/myFriendList',
+        'myFriendList': 'js/app/myFriendList',
         //컨트롤러
-        'main': 'js/controllers/main',
-        'friendsFeed': 'js/controllers/friendsFeed',
-        'noneFriendsFeed': 'js/controllers/noneFriendsFeed',
-        'tour': 'js/controllers/tour',
-        'myActivities': 'js/controllers/myActivities',
-        'myMap' : 'js/controllers/myMap',
-        'myFriendList': 'js/controllers/myFriendList'
+        'main': 'js/app/main',
+        'friendsFeed': 'js/app/friendsFeed',
+        'tour': 'js/app/tour',
+        'myActivities': 'js/app/myActivities',
+        'myMap' : 'js/app/myMap',
+//        'main_map' : 'js/app/main_map',
+        'myFriendList': 'js/app/myFriendList',
     },
   
   shim: {
@@ -46,23 +46,20 @@ requirejs.config({
       deps:['jquery']
     },
     'main': {
-      deps: ['angular-route', 'friendsFeed','noneFriendsFeed', 'bootstrap.min', 'tour','myActivities', 'myMap', 'myFriendList']
+      deps: ['angular-route', 'friendsFeed', 'bootstrap.min', 'tour','myFriendList','myActivities']
     },
     'friendsFeed': {
-      deps: ['angular']
-    },
-    'noneFriendsFeed': {
       deps: ['angular']
     },
     'myActivities': {
       deps: ['angular']
     },
-    'myMap': {
-      deps: ['angular']
-    },
+//    'main_map': {
+//      deps: ['angular']
+//    },
     'myFriendList': {
       deps:['angular']
-    }
+    },
   }
   
 });

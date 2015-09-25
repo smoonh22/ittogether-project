@@ -7,6 +7,21 @@ body {
 nav {
   opacity: 0.9;
 }
+.navbar-nav, .navbar-brand{
+	margin-top:10px;
+}
+
+.user-prof {
+	margin-top:-2px;
+	height:60px;
+	background-color: white;
+  color: dodgerblue;
+}
+#header-user-img {
+  width:55px;
+  height: 55px;
+}
+
 #left-feed-title {
   margin-top: 30px;
   margin-bottom: 30px;

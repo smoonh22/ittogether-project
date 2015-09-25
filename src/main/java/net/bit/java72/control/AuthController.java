@@ -33,6 +33,7 @@ public class AuthController {
       result.put("data", "yes");
       result.put("nickname", member.getNickname());
       result.put("mno", member.getMno());
+      result.put("profilePic", member.getProfilePicture());
     }
     return result;
   }
@@ -89,7 +90,6 @@ public class AuthController {
     result.put("nickname", member.getNickname());
     result.put("mno", member.getMno());
     result.put("data", "yes");
-    System.out.println(member.getNickname());
     } catch (Exception e) {
       result.put("data", "no");
       return result;

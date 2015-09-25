@@ -8,6 +8,7 @@ function login() {
       if (result.data === 'yes') {
         sessionStorage.setItem('nickname', result.nickname);
         sessionStorage.setItem('mno', result.mno);
+        sessionStorage.setItem('profile-pic', result.profilePic);
         window.location = "index.html";
       } else {
         alert('이메일 또는 비밀번호가 맞지 않습니다.');
@@ -175,53 +176,7 @@ function initAutocomplete() { /* 초기화 함수*/
 // 모달창에서 구글맵 나오게 trigger
 $('#signupModal').on("shown.bs.modal", function () {
   google.maps.event.trigger(map, "resize");
-  
-  init();
 });
 
 
-function init() {
-  console.log('djfkdjf');
-$('#fileupload').fileupload({
-          url: 'ittogether/file/upload.do',
-          dataType: 'json',
-          maxFileSize: 10000000,
-          disableImageResize: /Android(?!.*Chrome)|Opera/
-            .test(window.navigator.userAgent),
-          previewMaxWidth: 100,
-          previewMaxHeight: 100,
-          previewCrop: true,
-          fail : function(e, data) {
-            console.log(e);
-          }
-        }).on('fileuploadsubmit', function(e, data) {
-          // 서버에 일반 폼 데이터도 보내고 싶으면, submit 하기 전에
-          // 다음과 같이 formData 프로퍼티에 값을 설정하라!
-          /*
-          data.formData = {
-            data1: 'okok',
-            data2: 'nono'
-          };
-          */
-        }).on('fileuploaddone', function(e, data) {
-          console.log('dfdfdfdfd');
-          console.log(data.result);
-//          $('#files').html('');
-//          $.each(data.result.data, function (index, file) {
-//              $('<span/>')
-//              .text(file.name 
-//                  + '(' + file.originName + ')'
-//                  + ', ' + file.size)
-//                  .appendTo('#files');
-//              $('#fAttachFile').val(file.name);
-//          });
-        }).on('fileuploadprogressall', function (e, data) {
-          var progress = parseInt(
-              data.loaded / data.total * 100, 10);
-          $('#progress .progress-bar').css(
-              'width',
-              progress + '%'
-          );
-        });
-}
 // 지도 관련 끝

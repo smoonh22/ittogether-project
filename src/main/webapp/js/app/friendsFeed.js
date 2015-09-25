@@ -1,7 +1,19 @@
 define(function() {
       //페이지가 완전히 로드된 뒤에 실행
-      var app = angular.module('noneFriendsFeed', []);
+      var app = angular.module('friendsFeed', []);
 
+  
+  //친구 최근 게시물
+  app.controller('friendFeedCtrl', ['$http', function($http) {
+    var parent = this;
+    $http.get('feed/friendFeed.do').success(function(result){
+       parent.feeds = result.data;
+    });
+    
+  }]);
+  
+  
+  //비친구 최근 게시물
   app.controller('noneFriendFeedCtrl', function() {
     this.feeds = nonfriends;
   });

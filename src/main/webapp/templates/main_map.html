@@ -1,6 +1,7 @@
+<!--
 <div id="map">
 </div>
-
+-->
 <div id="finder-box">
   <div class="dropdown">
     <button class="btn btn-info btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">모두
@@ -116,210 +117,212 @@
     </div>
 
 
-<!--
-<div ng-controller="mainMapCtrl as mmCtrl">
-  <div id="friendLocArr" ng-repeat=" friend in mmCtrl.friends">{{friend.nickname}},{{friend.latitude}},{{friend.longitude}}/</div>
-</div>
--->
-
+  <div ng-app="main_map">
+   <div ng-controller="myMapCtrl as mmCtrl">
+    <div ng-repeat="friend in mmCtrl.friends">
+      {{friend.nickname}}, 
+      {{friend.latitude}}, 
+      {{friend.longitude}}
+    </div>
+  </div>
+  </div>
 <script>
   
-  var myLoc = [37.497943, 127.027622];
-  
-  var hiddenInfoWindow = $('#friendLocArr')[0].innerHTML;;
-  var arr = hiddenInfoWindow.split('/');
-  var friendLocArr = [];
-  for (var i = 0; i < arr.length; i++) {
-    friendLocArr[i] = arr[i].split(',');
-    friendLocArr[i][1] = parseFloat(friendLocArr[i][1]);
-    friendLocArr[i][2] = parseFloat(friendLocArr[i][2]);
-  }
-  
-  var friendMarkers = new Array; <!-- 팝업창 띄울 때의 마커들 -->
-  var notFriendMarkers = new Array; <!-- 팝업창 띄울 때의 마커들  -->
-  var notFriendLocArr = [ <!-- 주변 회원들의 배열 -->
-    ['notFriend0', 37.496629, 127.027622],
-    ['notFriend1', 37.495508, 127.026845],
-    ['notFriend2', 37.497248, 127.026352],
-    ['notFriend3', 37.499380, 127.027244],
-    ['notFriend4', 37.497624, 127.028219]
-  ];
-  
-  var map;
-  var circle;
-  var friendWindow; /* 친구들 팝업창 */
-  var notFriendWindow; /* 회원들 팝업창 */
-    
-  var myInfoWindow = $('#myInfoWindow');
-  var myBalloon = myInfoWindow[0].innerHTML;
-  
-  var friendInfoWindow = $('#friendInfoWindow');
-  var friendBalloon = friendInfoWindow[0].innerHTML;
-  
-  var notFriendInfoWindow = $('#notFriendInfoWindow');
-  var notFriendBalloon = notFriendInfoWindow[0].innerHTML;
-  
-  var radius = { /* 반경 보여줄 지점 */
-	  gangnamStation: {
-	    center: {lat: myLoc[0], lng: myLoc[1]}, /* 반경의 중심 */ 
-	    population: 26 /* 반경 설정 200m: 26, 500m: 65, 1km: 130 */ 
-	  }
-	};
-  
-  function initMap1() {
-    map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 17,
-      /* 처음 화면을 보여주는 위도, 경도 */
-      center: {
-        lat: myLoc[0], 
-        lng: myLoc[1]
-      },
-      disableDefaultUI: true, /* DEFAULT UI 사용*/
-      panControl: false,
-      zoomControl: false,
-      scaleControl: false /* 척도 */
-    });
-    myWindow = new google.maps.InfoWindow({ /* 팝업창 생성 */
-      content: myBalloon
-    });
-    friendWindow = new google.maps.InfoWindow({ /* 팝업창 생성 */
-      content: friendBalloon
-    });
-    notFriendWindow = new google.maps.InfoWindow({ /* 팝업창 생성 */
-      content: notFriendBalloon
-    });
-    markMyLoc();
-    for (var i = 0; i < friendLocArr.length; i++) {
-      markFriends(i); /* 친구 마킹 */
-    }
-    for (var i = 0; i < friendLocArr.length; i++) {
-      markNotFriends(i); /* 주변 회원 마킹 */
-    }
-    markCircle(); /* 반경 렌더링 */
-    
-    google.maps.event.addListener(myWindow, 'domready', function() {
-      var iwOuter = $('.gm-style-iw');
-      var iwBackground = iwOuter.prev();
-      iwBackground.children(':nth-child(2)').css({'display' : 'none'});
-      iwBackground.children(':nth-child(4)').css({'display' : 'none'});
-      iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
-      var iwCloseBtn = iwOuter.next();
-      iwCloseBtn.css({opacity: '1', right: '28px', top: '16px', border: '0px solid #48b5e9', 'border-radius': '4px'});
-      iwCloseBtn.mouseout(function(){
-        $(this).css({opacity: '1'});
-      });
-    });
-    
-    google.maps.event.addListener(friendWindow, 'domready', function() {
-      var iwOuter = $('.gm-style-iw');
-      var iwBackground = iwOuter.prev();
-      iwBackground.children(':nth-child(2)').css({'display' : 'none'});
-      iwBackground.children(':nth-child(4)').css({'display' : 'none'});
-      iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
-      var iwCloseBtn = iwOuter.next();
-      iwCloseBtn.css({opacity: '1', right: '28px', top: '16px', border: '0px solid #48b5e9', 'border-radius': '4px'});
-      iwCloseBtn.mouseout(function(){
-        $(this).css({opacity: '1'});
-      });
-    });
-    
-    google.maps.event.addListener(notFriendWindow, 'domready', function() {
-      var iwOuter = $('.gm-style-iw');
-      var iwBackground = iwOuter.prev();
-      iwBackground.children(':nth-child(2)').css({'display' : 'none'});
-      iwBackground.children(':nth-child(4)').css({'display' : 'none'});
-      iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
-      var iwCloseBtn = iwOuter.next();
-      iwCloseBtn.css({opacity: '1', right: '28px', top: '16px', border: '0px solid #48b5e9', 'border-radius': '4px'});
-      iwCloseBtn.mouseout(function(){
-        $(this).css({opacity: '1'});
-      });
-    });
-  }
-  
-  function markMyLoc () {
-    var marker = new google.maps.Marker({
-      position: {
-          lat: myLoc[0],
-          lng: myLoc[1]
-        },
-      map: map,
-      icon: 'images/icons/myHome.png'
-    });
-    marker.addListener('click', function() {
-        myWindow.open(map, marker);
-      });
-  }
-  
-  function markFriends(i) { 
-    var friendLoc = friendLocArr[i];
-    window.setTimeout(function() {
-      friendMarkers.push(new google.maps.Marker({
-        title: friendLoc[0],
-        position: {
-          lat: friendLoc[1],
-          lng: friendLoc[2]
-        },
-        map: map,
-        animation: google.maps.Animation.DROP,
-        icon: 'images/icons/friendHome.png'
-      }));
-      friendMarkers[i].addListener('click', function() {
-        friendWindow.open(map, friendMarkers[i]);
-      });
-    }, i * 100);
-  }
-
-  function markNotFriends(i) { 
-    var notFriendLoc = notFriendLocArr[i];
-    window.setTimeout(function() {
-      notFriendMarkers.push(new google.maps.Marker({
-        title: notFriendLoc[0],
-        position: {
-          lat: notFriendLoc[1],
-          lng: notFriendLoc[2]
-        },
-        map: map,
-        animation: google.maps.Animation.DROP,
-        icon: 'images/icons/pin.png'
-      }));
-      notFriendMarkers[i].addListener('click', function() {
-        notFriendWindow.open(map, notFriendMarkers[i]);
-      });
-    }, i * 100);
-  }
-
-function markCircle() {
-    for (var city in radius) {
-      circle = new google.maps.Circle({ 
-        strokeColor: '#000', /* 반경 렌더링 보더 색*/
-        strokeOpacity: 0.4,
-        strokeWeight: 1,
-        fillColor: '#FFFFFF', /* 반경 렌더링 채움 색 */
-        fillOpacity: 0.25,
-        map: map,
-        center: radius[city].center,
-        radius: Math.sqrt(radius[city].population) * 100
-      });
-    }
-  }
-  
-function radiusDistance(m) { /* 반경 렌더링 거리 조정 함수 */
-  radius = { /* 반경 보여줄때의 변수 */
-  gangnamStation: {
-    /* 반경의 중심 */
-    center: {
-            lat: myLoc[0], 
-            lng: myLoc[1]
-           }, 
-    population: m /* 반경 설정 200m: 26, 500m: 65, 1km: 130 */
-  }
-  };
-  circle.setMap(null);
-  markCircle();
-}
+//  var myLoc = [37.497943, 127.027622];
+//  
+//  var hiddenInfoWindow = $('#friendLocArr')[0].innerHTML;;
+//  var arr = hiddenInfoWindow.split('/');
+//  var friendLocArr = [];
+//  for (var i = 0; i < arr.length; i++) {
+//    friendLocArr[i] = arr[i].split(',');
+//    friendLocArr[i][1] = parseFloat(friendLocArr[i][1]);
+//    friendLocArr[i][2] = parseFloat(friendLocArr[i][2]);
+//  }
+//  
+//  var friendMarkers = new Array; <!-- 팝업창 띄울 때의 마커들 -->
+//  var notFriendMarkers = new Array; <!-- 팝업창 띄울 때의 마커들  -->
+//  var notFriendLocArr = [ <!-- 주변 회원들의 배열 -->
+//    ['notFriend0', 37.496629, 127.027622],
+//    ['notFriend1', 37.495508, 127.026845],
+//    ['notFriend2', 37.497248, 127.026352],
+//    ['notFriend3', 37.499380, 127.027244],
+//    ['notFriend4', 37.497624, 127.028219]
+//  ];
+//  
+//  var map;
+//  var circle;
+//  var friendWindow; /* 친구들 팝업창 */
+//  var notFriendWindow; /* 회원들 팝업창 */
+//    
+//  var myInfoWindow = $('#myInfoWindow');
+//  var myBalloon = myInfoWindow[0].innerHTML;
+//  
+//  var friendInfoWindow = $('#friendInfoWindow');
+//  var friendBalloon = friendInfoWindow[0].innerHTML;
+//  
+//  var notFriendInfoWindow = $('#notFriendInfoWindow');
+//  var notFriendBalloon = notFriendInfoWindow[0].innerHTML;
+//  
+//  var radius = { /* 반경 보여줄 지점 */
+//	  gangnamStation: {
+//	    center: {lat: myLoc[0], lng: myLoc[1]}, /* 반경의 중심 */ 
+//	    population: 26 /* 반경 설정 200m: 26, 500m: 65, 1km: 130 */ 
+//	  }
+//	};
+//  
+//  function initMap() {
+//    map = new google.maps.Map(document.getElementById('map'), {
+//      zoom: 17,
+//      /* 처음 화면을 보여주는 위도, 경도 */
+//      center: {
+//        lat: myLoc[0], 
+//        lng: myLoc[1]
+//      },
+//      disableDefaultUI: true, /* DEFAULT UI 사용*/
+//      panControl: false,
+//      zoomControl: false,
+//      scaleControl: false /* 척도 */
+//    });
+//    myWindow = new google.maps.InfoWindow({ /* 팝업창 생성 */
+//      content: myBalloon
+//    });
+//    friendWindow = new google.maps.InfoWindow({ /* 팝업창 생성 */
+//      content: friendBalloon
+//    });
+//    notFriendWindow = new google.maps.InfoWindow({ /* 팝업창 생성 */
+//      content: notFriendBalloon
+//    });
+//    markMyLoc();
+//    for (var i = 0; i < friendLocArr.length; i++) {
+//      markFriends(i); /* 친구 마킹 */
+//    }
+//    for (var i = 0; i < friendLocArr.length; i++) {
+//      markNotFriends(i); /* 주변 회원 마킹 */
+//    }
+//    markCircle(); /* 반경 렌더링 */
+//    
+//    google.maps.event.addListener(myWindow, 'domready', function() {
+//      var iwOuter = $('.gm-style-iw');
+//      var iwBackground = iwOuter.prev();
+//      iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+//      iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+//      iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
+//      var iwCloseBtn = iwOuter.next();
+//      iwCloseBtn.css({opacity: '1', right: '28px', top: '16px', border: '0px solid #48b5e9', 'border-radius': '4px'});
+//      iwCloseBtn.mouseout(function(){
+//        $(this).css({opacity: '1'});
+//      });
+//    });
+//    
+//    google.maps.event.addListener(friendWindow, 'domready', function() {
+//      var iwOuter = $('.gm-style-iw');
+//      var iwBackground = iwOuter.prev();
+//      iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+//      iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+//      iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
+//      var iwCloseBtn = iwOuter.next();
+//      iwCloseBtn.css({opacity: '1', right: '28px', top: '16px', border: '0px solid #48b5e9', 'border-radius': '4px'});
+//      iwCloseBtn.mouseout(function(){
+//        $(this).css({opacity: '1'});
+//      });
+//    });
+//    
+//    google.maps.event.addListener(notFriendWindow, 'domready', function() {
+//      var iwOuter = $('.gm-style-iw');
+//      var iwBackground = iwOuter.prev();
+//      iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+//      iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+//      iwBackground.children(':nth-child(3)').find('div').children().css({'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index' : '1'});
+//      var iwCloseBtn = iwOuter.next();
+//      iwCloseBtn.css({opacity: '1', right: '28px', top: '16px', border: '0px solid #48b5e9', 'border-radius': '4px'});
+//      iwCloseBtn.mouseout(function(){
+//        $(this).css({opacity: '1'});
+//      });
+//    });
+//  }
+//  
+//  function markMyLoc () {
+//    var marker = new google.maps.Marker({
+//      position: {
+//          lat: myLoc[0],
+//          lng: myLoc[1]
+//        },
+//      map: map,
+//      icon: 'images/icons/myHome.png'
+//    });
+//    marker.addListener('click', function() {
+//        myWindow.open(map, marker);
+//      });
+//  }
+//  
+//  function markFriends(i) { 
+//    var friendLoc = friendLocArr[i];
+//    window.setTimeout(function() {
+//      friendMarkers.push(new google.maps.Marker({
+//        title: friendLoc[0],
+//        position: {
+//          lat: friendLoc[1],
+//          lng: friendLoc[2]
+//        },
+//        map: map,
+//        animation: google.maps.Animation.DROP,
+//        icon: 'images/icons/friendHome.png'
+//      }));
+//      friendMarkers[i].addListener('click', function() {
+//        friendWindow.open(map, friendMarkers[i]);
+//      });
+//    }, i * 100);
+//  }
+//
+//  function markNotFriends(i) { 
+//    var notFriendLoc = notFriendLocArr[i];
+//    window.setTimeout(function() {
+//      notFriendMarkers.push(new google.maps.Marker({
+//        title: notFriendLoc[0],
+//        position: {
+//          lat: notFriendLoc[1],
+//          lng: notFriendLoc[2]
+//        },
+//        map: map,
+//        animation: google.maps.Animation.DROP,
+//        icon: 'images/icons/pin.png'
+//      }));
+//      notFriendMarkers[i].addListener('click', function() {
+//        notFriendWindow.open(map, notFriendMarkers[i]);
+//      });
+//    }, i * 100);
+//  }
+//
+//function markCircle() {
+//    for (var city in radius) {
+//      circle = new google.maps.Circle({ 
+//        strokeColor: '#000', /* 반경 렌더링 보더 색*/
+//        strokeOpacity: 0.4,
+//        strokeWeight: 1,
+//        fillColor: '#FFFFFF', /* 반경 렌더링 채움 색 */
+//        fillOpacity: 0.25,
+//        map: map,
+//        center: radius[city].center,
+//        radius: Math.sqrt(radius[city].population) * 100
+//      });
+//    }
+//  }
+//  
+//function radiusDistance(m) { /* 반경 렌더링 거리 조정 함수 */
+//  radius = { /* 반경 보여줄때의 변수 */
+//  gangnamStation: {
+//    /* 반경의 중심 */
+//    center: {
+//            lat: myLoc[0], 
+//            lng: myLoc[1]
+//           }, 
+//    population: m /* 반경 설정 200m: 26, 500m: 65, 1km: 130 */
+//  }
+//  };
+//  circle.setMap(null);
+//  markCircle();
+//}
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&callback=initMap1" async defer>
-</script>
-<
-<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>-->
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&callback=initMap" async defer>-->
+
+<script type="text/javascript" src="js/app/main_map.js"></script>

@@ -5,7 +5,7 @@
         <h1 class="editorial-title">동네에서 친구를 찾으시나요?</h1>
         <p class="editorial-para">주소를 기반으로 하는 소셜네트워크. 지금바로 진정한 친구를 찾아보세요</p>
         <div id="map-link-div">
-          <a class="btn btn-info btn-ms btn-block map-btn" id="toggleMap">친구 찾아보기</a>
+          <a class="btn btn-info btn-ms btn-block map-btn" id="toggleMap" >친구 찾아보기</a>
         </div>
       </div>
     </div>
@@ -104,13 +104,11 @@
 			</div>
 		</div>
       
-
-
-		
-  <script type="text/javascript">
+<script type="text/javascript">
 //메인화면 버튼 클릭시 구글맵으로 변경
-  $('#toggleMap').click(function (event) {
+  $('#toggleMap').on('click', function (event) {
     $('#changeToMap').load('templates/main_map.html');
   });
   </script>
+		
   

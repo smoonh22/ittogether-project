@@ -19,6 +19,7 @@
   ],
   "dependencies": {
     "angular": "~1.4.6",
+    "angular-google-maps": "~2.2.1",
     "angular-masonry": "~0.12.0",
     "angular-route": "~1.4.6",
     "blueimp-file-upload": "jquery-file-upload#~9.11.2",
@@ -28,8 +29,10 @@
     "classie": "~1.0.1",
     "imagesloaded": "~3.1.8",
     "jquery": "~2.1.4",
+    "lodash": "~3.10.1",
     "metisMenu": "~2.1.0",
     "modernizr": "~3.0.0",
-    "requirejs": "~2.1.20"
+    "requirejs": "~2.1.20",
+    "requirejs-plugins": "~1.0.3"
   }
 }

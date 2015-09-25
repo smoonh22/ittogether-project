@@ -17,7 +17,7 @@
   </resultMap>
   <select id="exist" 
           parameterType="map" resultMap="MemberMap">
-    SELECT mno, nicknm 
+    SELECT mno, nicknm, mphoto
     FROM memb_t
     WHERE email=#{email} and pwd=#{password}
   </select>

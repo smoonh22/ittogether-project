@@ -60,7 +60,7 @@
         <div class="modal-body">
           <form role="form">
             <div class="profile-info-div">
-              <img id="profile-img" src="images/cat01.jpg" />
+              <img id="profile-img" src="" />
             </div>
             <!--            파일 업록드   -->
             <div class="form-group my-new">
@@ -69,7 +69,7 @@
                 <span class="btn btn-success fileinput-button">
         <i class="glyphicon glyphicon-plus"></i>
         <span>파일 찾기</span>
-                <input id="fileupload" type="file" name="file" multiple>
+                <input id="fileupload" type="file" name="file" data-url="file/upload.do" multiple>
                 <!-- 업로드한 후에 서버에서 보내준 파일명을 저장.
              회원 정보를 등록할 때 함께 보냄.
          -->
@@ -77,9 +77,11 @@
                 </span>
                 <br>
                 <br>
+<!--
                 <div id="progress" class="progress">
                   <div class="progress-bar progress-bar-success"></div>
                 </div>
+-->
                 <div id="files" class="files"></div>
               </div>
             </div>
@@ -118,35 +120,38 @@
     </div>
   </div>
   <!-- /.modal -->
+  
+ 
   <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
   <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-  <script type="text/javascript" src="js/controllers/facebook.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&libraries=places&callback=initAutocomplete" async defer></script>
+  
   <script src="bower_components/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
-  <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
-  <script src="http://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
-  <!-- The Canvas to Blob plugin is included for image resizing functionality -->
-  <script src="bower_components/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
-  <!-- blueimp Gallery script -->
-  <script src="http://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
-  <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+
   <script src="bower_components/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
   <!-- The basic File Upload plugin -->
   <script src="bower_components/blueimp-file-upload/js/jquery.fileupload.js"></script>
-  <!-- The File Upload processing plugin -->
-  <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
-  <!-- The File Upload image preview & resize plugin -->
-  <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
-  <!-- The File Upload audio preview plugin -->
-  <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-audio.js"></script>
-  <!-- The File Upload video preview plugin -->
-  <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-video.js"></script>
-  <!-- The File Upload validation plugin -->
-  <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
-  <!-- The File Upload user interface plugin -->
-  <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-ui.js"></script>
+
+  
+  <script type="text/javascript">
+  $(function () {
+$(function () {
+    $('#fileupload').fileupload({
+        dataType: 'json',
+        done: function (e, data) {
+            $.each(data.result.data, function (index, file) {
+                $('#profile-img').attr('src', file.url);
+            });
+        }
+    });
+});
+});
+  
+  </script>
   <!-- The main application script -->
-  <script type="text/javascript" src="js/controllers/login.js"></script>
+  <script type="text/javascript" src="js/app/facebook.js"></script>
+  <script type="text/javascript" src="js/app/login.js"></script>
+  
 
 </body>
 
