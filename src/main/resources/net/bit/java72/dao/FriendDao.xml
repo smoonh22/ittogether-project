@@ -3,7 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.bit.java72.dao.FriendDao">
-
+  <resultMap type="FriendList" id="FListMap">
+    <id     column="FRDNO" property="frdmno"/>
+    <id		column="MNO"     property="mno"/>
+    <result column="STATE"     property="state"/>
+    <result column="FRD_DT"   property="friendDate"/>
+  </resultMap>
 
   <select id="frdList" parameterType="Int" resultType="int">
     SELECT *
@@ -11,10 +16,17 @@
     WHERE mno=#{values} and state=2
   </select>
   
+  
   <select id="applyList" parameterType="Int" resultType="int">
     SELECT *
     FROM FRD_T
     WHERE mno=#{values} and state=1
+  </select>
+    
+  <select id="applyList2" parameterType="Int" resultType="int">
+    SELECT *
+    FROM FRD_T
+    WHERE mno=#{values} and state=3
   </select>
   
   <select id="getFRD" parameterType="int">
@@ -23,17 +35,17 @@
   	where mno=#{values}
   </select>
   
-  <insert id="addFRD" parameterType="map">
+  <insert id="addFRD" parameterType="FriendList">
     INSERT INTO FRD_T(mno, frdno, state, frd_dt) 
     VALUES(#{mno}, #{frdno},1, now())
   </insert>
   
-  <update id="acceptFRD" parameterType="map">
-  UPDATE frd_t set state=2 where mno=#{mno} and frdno=#{frdno} 
+  <update id="acceptFRD" parameterType="FriendList">
+  UPDATE frd_t set state=2 where mno=#{mno} and frdno=#{frdmno} 
   </update>
   
-  <delete id="deleteFRD" parameterType="map">
-  DELETE from FRD_T where mno=#{mno} and frdno=#{frdno}
+  <delete id="deleteFRD" parameterType="FriendList">
+  DELETE from FRD_T where mno=#{mno} and frdno=#{frdmno}
   </delete>
 </mapper>
 

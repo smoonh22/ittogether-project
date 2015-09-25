@@ -9,10 +9,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import net.bit.java72.domain.FriendList;
 import net.bit.java72.domain.Member;
 import net.bit.java72.service.FriendService;
 import net.bit.java72.service.MemberService;
@@ -29,6 +29,7 @@ public class FriendController {
   public Object list(int mno) {
   Map<String,Object> result = new HashMap<String,Object>();
   try {
+    System.out.println(friendService.frdList(mno));
     ArrayList<Integer> fno = friendService.frdList(mno);
     List<Member> frdList = new ArrayList<>();
     for(int i = 0; i < fno.size(); i++){
@@ -43,18 +44,48 @@ public class FriendController {
     }
     result.put("apply", frdList2);
     
+    ArrayList<Integer> fno3 = friendService.applyList2(mno);
+    List<Member> frdList3 = new ArrayList<>();
+    for(int i = 0; i < fno3.size(); i++){
+      frdList3.add(memberService.getOne(fno3.get(i)));
+    }
+    result.put("applyU", frdList3);
+    
   } catch (Exception e) {
   }
   return  result;
   }
   
   @RequestMapping("/delete")
-  public Object delete(int frdmno) {
-    Map<String,Object> result = new HashMap<String,Object>();
+  public void delete(int frdmno,int mno) {
     
+    FriendList friendList = new FriendList();
+    FriendList friendList2 = new FriendList();
     
+    friendList.setFrdmno(frdmno);
+    friendList.setMno(mno);
     
-    return result;
+    friendList2.setFrdmno(mno);
+    friendList2.setMno(frdmno);
+    
+    friendService.deleteFRD(friendList);
+    friendService.deleteFRD(friendList2);
+  }
+  
+  @RequestMapping("/apply")
+  public void apply(int frdmno, int mno) {
+    
+    FriendList friendList = new FriendList();
+    FriendList friendList2 = new FriendList();
+    
+    friendList.setFrdmno(frdmno);
+    friendList.setMno(mno);
+    
+    friendList2.setFrdmno(mno);
+    friendList2.setMno(frdmno);
+    
+    friendService.acceptFRD(friendList);
+    friendService.acceptFRD(friendList2);
     
   }
 }

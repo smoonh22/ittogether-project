@@ -1,6 +1,6 @@
 define(function () {
   //페이지가 완전히 로드된 뒤에 실행
-  var app = angular.module('main', ['ngRoute', 'friendsFeed', 'myFriendList','myActivities','mainMap']);
+  var app = angular.module('main', ['ngRoute', 'friendsFeed', 'myFriendList','myActivities']);
 
   app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/home', {
@@ -19,8 +19,7 @@ define(function () {
       redirectTo: '/home'
     });
          }]);
-  
-  
+
   
   //개인정보 모달 directives
   app.directive('infoModal', function () {
@@ -71,6 +70,7 @@ define(function () {
     return {
       restrict: 'E',
       templateUrl: 'templates/header.html'
+        
     };
   });
   // 모달창에서 구글맵 나오게 trigger

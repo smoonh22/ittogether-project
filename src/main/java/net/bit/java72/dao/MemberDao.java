@@ -1,5 +1,6 @@
 package net.bit.java72.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import net.bit.java72.domain.Member;
@@ -16,4 +17,6 @@ public interface MemberDao {
   Member getNickName(String email);
   //유저 한명의 모든 정보 가져오기
   Member getOne(int mno);
+  
+  List<Member> getlatlon(int mno);  
 }
