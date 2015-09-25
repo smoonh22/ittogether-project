@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import net.bit.java72.domain.FriendFeed;
 import net.bit.java72.domain.Member;
 import net.bit.java72.service.FeedService;
 import net.bit.java72.service.MemberService;
@@ -60,20 +61,22 @@ public class FeedController {
   double lon = Double.parseDouble(myInfo.getLongitude());
   
   List<Member> distanceList = memberService.getlatlon(mno);
-  List<Member> frdList = new ArrayList<>();
+  List<FriendFeed> frdList = new ArrayList<>();
   for(Member member : distanceList){
     double lat2 = Double.parseDouble(member.getLatitude());
     double lon2 = Double.parseDouble(member.getLongitude());
     
     System.out.println("위도 : " + lat2 );
     System.out.println("경도 : " + lon2 );
-    
+    System.out.println(member.getMno());
     double distance = CalcDistance(lat,lon,lat,lon2);
     System.out.println("거리 : " + distance);
     if(distance <= 1000){
-      frdList.add(memberService.getOne(member.getMno()));
+      FriendFeed feeds = feedService.noneFriendFeed(member.getMno());
+      if( feeds != null){
+        frdList.add(feeds);
+      }
     }
-    
   }
   result.put("data", frdList);
 //  HttpHeaders headers = new HttpHeaders();

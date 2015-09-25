@@ -66,33 +66,33 @@
 	<div class="col-md-4" id='right-section'>
 			<div id="right-feed-title">주변 회원들의 활동</div>
 			<div id='right-feed' ng-controller="noneFriendFeedCtrl as nffCtrl">
-				<div ng-repeat="feed in nffCtrl.feeds">
+				<div ng-repeat="nfeed in nffCtrl.nfeeds">
 				<div class="test">
 						<div class="nonfriend-panel">
-						<div class="panel-heading" id='category-color-{{feed.category}}'></div>
+						<div class="panel-heading" id='category-color-{{nfeed.category}}'></div>
 						<div class='row'>
 						<div class="panel-body">
 							<div class="col-md-3">
 							<div class="img-div">
 								<span id="img-in-box"> <img
-									src='{{feed.profile}}' id='nonfriend-profileImg'
+									src='{{nfeed.profileImg}}' id='nonfriend-profileImg'
 									class="img-circle">
 							</div>
 							</div>
 							<div class="col-md-9">
 							<div class="content-div">
-								<p id="user-name">{{feed.name}}</p>
+								<p id="user-name">{{nfeed.name}}</p>
 								<h5 id="feed-info">
 									<small class="text-muted"><img
-										src="images/icons/calendar.png"> {{feed.date}} </small> <small
+										src="images/icons/calendar.png"> {{nfeed.date}} </small> <small
 										class="text-muted"><img
 										src="images/icons/multiple.png">
-										{{feed.headcount}} </small> <small
+										{{nfeed.headcount}} </small> <small
 										class="text-muted"><img src="images/icons/time.png">
-										{{feed.pasttime}}</small>
+										{{nfeed.pasttime}}</small>
 								</h5>
 								<hr>
-								<div id="unfriend-content">{{feed.content}}</div>
+								<div id="unfriend-content">{{nfeed.content}}</div>
 							</div>
 							</div>
 						</div>

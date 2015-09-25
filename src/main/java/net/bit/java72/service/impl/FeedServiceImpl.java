@@ -23,6 +23,10 @@ public class FeedServiceImpl implements FeedService {
   public List<Feed> myActivityList() {
     return feedDao.myActivityList();
   }
+  @Override
+  public FriendFeed noneFriendFeed(int mno) {
+    return feedDao.noneFriendFeed(mno);
+  }
   
 }
 

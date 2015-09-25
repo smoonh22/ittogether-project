@@ -27,7 +27,8 @@ define(function() {
       }
       }).success(function(result){
         console.log("db연결성공");
-          parent.feeds = result.data
+        console.log(result.data);
+          parent.nfeeds = result.data
         })
       
   }]);
