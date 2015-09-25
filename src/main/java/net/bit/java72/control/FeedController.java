@@ -30,9 +30,6 @@ public class FeedController {
   
   
   result.put("data",feedService.list(mno));
-//  HttpHeaders headers = new HttpHeaders();
-//  headers.add("Content-type"
-//      , "text/plain;charset=UTF-8");
   
   return result;  
  
@@ -41,10 +38,6 @@ public class FeedController {
   @RequestMapping("/myActivity")
   public Object feedlist() {  
   Map<String,Object> result = new HashMap<String,Object>();
-//  HttpHeaders headers = new HttpHeaders();
-//  headers.add("Content-type"
-//      , "text/plain;charset=UTF-8");
-//  
   
   result.put("activity", feedService.myActivityList());
   
@@ -79,10 +72,6 @@ public class FeedController {
     }
   }
   result.put("data", frdList);
-//  HttpHeaders headers = new HttpHeaders();
-//  headers.add("Content-type"
-//      , "text/plain;charset=UTF-8");
-  
   return result;  
  
   }
