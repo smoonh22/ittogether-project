@@ -6,6 +6,7 @@ define(function () {
         var parent_scope = this;
         $http.get('feed/myActivity.do').success(function (result) {
           parent_scope.activities = result.activity;
+          console.log(result.activity.meetTime);
         });
   }]);
 });
