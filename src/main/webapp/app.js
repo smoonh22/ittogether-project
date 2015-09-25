@@ -21,11 +21,12 @@ requirejs.config({
         'myFriendList': 'js/app/myFriendList',
         //컨트롤러
         'main': 'js/app/main',
+        'friendsFeed': 'js/app/friendsFeed',
         'tour': 'js/app/tour',
         'myActivities': 'js/app/myActivities',
         'myMap' : 'js/app/myMap',
         'main_map' : 'js/app/main_map',
-        'myFriendList': 'js/app/myFriendList',
+        'myFriendList': 'js/app/myFriendList'
     },
   
   shim: {
@@ -45,17 +46,20 @@ requirejs.config({
       deps:['jquery']
     },
     'main': {
-      deps: ['angular-route', 'bootstrap.min', 'tour','myFriendList','myActivities', 'main_map']
+      deps: ['angular-route', 'friendsFeed', 'bootstrap.min', 'tour','myFriendList','myActivities']
+    },
+    'friendsFeed': {
+      deps: ['angular']
     },
     'myActivities': {
       deps: ['angular']
     },
-    'main_map': {
-      deps: ['angular']
-    },
+//    'main_map': {
+//      deps: ['angular']
+//    },
     'myFriendList': {
       deps:['angular']
-    },
+    }
   }
   
 });

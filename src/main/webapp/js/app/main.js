@@ -1,6 +1,6 @@
 define(function () {
   //페이지가 완전히 로드된 뒤에 실행
-  var app = angular.module('main', ['ngRoute', 'myFriendList','myActivities','mainMap']);
+  var app = angular.module('main', ['ngRoute', 'friendsFeed',  'myFriendList','myActivities', /*'mainMap'*/]);
 
   app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/home', {
@@ -19,12 +19,13 @@ define(function () {
       redirectTo: '/home'
     });
          }]);
-  
-  
+
   
   //개인정보 모달 directives
   app.directive('infoModal', function () {
+    
     return {
+      
       restrict: 'E',
       controller: function () {
         var parent_scope = this;
@@ -44,7 +45,7 @@ define(function () {
                   name: $('#name').val(), 
                   email: $('#email').val(),
                   password: $('#password').val(),
-                  address: $('#address').val(),
+                  address: $('#address').val()
                },
               success: function(result){
                  if (result.data == 'success') {
@@ -59,6 +60,8 @@ define(function () {
       templateUrl: 'templates/modals/info-modal.html'
     };
   });
+  
+  
   //심심해 모달 directives
   app.directive('boredModal', function () {
     return {
@@ -73,12 +76,6 @@ define(function () {
       templateUrl: 'templates/header.html'
     };
   });
-  
-  
-  
-  
-  
-  
   
 });
 
