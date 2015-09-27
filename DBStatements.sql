@@ -1,3 +1,35 @@
+
+-- MEMB_T
+CREATE TABLE MEMB_T (
+  MNO     INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
+  NICKNM  VARCHAR(50)  NOT NULL COMMENT '닉네임', -- 닉네임
+  EMAIL   VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
+  PWD     VARCHAR(50)  NOT NULL COMMENT '비밀번호', -- 비밀번호
+  NAME    VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
+  ADDR    VARCHAR(255) NOT NULL COMMENT '주소', -- 주소
+  LAT     varchar(100) NOT NULL COMMENT '위도', -- 위도
+  LON     varchar(100) NOT NULL COMMENT '경도', -- 경도
+  HOMETWN varchar(100) NULL     COMMENT '출신지', -- 출신지
+  SEX     INTEGER      NULL     COMMENT '성별', -- 성별
+  MPHOTO  VARCHAR(100) NULL     COMMENT '사진경로', -- 사진경로
+  CRE_DT  DATETIME     NULL     COMMENT '가입일', -- 가입일
+  HB1     varchar(100) NULL     COMMENT '취미1', -- 취미1
+  HB2     varchar(100) NULL     COMMENT '취미2', -- 취미2
+  HB3     varchar(100) NULL     COMMENT '취미3', -- 취미3
+  INTRO   MEDIUMTEXT   NULL     COMMENT '소개', -- 소개
+  AGE     INTEGER      NULL     COMMENT '나이' -- 나이
+)
+
+
+alter table memb_t add hb1 varchar(100) null;
+alter table memb_t add hb2 varchar(100) null;
+alter table memb_t add hb3 varchar(100) null;
+alter table memb_t add intro mediumtext null;
+alter table memb_t add age integer null;
+
+
+
+
 insert into frd_t (frdno, mno, state, frd_dt) values(1,2,1,now());
 insert into frd_t (frdno, mno, state, frd_dt) values(2,1,1,now());
 insert into frd_t (frdno, mno, state, frd_dt) values(2,3,2,now());

@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.bit.java72.dao.MemberDao">
+
   <resultMap type="Member" id="MemberMap">
     <id     column="mno"      property="mno" />
     <result column="email"    property="email"/>
@@ -14,7 +15,12 @@
     <result column="lon"      property="longitude"/>
     <result column="addr"     property="address"/>
     <result column="mphoto"   property="profilePicture"/>
+    <result column="sex"      property="sex"/>
+    <result column="hb"       property="hobby"/>
+    <result column="intro"    property="introduction"/>
+    <result column="age"      property="age"/>
   </resultMap>
+  
   <select id="exist" 
           parameterType="map" resultMap="MemberMap">
     SELECT mno, nicknm, mphoto
@@ -53,7 +59,6 @@
     WHERE nicknm = #{value}
   </select>
   
-  
   <select id="getUserInfo" 
           parameterType="string" resultMap="MemberMap">
     SELECT * 
@@ -65,7 +70,13 @@
     UPDATE memb_t SET 
       nicknm=#{nickname},
       name=#{name},
-      pwd=#{password}
+      pwd=#{password},
+      mphoto=#{profilePicture},
+      intro=#{introduction},
+      sex=#{sex},
+      age=#{age},
+      hb=#{hobby},
+      hometwn=#{hometown}
     WHERE email = #{email}    
   </update>
   

@@ -25,8 +25,9 @@ requirejs.config({
         'tour': 'js/app/tour',
         'myActivities': 'js/app/myActivities',
         'myMap' : 'js/app/myMap',
-/*        'main_map' : 'js/app/main_map',*/
+//        'main_map' : 'js/app/main_map',
         'myFriendList': 'js/app/myFriendList',
+        'main_map' : 'js/app/main_map',
     },
   
   shim: {
@@ -54,12 +55,12 @@ requirejs.config({
     'myActivities': {
       deps: ['angular']
     },
-/*    'main_map': {
-      deps: ['angular']
-    },*/
+//    'main_map': {
+//      deps: ['angular']
+//    },
     'myFriendList': {
       deps:['angular']
-    },
+    }
   }
   
 });
