@@ -34,15 +34,11 @@ define(function () {
 //          name: sessionStorage.getItem('name'),
 //          latitude: sessionStorage.getItem('nickname'),
 //          latitude: sessionStorage.getItem('latitude')
-//          
         }, function (result) {
           parent_scope.userDatas = result.data;
         });
-
-        
          $('#save-changes').click(function (event) {
             var radio = $("input:radio[name='radioButton']:checked").val();
-            console.log("raidoValue: " + radio);
            
            $.ajax('member/updateUser.do',
               {

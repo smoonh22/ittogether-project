@@ -18,9 +18,9 @@ requirejs.config({
         'AnimOnScroll': 'js/lib/AnimOnScroll',
         'metisMenu': 'bower_components/metisMenu/metisMenu',
         'angular-route': 'bower_components/angular-route/angular-route',
-        'myFriendList': 'js/app/myFriendList',
         //컨트롤러
         'main': 'js/app/main',
+        'myFriendList': 'js/app/myFriendList',
         'friendsFeed': 'js/app/friendsFeed',
         'tour': 'js/app/tour',
         'myActivities': 'js/app/myActivities',
@@ -32,7 +32,7 @@ requirejs.config({
   
   shim: {
     'angular': {
-        deps: ['jquery']
+      deps: ['jquery']
     },
     'angular-route': {
       deps: ['angular']

@@ -1,4 +1,4 @@
-<div id="map">
+<div id="mainMap">
 </div>
 <div id="finder-box">
   <div class="dropdown">
@@ -63,56 +63,59 @@
 </div>
   
 
-<div id="friendLocArr" hidden="true">friend0,37.497129,127.027612/friend1,37.496708,127.026865/friend2,37.498308,127.026312/friend3,37.497380,127.027294/friend4,37.498674,127.028249</div>
-
     <div id="myInfoWindow" hidden="true">
-    <div id="iw-container">
-      <div class="iw-title">송문혁</div>
-      <div class="iw-content">
-          <div class="iw-subTitle">
-           <img src="images/myPhoto.png" class="img-circle">
-          </div>
-          <div class="iw-subTitle">
-            <input type="txt" class="form-control input-sm" id="myInfoTitle" placeholder="음악 같이 들어요~">
-          </div>
+      <div id="iw-container">
+        <div class="iw-title">송문혁</div>
+        <div class="iw-content">
+            <div class="iw-subTitle">
+             <img src="images/myPhoto.png" class="img-circle">
+            </div>
+            <div class="iw-subTitle">
+              <input type="txt" class="form-control input-sm" id="myInfoTitle" placeholder="음악 같이 들어요~">
+            </div>
+        </div>
       </div>
     </div>
-    </div>
+
     <div id="friendInfoWindow" hidden="true">
-    <div id="iw-container">
-      <div class="iw-title">설현</div>
-      <div class="iw-content">
-          <div class="iw-subTitle">
-           <img src="images/seol2.png" class="img-circle">
-          </div>
-          <div class="iw-subTitle">
-            <input type="txt" class="form-control" id="myInfoTitle" placeholder="심쿵해">
-          </div>
-          <div class="iw-subTitle">
-           <button type="submit" class="btn btn-info btn-sm btn-block">프로필 보기</button>
-         </div>
-         <div class="iw-subTitle">
-           <button type="submit" class="btn btn-info btn-sm btn-block">메시지 보내기</button>
-         </div>
+      <div id="iw-container">
+        <div class="iw-title">설현</div>
+        <div class="iw-content">
+            <div class="iw-subTitle">
+             <img src="images/seol2.png" class="img-circle">
+            </div>
+            <div class="iw-subTitle">
+              <input type="txt" class="form-control" id="myInfoTitle" placeholder="심쿵해">
+            </div>
+            <div class="iw-subTitle">
+             <button type="submit" class="btn btn-info btn-sm btn-block">프로필 보기</button>
+           </div>
+           <div class="iw-subTitle">
+             <button type="submit" class="btn btn-info btn-sm btn-block">메시지 보내기</button>
+           </div>
+        </div>
       </div>
     </div>
-    </div>
+
     <div id="notFriendInfoWindow" hidden="true">
-    <div id="iw-container">
-      <div class="iw-title">...</div>
-      <div class="iw-content">
-          <div class="iw-subTitle">
-           <img src="images/notFriend.png" class="img-circle">
-          </div>
-          <div class="iw-subTitle">
-            <input type="txt" class="form-control" id="myInfoTitle" placeholder="친구가 되시면 보입니다. 친구 신청을 해보세요.">
-          </div>
-          <div class="iw-subTitle">
-           <button type="submit" class="btn btn-info btn-sm btn-block">친구 신청</button>
-         </div>
+      <div id="iw-container">
+        <div class="iw-title">...</div>
+        <div class="iw-content">
+            <div class="iw-subTitle">
+             <img src="images/notFriend.png" class="img-circle">
+            </div>
+            <div class="iw-subTitle">
+              <input type="txt" class="form-control" id="myInfoTitle" placeholder="친구가 되시면 보입니다. 친구 신청을 해보세요.">
+            </div>
+            <div class="iw-subTitle">
+             <button type="submit" class="btn btn-info btn-sm btn-block">친구 신청</button>
+           </div>
+        </div>
       </div>
     </div>
-    </div>
+
+
+<div id="friendLocArr" hidden="true">friend0,37.497129,127.027612/friend1,37.496708,127.026865/friend2,37.498308,127.026312/friend3,37.497380,127.027294/friend4,37.498674,127.028249</div>
 
 
 <script>
@@ -121,7 +124,8 @@
   
   var hiddenInfoWindow = $('#friendLocArr')[0].innerHTML;;
   var arr = hiddenInfoWindow.split('/');
-  var friendLocArr = [];
+  console.log(hiddenInfoWindow);
+  
   for (var i = 0; i < arr.length; i++) {
     friendLocArr[i] = arr[i].split(',');
     friendLocArr[i][1] = parseFloat(friendLocArr[i][1]);
@@ -160,7 +164,7 @@
 	};
   
   function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById('mainMap'), {
       zoom: 17,
       /* 처음 화면을 보여주는 위도, 경도 */
       center: {
