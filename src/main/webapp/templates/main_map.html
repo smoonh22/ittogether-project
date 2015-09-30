@@ -114,27 +114,33 @@
       </div>
     </div>
 
+<div id="friendLocArr" ng-repeat="map." hidden="true">friend0,37.497129,127.027612/friend1,37.496708,127.026865/friend2,37.498308,127.026312/friend3,37.497380,127.027294/friend4,37.498674,127.028249</div>
+</div>
 
-<div id="friendLocArr" hidden="true">friend0,37.497129,127.027612/friend1,37.496708,127.026865/friend2,37.498308,127.026312/friend3,37.497380,127.027294/friend4,37.498674,127.028249</div>
 
+<div  ng-controller="myMapCtrl as map">
+  <div id="friendLocArr" ng-repeat="map.friend" hidden="false">{{friend.nickname}},{{friend.latitude}},{{friend.longitude}}</div>
+</div>
 
 <script>
   
   var myLoc = [37.497943, 127.027622];
   
-  var hiddenInfoWindow = $('#friendLocArr')[0].innerHTML;;
+  var hiddenInfoWindow = $('#friendLocArr')[0].innerHTML;
   var arr = hiddenInfoWindow.split('/');
-  console.log(hiddenInfoWindow);
+  console.log(arr[0]);
   
+  var friendLocArr = [];
   for (var i = 0; i < arr.length; i++) {
     friendLocArr[i] = arr[i].split(',');
     friendLocArr[i][1] = parseFloat(friendLocArr[i][1]);
     friendLocArr[i][2] = parseFloat(friendLocArr[i][2]);
-  }
+  };
+  console.log(friendLocArr[0]);
   
-  var friendMarkers = new Array; <!-- 팝업창 띄울 때의 마커들 -->
-  var notFriendMarkers = new Array; <!-- 팝업창 띄울 때의 마커들  -->
-  var notFriendLocArr = [ <!-- 주변 회원들의 배열 -->
+  var friendMarkers = new Array; /*팝업창 띄울 때의 마커들 */
+  var notFriendMarkers = new Array; /* 팝업창 띄울 때의 마커들 */
+  var notFriendLocArr = [ /* 주변 회원들의 배열 */
     ['notFriend0', 37.496629, 127.027622],
     ['notFriend1', 37.495508, 127.026845],
     ['notFriend2', 37.497248, 127.026352],
@@ -316,13 +322,14 @@ function radiusDistance(m) { /* 반경 렌더링 거리 조정 함수 */
   markCircle();
 }
 </script>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&callback=initMap" async defer></script>
+
 <script type="text/javascript">
 (function() {
    $.getJSON('member/userInfo.do', {
           nickname: sessionStorage.getItem('nickname')
         }, function (result) {
-          console.log(result.data + "gggg");
         });
 })();
   

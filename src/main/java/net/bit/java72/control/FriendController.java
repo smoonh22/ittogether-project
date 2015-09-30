@@ -27,33 +27,34 @@ public class FriendController {
 
   @RequestMapping("/list")
   public Object list(int mno) {
-  Map<String,Object> result = new HashMap<String,Object>();
-  try {
-    System.out.println(friendService.frdList(mno));
-    ArrayList<Integer> fno = friendService.frdList(mno);
-    List<Member> frdList = new ArrayList<>();
-    for(int i = 0; i < fno.size(); i++){
-      frdList.add(memberService.getOne(fno.get(i)));
-    }
-    result.put("data", frdList);
-   
-    ArrayList<Integer> fno2 = friendService.applyList(mno);
-    List<Member> frdList2 = new ArrayList<>();
-    for(int i = 0; i < fno2.size(); i++){
-      frdList2.add(memberService.getOne(fno2.get(i)));
-    }
-    result.put("apply", frdList2);
+    Map<String,Object> result = new HashMap<String,Object>();
     
-    ArrayList<Integer> fno3 = friendService.applyList2(mno);
-    List<Member> frdList3 = new ArrayList<>();
-    for(int i = 0; i < fno3.size(); i++){
-      frdList3.add(memberService.getOne(fno3.get(i)));
-    }
-    result.put("applyU", frdList3);
+    try {
+      System.out.println(friendService.frdList(mno));
+      ArrayList<Integer> fno = friendService.frdList(mno);
+      List<Member> frdList = new ArrayList<>();
+      for(int i = 0; i < fno.size(); i++){
+        frdList.add(memberService.getOne(fno.get(i)));
+      }
+      result.put("data", frdList);
+     
+      ArrayList<Integer> fno2 = friendService.applyList(mno);
+      List<Member> frdList2 = new ArrayList<>();
+      for(int i = 0; i < fno2.size(); i++){
+        frdList2.add(memberService.getOne(fno2.get(i)));
+      }
+      result.put("apply", frdList2);
+      
+      ArrayList<Integer> fno3 = friendService.applyList2(mno);
+      List<Member> frdList3 = new ArrayList<>();
+      for(int i = 0; i < fno3.size(); i++){
+        frdList3.add(memberService.getOne(fno3.get(i)));
+      }
+      result.put("applyU", frdList3);
+      
+    } catch (Exception e) {}
     
-  } catch (Exception e) {
-  }
-  return  result;
+    return  result;
   }
   
   @RequestMapping("/delete")

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import net.bit.java72.service.MarkerService;
 
-@RequestMapping("/map")
+@RequestMapping("/marker")
 public class MarkerController {
   @Autowired MarkerService markerService;
   @Autowired ServletContext servletContext;
