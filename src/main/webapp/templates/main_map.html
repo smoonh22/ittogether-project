@@ -65,6 +65,7 @@
 </div>
   
 
+<!--
     <div id="myInfoWindow" hidden="true">
       <div id="iw-container">
         <div class="iw-title">송문혁</div>
@@ -78,6 +79,7 @@
         </div>
       </div>
     </div>
+-->
 
     <div id="friendInfoWindow" hidden="true">
       <div id="iw-container">
@@ -90,10 +92,10 @@
               <input type="txt" class="form-control" id="myInfoTitle" placeholder="심쿵해">
             </div>
             <div class="iw-subTitle">
-             <button type="submit" class="btn btn-info btn-sm btn-block">프로필 보기</button>
+             <button type="submit" class="btn btn-info btn-xs btn-block">프로필 보기</button>
            </div>
            <div class="iw-subTitle">
-             <button type="submit" class="btn btn-info btn-sm btn-block">메시지 보내기</button>
+             <button type="submit" class="btn btn-info btn-xs btn-block">메시지 보내기</button>
            </div>
         </div>
       </div>
@@ -110,7 +112,7 @@
               <input type="txt" class="form-control" id="myInfoTitle" placeholder="친구가 되시면 보입니다. 친구 신청을 해보세요.">
             </div>
             <div class="iw-subTitle">
-             <button type="submit" class="btn btn-info btn-sm btn-block">친구 신청</button>
+             <button type="submit" class="btn btn-info btn-xs btn-block">친구 신청</button>
            </div>
         </div>
       </div>
@@ -119,6 +121,9 @@
 <script>
   //json형식으로 받아온 데이터를 뿌려줌
   var myLoc = [];
+  var myNickname,
+      myIntro,
+      myPhoto;
   (function() {
     $.getJSON('member/getMyLoc.do', {
       mno: sessionStorage.getItem('mno')
@@ -126,7 +131,10 @@
       myLoc[0] = parseFloat((results.data[0].latitude));
       myLoc[1] = parseFloat((results.data[0].longitude));
       myLoc[2] = Number(results.data[0].mno);
-      console.log("나의 위치 - lat: " + myLoc[0] + " lon: " + myLoc[1]);
+      myNickname = results.data[0].nickname;
+      myIntro    = results.data[0].introduction;
+      myPhoto    = results.data[0].profilePicture;
+      console.log("나의 위치(" + myNickname + ") - lat: " + myLoc[0] + " lon: " + myLoc[1]);
     });
   })();
   
@@ -137,7 +145,13 @@
       frdno: sessionStorage.getItem('mno')
     }, function(results) {
      for (var i = 0 ; i < results.data.length; i ++) {
-       var tempArr = [results.data[i].nickname, Number(results.data[i].latitude), Number(results.data[i].longitude), results.data[i].intro];
+       var tempArr = [
+         results.data[i].nickname, 
+         Number(results.data[i].latitude),
+         Number(results.data[i].longitude), 
+         results.data[i].introduction,
+         results.data[i].profilePicture
+       ];
         friendLocArr.push(tempArr);
         console.log("친구" + i + ": " + friendLocArr[i]);
      }
@@ -150,29 +164,36 @@
       frdno: sessionStorage.getItem('mno')
     }, function(results) {
      for (var i = 0 ; i < results.data.length; i ++) {
-       var tempArr = [results.data[i].nickname, Number(results.data[i].latitude), Number(results.data[i].longitude), results.data[i].intro];
+       var tempArr = [
+         results.data[i].nickname, 
+         Number(results.data[i].latitude),
+         Number(results.data[i].longitude),
+         results.data[i].introduction,
+         results.data[i].profilePicture
+       ];
         notFriendLocArr.push(tempArr);
         console.log("주변회원" + i + ": " + notFriendLocArr[i]);
      }
   });
   })();
   
-  var friendMarkers = new Array; /*팝업창 띄울 때의 마커들 */
-  var notFriendMarkers = new Array; /* 팝업창 띄울 때의 마커들  */
+  var friendMarkers = []; /*팝업창 띄울 때의 마커들 */
+  var notFriendMarkers = []; /* 팝업창 띄울 때의 마커들  */
   
   var map;
   var circle;
-  var friendWindow; /* 친구들 팝업창 */
-  var notFriendWindow; /* 회원들 팝업창 */
+  var friendWindow=[];/* 친구들 팝업창 */
+  var notFriendWindow=[]; /* 회원들 팝업창 */
     
-  var myInfoWindow = $('#myInfoWindow');
-  var myBalloon = myInfoWindow[0].innerHTML;
+//  var myInfoWindow = $('#myInfoWindow');
+//  var myBalloon = myInfoWindow[0].innerHTML;
+//  console.log(myBalloon);
   
-  var friendInfoWindow = $('#friendInfoWindow');
-  var friendBalloon = friendInfoWindow[0].innerHTML;
-  
-  var notFriendInfoWindow = $('#notFriendInfoWindow');
-  var notFriendBalloon = notFriendInfoWindow[0].innerHTML;
+//  var friendInfoWindow = $('#friendInfoWindow');
+//  var friendBalloon = friendInfoWindow[0].innerHTML;
+//  
+//  var notFriendInfoWindow = $('#notFriendInfoWindow');
+//  var notFriendBalloon = notFriendInfoWindow[0].innerHTML;
   
   
 function initMap() {
@@ -182,6 +203,7 @@ function initMap() {
 	    population: 26 /* 반경 설정 200m: 26, 500m: 65, 1km: 130 */ 
 	  }
 	};
+  
     map = new google.maps.Map(document.getElementById('mainMap'), {
       zoom: 17,
       /* 처음 화면을 보여주는 위도, 경도 */
@@ -191,15 +213,59 @@ function initMap() {
       zoomControl: false,
       scaleControl: false /* 척도 */
     });
+  
     myWindow = new google.maps.InfoWindow({ /* 팝업창 생성 */
-      content: myBalloon
+      content: "<div>"+
+        "<div id='iw-container'>"+
+        "<div class='iw-title'>" + myNickname +"</div>"+
+        "<div class='iw-content'>"+
+            "<div class='iw-subTitle'>"+
+             "<img src=" + myPhoto + " class='img-circle iw-img'>"+
+            "</div>"+
+            "<div class='iw-subTitle'>"+
+              "<textarea class='form-control' rows='2'>" + myIntro + "</textarea>"+
+            "</div>"+
+        "</div>"+
+      "</div>"+
+    "</div>"
     });
-    friendWindow = new google.maps.InfoWindow({ /* 팝업창 생성 */
-      content: friendBalloon
+  
+  for (var i = 0; i < friendLocArr.length; i++) {
+    friendWindow[i] = new google.maps.InfoWindow({ /* 팝업창 생성 */
+      content: "<div>"+ 
+        "<div id='iw-container'>"+
+        "<div class='iw-title'>" + friendLocArr[i][0] +"</div>"+
+        "<div class='iw-content'>"+
+            "<div class='iw-subTitle'>"+
+             "<img src=" + friendLocArr[i][4] + " class='img-circle iw-img'>"+
+            "</div>"+
+            "<div class='iw-subTitle'>"+
+              "<input type='txt' class='form-control input-xs' value=" + friendLocArr[i][3] + ">"+
+            "</div>"+
+        "</div>"+
+      "</div>"+
+    "</div>"
     });
-    notFriendWindow = new google.maps.InfoWindow({ /* 팝업창 생성 */
-      content: notFriendBalloon
+  }
+  
+  for (var i = 0; i < notFriendLocArr.length; i++) {
+    notFriendWindow[i] = new google.maps.InfoWindow({ /* 팝업창 생성 */
+      content: "<div>"+
+        "<div id='iw-container'>"+
+        "<div class='iw-title'>" + notFriendLocArr[i][0] +"</div>"+
+        "<div class='iw-content'>"+
+            "<div class='iw-subTitle'>"+
+             "<img src=" + notFriendLocArr[i][4] + " class='img-circle iw-img'>"+
+            "</div>"+
+            "<div class='iw-subTitle'>"+
+              "<input type='txt' class='form-control input-xs' value=" + notFriendLocArr[i][3] + ">"+
+            "</div>"+
+        "</div>"+
+      "</div>"+
+    "</div>"
     });
+  }
+  
     markMyLoc();
     for (var i = 0; i < friendLocArr.length; i++) {
       markFriends(i); /* 친구 마킹 */
@@ -272,7 +338,7 @@ function initMap() {
         icon: 'images/icons/friendHome.png'
       }));
       friendMarkers[i].addListener('click', function() {
-        friendWindow.open(map, friendMarkers[i]);
+        friendWindow[i].open(map, friendMarkers[i]);
       });
     }, i * 100);
   }
@@ -291,7 +357,7 @@ function initMap() {
         icon: 'images/icons/pin.png'
       }));
       notFriendMarkers[i].addListener('click', function() {
-        notFriendWindow.open(map, notFriendMarkers[i]);
+        notFriendWindow[i].open(map, notFriendMarkers[i]);
       });
     }, i * 100);
   }
