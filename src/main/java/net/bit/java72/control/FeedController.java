@@ -65,9 +65,11 @@ public class FeedController {
     double distance = CalcDistance(lat,lon,lat,lon2);
     System.out.println("거리 : " + distance);
     if(distance <= 1000){
-      FriendFeed feeds = feedService.noneFriendFeed(member.getMno());
+      List<FriendFeed> feeds = feedService.noneFriendFeed(member.getMno());
       if( feeds != null){
-        frdList.add(feeds);
+        for (FriendFeed friendFeed : feeds) {
+        frdList.add(friendFeed);
+      }
       }
     }
   }

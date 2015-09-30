@@ -8,5 +8,5 @@ import net.bit.java72.domain.FriendFeed;
 public interface FeedDao {
   List<FriendFeed> list(int mno);
   List<Feed> myActivityList();
-  FriendFeed noneFriendFeed(int mno);
+  List<FriendFeed> noneFriendFeed(int mno);
 }

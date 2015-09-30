@@ -19,6 +19,8 @@ public class Member implements Serializable{
   protected String hometown;
   protected Date createDate;
   protected String profilePicture;
+  
+  
   public int getMno() {
     return mno;
   }

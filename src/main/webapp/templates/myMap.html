@@ -30,7 +30,7 @@ var myLoc = [37.497943, 127.027622];
 var map;
 var marker = [];
   
-function initMap2() {
+function initMap() {
   map = new google.maps.Map(document.getElementById('map-canvas'), {
     zoom: 16,
     center: {lat: myLoc[0], lng: myLoc[1]},
@@ -97,5 +97,5 @@ function markMyLoc () {
 
 
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&callback=initMap2" async defer>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&callback=initMap" async defer>
 </script>

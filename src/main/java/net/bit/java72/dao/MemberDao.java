@@ -18,5 +18,6 @@ public interface MemberDao {
   //유저 한명의 모든 정보 가져오기
   Member getOne(int mno);
   
-  List<Member> getlatlon(int mno);  
+  List<Member> getlatlon(int mno);
+  List<Member> getMembers();  
 }

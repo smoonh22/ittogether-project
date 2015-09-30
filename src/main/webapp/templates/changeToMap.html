@@ -1,0 +1,96 @@
+<div  ng-controller="toggleToMapCtrl as toMapCtrl">
+    <div ng-switch="subview">
+        <div ng-switch-when="main_html"><div ng-include="'templates/main.html'"></div></div>
+        <div ng-switch-when="map_html"><div ng-include="'templates/main_map.html'"></div></div>
+    </div>
+  </div>
+  
+ 
+<div class='row'>
+  <div class="col-md-8" id='left-section'>
+    <div id="left-feed-title">친구들의 활동</div>
+    <div id='left-feed' ng-controller="friendFeedCtrl as ffCtrl">
+      <div ng-repeat="feed in ffCtrl.feeds">
+        <div class="test">
+          <div class='row'>
+            <div class='col-md-1'></div>
+            <div class='col-md-10'>
+              <div class="friend-panel">
+                <div class="panel-heading" id='category-color-{{feed.category}}'></div>
+                <div class='row'>
+                  <div class="panel-body">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-3">
+                      <div class="img-div">
+                        <span id="img-in-box"> <img
+									src='{{feed.profilePicture}}' id='friend-profileImg'
+									class="img-circle"></span>
+							</div>
+							</div>
+							<div class="col-md-6">
+							<div class="content-div">
+								<p id="user-name">{{feed.name}}</p>
+								<h5 id="feed-info">
+									<small class="text-muted"><img
+										src="images/icons/calendar.png"> {{feed.meetTime}} </small> <small
+										class="text-muted"><img
+										src="images/icons/multiple.png">
+										{{feed.stuffCount}}/{{feed.maxHeadCount}} </small> <small
+										class="text-muted"><img src="images/icons/time.png">
+										{{feed.createDate}}</small>
+								</h5>
+								<hr>
+								<div id="unfriend-content">{{feed.content}}</div>
+							</div>
+							</div>
+							<div class="col-md-2"></div>
+						</div>
+					</div>
+				</div>
+				</div>
+				<div class='col-md-1'></div>
+				</div>
+				</div>
+			</div>
+			</div>
+		</div>
+
+	<div class="col-md-4" id='right-section'>
+			<div id="right-feed-title">주변 회원들의 활동</div>
+			<div id='right-feed' ng-controller="noneFriendFeedCtrl as nffCtrl">
+				<div ng-repeat="nfeed in nffCtrl.nfeeds">
+				<div class="test">
+						<div class="nonfriend-panel">
+						<div class="panel-heading" id='category-color-{{nfeed.category}}'></div>
+						<div class='row'>
+						<div class="panel-body">
+							<div class="col-md-3">
+							<div class="img-div">
+								<span id="img-in-box"> <img
+									src='{{nfeed.profileImg}}' id='nonfriend-profileImg'
+									class="img-circle">
+							</div>
+							</div>
+							<div class="col-md-9">
+							<div class="content-div">
+								<p id="user-name">{{nfeed.name}}</p>
+								<h5 id="feed-info">
+									<small class="text-muted"><img
+										src="images/icons/calendar.png"> {{nfeed.date}} </small> <small
+										class="text-muted"><img
+										src="images/icons/multiple.png">
+										{{nfeed.headcount}} </small> <small
+										class="text-muted"><img src="images/icons/time.png">
+										{{nfeed.pasttime}}</small>
+								</h5>
+								<hr>
+								<div id="unfriend-content">{{nfeed.content}}</div>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</div>
+				</div>
+			</div>
+			</div>

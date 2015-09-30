@@ -1,14 +1,20 @@
-(function() {
-  var app = angular.module('mainMap', []);
+define(function() {
+  var app = angular.module('mainMap', ['main']);
   
-  app.controller('myMapCtrl', ['$http', function(result){
-    console.log("테스트");
-    this.friends = data;
+  
+  app.controller('myMapCtrl', ['$http','$scope','$rootScope', function($http, $scope, $rootScope){
+    console.log('mainMap');
+    $rootScope.friends = "data";
+    $rootScope.$apply();
   }]);
+  
+  
     
     var data = {
-        nickname: 'ab',
-        longitude: '3',
-        latitude: '4'
+        nickname : 'aaa',
+        latitude: '123.232',
+        longitude: '123, 23'
     };
-})();
+  console.log(data.nickname+
+             'ddd');
+});

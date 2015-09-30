@@ -4,7 +4,6 @@ define(function() {
 app.controller('myFriendCtrl',['$http','$scope', function($http,$scope) {
     var parent_scope = this;
     var data = $scope.delfrdmno;
-    console.log(data);
     $http.get('frd/list.do',
          {
         params: {

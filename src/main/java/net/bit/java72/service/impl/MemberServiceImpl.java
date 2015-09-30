@@ -63,6 +63,11 @@ public class MemberServiceImpl implements MemberService {
   public List<Member> getlatlon(int mno) {
     return memberDao.getlatlon(mno);
   }
+  @Override
+  public List<Member> getMembers() {
+    // TODO Auto-generated method stub
+    return memberDao.getMembers();
+  }
  
 
 }

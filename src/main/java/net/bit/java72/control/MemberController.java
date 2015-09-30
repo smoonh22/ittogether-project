@@ -1,12 +1,14 @@
 package net.bit.java72.control;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -49,6 +51,16 @@ public class MemberController {
     }
     
     return result;
+  }
+  
+  @RequestMapping("/getMembers")
+  public Object getMembers() {
+    Map<String,Object> result = new HashMap<String,Object>();
+    
+    List<Member> members = memberService.getMembers();
+    result.put("data", members);
+    return result;
+        
   }
 }
   
