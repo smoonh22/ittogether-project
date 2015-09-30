@@ -1,5 +1,7 @@
+<link rel='stylesheet' href="css/main_map.css" />
 <div id="mainMap">
 </div>
+
 <div id="finder-box">
   <div class="dropdown">
     <button class="btn btn-info btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">모두
@@ -114,19 +116,24 @@
       </div>
     </div>
 
-<div id="friendLocArr" ng-repeat="map." hidden="true">friend0,37.497129,127.027612/friend1,37.496708,127.026865/friend2,37.498308,127.026312/friend3,37.497380,127.027294/friend4,37.498674,127.028249</div>
-</div>
-
-
-<div  ng-controller="myMapCtrl as map">
-  <div id="friendLocArr" ng-repeat="map.friend" hidden="false">{{friend.nickname}},{{friend.latitude}},{{friend.longitude}}</div>
-</div>
-
 <script>
-  
+  var notFriendLocArr =[];
+  var friendLocArr = [];
+  //json형식으로 받아온 데이터를 뿌려줌
+  (function() {
+  $.getJSON('member/getMembers.do', function(results) {
+    console.log(results.data);
+     for (var i = 0 ; i < results.data.length; i ++) {
+       var tempArr = [results.data[i].nickname, Number(results.data[i].latitude), Number(results.data[i].longitude)];
+        notFriendLocArr.push(tempArr);
+     }
+    console.log(notFriendLocArr);
+    
+  });
+  })();
   var myLoc = [37.497943, 127.027622];
   
-  var hiddenInfoWindow = $('#friendLocArr')[0].innerHTML;
+  /* var hiddenInfoWindow = $('#friendLocArr')[0].innerHTML;
   var arr = hiddenInfoWindow.split('/');
   console.log(arr[0]);
   
@@ -136,8 +143,7 @@
     friendLocArr[i][1] = parseFloat(friendLocArr[i][1]);
     friendLocArr[i][2] = parseFloat(friendLocArr[i][2]);
   };
-  console.log(friendLocArr[0]);
-  
+  console.log(friendLocArr[0]); */
   var friendMarkers = new Array; /*팝업창 띄울 때의 마커들 */
   var notFriendMarkers = new Array; /* 팝업창 띄울 때의 마커들 */
   var notFriendLocArr = [ /* 주변 회원들의 배열 */
@@ -147,6 +153,15 @@
     ['notFriend3', 37.499380, 127.027244],
     ['notFriend4', 37.497624, 127.028219]
   ];
+  var friendMarkers = new Array; <!-- 팝업창 띄울 때의 마커들 -->
+  var notFriendMarkers = new Array; <!-- 팝업창 띄울 때의 마커들  -->
+//  var notFriendLocArr = [ <!-- 주변 회원들의 배열 -->
+//    ['notFriend0', 37.496629, 127.027622],
+//    ['notFriend1', 37.495508, 127.026845],
+//    ['notFriend2', 37.497248, 127.026352],
+//    ['notFriend3', 37.499380, 127.027244],
+//    ['notFriend4', 37.497624, 127.028219]
+//  ];
   
   var map;
   var circle;
@@ -195,7 +210,7 @@
     for (var i = 0; i < friendLocArr.length; i++) {
       markFriends(i); /* 친구 마킹 */
     }
-    for (var i = 0; i < friendLocArr.length; i++) {
+    for (var i = 0; i < notFriendLocArr.length; i++) {
       markNotFriends(i); /* 주변 회원 마킹 */
     }
     markCircle(); /* 반경 렌더링 */
@@ -326,11 +341,11 @@ function radiusDistance(m) { /* 반경 렌더링 거리 조정 함수 */
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&callback=initMap" async defer></script>
 
 <script type="text/javascript">
-(function() {
-   $.getJSON('member/userInfo.do', {
-          nickname: sessionStorage.getItem('nickname')
-        }, function (result) {
-        });
-})();
+	(function() {
+	   $.getJSON('member/userInfo.do', {
+	          nickname: sessionStorage.getItem('nickname')
+	        }, function (result) {
+	        });
+	})();
   
 </script>

@@ -1,10 +1,10 @@
 define(function () {
   //페이지가 완전히 로드된 뒤에 실행
-  var app = angular.module('main', ['ngRoute', 'friendsFeed',  'myFriendList','myActivities', /*'mainMap'*/]);
-
+  var app = angular.module('main', ['ngRoute', 'friendsFeed', 'myFriendList','myActivities', 'customMyMap']);
   app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/home', {
-      templateUrl: 'templates/main.html'
+      templateUrl: 'templates/changeToMap.html',
+      controller: 'toggleToMapCtrl'
     });
 //    $routeProvider.when('/main_map', {
 //      templateUrl: 'templates/main_map.html'
@@ -12,9 +12,9 @@ define(function () {
     $routeProvider.when('/activity', {
       templateUrl: 'templates/my_activities.html'
     });
-//    $routeProvider.when('/myMap', {
-//      templateUrl: 'templates/myMap.html'
-//    });
+    $routeProvider.when('/myMap', {
+      templateUrl: 'templates/myMap.html'
+    });
     $routeProvider.otherwise({
       redirectTo: '/home'
     });
@@ -72,8 +72,7 @@ define(function () {
     };
   });
   
-  
-  //심심해 모달 directives
+  //심심해 모달 
   app.directive('boredModal', function () {
     return {
       restrict: 'E',
@@ -89,5 +88,25 @@ define(function () {
     };
   });
   
+  app.controller('toggleToMapCtrl', ['$http', '$scope', function($http, $scope) {
+      var parent_scope = $scope;
+      $scope.subview = 'main_html';
+      $scope.toggleMap = function() {
+          parent_scope.subview= 'map_html';
+          $scope.$parent.tests= test;    
+        
+        var test = [
+          {
+            name: 'haha'
+          },
+          {
+            name: 'hooo'
+          }
+        ];
+      }
+    
+      
+
+  }]);
 });
 

@@ -14,6 +14,8 @@ define(function() {
        parent.feeds = result.data;
     });
     
+    
+    
   }]);
   
   
@@ -31,8 +33,7 @@ define(function() {
         })
       
   }]);
-
- 
+  
 });
 
 

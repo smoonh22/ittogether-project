@@ -83,6 +83,10 @@
   <select id="getNickName" parameterType="string" resultMap="MemberMap">
   SELECT mno, nicknm FROM memb_t WHERE email=#{email}
   </select>
+  
+  <select id="getMembers" resultMap="MemberMap">
+    select nicknm, lat, lon, intro, mphoto from memb_t
+  </select>
 </mapper>
 
 

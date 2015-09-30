@@ -23,6 +23,7 @@ public class Member implements Serializable{
   protected String introduction;
   protected int    age;
   
+  
   public int getMno() {
     return mno;
   }
