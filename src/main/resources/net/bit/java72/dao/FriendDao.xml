@@ -28,7 +28,7 @@
     FROM FRD_T
     WHERE mno=#{values} and state=3
   </select>
-  
+  	
   <select id="getFRD" parameterType="int">
   	SELECT * 
   	FROM memb_t
@@ -47,9 +47,29 @@
   <delete id="deleteFRD" parameterType="FriendList">
   DELETE from FRD_T where mno=#{mno} and frdno=#{frdmno}
   </delete>
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 'all'.toString()">
+				and( btitle like concat( '%', #{keyword}, '%' )
+				or bcontent like concat( '%', #{keyword}, '%' ) 
+				or nickname	like concat( '%',#{keyword}, '%' ) 
+				or email like concat( '%',#{keyword}, '%' ))
+			</if>
+			<if test="searchType == 'btitle'.toString()">
+				and btitle like concat( '%', #{keyword}, '%' )
+			</if>
+			<if test="searchType == 'bcontent'.toString()">
+				and bcontent like concat( '%', #{keyword}, '%' )
+			</if>
+			<if test="searchType == 'nickname'.toString()">
+				and nickname like concat( '%', #{keyword}, '%' )
+			</if>
+			<if test="searchType == 'email'.toString()">
+				and email like concat( '%', #{keyword}, '%' )
+			</if>
+		</if>
+	</sql>
 </mapper>
-
-
 
 
 

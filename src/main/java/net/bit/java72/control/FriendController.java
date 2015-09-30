@@ -56,9 +56,18 @@ public class FriendController {
   return  result;
   }
   
+  @RequestMapping("/search")
+  public Object search(int typemno,String searchCnt){
+  Map<String,Object> result = new HashMap<String,Object>();
+   
+  
+  
+  return result;
+  }
+  
   @RequestMapping("/delete")
   public void delete(int frdmno,int mno) {
-    
+  
     FriendList friendList = new FriendList();
     FriendList friendList2 = new FriendList();
     

@@ -19,6 +19,7 @@ requirejs.config({
         'metisMenu': 'bower_components/metisMenu/metisMenu',
         'angular-route': 'bower_components/angular-route/angular-route',
         'myFriendList': 'js/app/myFriendList',
+        'angular-masonry-directive' : 'bower_components/angular-masonry-directive/angular-masonry-directive',
         //컨트롤러
         'main': 'js/app/main',
         'friendsFeed': 'js/app/friendsFeed',
@@ -46,13 +47,16 @@ requirejs.config({
       deps:['jquery']
     },
     'main': {
-      deps: ['angular-route', 'friendsFeed', 'bootstrap.min', 'tour','myFriendList','myActivities']
+      deps: ['angular-route', 'friendsFeed', 'bootstrap.min', 'tour','myFriendList','myActivities','angular-masonry-directive']
     },
     'friendsFeed': {
       deps: ['angular']
     },
     'myActivities': {
-      deps: ['angular']
+      deps: ['angular','angular-masonry-directive']
+    },
+    'angular-masonry-directive' : {
+      deps:['angular','jquery']
     },
 /*    'main_map': {
       deps: ['angular']

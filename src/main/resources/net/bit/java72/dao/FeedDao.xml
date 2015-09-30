@@ -70,6 +70,29 @@
   ORDER by cre_dt desc;
   </select>
  
+
+<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 'all'.toString()">
+				and( btitle like concat( '%', #{keyword}, '%' )
+				or bcontent like concat( '%', #{keyword}, '%' ) 
+				or nickname	like concat( '%',#{keyword}, '%' ) 
+				or email like concat( '%',#{keyword}, '%' ))
+			</if>
+			<if test="searchType == 'btitle'.toString()">
+				and btitle like concat( '%', #{keyword}, '%' )
+			</if>
+			<if test="searchType == 'bcontent'.toString()">
+				and bcontent like concat( '%', #{keyword}, '%' )
+			</if>
+			<if test="searchType == 'nickname'.toString()">
+				and nickname like concat( '%', #{keyword}, '%' )
+			</if>
+			<if test="searchType == 'email'.toString()">
+				and email like concat( '%', #{keyword}, '%' )
+			</if>
+		</if>
+</sql>
 </mapper>
 
 

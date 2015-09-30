@@ -33,8 +33,89 @@
           
           <li class="dropdown"><a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> 내 친구들</a>
              <ul class="dropdown-menu" aria-labelledby="dLabel">   
-               <li >
-               <div class="panel panel-primary">
+<ul class="nav nav-tabs" role="tablist">
+   <li role="presentation" class="active"><a href="#findFriend" aria-controls="home" role="tab" data-toggle="tab">친구 검색</a></li>
+    <li role="presentation"><a href="#myFriendList" aria-controls="fflist" role="tab" data-toggle="tab">친구 목록</a></li>
+    <li role="presentation"><a href="#myApplyList" aria-controls="aflist" role="tab" data-toggle="tab">친구 요청</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+     <div role="tabpanel" class="tab-pane active" id="findFriend">
+		          <div class="panel panel-success">
+                 <div class="panel-heading">
+                   <h3 class="panel-title">친구 검색</h3>
+                  		<select class='searchType' ng-model='typeBox'>
+  							<option value="1">이름</option>
+  							<option value="2">닉네임</option>
+  							<option value="3">이메일</option>
+						</select>
+						<input type="text" ng-model='searchQuery'>
+						<button class='searchBtn' ng-click='search(typeBox,searchQuery)'>검색</button>
+                 </div>
+                 <div class="panel-body" >
+                       <div class='row'  ng-repeat-start="frdList in mFCtrl.frdLists">
+                      <div class='col-md-4' >
+                         <img class="img-circle header-image" src="images/{{frdList.profilePicture}}"/>
+                      </div>
+                      <div class='col-md-6'>
+                         <table>
+                         <br>
+                            <tr>	
+                               <td>이름 : {{frdList.name}}</td>
+                            </tr>
+                            <tr>
+                               <td>주소 : {{frdList.address}}</td>
+                            </tr>
+                            <tr>
+                               <td>이메일 : {{frdList.email}}</td>
+                            </tr>
+                         </table>
+                      </div>
+                      <div class='col-md-2' >
+                      <br><br>
+                      <button href='#' ng-click='delfrd(frdList.mno)' class='delfrdbtn'>삭제</button>
+                      </div>
+                   </div>
+                   <div  ng-repeat-end></div>
+                 </div >
+            </div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="myFriendList">
+  		<div class="panel panel-info">
+                 <div class="panel-heading">
+                   <h3 class="panel-title">친구 목록</h3>
+                 </div>
+                 <div class="panel-body" >
+                       <div class='row'  ng-repeat-start="frdList in mFCtrl.frdLists">
+                      <div class='col-md-4' >
+                         <img class="img-circle header-image" src="images/{{frdList.profilePicture}}"/>
+                      </div>
+                      <div class='col-md-6'>
+                         <table>
+                         <br>
+                            <tr>	
+                               <td>이름 : {{frdList.name}}</td>
+                            </tr>
+                            <tr>
+                               <td>주소 : {{frdList.address}}</td>
+                            </tr>
+                            <tr>
+                               <td>이메일 : {{frdList.email}}</td>
+                            </tr>
+                         </table>
+                      </div>
+                      <div class='col-md-2' >
+                      <br><br>
+                      <button href='#' ng-click='delfrd(frdList.mno)' class='delfrdbtn'>삭제</button>
+                      </div>
+                   </div>
+                   <div  ng-repeat-end></div>
+                 </div >
+            </div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="myApplyList">
+    	             <div class="panel panel-primary">
                  <div class="panel-heading">
                    <h3 class="panel-title">요청 목록</h3>
                  </div>
@@ -89,40 +170,7 @@
                    </div>
                  </div>
             </div>
-               </li>
-               <li>
-                     <div class="panel panel-info">
-                 <div class="panel-heading">
-                   <h3 class="panel-title">친구 목록</h3>
-                 </div>
-                 <div class="panel-body" >
-                       <div class='row'  ng-repeat-start="frdList in mFCtrl.frdLists">
-                      <div class='col-md-4' >
-                         <img class="img-circle header-image" src="images/{{frdList.profilePicture}}"/>
-                      </div>
-                      <div class='col-md-6'>
-                         <table>
-                         <br>
-                            <tr>	
-                               <td>이름 : {{frdList.name}}</td>
-                            </tr>
-                            <tr>
-                               <td>주소 : {{frdList.address}}</td>
-                            </tr>
-                            <tr>
-                               <td>이메일 : {{frdList.email}}</td>
-                            </tr>
-                         </table>
-                      </div>
-                      <div class='col-md-2' >
-                      <br><br>
-                      <button href='#' ng-click='delfrd(frdList.mno)' class='delfrdbtn'>삭제</button>
-                      </div>
-                   </div>
-                   <div  ng-repeat-end></div>
-                 </div >
-            </div>
-               </li>
+    </div>
              </ul>
           </li>
           <li><a data-toggle="modal" href="#infoModal"><span class="glyphicon glyphicon-cog"></span> 내 정보</a></li>

@@ -27,12 +27,11 @@ public class FeedController {
   public Object list(int mno) {
     
   Map<String,Object> result = new HashMap<String,Object>();
-  
-  
-  result.put("data",feedService.list(mno));
-//  HttpHeaders headers = new HttpHeaders();
-//  headers.add("Content-type"
-//      , "text/plain;charset=UTF-8");
+  try {
+    
+    result.put("data",feedService.list(mno));
+  } catch (Exception e) {
+  }
   
   return result;  
  
@@ -41,10 +40,6 @@ public class FeedController {
   @RequestMapping("/myActivity")
   public Object feedlist() {  
   Map<String,Object> result = new HashMap<String,Object>();
-//  HttpHeaders headers = new HttpHeaders();
-//  headers.add("Content-type"
-//      , "text/plain;charset=UTF-8");
-//  
   
   result.put("activity", feedService.myActivityList());
   
@@ -53,32 +48,34 @@ public class FeedController {
   
   @RequestMapping("/noneFriendFeed")
   public Object nonelist(int mno) {
-    
   Map<String,Object> result = new HashMap<String,Object>();
-  
-  Member myInfo = memberService.getOne(mno);
-  double lat = Double.parseDouble(myInfo.getLatitude());
-  double lon = Double.parseDouble(myInfo.getLongitude());
-  
-  List<Member> distanceList = memberService.getlatlon(mno);
-  List<FriendFeed> frdList = new ArrayList<>();
-  for(Member member : distanceList){
-    double lat2 = Double.parseDouble(member.getLatitude());
-    double lon2 = Double.parseDouble(member.getLongitude());
     
-    System.out.println("위도 : " + lat2 );
-    System.out.println("경도 : " + lon2 );
-    System.out.println(member.getMno());
-    double distance = CalcDistance(lat,lon,lat,lon2);
-    System.out.println("거리 : " + distance);
-    if(distance <= 1000){
-      FriendFeed feeds = feedService.noneFriendFeed(member.getMno());
-      if( feeds != null){
-        frdList.add(feeds);
+  try {
+    
+    Member myInfo = memberService.getOne(mno);
+    double lat = Double.parseDouble(myInfo.getLatitude());
+    double lon = Double.parseDouble(myInfo.getLongitude());
+    System.out.println("나의 위도 : " + lat + " 나의 경도 : " + lon);
+    List<Member> distanceList = memberService.getlatlon(mno);
+    List<FriendFeed> frdList = new ArrayList<>();
+    for(Member member : distanceList){
+      double lat2 = Double.parseDouble(member.getLatitude());
+      double lon2 = Double.parseDouble(member.getLongitude());
+      
+      System.out.println("위도 : " + lat2 );
+      System.out.println("경도 : " + lon2 );
+      System.out.println(member.getMno());
+      double distance = CalcDistance(lat,lon,lat2,lon2);
+      System.out.println("거리 : " + distance);
+      if(distance <= 1000){
+        FriendFeed feeds = feedService.noneFriendFeed(member.getMno());
+        if( feeds != null){
+          frdList.add(feeds);
+        }
       }
-    }
-  }
-  result.put("data", frdList);
+    }  
+    result.put("data", frdList);
+  } catch (Exception e) {}
 //  HttpHeaders headers = new HttpHeaders();
 //  headers.add("Content-type"
 //      , "text/plain;charset=UTF-8");

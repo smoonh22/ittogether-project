@@ -19,15 +19,12 @@ define(function() {
   
   //비친구 최근 게시물
   app.controller('noneFriendFeedCtrl',['$http', function($http) {
-    console.log("하하하");
     var parent = this;
     $http.get('feed/noneFriendFeed.do',{
       params: {
         mno: sessionStorage.getItem('mno')
       }
       }).success(function(result){
-        console.log("db연결성공");
-        console.log(result.data);
           parent.nfeeds = result.data
         })
       

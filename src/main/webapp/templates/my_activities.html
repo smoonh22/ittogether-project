@@ -1,4 +1,4 @@
-  <div id='moim-Img'>
+  <div id='moim-Img' ng-controller="activityCtrl as MCtrl">
    <div class="span6 col-sm-6  editorial-moim-container">
       <div class="editorial-cell">
          <h1 class="editorial-title">내 모든 활동들을 볼수 있습니다</h1>
@@ -56,10 +56,10 @@
          </div>
       </div>
    </div>
-
-   <div class='row'>
+   
+    <div class='row'>
       <div ng-controller="activityCtrl as MCtrl">
-         <div ng-repeat="myact in MCtrl.activities">
+         <div ng-repeat-start="myact in MCtrl.activities">
             <div id="myactfeed" class="col-md-4">
                <div class="masonry_title">
                   <div class="panel-heading" id='category-color-{{myact.category}}'></div>
@@ -96,6 +96,7 @@
                </div>
             </div>
          </div>
+         <div ng-repeat-end></div>
       </div>
    </div>
    </div>

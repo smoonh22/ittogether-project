@@ -4,7 +4,6 @@ define(function() {
 app.controller('myFriendCtrl',['$http','$scope', function($http,$scope) {
     var parent_scope = this;
     var data = $scope.delfrdmno;
-    console.log(data);
     $http.get('frd/list.do',
          {
         params: {
@@ -26,16 +25,25 @@ app.controller('myFriendCtrl',['$http','$scope', function($http,$scope) {
         console.log("failed :(", failure);
       });
     }*/
-    
+ $scope.search = function(typeBox, searchQuery) {
+   $http.get('frd/search.do',{params : {typemno : typeBox, searchCnt : searchQuery}}).success(function(result){
+     console.log(result.searchList);
+     parent_scope.searchLists = result.searchList;
+   })
+ }
   
  $scope.delfrd = function(mno){
    $http.get('frd/delete.do',{params : { frdmno : mno,  mno: sessionStorage.getItem('mno')}}).success(function(result){
        alert("삭제 되었습니다!");
-     })
+
+/*       window.location.reload();*/
+       })
    };
    $scope.applyfrd = function(mno){
      $http.get('frd/apply.do',{params : { frdmno : mno,  mno: sessionStorage.getItem('mno')}}).success(function(result){
        alert("수락 되었습니다!");
+   
+/*       window.location.reload();*/
      })
    };
   }]);

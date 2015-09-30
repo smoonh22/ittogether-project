@@ -45,6 +45,7 @@ public class MemberServiceImpl implements MemberService {
   }
   @Override
   public Member getUserInfo(String nickname) {
+    System.out.println("이씨발무슨에러야? :" + nickname);
     return memberDao.getUserInfo(nickname);
   }
   @Override
