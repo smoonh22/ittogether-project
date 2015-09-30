@@ -120,7 +120,7 @@
   //json형식으로 받아온 데이터를 뿌려줌
   (function() {
   $.getJSON('member/getMembers.do', function(results) {
-    console.log(results.data);
+    console.log(results.data.length);
      for (var i = 0 ; i < results.data.length; i ++) {
        var tempArr = [results.data[i].nickname, Number(results.data[i].latitude), Number(results.data[i].longitude)];
         notFriendLocArr.push(tempArr);
@@ -158,6 +158,8 @@
   var myInfoWindow = $('#myInfoWindow');
   var myBalloon = myInfoWindow[0].innerHTML;
   
+  var myBalloon2 = "<div>" + 'abc' + "</div>"
+  
   var friendInfoWindow = $('#friendInfoWindow');
   var friendBalloon = friendInfoWindow[0].innerHTML;
   
@@ -190,6 +192,7 @@
     friendWindow = new google.maps.InfoWindow({ /* 팝업창 생성 */
       content: friendBalloon
     });
+   
     notFriendWindow = new google.maps.InfoWindow({ /* 팝업창 생성 */
       content: notFriendBalloon
     });

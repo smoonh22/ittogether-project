@@ -24,7 +24,8 @@ define(function() {
     var parent = this;
     $http.get('feed/noneFriendFeed.do',{
       params: {
-        mno: sessionStorage.getItem('mno')
+        mno: sessionStorage.getItem('mno'),
+        distance: 
       }
       }).success(function(result){
         console.log("db연결성공");
