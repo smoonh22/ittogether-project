@@ -84,9 +84,36 @@
   SELECT mno, nicknm FROM memb_t WHERE email=#{email}
   </select>
   
-  <select id="getMembers" resultMap="MemberMap">
-    select nicknm, lat, lon, intro, mphoto from memb_t
+  
+  <select id="getMyLoc" parameterType="int" resultMap="MemberMap">
+  SELECT 
+    mno,
+    nicknm,
+    lat,
+    lon,
+    intro,
+    mphoto
+  FROM memb_t 
+  WHERE mno=#{mno};
   </select>
+  
+  <select id="getFriends" parameterType="int" resultMap="MemberMap">
+    SELECT
+      t1.nicknm, 
+      t1.lat, 
+      t1.lon, 
+      t1.intro, 
+      t1.mphoto 
+    FROM memb_t t1 JOIN frd_t t2 using(mno)
+    WHERE frdno=#{frdno} and state=2;
+  </select>
+  
+  <select id="getMembers" parameterType="int" resultMap="MemberMap">
+	  SELECT * FROM memb_t m
+	  WHERE NOT EXISTS (SELECT null FROM frd_t f WHERE f.mno=m.mno)
+	  AND NOT EXISTS (SELECT null FROM frd_t f WHERE m.mno=#{mno});
+  </select>
+  
 </mapper>
 
 

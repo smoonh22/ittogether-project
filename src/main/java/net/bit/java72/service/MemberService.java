@@ -15,7 +15,9 @@ public interface MemberService {
   Member getNickName(String email);
   Member getOne(int mno);
   List<Member> getlatlon(int mno);
-  List<Member> getMembers();  
+  List<Member> getMyLoc(int mno);
+  List<Member> getFriends(int frdno);
+  List<Member> getMembers(int frdno);  
  
 }
 

@@ -31,9 +31,6 @@ define(function () {
         
         $.getJSON('member/userInfo.do', {
           nickname: sessionStorage.getItem('nickname')
-//          name: sessionStorage.getItem('name'),
-//          latitude: sessionStorage.getItem('nickname'),
-//          latitude: sessionStorage.getItem('latitude')
         }, function (result) {
           parent_scope.userDatas = result.data;
         });

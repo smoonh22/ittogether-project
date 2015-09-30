@@ -27,8 +27,8 @@ define(function() {
         mno: sessionStorage.getItem('mno')
       }
       }).success(function(result){
-        console.log("db연결성공");
-        console.log(result.data);
+//        console.log("db연결성공");
+//        console.log(result.data);
           parent.nfeeds = result.data
         })
       

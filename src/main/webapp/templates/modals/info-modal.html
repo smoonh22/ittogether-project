@@ -90,8 +90,8 @@ function initAutocomplete() { /* 초기화 함수*/
   
   myHome[0] = parseFloat($('#latitude').val());
   myHome[1] = parseFloat($('#longitude').val());
-console.log("latitude:  " + myHome[0] + " (myHome[0])");
-console.log("longitude: " + myHome[1] + " (myHome[1])");
+//console.log("myHomeLatitude:  " + myHome[0] + " (myHome[0])");
+//console.log("myHomeLongitude: " + myHome[1] + " (myHome[1])");
   
   map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: myHome[0], lng: myHome[1] },
