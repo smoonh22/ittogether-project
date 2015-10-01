@@ -37,6 +37,12 @@ requirejs.config({
     'angular-route': {
       deps: ['angular']
     },
+    'jquery_ui_widget' : {
+      deps:['jquery-iframe-transport']
+    },
+    'jquery-iframe-transport': {
+      deps: ['jquery-fileupload']
+    },
     'tour': {
       deps:['bootstrap-tour']
     },
@@ -47,7 +53,7 @@ requirejs.config({
       deps:['jquery']
     },
     'main': {
-      deps: ['angular-route', 'friendsFeed', 'bootstrap.min', 'tour','myFriendList','myActivities','mainMap', 'customMyMap', 'jquery_ui_widget', 'jquery-iframe-transport', 'jquery-fileupload']
+      deps: ['angular-route', 'friendsFeed', 'bootstrap.min', 'tour','myFriendList','myActivities','mainMap', 'customMyMap', 'jquery_ui_widget']
     },
     'friendsFeed': {
       deps: ['angular']
@@ -63,9 +69,6 @@ requirejs.config({
     },
     'myFriendList': {
       deps: ['angular']
-    },
-    'info-modal': {
-      deps: ['jquery_ui_widget', 'jquery-iframe-transport', 'jquery-fileupload']
     }
   }
   

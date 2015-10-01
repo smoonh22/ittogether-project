@@ -34,6 +34,7 @@ define(function () {
         }, function (result) {
           parent_scope.userDatas = result.data;
         });
+        
          $('#save-changes').click(function (event) {
             var radio = $("input:radio[name='radioButton']:checked").val();
            
@@ -63,6 +64,20 @@ define(function () {
               }
            });
         });
+        
+        $(function () {
+$(function () {
+    $('#fileupload1').fileupload({
+        dataType: 'json',
+        done: function (e, data) {
+            $.each(data.result.data, function (index, file) {
+                $('#profile-img').attr('src', file.url);
+            });
+        }
+    });
+});
+});
+      
       },
       controllerAs: 'infoCtrl',
       templateUrl: 'templates/modals/info-modal.html'
