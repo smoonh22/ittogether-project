@@ -33,8 +33,10 @@
 
   <select id="list" resultMap="FriendFeedMap" parameterType="int">
   select 
+   t1.nicknm,
    t1.NAME,
    t1.MPHOTO,
+   t2.FNO,
    t2.CATEGRY,
    t2.MAX_HEADCNT,
    t2.CNT,
@@ -51,7 +53,9 @@
   <select id="noneFriendFeed" resultMap="FriendFeedMap" parameterType="int">
   select 
    t1.nicknm,
+   t1.name,
    t1.MPHOTO,
+   t2.fno,
    t2.CATEGRY,
    t2.MAX_HEADCNT,
    t2.CNT,
@@ -70,6 +74,25 @@
   ORDER by cre_dt desc;
   </select>
  
+ <select id="getDetail" resultMap="FriendFeedMap" parameterType="int">
+  select 
+   t1.nicknm,
+   t1.name,
+   t1.MPHOTO,
+   t2.FNO,
+   t2.CATEGRY,
+   t2.MAX_HEADCNT,
+   t2.CNT,
+   t2.MEET_TIME,
+   t2.CONTNT,
+   t2.cre_dt,
+   t2.TITLE
+   from memb_t t1 inner join feed_t t2 
+   on t2.fno= #{value} and t1.mno = t2.mno
+  </select>
+   <insert id="friendJoinActivity" parameterType="map">
+      insert into joinedfrd_t(mno, fno) values(#{mno}, #{fno})
+  </insert>
 </mapper>
 
 

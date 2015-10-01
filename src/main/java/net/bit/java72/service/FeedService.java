@@ -10,6 +10,8 @@ public interface FeedService {
   List<FriendFeed> list(int mno);
   List<Feed> myActivityList();
   List<FriendFeed> noneFriendFeed(int mno);
+  FriendFeed getDetail(int fno);
+  int friendJoinActivity(int mno, int fno);
   
 }
 

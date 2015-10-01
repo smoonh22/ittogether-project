@@ -23,11 +23,11 @@
   <show-nav></show-nav>
   <!---->
   <div ng-view></div>
-  
- 
 
 
-  
+
+
+
 
   <!-- 개인정보 모달 창  -->
   <info-modal></info-modal>
@@ -35,12 +35,32 @@
   <!--  심심해 모달창  -->
   <bored-modal></bored-modal>
   </div>
+
+
+  <div class="panel panel-info chat-panel">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Collapsible Group Item #2
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body chat-body">
+      <ul id="messages"></ul>
+<form action="">
+<input id="m" autocomplete="off" /><button>Send</button>
+</form>
+      </div>
+    </div>
+  </div>
   <script data-main='app.js' src='bower_components/requirejs/require.js'></script>
-<!--
+  
+  <!--
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4" async defer>
 </script>
 -->
-    
+
 </body>
 
 </html>

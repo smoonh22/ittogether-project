@@ -80,20 +80,8 @@ define(function () {
       $scope.subview = 'main_html';
       $scope.toggleMap = function() {
           parent_scope.subview= 'map_html';
-          $scope.$parent.tests= test;    
-        
-        var test = [
-          {
-            name: 'haha'
-          },
-          {
-            name: 'hooo'
-          }
-        ];
+          
       }
-    
-      
-
   }]);
   
 //  app.controller('hahaCtrl', function() {
@@ -105,7 +93,5 @@ define(function () {
 //    google.maps.event.trigger(map, "resize");
 //  });
   
-  
-  
-  
+
 });

@@ -59,11 +59,7 @@ public class FeedController {
     double lat2 = Double.parseDouble(member.getLatitude());
     double lon2 = Double.parseDouble(member.getLongitude());
     
-    System.out.println("위도 : " + lat2 );
-    System.out.println("경도 : " + lon2 );
-    System.out.println(member.getMno());
-    double distance = CalcDistance(lat,lon,lat,lon2);
-    System.out.println("거리 : " + distance);
+    double distance = CalcDistance(lat,lon,lat2,lon2);
     if(distance <= 1000){
       List<FriendFeed> feeds = feedService.noneFriendFeed(member.getMno());
       if( feeds != null){
@@ -94,6 +90,33 @@ public class FeedController {
 
       return  Math.round(Math.round(ret) / 1000);
   }
+  
+  
+  //최근 피드 클릭시 디테일 정보 
+  @RequestMapping("/detail")
+  public Object detail(int fno) throws Exception {
+    System.out.println(fno + "jjjjjj");
+    Map<String,Object> result = new HashMap<String,Object>();
+    FriendFeed friendFeed = feedService.getDetail(fno);
+    result.put("detail", friendFeed);
+   
+    return result;
+  }
+   
+  
+  @RequestMapping("/friendjoin")
+  public Object friendJoin(int mno, int fno) throws Exception {
+    System.out.println(fno + " : :" + mno);
+    Map<String,Object> result = new HashMap<String,Object>();
+    int count = feedService.friendJoinActivity(mno, fno);
     
+    if (count > 0) {
+      result.put("data", "success");
+    } else {
+      result.put("data", "failure");
+    }
+   
+    return result;
+  }
   }
 

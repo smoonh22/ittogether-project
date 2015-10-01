@@ -1,3 +1,43 @@
+-- 모임에 참여했을 때를 위한 테이
+-- 참여친구
+DROP TABLE IF EXISTS JoinedFrd_T RESTRICT;
+
+-- 참여친구
+CREATE TABLE JoinedFrd_T (
+  FNO INTEGER NOT NULL COMMENT '글번호', -- 글번호
+  MNO INTEGER NOT NULL COMMENT '회원번호' -- 회원번호
+)
+COMMENT '참여친구';
+
+-- 참여친구
+ALTER TABLE JoinedFrd_T
+  ADD CONSTRAINT PK_JoinedFrd_T -- 참여친구 Primary key
+    PRIMARY KEY (
+      FNO, -- 글번호
+      MNO  -- 회원번호
+    );
+
+-- 참여친구
+ALTER TABLE JoinedFrd_T
+  ADD CONSTRAINT FK_FEED_T_TO_JoinedFrd_T -- FEED_T -> 참여친구
+    FOREIGN KEY (
+      FNO -- 글번호
+    )
+    REFERENCES FEED_T ( -- FEED_T
+      FNO -- 글번호
+    );
+
+-- 참여친구
+ALTER TABLE JoinedFrd_T
+  ADD CONSTRAINT FK_MEMB_T_TO_JoinedFrd_T -- MEMB_T -> 참여친구
+    FOREIGN KEY (
+      MNO -- 회원번호
+    )
+    REFERENCES MEMB_T ( -- MEMB_T
+      MNO -- 회원번호
+    );
+-- 끝
+
 insert into frd_t (frdno, mno, state, frd_dt) values(1,2,1,now());
 insert into frd_t (frdno, mno, state, frd_dt) values(2,1,1,now());
 insert into frd_t (frdno, mno, state, frd_dt) values(2,3,2,now());

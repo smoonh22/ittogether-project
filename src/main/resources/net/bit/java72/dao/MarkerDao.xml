@@ -18,5 +18,8 @@
     select * from marker_t
     where mno = 1;
   </select>
+  
+  
+
     
 </mapper>

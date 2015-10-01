@@ -5,8 +5,6 @@
     </div>
   </div>
   
- 
-<div class='row'>
   <div class="col-md-8" id='left-section'>
     <div id="left-feed-title">친구들의 활동</div>
     <div id='left-feed' ng-controller="friendFeedCtrl as ffCtrl">
@@ -27,6 +25,7 @@
 									class="img-circle"></span>
 							</div>
 							</div>
+           <a href="#detailModal" data-toggle="modal" data-fno="{{feed.fno}}" class="detail-view">
 							<div class="col-md-6">
 							<div class="content-div">
 								<p id="user-name">{{feed.name}}</p>
@@ -40,9 +39,12 @@
 										{{feed.createDate}}</small>
 								</h5>
 								<hr>
-								<div id="unfriend-content">{{feed.content}}</div>
+      
+								<div id="unfriend-content">{{feed.title}}</div>
+		          
 							</div>
 							</div>
+		          </a>
 							<div class="col-md-2"></div>
 						</div>
 					</div>
@@ -71,6 +73,7 @@
 									class="img-circle">
 							</div>
 							</div>
+							<a href="#detailModal" data-toggle="modal" data-fno="{{nfeed.fno}}" class="detail-view">
 							<div class="col-md-9">
 							<div class="content-div">
 								<p id="user-name">{{nfeed.name}}</p>
@@ -84,9 +87,10 @@
 										{{nfeed.pasttime}}</small>
 								</h5>
 								<hr>
-								<div id="unfriend-content">{{nfeed.content}}</div>
+								<div id="unfriend-content">{{nfeed.title}}</div>
 							</div>
 							</div>
+							</a>
 						</div>
 					</div>
 				</div>
@@ -94,3 +98,68 @@
 				</div>
 			</div>
 			</div>
+      
+
+<!-- modal start -->
+<div id="detailModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="detail-title"></h4>
+        <input type="hidden" id="detail-number"/>
+      </div>
+      <div class="modal-body">
+        <form role="form">
+          <div class="form-group">
+            <label>닉네임</label>
+            <input class="form-control" id="detail-nickname">
+          </div>
+          <div class="form-group">
+            <label>이름</label>
+            <input class="form-control" value="" id="detail-name">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="join-btn">참여하기</button>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+</div>
+
+
+<script type="text/javascript">
+   $(document).on('click', '.detail-view', function (e) {
+    getFno = $(this).attr('data-fno');
+     $.getJSON('feed/detail.do', 
+        {
+          fno: getFno
+        }, function(result) {
+        //계속 쭉 해라 나머지 데이터들  
+       $('#detail-title').text(result.detail.title);
+       $('#detail-number').val(result.detail.fno);
+     });
+   });
+  
+  $('#join-btn').on('click', function() {
+      console.log(sessionStorage.getItem('mno'));
+    $.ajax('feed/friendjoin.do', {
+        method: 'get',
+        dataType: 'json',
+        data : {
+              mno: sessionStorage.getItem('mno'),
+              fno:  $('#detail-number').val()
+              },
+        success: function(result) {
+            if ( result.data === 'success' ) {
+                alert('참여 성공');
+              } 
+          }
+      });
+    });
+</script>

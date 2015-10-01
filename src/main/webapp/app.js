@@ -14,6 +14,7 @@ requirejs.config({
         'bootstrap.min': 'bower_components/bootstrap/dist/js/bootstrap',
         'bootstrap-tour': 'bower_components/bootstrap-tour/build/js/bootstrap-tour',
         'angular-route': 'bower_components/angular-route/angular-route',
+        
         //컨트롤러
         'main': 'js/app/main',
         'friendsFeed': 'js/app/friendsFeed',

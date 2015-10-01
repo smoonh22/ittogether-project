@@ -15,6 +15,4 @@ define(function() {
         latitude: '123.232',
         longitude: '123, 23'
     };
-  console.log(data.nickname+
-             'ddd');
 });
