@@ -158,6 +158,8 @@ function initAutocomplete() { /* 초기화 함수*/
     map.setZoom(18);
     $("#latitude").val(markers[0].position.H); /* 위도 경도 */
     $("#longitude").val(markers[0].position.L);
+    console.log(markers[0].position.H);
+    console.log(markers[0].position.L);
 
     google.maps.event.addListener(map, 'click', function (event) {
       addMarker(event.latLng, map); /* 마커 찍어주는 함수 */
@@ -167,6 +169,8 @@ function initAutocomplete() { /* 초기화 함수*/
       markers[0].setPosition(location);
       $("#latitude").val(markers[0].position.H); /* 위도 경도 */
       $("#longitude").val(markers[0].position.L);
+      console.log(markers[0].position.H);
+      console.log(markers[0].position.L);
     }
   });
 

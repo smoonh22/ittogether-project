@@ -24,10 +24,12 @@ define(function () {
   
   //개인정보 모달 directives
   app.directive('infoModal', function () {
+    
     return {
       restrict: 'E',
       controller: function () {
         var parent_scope = this;
+        
         $.getJSON('member/userInfo.do', {
           nickname: sessionStorage.getItem('nickname')
         }, function (result) {
@@ -35,6 +37,8 @@ define(function () {
         });
         
          $('#save-changes').click(function (event) {
+            var radio = $("input:radio[name='radioButton']:checked").val();
+           
            $.ajax('member/updateUser.do',
               {
                method: 'POST',
@@ -44,21 +48,43 @@ define(function () {
                   name: $('#name').val(), 
                   email: $('#email').val(),
                   password: $('#password').val(),
-                  address: $('#address').val(),
+                  address: $('#pac-input').val(),
+                  latitude: $('#latitude').val(),
+                  longitude: $('#longitude').val(),
+                  introduction: $('#introduction').val(),
+                  age: $('#age').val(),
+                  hobby: $('#hobby').val(),
+                  hometown: $('#hometown').val(),
+                  sex: radio
                },
               success: function(result){
                  if (result.data == 'success') {
-                   alert('성공적으로 변경되었습니다');
                    $('#infoModal').modal('toggle');
+                   console.log('성공적으로 변경되었습니다');
                  }
               }
            });
         });
+        
+        $(function () {
+$(function () {
+    $('#fileupload1').fileupload({
+        dataType: 'json',
+        done: function (e, data) {
+            $.each(data.result.data, function (index, file) {
+                $('#profile-img').attr('src', file.url);
+            });
+        }
+    });
+});
+});
+      
       },
       controllerAs: 'infoCtrl',
       templateUrl: 'templates/modals/info-modal.html'
     };
   });
+  
   //심심해 모달 
   app.directive('boredModal', function () {
     return {
@@ -75,7 +101,6 @@ define(function () {
     };
   });
   
-  
   app.controller('toggleToMapCtrl', ['$http', '$scope', function($http, $scope) {
       var parent_scope = $scope;
       $scope.subview = 'main_html';
@@ -84,15 +109,5 @@ define(function () {
           
       }
   }]);
-  
-//  app.controller('hahaCtrl', function() {
-//    console.log('HAAAACTl');
-//    $scope.$apply.test ="hahahah";
-//  });
-  // 모달창에서 구글맵 나오게 trigger
-//  $('#infoModal').on("shown.bs.modal", function () {
-//    google.maps.event.trigger(map, "resize");
-//  });
-  
-
 });
+

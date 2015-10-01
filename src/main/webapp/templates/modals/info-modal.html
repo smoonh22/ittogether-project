@@ -1,3 +1,7 @@
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&libraries=places&callback=initAutocomplete" async defer></script>
+
+<script type="text/javascript" src="js/app/info-modal.js"></script>
+
 <!-- modal start -->
 <div id="infoModal" class="modal fade">
   <div class="modal-dialog">
@@ -8,55 +12,70 @@
       </div>
       <div class="modal-body">
         <form role="form">
-          <div class="form-group">
+            <div class="profile-info-div2">
+              <img id="profile-img" class='img-circle' src='{{infoCtrl.userDatas.profilePicture}}' />
+            <div class="form-group my-new">
+              <div>
+                <span class="btn btn-success fileinput-button profile-info-span2">
+                  <i class="glyphicon glyphicon-plus"></i>
+                  <span>파일 찾기</span>
+                  <input id="fileupload1" type="file" name="file" data-url="file/upload.do" multiple>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group info-div">
             <label>닉네임</label>
             <input class="form-control" value="{{infoCtrl.userDatas.nickname}}" id="nickname">
           </div>
-          <div class="form-group">
+          <div class="form-group info-div">
             <label>이름</label>
             <input class="form-control" value="{{infoCtrl.userDatas.name}}" id="name">
           </div>
-          <div class="form-group">
+          <div class="form-group info-div">
             <label>비밀번호</label>
             <input type="password" class="form-control" value="{{infoCtrl.userDatas.password}}" id="password">
           </div>
-          <div class="form-group">
+          <div class="form-group info-div">
             <label>이메일</label>
             <input class="form-control" readonly value="{{infoCtrl.userDatas.email}}" id="email">
           </div>
           <div class="form-group">
-            <label>프로필사진</label>
-            <input type="file">
-          </div>
+              <label>집 주소(주소 입력 후 핀 조정으로 상세하게 지도에 위치 설정을 해주세요)</label>
+              <input id="pac-input" class="controls" type="text" value="{{infoCtrl.userDatas.address}}">
+            <div>
+              <div id="map"></div>
+              </div>
+              <div hidden="true">
+                <input type="text" id="latitude" value="{{infoCtrl.userDatas.latitude}}">
+                <input type="text" id="longitude" value="{{infoCtrl.userDatas.longitude}}">
+              </div>
+            </div>
           <div class="form-group">
             <label>내 소개</label>
-            <textarea class="form-control" rows="3" id="introduction"></textarea>
+            <input class="form-control" id="introduction" value="{{infoCtrl.userDatas.introduction}}">
           </div>
           <div class="form-group">
             <label>성별</label>
             <label class="radio-inline">
-              <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" checked>남자
+              <input type="radio" name="radioButton" id="r1" value="1" ng-model="infoCtrl.userDatas.sex">남자
             </label>
             <label class="radio-inline">
-              <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">여자
+              <input type="radio" name="radioButton" id="r2" value="2" ng-model="infoCtrl.userDatas.sex">여자
             </label>
           </div>
           <div class="form-group">
             <label>나이</label>
-            <input class="form-control" id="age">
+            <input class="form-control" id="age" value="{{infoCtrl.userDatas.age}}">
           </div>
           <div class="form-group">
             <label>취미</label>
-            <br>
-            <input class="form-control" id="hobby1">
-            <input class="form-control" id="hobby2">
-            <input class="form-control" id="hobby3">
+            <input class="form-control" id="hobby" value="{{infoCtrl.userDatas.hobby}}">
           </div>
           <div class="form-group">
             <label>고향</label>
-            <input class="form-control" id="hometown">
+            <input class="form-control" id="hometown" value="{{infoCtrl.userDatas.hometown}}">
           </div>
-
         </form>
       </div>
       <div class="modal-footer">
@@ -69,3 +88,109 @@
   </div>
   <!-- /.modal -->
 </div>
+
+
+<script>
+function initAutocomplete() { /* 초기화 함수*/
+  
+  var myHome = [];
+  var map;
+  
+  myHome[0] = parseFloat($('#latitude').val());
+  myHome[1] = parseFloat($('#longitude').val());
+//console.log("myHomeLatitude:  " + myHome[0] + " (myHome[0])");
+//console.log("myHomeLongitude: " + myHome[1] + " (myHome[1])");
+  
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: { lat: myHome[0], lng: myHome[1] },
+    /* 처음 지도에서 비춰지는 지역 */
+    zoom: 17,
+    disableDefaultUI: true
+  });
+  
+  var input = document.getElementById('pac-input');
+  var searchBox = new google.maps.places.SearchBox(input);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+  map.addListener('bounds_changed', function () {
+    searchBox.setBounds(map.getBounds());
+  });
+
+  var markers = [];
+  
+  markers[0] = new google.maps.Marker({
+    position: { lat: myHome[0], lng: myHome[1] },
+    map: map,
+    title: 'Hello World!'
+  });
+  
+  searchBox.addListener('places_changed', function () {
+    var places = searchBox.getPlaces();
+
+    if (places.length == 0) {
+      return;
+    }
+
+    markers.forEach(function (marker) {
+      marker.setMap(null);
+    });
+    markers = [];
+
+    var bounds = new google.maps.LatLngBounds();
+console.log('bounds: ' + bounds);
+    
+    places.forEach(function (place) {
+      markers.push(new google.maps.Marker({
+        map: map,
+        title: place.name,
+        position: place.geometry.location
+      }));
+
+      if (place.geometry.viewport) {
+        bounds.union(place.geometry.viewport);
+      } else {
+        bounds.extend(place.geometry.location);
+      }
+    });
+    
+    map.fitBounds(bounds);
+//    map.setZoom(1);
+    
+    $("#latitude").val(markers[0].position.H); /* 위도 경도 */
+    $("#longitude").val(markers[0].position.L);
+console.log('markers[0].position.H: ' + markers[0].position.H);
+console.log('markers[0].position.L: ' + markers[0].position.L);
+
+    google.maps.event.addListener(map, 'click', function (event) {
+      addMarker(event.latLng, map); /* 마커 찍어주는 함수 */
+console.log(event.latLng);
+    });
+
+    function addMarker(location, map) {
+      markers[0].setPosition(location);
+      markers[0].setPosition(location);
+      $("#latitude").val(markers[0].position.H); /* 위도 경도 */
+      $("#longitude").val(markers[0].position.L);
+    }
+  });
+  
+  $('#infoModal').on("shown.bs.modal", function () {
+    resizeMap();
+  });
+  
+  function resizeMap() {
+    if(typeof map =="undefined") return;
+    setTimeout( function(){resizingMap();} , 400);
+  }
+  
+  function resizingMap() {
+   if(typeof map =="undefined") return;
+   var center = map.getCenter();
+   google.maps.event.trigger(map, "resize");
+   map.setCenter(center); 
+  }
+}
+  
+</script>
+
+

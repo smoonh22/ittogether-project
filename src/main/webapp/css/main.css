@@ -196,7 +196,7 @@ hr {
   padding: 2px;
   text-align: center;
 }
-#map {
+#mainMap {
   height: 90%;
   width: 100%;
 }
@@ -234,8 +234,8 @@ hr {
   margin-left:60%;
 }
 .boredTable {
-  border: 1px solid grey;
-  background: #377CB6;
+  border: 1px solid white;
+  background: #4FB8D9;
   padding: 28px;
 }
 .friendBalloon {
@@ -255,7 +255,7 @@ hr {
 
 /* 개인 정보 창*/
 
-#hobby1, #hobby2, #hobby3 {
+#hobby {
   display: inline-block;
   width:100px;
   margin-right:5px;
@@ -309,7 +309,8 @@ hr {
 }
 .iw-subTitle img {
   display: block;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 

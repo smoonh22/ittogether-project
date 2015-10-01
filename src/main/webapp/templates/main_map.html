@@ -1,6 +1,7 @@
-  <link rel='stylesheet' href="css/main_map.css" />
-<div id="map">
+<link rel='stylesheet' href="css/main_map.css" />
+<div id="mainMap"> <!-- infoModal에 있는 구글맵 id가 map이라 mainMap으로 명명-->
 </div>
+
 <div id="finder-box">
   <div class="dropdown">
     <button class="btn btn-info btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">모두
@@ -64,138 +65,201 @@
 </div>
   
 
-<div id="friendLocArr" hidden="true">friend0,37.497129,127.027612/friend1,37.496708,127.026865/friend2,37.498308,127.026312/friend3,37.497380,127.027294/friend4,37.498674,127.028249</div>
-
+<!--
     <div id="myInfoWindow" hidden="true">
-    <div id="iw-container">
-      <div class="iw-title">송문혁</div>
-      <div class="iw-content">
-          <div class="iw-subTitle">
-           <img src="images/myPhoto.png" class="img-circle">
-          </div>
-          <div class="iw-subTitle">
-            <input type="txt" class="form-control input-sm" id="myInfoTitle" placeholder="음악 같이 들어요~">
-          </div>
+      <div id="iw-container">
+        <div class="iw-title">송문혁</div>
+        <div class="iw-content">
+            <div class="iw-subTitle">
+             <img src="images/myPhoto.png" class="img-circle">
+            </div>
+            <div class="iw-subTitle">
+              <input type="txt" class="form-control input-sm" id="myInfoTitle" placeholder="음악 같이 들어요~">
+            </div>
+        </div>
       </div>
     </div>
-    </div>
+-->
+
     <div id="friendInfoWindow" hidden="true">
-    <div id="iw-container">
-      <div class="iw-title">설현</div>
-      <div class="iw-content">
-          <div class="iw-subTitle">
-           <img src="images/seol2.png" class="img-circle">
-          </div>
-          <div class="iw-subTitle">
-            <input type="txt" class="form-control" id="myInfoTitle" placeholder="심쿵해">
-          </div>
-          <div class="iw-subTitle">
-           <button type="submit" class="btn btn-info btn-sm btn-block">프로필 보기</button>
-         </div>
-         <div class="iw-subTitle">
-           <button type="submit" class="btn btn-info btn-sm btn-block">메시지 보내기</button>
-         </div>
+      <div id="iw-container">
+        <div class="iw-title">설현</div>
+        <div class="iw-content">
+            <div class="iw-subTitle">
+             <img src="images/seol2.png" class="img-circle">
+            </div>
+            <div class="iw-subTitle">
+              <input type="txt" class="form-control" id="myInfoTitle" placeholder="심쿵해">
+            </div>
+            <div class="iw-subTitle">
+             <button type="submit" class="btn btn-info btn-xs btn-block">프로필 보기</button>
+           </div>
+           <div class="iw-subTitle">
+             <button type="submit" class="btn btn-info btn-xs btn-block">메시지 보내기</button>
+           </div>
+        </div>
       </div>
     </div>
-    </div>
+
     <div id="notFriendInfoWindow" hidden="true">
-    <div id="iw-container">
-      <div class="iw-title">...</div>
-      <div class="iw-content">
-          <div class="iw-subTitle">
-           <img src="images/notFriend.png" class="img-circle">
-          </div>
-          <div class="iw-subTitle">
-            <input type="txt" class="form-control" id="myInfoTitle" placeholder="친구가 되시면 보입니다. 친구 신청을 해보세요.">
-          </div>
-          <div class="iw-subTitle">
-           <button type="submit" class="btn btn-info btn-sm btn-block">친구 신청</button>
-         </div>
+      <div id="iw-container">
+        <div class="iw-title">...</div>
+        <div class="iw-content">
+            <div class="iw-subTitle">
+             <img src="images/notFriend.png" class="img-circle">
+            </div>
+            <div class="iw-subTitle">
+              <input type="txt" class="form-control" id="myInfoTitle" placeholder="친구가 되시면 보입니다. 친구 신청을 해보세요.">
+            </div>
+            <div class="iw-subTitle">
+             <button type="submit" class="btn btn-info btn-xs btn-block">친구 신청</button>
+           </div>
+        </div>
       </div>
     </div>
-    </div>
+
 <script>
-  var notFriendLocArr =[];
-  var friendLocArr = [];
   //json형식으로 받아온 데이터를 뿌려줌
+  var myLoc = [];
+  var myNickname,
+      myIntro,
+      myPhoto;
   (function() {
-  $.getJSON('member/getMembers.do', function(results) {
-    console.log(results.data.length);
+    $.getJSON('member/getMyLoc.do', {
+      mno: sessionStorage.getItem('mno')
+    }, function(results) {
+      myLoc[0] = parseFloat((results.data[0].latitude));
+      myLoc[1] = parseFloat((results.data[0].longitude));
+      myLoc[2] = Number(results.data[0].mno);
+      myNickname = results.data[0].nickname;
+      myIntro    = results.data[0].introduction;
+      myPhoto    = results.data[0].profilePicture;
+      console.log("나의 위치(" + myNickname + ") - lat: " + myLoc[0] + " lon: " + myLoc[1]);
+    });
+  })();
+  
+  
+  var friendLocArr = [];
+  (function() {
+    $.getJSON('member/getFriends.do', {
+      frdno: sessionStorage.getItem('mno')
+    }, function(results) {
      for (var i = 0 ; i < results.data.length; i ++) {
-       var tempArr = [results.data[i].nickname, Number(results.data[i].latitude), Number(results.data[i].longitude)];
-        notFriendLocArr.push(tempArr);
+       var tempArr = [
+         results.data[i].nickname, 
+         Number(results.data[i].latitude),
+         Number(results.data[i].longitude), 
+         results.data[i].introduction,
+         results.data[i].profilePicture
+       ];
+        friendLocArr.push(tempArr);
+        console.log("친구" + i + ": " + friendLocArr[i]);
      }
-    console.log(notFriendLocArr);
-    
   });
   })();
-  var myLoc = [37.497943, 127.027622];
   
-//  var hiddenInfoWindow = $('#friendLocArr')[0].innerHTML;;
-//  var arr = hiddenInfoWindow.split('/');
-//  var friendLocArr = [];
-//  for (var i = 0; i < arr.length; i++) {
-//    friendLocArr[i] = arr[i].split(',');
-//    friendLocArr[i][1] = parseFloat(friendLocArr[i][1]);
-//    friendLocArr[i][2] = parseFloat(friendLocArr[i][2]);
-//  }
+  var notFriendLocArr =[];
+  (function() {
+    $.getJSON('member/getMembers.do', {
+      frdno: sessionStorage.getItem('mno')
+    }, function(results) {
+     for (var i = 0 ; i < results.data.length; i ++) {
+       var tempArr = [
+         results.data[i].nickname, 
+         Number(results.data[i].latitude),
+         Number(results.data[i].longitude),
+         results.data[i].introduction,
+         results.data[i].profilePicture
+       ];
+        notFriendLocArr.push(tempArr);
+        console.log("주변회원" + i + ": " + notFriendLocArr[i]);
+     }
+  });
+  })();
   
-  var friendMarkers = new Array; <!-- 팝업창 띄울 때의 마커들 -->
-  var notFriendMarkers = new Array; <!-- 팝업창 띄울 때의 마커들  -->
-//  var notFriendLocArr = [ <!-- 주변 회원들의 배열 -->
-//    ['notFriend0', 37.496629, 127.027622],
-//    ['notFriend1', 37.495508, 127.026845],
-//    ['notFriend2', 37.497248, 127.026352],
-//    ['notFriend3', 37.499380, 127.027244],
-//    ['notFriend4', 37.497624, 127.028219]
-//  ];
+  var friendMarkers = []; /*팝업창 띄울 때의 마커들 */
+  var notFriendMarkers = []; /* 팝업창 띄울 때의 마커들  */
   
   var map;
   var circle;
-  var friendWindow; /* 친구들 팝업창 */
-  var notFriendWindow; /* 회원들 팝업창 */
+  var friendWindow=[];/* 친구들 팝업창 */
+  var notFriendWindow=[]; /* 회원들 팝업창 */
     
-  var myInfoWindow = $('#myInfoWindow');
-  var myBalloon = myInfoWindow[0].innerHTML;
+//  var myInfoWindow = $('#myInfoWindow');
+//  var myBalloon = myInfoWindow[0].innerHTML;
+//  console.log(myBalloon);
   
-  var myBalloon2 = "<div>" + 'abc' + "</div>"
   
-  var friendInfoWindow = $('#friendInfoWindow');
-  var friendBalloon = friendInfoWindow[0].innerHTML;
-  
-  var notFriendInfoWindow = $('#notFriendInfoWindow');
-  var notFriendBalloon = notFriendInfoWindow[0].innerHTML;
-  
+function initMap() {
   var radius = { /* 반경 보여줄 지점 */
-	  gangnamStation: {
+	  radiusCenter: {
 	    center: {lat: myLoc[0], lng: myLoc[1]}, /* 반경의 중심 */ 
 	    population: 26 /* 반경 설정 200m: 26, 500m: 65, 1km: 130 */ 
 	  }
 	};
   
-  function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById('mainMap'), {
       zoom: 17,
       /* 처음 화면을 보여주는 위도, 경도 */
-      center: {
-        lat: myLoc[0], 
-        lng: myLoc[1]
-      },
+      center: { lat: myLoc[0], lng: myLoc[1] },
       disableDefaultUI: true, /* DEFAULT UI 사용*/
       panControl: false,
       zoomControl: false,
       scaleControl: false /* 척도 */
     });
+  
     myWindow = new google.maps.InfoWindow({ /* 팝업창 생성 */
-      content: myBalloon
+      content: "<div>"+
+        "<div id='iw-container'>"+
+        "<div class='iw-title'>" + myNickname +"</div>"+
+        "<div class='iw-content'>"+
+            "<div class='iw-subTitle'>"+
+             "<img src=" + myPhoto + " class='img-circle iw-img'>"+
+            "</div>"+
+            "<div class='iw-subTitle'>"+
+              "<textarea class='form-control' rows='2'>" + myIntro + "</textarea>"+
+            "</div>"+
+        "</div>"+
+      "</div>"+
+    "</div>"
     });
-    friendWindow = new google.maps.InfoWindow({ /* 팝업창 생성 */
-      content: friendBalloon
+  
+  for (var i = 0; i < friendLocArr.length; i++) {
+    friendWindow[i] = new google.maps.InfoWindow({ /* 팝업창 생성 */
+      content: "<div>"+ 
+        "<div id='iw-container'>"+
+        "<div class='iw-title'>" + friendLocArr[i][0] +"</div>"+
+        "<div class='iw-content'>"+
+            "<div class='iw-subTitle'>"+
+             "<img src=" + friendLocArr[i][4] + " class='img-circle iw-img'>"+
+            "</div>"+
+            "<div class='iw-subTitle'>"+
+              "<input type='txt' class='form-control input-xs' value=" + friendLocArr[i][3] + ">"+
+            "</div>"+
+        "</div>"+
+      "</div>"+
+    "</div>"
     });
-   
-    notFriendWindow = new google.maps.InfoWindow({ /* 팝업창 생성 */
-      content: notFriendBalloon
+  }
+  
+  for (var i = 0; i < notFriendLocArr.length; i++) {
+    notFriendWindow[i] = new google.maps.InfoWindow({ /* 팝업창 생성 */
+      content: "<div>"+
+        "<div id='iw-container'>"+
+        "<div class='iw-title'>" + notFriendLocArr[i][0] +"</div>"+
+        "<div class='iw-content'>"+
+            "<div class='iw-subTitle'>"+
+             "<img src=" + notFriendLocArr[i][4] + " class='img-circle iw-img'>"+
+            "</div>"+
+            "<div class='iw-subTitle'>"+
+              "<input type='txt' class='form-control input-xs' value=" + notFriendLocArr[i][3] + ">"+
+            "</div>"+
+        "</div>"+
+      "</div>"+
+    "</div>"
     });
+  }
+  
     markMyLoc();
     for (var i = 0; i < friendLocArr.length; i++) {
       markFriends(i); /* 친구 마킹 */
@@ -231,7 +295,7 @@
       });
     });
     
-    google.maps.event.addListener(notFriendWindow, 'domready', function() {
+    google.maps.event.addListener(notFriendWindow, 'domready',    function() {
       var iwOuter = $('.gm-style-iw');
       var iwBackground = iwOuter.prev();
       iwBackground.children(':nth-child(2)').css({'display' : 'none'});
@@ -243,14 +307,9 @@
         $(this).css({opacity: '1'});
       });
     });
-  }
-  
   function markMyLoc () {
     var marker = new google.maps.Marker({
-      position: {
-          lat: myLoc[0],
-          lng: myLoc[1]
-        },
+      position: { lat: myLoc[0], lng: myLoc[1] },
       map: map,
       icon: 'images/icons/myHome.png'
     });
@@ -273,7 +332,7 @@
         icon: 'images/icons/friendHome.png'
       }));
       friendMarkers[i].addListener('click', function() {
-        friendWindow.open(map, friendMarkers[i]);
+        friendWindow[i].open(map, friendMarkers[i]);
       });
     }, i * 100);
   }
@@ -292,7 +351,7 @@
         icon: 'images/icons/pin.png'
       }));
       notFriendMarkers[i].addListener('click', function() {
-        notFriendWindow.open(map, notFriendMarkers[i]);
+        notFriendWindow[i].open(map, notFriendMarkers[i]);
       });
     }, i * 100);
   }
@@ -314,19 +373,29 @@ function markCircle() {
   
 function radiusDistance(m) { /* 반경 렌더링 거리 조정 함수 */
   radius = { /* 반경 보여줄때의 변수 */
-  gangnamStation: {
-    /* 반경의 중심 */
-    center: {
-            lat: myLoc[0], 
-            lng: myLoc[1]
-           }, 
-    population: m /* 반경 설정 200m: 26, 500m: 65, 1km: 130 */
-  }
+    radiusCenter: {
+      /* 반경의 중심 */
+      center: { lat: myLoc[0], lng: myLoc[1] }, 
+      population: m /* 반경 설정 200m: 26, 500m: 65, 1km: 130 */
+    }
   };
   circle.setMap(null);
   markCircle();
 }
+}
+  
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&callback=initMap" async defer></script>
+<!--
 
+<script type="text/javascript">
+	(function() {
+	   $.getJSON('member/userInfo.do', {
+	          nickname: sessionStorage.getItem('nickname')
+	        }, function (result) {
+	        });
+	})();
+  
+</script>
+-->

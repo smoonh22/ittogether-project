@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.bit.java72.dao.MemberDao">
+
   <resultMap type="Member" id="MemberMap">
     <id     column="mno"      property="mno" />
     <result column="email"    property="email"/>
@@ -14,7 +15,12 @@
     <result column="lon"      property="longitude"/>
     <result column="addr"     property="address"/>
     <result column="mphoto"   property="profilePicture"/>
+    <result column="sex"      property="sex"/>
+    <result column="hb"       property="hobby"/>
+    <result column="intro"    property="introduction"/>
+    <result column="age"      property="age"/>
   </resultMap>
+  
   <select id="exist" 
           parameterType="map" resultMap="MemberMap">
     SELECT mno, nicknm, mphoto
@@ -53,7 +59,6 @@
     WHERE nicknm = #{value}
   </select>
   
-  
   <select id="getUserInfo" 
           parameterType="string" resultMap="MemberMap">
     SELECT * 
@@ -65,7 +70,13 @@
     UPDATE memb_t SET 
       nicknm=#{nickname},
       name=#{name},
-      pwd=#{password}
+      pwd=#{password},
+      mphoto=#{profilePicture},
+      intro=#{introduction},
+      sex=#{sex},
+      age=#{age},
+      hb=#{hobby},
+      hometwn=#{hometown}
     WHERE email = #{email}    
   </update>
   
@@ -73,9 +84,41 @@
   SELECT mno, nicknm FROM memb_t WHERE email=#{email}
   </select>
   
-  <select id="getMembers" resultMap="MemberMap">
-    select nicknm, lat, lon from memb_t
+  
+  <!-- 메인지도 내위치 -->
+  <select id="getMyLoc" parameterType="int" resultMap="MemberMap">
+  SELECT 
+    mno,
+    nicknm,
+    lat,
+    lon,
+    intro,
+    mphoto
+  FROM memb_t 
+  WHERE mno=#{mno};
   </select>
+  
+  
+   <!-- 내 친구들 정보 가져와서 메인맵에 뿌려줌 -->
+  <select id="getFriends" parameterType="int" resultMap="MemberMap">
+    SELECT
+      t1.nicknm, 
+      t1.lat, 
+      t1.lon, 
+      t1.intro, 
+      t1.mphoto 
+    FROM memb_t t1 JOIN frd_t t2 using(mno)
+    WHERE frdno=#{frdno} and state=2;
+  </select>
+  
+  
+  <!-- 비 친구들 뿌려주는건데 현재 모든 비친구 다 뿌려줌 -->
+  <select id="getMembers" parameterType="int" resultMap="MemberMap">
+	  SELECT * FROM memb_t m
+	  WHERE NOT EXISTS (SELECT null FROM frd_t f WHERE f.mno=m.mno)
+	  AND NOT EXISTS (SELECT null FROM frd_t f WHERE m.mno=#{mno});
+  </select>
+  
 </mapper>
 
 

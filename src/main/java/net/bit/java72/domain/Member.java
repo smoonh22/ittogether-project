@@ -7,18 +7,21 @@ public class Member implements Serializable{
 
   private static final long serialVersionUID = 1L;
 
-  protected int mno;
-  protected String nickname;
+  protected int    mno;
   protected String email;
-  protected String password;
   protected String name;
-  protected String address;
+  protected String nickname;
+  protected String password;
+  protected Date   createDate;
+  protected String hometown;
   protected String latitude;
   protected String longitude;
-  protected int sex;
-  protected String hometown;
-  protected Date createDate;
+  protected String address;
   protected String profilePicture;
+  protected int    sex;
+  protected String hobby;
+  protected String introduction;
+  protected int    age;
   
   
   public int getMno() {
@@ -27,23 +30,11 @@ public class Member implements Serializable{
   public void setMno(int mno) {
     this.mno = mno;
   }
-  public String getNickname() {
-    return nickname;
-  }
-  public void setNickname(String nickname) {
-    this.nickname = nickname;
-  }
   public String getEmail() {
     return email;
   }
   public void setEmail(String email) {
     this.email = email;
-  }
-  public String getPassword() {
-    return password;
-  }
-  public void setPassword(String password) {
-    this.password = password;
   }
   public String getName() {
     return name;
@@ -51,11 +42,29 @@ public class Member implements Serializable{
   public void setName(String name) {
     this.name = name;
   }
-  public String getAddress() {
-    return address;
+  public String getNickname() {
+    return nickname;
   }
-  public void setAddress(String address) {
-    this.address = address;
+  public void setNickname(String nickname) {
+    this.nickname = nickname;
+  }
+  public String getPassword() {
+    return password;
+  }
+  public void setPassword(String password) {
+    this.password = password;
+  }
+  public Date getCreateDate() {
+    return createDate;
+  }
+  public void setCreateDate(Date createDate) {
+    this.createDate = createDate;
+  }
+  public String getHometown() {
+    return hometown;
+  }
+  public void setHometown(String hometown) {
+    this.hometown = hometown;
   }
   public String getLatitude() {
     return latitude;
@@ -69,17 +78,11 @@ public class Member implements Serializable{
   public void setLongitude(String longitude) {
     this.longitude = longitude;
   }
-  public int getSex() {
-    return sex;
+  public String getAddress() {
+    return address;
   }
-  public void setSex(int sex) {
-    this.sex = sex;
-  }
-  public String getHometown() {
-    return hometown;
-  }
-  public void setHometown(String hometown) {
-    this.hometown = hometown;
+  public void setAddress(String address) {
+    this.address = address;
   }
   public String getProfilePicture() {
     return profilePicture;
@@ -87,11 +90,29 @@ public class Member implements Serializable{
   public void setProfilePicture(String profilePicture) {
     this.profilePicture = profilePicture;
   }
-  public Date getCreateDate() {
-    return createDate;
+  public int getSex() {
+    return sex;
   }
-  public void setCreateDate(Date createDate) {
-    this.createDate = createDate;
+  public void setSex(int sex) {
+    this.sex = sex;
+  }
+  public String getHobby() {
+    return hobby;
+  }
+  public void setHobby(String hobby) {
+    this.hobby = hobby;
+  }
+  public String getIntroduction() {
+    return introduction;
+  }
+  public void setIntroduction(String introduction) {
+    this.introduction = introduction;
+  }
+  public int getAge() {
+    return age;
+  }
+  public void setAge(int age) {
+    this.age = age;
   }
   
   

@@ -8,31 +8,40 @@
  */
 requirejs.config({
     paths: {
-        //라이브러리
-        'jquery': 'bower_components/jquery/dist/jquery',
-        'angular': 'bower_components/angular/angular',
-        'bootstrap.min': 'bower_components/bootstrap/dist/js/bootstrap',
-        'bootstrap-tour': 'bower_components/bootstrap-tour/build/js/bootstrap-tour',
-        'angular-route': 'bower_components/angular-route/angular-route',
-        
-        'myFriendList': 'js/app/myFriendList',
-        'angular-masonry-directive' : 'bower_components/angular-masonry-directive/angular-masonry-directive',
-        //컨트롤러
-        'main': 'js/app/main',
-        'friendsFeed': 'js/app/friendsFeed',
-        'tour': 'js/app/tour',
-        'myActivities': 'js/app/myActivities',
-        'mainMap' : 'js/app/main_map',
-        'myFriendList': 'js/app/myFriendList',
+      //라이브러리
+      'jquery': 'bower_components/jquery/dist/jquery',
+      'angular': 'bower_components/angular/angular',
+      'bootstrap.min': 'bower_components/bootstrap/dist/js/bootstrap',
+      'bootstrap-tour': 'bower_components/bootstrap-tour/build/js/bootstrap-tour',
+      'angular-route': 'bower_components/angular-route/angular-route',
+      'jquery_ui_widget' : 'bower_components/blueimp-file-upload/js/vendor/jquery.ui.widget',
+      'jquery-iframe-transport': 'bower_components/blueimp-file-upload/js/jquery.iframe-transport',
+      'jquery-fileupload': 'bower_components/blueimp-file-upload/js/jquery.fileupload',
+      'angular-masonry-directive' : 'bower_components/angular-masonry-directive/angular-masonry-directive',
+      //컨트롤러
+      'main': 'js/app/main',
+      'myFriendList': 'js/app/myFriendList',
+      'friendsFeed': 'js/app/friendsFeed',
+      'tour': 'js/app/tour',
+      'myActivities': 'js/app/myActivities',
+      'mainMap' : 'js/app/main_map',
+      'myFriendList': 'js/app/myFriendList',
+      'info-modal': 'js/app/info-modal'
     },
   
   shim: {
     'angular': {
-        deps: ['jquery'],
-        exports: 'angular'
+      deps: ['jquery'],
+      exports: 'angular'
     },
     'angular-route': {
       deps: ['angular']
+    },
+    'jquery_ui_widget' : {
+      deps:['jquery-iframe-transport']
+    },
+    'jquery-iframe-transport': {
+      deps: ['jquery-fileupload']
     },
     'tour': {
       deps:['bootstrap-tour']
@@ -44,7 +53,7 @@ requirejs.config({
       deps:['jquery']
     },
     'main': {
-      deps: ['angular-route', 'friendsFeed', 'bootstrap.min', 'tour','myFriendList','myActivities','angular-masonry-directive']
+      deps: ['angular-route', 'friendsFeed', 'bootstrap.min', 'tour','myFriendList','myActivities','mainMap', 'jquery_ui_widget']
     },
     'friendsFeed': {
       deps: ['angular']
@@ -59,8 +68,8 @@ requirejs.config({
       deps: ['angular']
     },
     'myFriendList': {
-      deps:['angular']
-    },
+      deps: ['angular']
+    }
   }
   
 });

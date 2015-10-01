@@ -8,7 +8,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -53,14 +52,36 @@ public class MemberController {
     return result;
   }
   
-  @RequestMapping("/getMembers")
-  public Object getMembers() {
+  
+  @RequestMapping("/getMyLoc")
+  public Object getMyLoc(int mno) {
     Map<String,Object> result = new HashMap<String,Object>();
     
-    List<Member> members = memberService.getMembers();
+    List<Member> members = memberService.getMyLoc(mno);
+    result.put("data", members);
+    System.out.println(members);
+    
+    return result;
+  }
+  
+  @RequestMapping("/getFriends")
+  public Object getFriends(int frdno) {
+    Map<String,Object> result = new HashMap<String,Object>();
+    
+    List<Member> members = memberService.getFriends(frdno);
+    result.put("data", members);
+    System.out.println(members);
+    
+    return result;
+  }
+  
+  @RequestMapping("/getMembers")
+  public Object getMembers(int frdno) {
+    Map<String,Object> result = new HashMap<String,Object>();
+    
+    List<Member> members = memberService.getMembers(frdno);
     result.put("data", members);
     return result;
-        
   }
 }
   

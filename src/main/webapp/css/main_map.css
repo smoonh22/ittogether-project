@@ -4,8 +4,8 @@
   padding: 2px;
   text-align: center;
 }
-#map {
-   width: 100%;
+#mainMap {
+  width: 100%;
   height: 600px;
 }
 #finder-box {
@@ -16,6 +16,7 @@
   padding: 10px;
   position: absolute;
 }
+
 #friend-box {
   background-color: rgba(255, 255, 255, 0.93);
   border-radius: 0.6em;
@@ -58,4 +59,65 @@
   height:50px;
   max-height: 50px;
   max-width: 50px;
+}
+
+
+/* mainMap에서 infoWindow */
+.gm-style-iw {
+    width: 200px !important; /* 건들면 화면 깨짐!!*/
+    top: 15px !important; /* 건들면 화면 깨짐!! */
+    left: 25px !important; /* 건들면 화면 깨짐 */
+    background-color: #fff;
+    box-shadow: 12px 15px 10px rgba(78, 78, 78, 0.7);
+    border: 1px solid rgba(72, 181, 233, 0.6);
+    border-radius: 10px 10px 10px 10px;
+}
+#iw-container {
+    margin-bottom: 0px;
+    width: 200px ;
+} 
+#iw-container .iw-title {
+    text-align: center;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    padding: 3px;
+    background-color: #48b5e9;
+    color: white;
+    margin: 0px;
+    border-radius: 2px 2px 0 0;
+}
+#iw-container .iw-content {
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: 400;
+    margin-right: 0px;
+    padding: 0px 10px 0px 10px;
+    max-height: 400px; /* 창 전체 맥스 길이*/
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+/*
+.iw-content img {
+    float: ;  사진 위치 조정 
+    margin: 10px 0px 10px 0px; 
+}
+*/
+.iw-subTitle {
+  font-size: 16px;
+  padding: 0px 0;
+}
+.iw-subTitle img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.iw-img {
+  width: 80px;
+  height: 80px;
+  max-height: 80px;
+  max-width: 80px;
+}
+textarea {
+   resize: none;
 }
