@@ -1,5 +1,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&libraries=places&callback=initAutocomplete" async defer></script>
 
+<script type="text/javascript" src="js/app/info-modal.js"></script>
+
 <!-- modal start -->
 <div id="infoModal" class="modal fade">
   <div class="modal-dialog">
@@ -10,25 +12,33 @@
       </div>
       <div class="modal-body">
         <form role="form">
-          <div class="form-group">
+            <div class="profile-info-div2">
+              <img id="profile-img" class='img-circle' src='{{infoCtrl.userDatas.profilePicture}}' />
+            <div class="form-group my-new">
+              <div>
+                <span class="btn btn-success fileinput-button profile-info-span2">
+                  <i class="glyphicon glyphicon-plus"></i>
+                  <span>파일 찾기</span>
+                  <input id="fileupload1" type="file" name="file" data-url="file/upload.do" multiple>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group info-div">
             <label>닉네임</label>
             <input class="form-control" value="{{infoCtrl.userDatas.nickname}}" id="nickname">
           </div>
-          <div class="form-group">
+          <div class="form-group info-div">
             <label>이름</label>
             <input class="form-control" value="{{infoCtrl.userDatas.name}}" id="name">
           </div>
-          <div class="form-group">
+          <div class="form-group info-div">
             <label>비밀번호</label>
             <input type="password" class="form-control" value="{{infoCtrl.userDatas.password}}" id="password">
           </div>
-          <div class="form-group">
+          <div class="form-group info-div">
             <label>이메일</label>
             <input class="form-control" readonly value="{{infoCtrl.userDatas.email}}" id="email">
-          </div>
-          <div class="form-group">
-            <label>프로필사진</label>
-            <input type="file">
           </div>
           <div class="form-group">
               <label>집 주소(주소 입력 후 핀 조정으로 상세하게 지도에 위치 설정을 해주세요)</label>
@@ -60,7 +70,6 @@
           </div>
           <div class="form-group">
             <label>취미</label>
-            <br>
             <input class="form-control" id="hobby" value="{{infoCtrl.userDatas.hobby}}">
           </div>
           <div class="form-group">
@@ -80,9 +89,8 @@
   <!-- /.modal -->
 </div>
 
-    
-<script>
 
+<script>
 function initAutocomplete() { /* 초기화 함수*/
   
   var myHome = [];
@@ -184,3 +192,5 @@ console.log(event.latLng);
 }
   
 </script>
+
+
