@@ -19,16 +19,16 @@ define(function () {
   }]);
 
   //비친구 최근 게시물
-  app.controller('noneFriendFeedCtrl', ['$http', function ($http) {
+  app.controller('noneFriendFeedCtrl',['$http', function($http) {
     var parent = this;
     $http.get('feed/noneFriendFeed.do', {
       params: {
         mno: sessionStorage.getItem('mno')
       }
-    }).success(function (result) {
-      parent.nfeeds = result.data
-    })
-
+      }).success(function(result){
+          parent.nfeeds = result.data
+        })
+      
   }]);
 
 

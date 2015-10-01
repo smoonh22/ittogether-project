@@ -15,12 +15,13 @@ requirejs.config({
         'bootstrap-tour': 'bower_components/bootstrap-tour/build/js/bootstrap-tour',
         'angular-route': 'bower_components/angular-route/angular-route',
         
+        'myFriendList': 'js/app/myFriendList',
+        'angular-masonry-directive' : 'bower_components/angular-masonry-directive/angular-masonry-directive',
         //컨트롤러
         'main': 'js/app/main',
         'friendsFeed': 'js/app/friendsFeed',
         'tour': 'js/app/tour',
         'myActivities': 'js/app/myActivities',
-        'customMyMap' : 'js/app/myMap',
         'mainMap' : 'js/app/main_map',
         'myFriendList': 'js/app/myFriendList',
     },
@@ -43,18 +44,18 @@ requirejs.config({
       deps:['jquery']
     },
     'main': {
-      deps: ['angular-route', 'friendsFeed', 'bootstrap.min', 'tour','myFriendList','myActivities','mainMap', 'customMyMap']
+      deps: ['angular-route', 'friendsFeed', 'bootstrap.min', 'tour','myFriendList','myActivities','angular-masonry-directive']
     },
     'friendsFeed': {
       deps: ['angular']
     },
     'myActivities': {
-      deps: ['angular']
+      deps: ['angular','angular-masonry-directive']
+    },
+    'angular-masonry-directive' : {
+      deps:['angular','jquery']
     },
     'mainMap': {
-      deps: ['angular']
-    },
-    'customMyMap': {
       deps: ['angular']
     },
     'myFriendList': {

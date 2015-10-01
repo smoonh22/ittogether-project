@@ -780,7 +780,7 @@ if (typeof jQuery === 'undefined') {
 
   function clearMenus(e) {
     if (e && e.which === 3) return
-    $(backdrop).remove()
+    /*$(backdrop).remove()*/
     $(toggle).each(function () {
       var $this         = $(this)
       var $parent       = getParent($this)
@@ -900,7 +900,7 @@ if (typeof jQuery === 'undefined') {
   // ===================================
 
   $(document)
-    .on('click.bs.dropdown.data-api', clearMenus)
+ /*   .on('click.bs.dropdown.data-api', clearMenus)*/
     .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
     .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
     .on('keydown.bs.dropdown.data-api', toggle, Dropdown.prototype.keydown)

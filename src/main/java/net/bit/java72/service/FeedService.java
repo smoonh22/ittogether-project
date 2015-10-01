@@ -12,6 +12,7 @@ public interface FeedService {
   List<FriendFeed> noneFriendFeed(int mno);
   FriendFeed getDetail(int fno);
   int friendJoinActivity(int mno, int fno);
+  int insert(Feed feed);
   
 }
 

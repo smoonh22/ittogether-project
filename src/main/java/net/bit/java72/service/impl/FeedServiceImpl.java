@@ -41,6 +41,10 @@ public class FeedServiceImpl implements FeedService {
     return feedDao.friendJoinActivity(map);
   }
   
+  public int insert(Feed feed) {
+    return feedDao.insert(feed);
+  }
+  
 }
 
 

@@ -6,6 +6,8 @@ import java.util.List;
 import net.bit.java72.domain.Feed;
 import net.bit.java72.domain.FriendFeed;
 import net.bit.java72.domain.FriendList;
+import net.bit.java72.domain.Member;
+import net.bit.java72.domain.Search;
 
 
 public interface FriendService {
@@ -20,7 +22,11 @@ public interface FriendService {
   
   int acceptFRD(FriendList friendList);
 
+  ArrayList<Member> unFriendList(Search search);
   
+  int addFrd(FriendList friendList);
+
+  int addFrd2(FriendList friendList);
 }
 
 

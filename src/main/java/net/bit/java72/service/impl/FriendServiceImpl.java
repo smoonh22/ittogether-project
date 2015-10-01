@@ -11,6 +11,7 @@ import net.bit.java72.dao.FriendDao;
 import net.bit.java72.dao.MemberDao;
 import net.bit.java72.domain.FriendList;
 import net.bit.java72.domain.Member;
+import net.bit.java72.domain.Search;
 import net.bit.java72.service.FriendService;
 import net.bit.java72.service.MemberService;
 
@@ -41,6 +42,21 @@ public int deleteFRD(FriendList friendList) {
 @Override
 public int acceptFRD(FriendList friendList) {
   return friendDao.acceptFRD(friendList);
+}
+
+@Override
+public ArrayList<Member> unFriendList(Search search) {
+  return friendDao.unFriendList(search);
+}
+
+@Override
+public int addFrd(FriendList friendList) {
+  return friendDao.addFRD(friendList);
+}
+
+@Override
+public int addFrd2(FriendList friendList) {
+  return friendDao.addFRD2(friendList);
 }
 
 

@@ -12,4 +12,5 @@ public interface FeedDao {
   List<FriendFeed> noneFriendFeed(int mno);
   FriendFeed getDetail(int fno);
   int friendJoinActivity(HashMap<String, Integer> map);
+  int insert(Feed feed);
 }

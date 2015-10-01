@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import net.bit.java72.domain.FriendList;
 import net.bit.java72.domain.Member;
+import net.bit.java72.domain.Search;
 import net.bit.java72.service.FriendService;
 import net.bit.java72.service.MemberService;
 
@@ -55,9 +56,26 @@ public class FriendController {
   return  result;
   }
   
+  @RequestMapping("/search")
+  public Object search(int mno ,int searchType ,String searchCnt){
+  Map<String,Object> result = new HashMap<String,Object>();
+  Search search = new Search();
+  
+  
+  search.setMno(mno);
+  search.setSearchType(searchType);
+  search.setSearchCnt(searchCnt);
+  
+  ArrayList<Member> unfriend = friendService.unFriendList(search);
+  
+  result.put("searchList", unfriend);
+  
+  return result;
+  }
+  
   @RequestMapping("/delete")
   public void delete(int frdmno,int mno) {
-    
+  
     FriendList friendList = new FriendList();
     FriendList friendList2 = new FriendList();
     
@@ -85,6 +103,26 @@ public class FriendController {
     
     friendService.acceptFRD(friendList);
     friendService.acceptFRD(friendList2);
+    
+  }
+  
+  @RequestMapping("/insert")
+  public void addFrd(int frdmno, int mno) {
+    System.out.println(frdmno);
+    System.out.println(mno);
+    
+    FriendList friendList = new FriendList();
+    FriendList friendList2 = new FriendList();
+    
+    friendList.setFrdmno(frdmno);
+    friendList.setMno(mno);
+    
+    friendList2.setFrdmno(mno);
+    friendList2.setMno(frdmno);
+    
+    friendService.addFrd(friendList);
+    friendService.addFrd2(friendList2);
+    
     
   }
 }
