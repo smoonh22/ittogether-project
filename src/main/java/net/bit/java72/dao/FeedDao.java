@@ -9,4 +9,5 @@ public interface FeedDao {
   List<FriendFeed> list(int mno);
   List<Feed> myActivityList();
   FriendFeed noneFriendFeed(int mno);
+  int insert(Feed feed);
 }

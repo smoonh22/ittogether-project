@@ -44,13 +44,13 @@
    t2.TITLE
    from memb_t t1 left outer join feed_t t2 
    on t1.mno=t2.mno
-   where t2.categry is not null and t1.mno IN (select frdno from frd_t where mno=#{values} and state=2)
+   where t2.categry is not null and t2.cre_dt  > curdate()-1 and t1.mno IN (select frdno from frd_t where mno=#{values} and state=2)
    ORDER by t2.cre_dt desc;
-  </select>
+  </select>	
   
   <select id="noneFriendFeed" resultMap="FriendFeedMap" parameterType="int">
   select 
-   t1.NAME,
+   t1.NAME,	
    t1.MPHOTO,
    t2.CATEGRY,
    t2.MAX_HEADCNT,
@@ -61,38 +61,21 @@
    t2.TITLE
    from memb_t t1 left outer join feed_t t2
    on t1.mno=t2.mno
-   where t2.categry is not null and t1.mno=#{values}
+   where t2.categry is not null and t1.mno=#{values} and t2.cre_dt > curdate()-1
   </select>
+  
+  <insert id="insert" parameterType="Feed">
+  INSERT INTO 
+  feed_t(mno,categry,contnt,cre_dt,title,max_headcnt,cnt,meet_time)
+  VALUES (#{mno},#{category},#{content},now(),#{title},#{maxHeadCount},#{stuffCount},#{meetTime})
+  </insert>
   
  <!-- 내정보 에서 밑에 게시물 출력 -->
    <select id="myActivityList" resultMap="FeedMap">
   select * from feed_t 
   ORDER by cre_dt desc;
   </select>
- 
 
-<sql id="search">
-		<if test="searchType != null">
-			<if test="searchType == 'all'.toString()">
-				and( btitle like concat( '%', #{keyword}, '%' )
-				or bcontent like concat( '%', #{keyword}, '%' ) 
-				or nickname	like concat( '%',#{keyword}, '%' ) 
-				or email like concat( '%',#{keyword}, '%' ))
-			</if>
-			<if test="searchType == 'btitle'.toString()">
-				and btitle like concat( '%', #{keyword}, '%' )
-			</if>
-			<if test="searchType == 'bcontent'.toString()">
-				and bcontent like concat( '%', #{keyword}, '%' )
-			</if>
-			<if test="searchType == 'nickname'.toString()">
-				and nickname like concat( '%', #{keyword}, '%' )
-			</if>
-			<if test="searchType == 'email'.toString()">
-				and email like concat( '%', #{keyword}, '%' )
-			</if>
-		</if>
-</sql>
 </mapper>
 
 

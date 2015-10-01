@@ -1,7 +1,7 @@
 package net.bit.java72.domain;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 public class FriendFeed implements Serializable {
 
@@ -24,6 +24,8 @@ public class FriendFeed implements Serializable {
   protected String longitude;
   protected int sex;
   protected String hometown;
+  protected String Dday;
+
   
 
   @Override
@@ -83,7 +85,7 @@ public class FriendFeed implements Serializable {
     return createDate;
   }
 
-  public void setCreateDate(Date createDate) {
+  public void setCreateDate(java.sql.Date createDate) {
     this.createDate = createDate;
   }
 
@@ -193,6 +195,14 @@ public class FriendFeed implements Serializable {
 
   public static long getSerialversionuid() {
     return serialVersionUID;
+  }
+
+  public String getDday() {
+    return Dday;
+  }
+
+  public void setDday(String dday) {
+    this.Dday = dday;
   }
 
   protected String profilePicture;

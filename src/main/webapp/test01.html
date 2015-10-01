@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+ <link rel='stylesheet' href="css/myFriendList.css" />
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+  <link rel='stylesheet' href="bower_components/bootstrap/dist/css/bootstrap.css" />
+<body>
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+   <li role="presentation" class="active"><a href="#findFriend" aria-controls="home" role="tab" data-toggle="tab">친구 검색</a></li>
+    <li role="presentation"><a href="#myFriendList" aria-controls="fflist" role="tab" data-toggle="tab">친구 목록</a></li>
+    <li role="presentation"><a href="#myApplyList" aria-controls="aflist" role="tab" data-toggle="tab">친구 요청</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+     <div role="tabpanel" class="tab-pane active" id="findFriend">
+		          <div class="panel panel-success">
+                 <div class="panel-heading">
+                   <h3 class="panel-title">친구 검색</h3>
+                 </div>
+                 <div class="panel-body" >
+                       <div class='row'  ng-repeat-start="frdList in mFCtrl.frdLists">
+                      <div class='col-md-4' >
+                         <img class="img-circle header-image" src="images/{{frdList.profilePicture}}"/>
+                      </div>
+                      <div class='col-md-6'>
+                         <table>
+                         <br>
+                            <tr>	
+                               <td>이름 : {{frdList.name}}</td>
+                            </tr>
+                            <tr>
+                               <td>주소 : {{frdList.address}}</td>
+                            </tr>
+                            <tr>
+                               <td>이메일 : {{frdList.email}}</td>
+                            </tr>
+                         </table>
+                      </div>
+                      <div class='col-md-2' >
+                      <br><br>
+                      <button href='#' ng-click='delfrd(frdList.mno)' class='delfrdbtn'>삭제</button>
+                      </div>
+                   </div>
+                   <div  ng-repeat-end></div>
+                 </div >
+            </div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="myFriendList">
+               <div class="panel panel-primary">
+                 <div class="panel-heading">
+                   <h3 class="panel-title">요청 목록</h3>
+                 </div>
+                 <div class="panel-body" ng-repeat="applyList in mFCtrl.applyLists">
+                   <div class='row'>
+                      <div class='col-md-4'>
+                         <img class="img-circle header-image" src="images/{{applyList.profilePicture}}"/>
+                      </div>
+                      <div class='col-md-6'>
+                         <table>
+                         <br>
+                            <tr>
+                               <td>이름 : {{applyList.name}}</td>
+                            </tr>
+                            <tr>
+                               <td>주소 : {{applyList.address}}</td>
+                            </tr>
+                            <tr>
+                               <td>이메일 : {{applyList.email}}</td>
+                            </tr>
+                         </table>
+                      </div>
+                      <div class='col-md-2'>
+                      <br><br>
+                      <button ng-click="applyfrd(applyList.mno)" >수락</button>
+                      </div>
+                   </div>
+                 </div>
+                 <div class="panel-body" ng-repeat="applyList2 in mFCtrl.applyList2s">
+                   <div class='row'>
+                      <div class='col-md-4'>
+                         <img class="img-circle header-image" src="images/{{applyList2.profilePicture}}"/>
+                      </div>
+                      <div class='col-md-6'>
+                         <table>
+                         <br>
+                            <tr>
+                               <td>이름 : {{applyList2.name}}</td>
+                            </tr>
+                            <tr>
+                               <td>주소 : {{applyList2.address}}</td>
+                            </tr>
+                            <tr>
+                               <td>이메일 : {{applyList2.email}}</td>
+                            </tr>
+                         </table>
+                      </div>
+                      <div class='col-md-2'>
+                      <br><br>
+                      	요청중...
+                      </div>
+                   </div>
+                 </div>
+            </div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="myApplyList">
+             <div class="panel panel-info">
+                 <div class="panel-heading">
+                   <h3 class="panel-title">친구 목록</h3>
+                 </div>
+                 <div class="panel-body" >
+                       <div class='row'  ng-repeat-start="frdList in mFCtrl.frdLists">
+                      <div class='col-md-4' >
+                         <img class="img-circle header-image" src="images/{{frdList.profilePicture}}"/>
+                      </div>
+                      <div class='col-md-6'>
+                         <table>
+                         <br>
+                            <tr>	
+                               <td>이름 : {{frdList.name}}</td>
+                            </tr>
+                            <tr>
+                               <td>주소 : {{fx`rdList.address}}</td>
+                            </tr>
+                            <tr>
+                               <td>이메일 : {{frdList.email}}</td>
+                            </tr>
+                         </table>
+                      </div>
+                      <div class='col-md-2' >
+                      <br><br>
+                      <button href='#' ng-click='delfrd(frdList.mno)' class='delfrdbtn'>삭제</button>
+                      </div>
+                   </div>
+                   <div  ng-repeat-end></div>
+                 </div >
+            </div>
+    
+    </div>
+ 
+ 
+  </div>
+
+</div>
+<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+</body>
+</html>

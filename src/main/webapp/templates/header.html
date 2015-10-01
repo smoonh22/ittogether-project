@@ -54,27 +54,27 @@
 						<button class='searchBtn' ng-click='search(typeBox,searchQuery)'>검색</button>
                  </div>
                  <div class="panel-body" >
-                       <div class='row'  ng-repeat-start="frdList in mFCtrl.frdLists">
+                       <div class='row'  ng-repeat-start="findList in mFCtrl.searchLists">
                       <div class='col-md-4' >
-                         <img class="img-circle header-image" src="images/{{frdList.profilePicture}}"/>
+                         <img class="img-circle header-image" src="images/{{findList.profilePicture}}"/>
                       </div>
-                      <div class='col-md-6'>
+                      <div class='col-md-5'>
                          <table>
                          <br>
                             <tr>	
-                               <td>이름 : {{frdList.name}}</td>
+                               <td>이름 : {{findList.name}}</td>
                             </tr>
                             <tr>
-                               <td>주소 : {{frdList.address}}</td>
+                               <td>주소 : {{findList.address}}</td>
                             </tr>
                             <tr>
-                               <td>이메일 : {{frdList.email}}</td>
+                               <td>이메일 : {{findList.email}}</td>
                             </tr>
                          </table>
                       </div>
-                      <div class='col-md-2' >
+                      <div class='col-md-3' >
                       <br><br>
-                      <button href='#' ng-click='delfrd(frdList.mno)' class='delfrdbtn'>삭제</button>
+                      <button href='#' ng-click='insertfrd(findList.mno)' class='insertfrdbtn'>친구신청</button>
                       </div>
                    </div>
                    <div  ng-repeat-end></div>

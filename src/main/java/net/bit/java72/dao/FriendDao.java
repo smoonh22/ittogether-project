@@ -3,6 +3,8 @@ package net.bit.java72.dao;
 import java.util.ArrayList;
 
 import net.bit.java72.domain.FriendList;
+import net.bit.java72.domain.Member;
+import net.bit.java72.domain.Search;
 
 
 public interface FriendDao {
@@ -16,5 +18,10 @@ public interface FriendDao {
   int deleteFRD(FriendList friendList);
   
   int acceptFRD(FriendList friendList);
+  
+  ArrayList<Member> unFriendList(Search search);
+  
+  int addFRD(FriendList friendList);
 
+  int addFRD2(FriendList friendList);
 }

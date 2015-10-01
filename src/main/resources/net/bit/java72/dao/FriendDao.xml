@@ -9,6 +9,23 @@
     <result column="STATE"     property="state"/>
     <result column="FRD_DT"   property="friendDate"/>
   </resultMap>
+    <resultMap type="Member" id="MemberMap">
+    <id     column="mno"      property="mno" />
+    <result column="email"    property="email"/>
+    <result column="nicknm"   property="nickname" />
+    <result column="pwd"      property="password" />
+    <result column="cre_dt"   property="createDate" />
+    <result column="hometwn"  property="hometown"/>
+    <result column="lat"      property="latitude"/>
+    <result column="lon"      property="longitude"/>
+    <result column="addr"     property="address"/>
+    <result column="mphoto"   property="profilePicture"/>
+  </resultMap>
+  <resultMap type="Search" id="SearchMap">
+  	<result column="mno"		property="mno"/>
+  	<result column="searchType"	property="searchType"/>
+  	<result column="searchCnt"	property="searchCnt"/>
+  </resultMap>
 
   <select id="frdList" parameterType="Int" resultType="int">
     SELECT *
@@ -20,13 +37,13 @@
   <select id="applyList" parameterType="Int" resultType="int">
     SELECT *
     FROM FRD_T
-    WHERE mno=#{values} and state=1
+    WHERE mno=#{values} and state=3
   </select>
     
   <select id="applyList2" parameterType="Int" resultType="int">
     SELECT *
     FROM FRD_T
-    WHERE mno=#{values} and state=3
+    WHERE mno=#{values} and state=1
   </select>
   	
   <select id="getFRD" parameterType="int">
@@ -34,10 +51,22 @@
   	FROM memb_t
   	where mno=#{values}
   </select>
+   
+  <select id="unFriendList" parameterType="Search" resultMap="MemberMap">
+  	SELECT * 
+  	FROM memb_t
+  	WHERE mno NOT IN (select frdno from frd_t where mno=#{mno}) and mno !=#{mno}
+  	<include refid='search'></include>
+  </select>
   
   <insert id="addFRD" parameterType="FriendList">
     INSERT INTO FRD_T(mno, frdno, state, frd_dt) 
-    VALUES(#{mno}, #{frdno},1, now())
+    VALUES(#{mno}, #{frdmno},1, now())
+  </insert>
+  
+  <insert id="addFRD2" parameterType="FriendList">
+    INSERT INTO FRD_T(mno, frdno, state, frd_dt) 
+    VALUES(#{mno}, #{frdmno},3, now())
   </insert>
   
   <update id="acceptFRD" parameterType="FriendList">
@@ -47,28 +76,21 @@
   <delete id="deleteFRD" parameterType="FriendList">
   DELETE from FRD_T where mno=#{mno} and frdno=#{frdmno}
   </delete>
-	<sql id="search">
+
+<sql id="search">
 		<if test="searchType != null">
-			<if test="searchType == 'all'.toString()">
-				and( btitle like concat( '%', #{keyword}, '%' )
-				or bcontent like concat( '%', #{keyword}, '%' ) 
-				or nickname	like concat( '%',#{keyword}, '%' ) 
-				or email like concat( '%',#{keyword}, '%' ))
+			<if test="searchType == 1">
+				and NAME like concat( '%', #{searchCnt}, '%' )
 			</if>
-			<if test="searchType == 'btitle'.toString()">
-				and btitle like concat( '%', #{keyword}, '%' )
+			<if test="searchType == 2">
+				and NICKNM like concat( '%', #{searchCnt}, '%' )
 			</if>
-			<if test="searchType == 'bcontent'.toString()">
-				and bcontent like concat( '%', #{keyword}, '%' )
-			</if>
-			<if test="searchType == 'nickname'.toString()">
-				and nickname like concat( '%', #{keyword}, '%' )
-			</if>
-			<if test="searchType == 'email'.toString()">
-				and email like concat( '%', #{keyword}, '%' )
+			<if test="searchType == 3">
+				and EMAIL like concat( '%', #{searchCnt}, '%' )
 			</if>
 		</if>
-	</sql>
+</sql>
+	
 </mapper>
 
 

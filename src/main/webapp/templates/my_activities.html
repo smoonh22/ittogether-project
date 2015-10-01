@@ -9,50 +9,7 @@
             <div class="btn btn-info btn-ms btn-block map-btn"
                data-target="#layerpop" data-toggle="modal"   >새 활동 만들기</div>
                
-            <div class="modal fade" id="layerpop" >
-               <div class="modal-dialog">
-                  <div class="modal-content">
-                     <!-- header -->
-                     <div class="modal-header">
-                        <!-- 닫기(x) 버튼 -->
-                        <button type="button" class="close" data-dismiss="modal">×</button>
-                        <!-- header title -->
-                        <h4 class="modal-title">새 활동 만들기</h4>
-                     </div>
-                     <!-- body -->
-                     <div class="modal-body">
-                        <small class="text-muted"> <label>카테고리</label> <input
-                           type="text" name="datalist" list="datalist"
-                           class="form-control" value="{{feed.category}}"> <datalist
-                              id="datalist">
-                              <option value="나눔"></option>
-                              <option value="도움"></option>
-                              <option value="요청"></option>
-                           </datalist> <br> <br>
-                        </small> <small class="text-muted"> <label>제목</label> <input
-                           type="text" class="form-control" value="{{feed.title}}">
-                        </small> <small class="text-muted"> <label>내용</label> <input
-                           type="text" class="form-control" value="{{feed.content}}">
-                        </small><br> <small class="text-muted"> <label>인원수 </label> <input
-                           type="number" min="2" max="10" value="{{feed.maxHeadCount}}">
-                        </small> <small class="text-muted"> <label>날짜입력 </label> <input
-                           type="date" min="2015-09-01" max="2019-12-31"
-                           value="{{feed.meetTime}}" >
-                        </small> <small class="text-muted"> <label>시간입력</label> <input
-                           type="time" value="{{feed.meetTime}}">
-                        </small>
 
-                        <!-- Footer -->
-                        <div class="modal-footer">
-
-        <button type="button" class="btn btn-primary" id="save-changes">새 활동 만들기</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-
-            </div>
          </div>
       </div>
    </div>
@@ -101,3 +58,5 @@
    </div>
    </div>
    
+   
+   <act-modal></act-modal>
