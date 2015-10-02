@@ -19,6 +19,7 @@ import net.bit.java72.domain.FriendFeed;
 import net.bit.java72.domain.Member;
 import net.bit.java72.service.FeedService;
 import net.bit.java72.service.MemberService;
+import net.bit.java72.util.CalculateDistance;
 
 @Controller("FeedController")
 @RequestMapping("/feed")
@@ -74,7 +75,7 @@ public class FeedController {
       double lat2 = Double.parseDouble(member.getLatitude());
       double lon2 = Double.parseDouble(member.getLongitude());
       
-      double distance = CalcDistance(lat,lon,lat2,lon2);
+      double distance = CalculateDistance.getDistance(lat,lon,lat2,lon2);
       if(distance <= 1000){
         List<FriendFeed> feeds = feedService.noneFriendFeed(member.getMno());
         for(FriendFeed test : feeds){
@@ -87,9 +88,6 @@ public class FeedController {
     }  
     result.put("data", frdList);
   } catch (Exception e) {}
-//  HttpHeaders headers = new HttpHeaders();
-//  headers.add("Content-type"
-//      , "text/plain;charset=UTF-8");
   
   return result;  
   }
@@ -143,23 +141,6 @@ public class FeedController {
     return result;
   }
   
-
-  public double CalcDistance(double lat1,double lon1,double lat2,double lon2) {
-    double EARTH_R, Rad, radLat1, radLat2, radDist; 
-    double distance, ret;
-
-    EARTH_R = 6371000.0;
-    Rad = Math.PI/180;
-    radLat1 = Rad * lat1;
-    radLat2 = Rad * lat2;
-    radDist = Rad * (lon1 - lon2);
-
-    distance = Math.sin(radLat1) * Math.sin(radLat2);
-    distance = distance + Math.cos(radLat1) * Math.cos(radLat2) * Math.cos(radDist);
-    ret = EARTH_R * Math.acos(distance);
-
-    return  Math.round(Math.round(ret) / 1000);
-  }
   
   public String CalcTime(Date meetTime){
     Calendar calendar = Calendar.getInstance();

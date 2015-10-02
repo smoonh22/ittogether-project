@@ -138,7 +138,7 @@
     getFno = $(this).attr('data-fno');
      $.getJSON('feed/detail.do', 
         {
-          fno: getFno
+          fno: getFno    
         }, function(result) {
         //계속 쭉 해라 나머지 데이터들  
        $('#detail-title').text(result.detail.title);

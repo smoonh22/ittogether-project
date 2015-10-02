@@ -23,7 +23,6 @@ requirejs.config({
       'friendsFeed': 'js/app/friendsFeed',
       'tour': 'js/app/tour',
       'myActivities': 'js/app/myActivities',
-      'mainMap' : 'js/app/main_map',
       'myFriendList': 'js/app/myFriendList',
       'info-modal': 'js/app/info-modal'
     },
@@ -49,7 +48,7 @@ requirejs.config({
       deps:['jquery']
     },
     'main': {
-      deps: ['angular-route', 'ng-file-upload', 'friendsFeed', 'bootstrap.min', 'tour','myFriendList','myActivities','mainMap']
+      deps: ['angular-route', 'ng-file-upload', 'friendsFeed', 'bootstrap.min', 'tour','myFriendList','myActivities']
     },
     'friendsFeed': {
       deps: ['angular']
@@ -59,9 +58,6 @@ requirejs.config({
     },
     'angular-masonry-directive' : {
       deps:['angular','jquery']
-    },
-    'mainMap': {
-      deps: ['angular']
     },
     'myFriendList': {
       deps: ['angular']

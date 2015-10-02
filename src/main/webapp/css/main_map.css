@@ -28,6 +28,8 @@
   position: absolute;
   right: 15px;
   table-layout: fixed;
+  overflow: scroll;
+  
 }
 #friend-table {
   margin: 10px;

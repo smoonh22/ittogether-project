@@ -39,7 +39,7 @@
    t2.FNO,
    t2.CATEGRY,
    t2.MAX_HEADCNT,
-   t2.CNT,
+   t2.CURRENT_CNT,
    t2.MEET_TIME,
    t2.CONTNT,
    t2.cre_dt,
@@ -58,7 +58,7 @@
    t2.fno,
    t2.CATEGRY,
    t2.MAX_HEADCNT,
-   t2.CNT,
+   t2.CURRENT_CNT,
    t2.MEET_TIME,
    t2.CONTNT,
    t2.cre_dt,
@@ -70,7 +70,7 @@
   
   <insert id="insert" parameterType="Feed">
   INSERT INTO 
-  feed_t(mno,categry,contnt,cre_dt,title,max_headcnt,cnt,meet_time)
+  feed_t(mno,categry,contnt,cre_dt,title,max_headcnt,CURRENT_CNT,meet_time)
   VALUES (#{mno},#{category},#{content},now(),#{title},#{maxHeadCount},#{stuffCount},#{meetTime})
   </insert>
   
@@ -88,7 +88,7 @@
    t2.FNO,
    t2.CATEGRY,
    t2.MAX_HEADCNT,
-   t2.CNT,
+   t2.CURRENT_CNT,
    t2.MEET_TIME,
    t2.CONTNT,
    t2.cre_dt,

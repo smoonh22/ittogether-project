@@ -64,11 +64,6 @@ public class MemberServiceImpl implements MemberService {
     return memberDao.getlatlon(mno);
   }
   @Override
-  public List<Member> getMembers(int frdno) {
-    // TODO Auto-generated method stub
-    return memberDao.getMembers(frdno);
-  }
-  @Override
   public List<Member> getFriends(int frdno) {
     // TODO Auto-generated method stub
     return memberDao.getFriends(frdno);
@@ -77,6 +72,11 @@ public class MemberServiceImpl implements MemberService {
   public List<Member> getMyLoc(int mno) {
     // TODO Auto-generated method stub
     return memberDao.getMyLoc(mno);
+  }
+  @Override
+  public List<Member> getNoneFriendMarks(int mno) {
+    // TODO Auto-generated method stub
+    return memberDao.getNoneFriendMarks(mno);
   }
  
 
