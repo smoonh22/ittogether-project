@@ -159,7 +159,7 @@ public class FeedController {
     ret = EARTH_R * Math.acos(distance);
 
     return  Math.round(Math.round(ret) / 1000);
-  }
+  } 
   
   public String CalcTime(Date meetTime){
     Calendar calendar = Calendar.getInstance();

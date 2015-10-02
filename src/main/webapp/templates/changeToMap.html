@@ -31,12 +31,12 @@
 								<p id="user-name">{{feed.name}}</p>
 								<h5 id="feed-info">
 									<small class="text-muted"><img
-										src="images/icons/calendar.png"> {{feed.meetTime}} </small> <small
+										src="images/icons/calendar.png"> {{feed.createDate}} </small> <small
 										class="text-muted"><img
 										src="images/icons/multiple.png">
 										{{feed.stuffCount}}/{{feed.maxHeadCount}} </small> <small
 										class="text-muted"><img src="images/icons/time.png">
-										{{feed.createDate}}</small>
+										{{feed.dday}}</small>
 								</h5>
 								<hr>
       
@@ -69,28 +69,26 @@
 							<div class="col-md-3">
 							<div class="img-div">
 								<span id="img-in-box"> <img
-									src='{{nfeed.profileImg}}' id='nonfriend-profileImg'
+									src='images/{{nfeed.profileImg}}' id='nonfriend-profileImg'
 									class="img-circle">
 							</div>
 							</div>
-							<a href="#detailModal" data-toggle="modal" data-fno="{{nfeed.fno}}" class="detail-view">
 							<div class="col-md-9">
 							<div class="content-div">
 								<p id="user-name">{{nfeed.name}}</p>
 								<h5 id="feed-info">
 									<small class="text-muted"><img
-										src="images/icons/calendar.png"> {{nfeed.date}} </small> <small
+										src="images/icons/calendar.png"> {{nfeed.createDate}} </small> <small
 										class="text-muted"><img
 										src="images/icons/multiple.png">
-										{{nfeed.headcount}} </small> <small
+										{{nfeed.stuffCount}}/{{nfeed.maxHeadCount}} </small> <small
 										class="text-muted"><img src="images/icons/time.png">
-										{{nfeed.pasttime}}</small>
+										{{nfeed.dday}}</small>
 								</h5>
 								<hr>
-								<div id="unfriend-content">{{nfeed.title}}</div>
+								<div id="unfriend-content">{{nfeed.content}}</div>
 							</div>
 							</div>
-							</a>
 						</div>
 					</div>
 				</div>
@@ -98,6 +96,7 @@
 				</div>
 			</div>
 			</div>
+		</div>
       
 
 <!-- modal start -->

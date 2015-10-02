@@ -52,10 +52,12 @@
   	where mno=#{values}
   </select>
    
+   
+   <!-- 친구아닌사람 검색에서 친구 검색으로 수정 -->
   <select id="unFriendList" parameterType="Search" resultMap="MemberMap">
   	SELECT * 
   	FROM memb_t
-  	WHERE mno NOT IN (select frdno from frd_t where mno=#{mno}) and mno !=#{mno}
+  	WHERE mno IN (select frdno from frd_t where mno=#{mno} and state=2) and mno !=#{mno}
   	<include refid='search'></include>
   </select>
   

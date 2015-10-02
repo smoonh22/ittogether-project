@@ -15,18 +15,19 @@ app.controller('myFriendCtrl',['$http','$scope', function($http,$scope) {
       parent_scope.applyList2s = result.applyU;
       
     });
-  /*  $scope.applyfrd = function () {
-      $http.get('frd/delete.do', { frdmno : parent_scope.delfrdmno },
-          function(response) {
-        console.log("dbdbdbd");
-      },
-      
-      function(failure) {
-        console.log("failed :(", failure);
-      });
-    }*/
- $scope.search = function(typeBox, searchQuery) {
-   $http.get('frd/search.do',{params : {mno: sessionStorage.getItem('mno') ,searchCnt : searchQuery ,searchType : typeBox }}).success(function(result){
+
+ $scope.typeBox = {
+    
+     availableOptions : [
+                         {value : '1', name : '이름'},
+                         {value : '2', name : '닉네임'},
+                         {value : '3', name : '이메일'}
+                         ],
+     selectedOption : {value : '3', name : '이메일'}
+ };   
+   
+ $scope.search = function(searchQuery) {
+   $http.get('frd/search.do',{params : {mno: sessionStorage.getItem('mno') ,searchCnt : searchQuery ,searchType : $('#typeBox').val() }}).success(function(result){
      parent_scope.searchLists = result.searchList;
    })
  };
