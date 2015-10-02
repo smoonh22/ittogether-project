@@ -16,7 +16,6 @@
     <result column="addr"     property="address"/>
     <result column="mphoto"   property="profilePicture"/>
     <result column="sex"      property="sex"/>
-    <result column="hb"       property="hobby"/>
     <result column="intro"    property="introduction"/>
     <result column="age"      property="age"/>
   </resultMap>
@@ -75,7 +74,7 @@
       intro=#{introduction},
       sex=#{sex},
       age=#{age},
-      hb=#{hobby},
+      hobby=#{hobby},
       hometwn=#{hometown}
     WHERE email = #{email}    
   </update>

@@ -1,7 +1,7 @@
 define(function () {
- 
+    
   //페이지가 완전히 로드된 뒤에 실행
-  var app = angular.module('main', ['ngRoute', 'friendsFeed', 'myFriendList','myActivities']);
+  var app = angular.module('main', ['ngRoute', 'ngFileUpload', 'friendsFeed', 'myFriendList','myActivities']);
   app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/home', {
       templateUrl: 'templates/changeToMap.html',
@@ -23,7 +23,7 @@ define(function () {
 
   
   //개인정보 모달 directives
-  app.directive('infoModal', function () {
+  app.directive('infoModal', ['Upload', function (Upload) {
     
     return {
       restrict: 'E',
@@ -35,6 +35,18 @@ define(function () {
         }, function (result) {
           parent_scope.userDatas = result.data;
         });
+        
+          parent_scope.uploadFiles = function(file) {
+          Upload.upload({
+            url: 'file/upload.do',
+            data: {file: file}
+        }).success(function (data, status, headers, config) {
+            $('#profile-img').attr('src', data.data[0].url);
+        }).error(function (data, status, headers, config) {
+            console.log('error status: ' + status);
+        })
+        };
+        
         
          $('#save-changes').click(function (event) {
             var radio = $("input:radio[name='radioButton']:checked").val();
@@ -55,7 +67,8 @@ define(function () {
                   age: $('#age').val(),
                   hobby: $('#hobby').val(),
                   hometown: $('#hometown').val(),
-                  sex: radio
+                  sex: radio,
+                  profilePicture: $('#profile-img').attr('src')
                },
               success: function(result){
                  if (result.data == 'success') {
@@ -65,25 +78,11 @@ define(function () {
               }
            });
         });
-        
-        $(function () {
-$(function () {
-    $('#fileupload1').fileupload({
-        dataType: 'json',
-        done: function (e, data) {
-            $.each(data.result.data, function (index, file) {
-                $('#profile-img').attr('src', file.url);
-            });
-        }
-    });
-});
-});
-      
       },
       controllerAs: 'infoCtrl',
       templateUrl: 'templates/modals/info-modal.html'
     };
-  });
+  }]);
   
   //심심해 모달 
   app.directive('boredModal', function () {
@@ -101,6 +100,8 @@ $(function () {
     };
   });
   
+  
+  //  메인 화면에서 지도로 토글 시키는 컨트롤러
   app.controller('toggleToMapCtrl', ['$http', '$scope', function($http, $scope) {
       var parent_scope = $scope;
       $scope.subview = 'main_html';

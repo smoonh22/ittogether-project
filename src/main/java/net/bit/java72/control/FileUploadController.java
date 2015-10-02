@@ -26,7 +26,6 @@ public class FileUploadController {
   public Object upload(
       @RequestParam(required=false) MultipartFile[] file,
       HttpServletRequest request) throws Exception {
-    
       String filename = null;
       File newPath = null;
       ArrayList<FileItem> files = new ArrayList<FileItem>();

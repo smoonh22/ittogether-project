@@ -14,10 +14,9 @@ requirejs.config({
       'bootstrap.min': 'bower_components/bootstrap/dist/js/bootstrap',
       'bootstrap-tour': 'bower_components/bootstrap-tour/build/js/bootstrap-tour',
       'angular-route': 'bower_components/angular-route/angular-route',
-      'jquery_ui_widget' : 'bower_components/blueimp-file-upload/js/vendor/jquery.ui.widget',
-      'jquery-iframe-transport': 'bower_components/blueimp-file-upload/js/jquery.iframe-transport',
-      'jquery-fileupload': 'bower_components/blueimp-file-upload/js/jquery.fileupload',
       'angular-masonry-directive' : 'bower_components/angular-masonry-directive/angular-masonry-directive',
+      'ng-file-upload': 'bower_components/ng-file-upload/ng-file-upload',
+      'ng-file-upload-shim': 'bower_components/ng-file-upload/ng-file-upload-shim',
       //컨트롤러
       'main': 'js/app/main',
       'myFriendList': 'js/app/myFriendList',
@@ -34,26 +33,23 @@ requirejs.config({
       deps: ['jquery'],
       exports: 'angular'
     },
+    'ng-file-upload': {
+      deps: ['angular']
+    },
     'angular-route': {
       deps: ['angular']
     },
-    'jquery_ui_widget' : {
-      deps:['jquery-iframe-transport']
-    },
-    'jquery-iframe-transport': {
-      deps: ['jquery-fileupload']
+    'bootstrap.min': {
+      deps: ['jquery']
     },
     'tour': {
       deps:['bootstrap-tour']
-    },
-    'bootstrap.min': {
-      deps: ['jquery']
     },
     'bootstrap-tour': {
       deps:['jquery']
     },
     'main': {
-      deps: ['angular-route', 'friendsFeed', 'bootstrap.min', 'tour','myFriendList','myActivities','mainMap', 'jquery_ui_widget']
+      deps: ['angular-route', 'ng-file-upload', 'friendsFeed', 'bootstrap.min', 'tour','myFriendList','myActivities','mainMap']
     },
     'friendsFeed': {
       deps: ['angular']

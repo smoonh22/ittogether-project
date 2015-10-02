@@ -1,7 +1,5 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&libraries=places&callback=initAutocomplete" async defer></script>
 
-<script type="text/javascript" src="js/app/info-modal.js"></script>
-
 <!-- modal start -->
 <div id="infoModal" class="modal fade">
   <div class="modal-dialog">
@@ -14,14 +12,12 @@
         <form role="form">
             <div class="profile-info-div2">
               <img id="profile-img" class='img-circle' src='{{infoCtrl.userDatas.profilePicture}}' />
-            <div class="form-group my-new">
-              <div>
-                <span class="btn btn-success fileinput-button profile-info-span2">
-                  <i class="glyphicon glyphicon-plus"></i>
-                  <span>파일 찾기</span>
-                  <input id="fileupload1" type="file" name="file" data-url="file/upload.do" multiple>
-                </span>
-              </div>
+              <div class="col-sm-10">
+<!--                <span class="btn btn-success fileinput-button">-->
+        
+               <button class="btn btn-success fileinput-button" type="file" ngf-select="infoCtrl.uploadFiles($file)">
+      <i class="glyphicon glyphicon-plus"></i>파일찾기</button>
+<!--                </span>-->
             </div>
           </div>
           <div class="form-group info-div">
@@ -47,8 +43,8 @@
               <div id="map"></div>
               </div>
               <div hidden="true">
-                <input type="text" id="latitude" value="{{infoCtrl.userDatas.latitude}}">
-                <input type="text" id="longitude" value="{{infoCtrl.userDatas.longitude}}">
+                <input type="text" class="info-latitude" value="{{infoCtrl.userDatas.latitude}}">
+                <input type="text" class="info-longitude" value="{{infoCtrl.userDatas.longitude}}">
               </div>
             </div>
           <div class="form-group">
@@ -79,8 +75,8 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="save-changes">Save changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-primary" id="save-changes">수정하기</button>
       </div>
       <!-- /.modal-content -->
     </div>
@@ -91,6 +87,19 @@
 
 
 <script>
+  //파일 업로드
+//  $(function () {
+//    $('#fileupload').fileupload({
+//        dataType: 'json',
+//        done: function (e, data) {
+//            $.each(data.result.data, function (index, file) {
+//                $('#profile-img').attr('src', file.url);
+//            });
+//        }
+//    });
+//});
+
+  
 function initAutocomplete() { /* 초기화 함수*/
   
   var myHome = [];
@@ -156,8 +165,8 @@ console.log('bounds: ' + bounds);
     map.fitBounds(bounds);
 //    map.setZoom(1);
     
-    $("#latitude").val(markers[0].position.H); /* 위도 경도 */
-    $("#longitude").val(markers[0].position.L);
+    $(".info-latitude").val(markers[0].position.H); /* 위도 경도 */
+    $(".info-longitude").val(markers[0].position.L);
 console.log('markers[0].position.H: ' + markers[0].position.H);
 console.log('markers[0].position.L: ' + markers[0].position.L);
 
@@ -169,8 +178,8 @@ console.log(event.latLng);
     function addMarker(location, map) {
       markers[0].setPosition(location);
       markers[0].setPosition(location);
-      $("#latitude").val(markers[0].position.H); /* 위도 경도 */
-      $("#longitude").val(markers[0].position.L);
+      $(".info-latitude").val(markers[0].position.H); /* 위도 경도 */
+      $(".info-longitude").val(markers[0].position.L);
     }
   });
   
