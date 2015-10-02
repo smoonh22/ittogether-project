@@ -26,7 +26,6 @@
 <div id="friend-box">
 </div>
 
-
 <script>
   //json형식으로 받아온 데이터를 뿌려줌
   var myLoc = [];
@@ -127,7 +126,6 @@
         population: 26 /* 반경 설정 200m: 26, 500m: 65, 1km: 130 */
       }
     };
-
     map = new google.maps.Map(document.getElementById('mainMap'), {
       zoom: 17,
       /* 처음 화면을 보여주는 위도, 경도 */
@@ -242,9 +240,6 @@
     });
 
 
-
-
-
     function markMyLoc() {
       var marker = new google.maps.Marker({
         position: {
@@ -275,12 +270,10 @@
       friendMarkers[i].addListener('click', function() {
         friendWindow[i].open(map, friendMarkers[i]);
       });
-      //    }, i * 100);
     }
 
     function markNotFriends(i) {
       var notFriendLoc = notFriendLocArr[i];
-      //    window.setTimeout(function() {
       notFriendMarkers.push(new google.maps.Marker({
         title: notFriendLoc[0],
         position: {
@@ -352,15 +345,3 @@
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&callback=initMap" async defer></script>
-<!--
-
-<script type="text/javascript">
-	(function() {
-	   $.getJSON('member/userInfo.do', {
-	          nickname: sessionStorage.getItem('nickname')
-	        }, function (result) {
-	        });
-	})();
-  
-</script>
--->

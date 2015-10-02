@@ -321,5 +321,66 @@ hr {
   bottom : 10px;
   right: 10px;
   width: 400px;
+}
+
+
+/* detailModal에서 친구 활동 디테일 관련*/
+.detail-user-info {
+/*  position: absolute;*/
+/*  float: left;*/
+  margin-left: 10px;
+/*  margin-top: 50px;*/
+}
+.detail-detail {
+  position: static;
+  float: right;
+  width: 420px;
+/*  left: 400px;*/
+}
+.detail-content {
+  background-color: #F2F4F5;
+/*  width: 400px;*/
+  height: 100px;
+}
+.detail-footer {
+}
+.detail-btn {
+  position: static;
+  float: right;
+}
+.dtail-default-img1 {
+  position: static;
+/*  float: left;*/
+  width: 180px;
+  padding: 5px;
+  margin-left: auto;
+}
+.dtail-default-img2 {
+  position: static;
+  width: 180px;
+  padding: 5px;
+  margin-left: auto;
+  margin-right: auto;
   
+}
+.dtail-default-img3 {
+  position: static;
+/*  float: right;*/
+  width: 180px;
+  padding: 5px;
+/*  padding-right: 18px;*/
+  margin-right: auto;
+}
+.detail-title {
+  vertical-align: text-top;
+}
+.detail-header {
+  height: 45px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #009AF3;
+  color: white;
+}
+.detail-user-name {
+  left: 10px;
 }
