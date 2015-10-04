@@ -55,7 +55,7 @@ requirejs.config({
       deps: ['angular']
     },
     'myActivities': {
-      deps: ['angular','angular-masonry']
+      deps: ['angular']
     },
     'angular-masonry-directive' : {
       deps:['angular','jquery']

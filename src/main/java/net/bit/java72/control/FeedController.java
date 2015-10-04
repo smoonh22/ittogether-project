@@ -33,8 +33,11 @@ public class FeedController {
   Map<String,Object> result = new HashMap<String,Object>();
   try {
     List<FriendFeed> test = feedService.list(mno);
+    SimpleDateFormat format = new SimpleDateFormat("yy년 MM월 dd일 E요일");
     for(FriendFeed feed : test){
-     feed.setDday(CalcTime(feed.getMeetTime()));
+      String meetdate = format.format(feed.getMeetTime());
+      feed.setMeetDday(meetdate);
+      feed.setDday(CalcTime(feed.getCreateDate()));
     }
     result.put("data",test);
     
@@ -118,7 +121,6 @@ public class FeedController {
   //최근 피드 클릭시 디테일 정보 
   @RequestMapping("/detail")
   public Object detail(int fno) throws Exception {
-    System.out.println(fno + "jjjjjj");
     Map<String,Object> result = new HashMap<String,Object>();
     FriendFeed friendFeed = feedService.getDetail(fno);
     result.put("detail", friendFeed);
@@ -129,7 +131,6 @@ public class FeedController {
   
   @RequestMapping("/friendjoin")
   public Object friendJoin(int mno, int fno) throws Exception {
-    System.out.println(fno + " : :" + mno);
     Map<String,Object> result = new HashMap<String,Object>();
     int count = feedService.friendJoinActivity(mno, fno);
   
@@ -166,9 +167,9 @@ public class FeedController {
     calendar.setTime(meetTime);
     long orderTime = calendar.getTimeInMillis();
     long currentTime = System.currentTimeMillis();
-    
-    long calcTime = (orderTime - currentTime)/1000;
-   if (calcTime > 0){ 
+    long calcTime = (currentTime - orderTime)/1000;
+
+    if (calcTime > 0){ 
        if((calcTime/86400) > 0) {
          return calcTime/86400 +"일 전";
        } else if(calcTime/3600 > 0) {

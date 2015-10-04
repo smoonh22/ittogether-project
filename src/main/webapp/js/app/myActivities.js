@@ -1,6 +1,6 @@
 define(function () {
 
-      var app = angular.module('myActivities', ['wu.masonry']);
+      var app = angular.module('myActivities', []);
 
       app.controller('activityCtrl', ['$http', function ($http) {
         var parent_scope = this;

@@ -25,8 +25,21 @@ public class FriendFeed implements Serializable {
   protected int sex;
   protected String hometown;
   protected String Dday;
+  protected String meetDday;
 
   
+
+  public String getMeetDday() {
+    return meetDday;
+  }
+
+
+
+  public void setMeetDday(String meetDday) {
+    this.meetDday = meetDday;
+  }
+
+
 
   @Override
   public String toString() {
@@ -85,7 +98,7 @@ public class FriendFeed implements Serializable {
     return createDate;
   }
 
-  public void setCreateDate(java.sql.Date createDate) {
+  public void setCreateDate(Date createDate) {
     this.createDate = createDate;
   }
 
@@ -206,5 +219,10 @@ public class FriendFeed implements Serializable {
   }
 
   protected String profilePicture;
+
+
+
+
+
 
 }
