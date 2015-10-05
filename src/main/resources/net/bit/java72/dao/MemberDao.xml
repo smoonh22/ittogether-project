@@ -76,7 +76,9 @@
       age=#{age},
       hobby=#{hobby},
       hometwn=#{hometown},
-      addr=#{address}
+      addr=#{address},
+      lat = #{latitude},
+      lon = #{longitude}
     WHERE email = #{email}    
   </update>
   

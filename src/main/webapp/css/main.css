@@ -331,6 +331,11 @@ hr {
   margin-left: 10px;
 /*  margin-top: 50px;*/
 }
+#detail-profilePicture {
+  width: 100px;
+  height: 100px;
+  
+}
 .detail-detail {
   position: static;
   float: right;

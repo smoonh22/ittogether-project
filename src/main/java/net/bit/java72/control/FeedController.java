@@ -141,7 +141,6 @@ public class FeedController {
     return result;
   }
   
-  
   public String CalcTime(Date meetTime){
     Calendar calendar = Calendar.getInstance();
     calendar.setTime(meetTime);

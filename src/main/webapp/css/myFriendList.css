@@ -2,5 +2,6 @@
 	width : 500%;
 }
 .header-image {
-	max-width : 130px;
+	width: 80px;
+	height: 80px;
 }

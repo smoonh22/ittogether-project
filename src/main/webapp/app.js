@@ -14,7 +14,6 @@ requirejs.config({
       'bootstrap.min': 'bower_components/bootstrap/dist/js/bootstrap',
       'bootstrap-tour': 'bower_components/bootstrap-tour/build/js/bootstrap-tour',
       'angular-route': 'bower_components/angular-route/angular-route',
-      'angular-masonry-directive' : 'bower_components/angular-masonry-directive/angular-masonry-directive',
       'ng-file-upload': 'bower_components/ng-file-upload/ng-file-upload',
       'ng-file-upload-shim': 'bower_components/ng-file-upload/ng-file-upload-shim',
       //컨트롤러
@@ -54,10 +53,7 @@ requirejs.config({
       deps: ['angular']
     },
     'myActivities': {
-      deps: ['angular','angular-masonry-directive']
-    },
-    'angular-masonry-directive' : {
-      deps:['angular','jquery']
+      deps: ['angular']
     },
     'myFriendList': {
       deps: ['angular']

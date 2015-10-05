@@ -9,7 +9,7 @@
     <result column="contnt"      property="content" />
     <result column="cre_dt"   property="createDate" />
     <result column="max_headcnt" property="maxHeadCount"/>
-    <result column="cnt" property="stuffCount"/>
+    <result column="current_cnt" property="currentCount"/>
     <result column="meet_time" property="meetTime"/>
   </resultMap>
   
@@ -19,7 +19,7 @@
     <result column="contnt"      property="content" />
     <result column="cre_dt"   property="createDate" />
     <result column="max_headcnt" property="maxHeadCount"/>
-    <result column="cnt" property="stuffCount"/>
+    <result column="current_cnt" property="currentCount"/>
     <result column="meet_time" property="meetTime"/>
     <result column="nicknm"    property="nickname" />
     <result column="pwd"      property="password" />
@@ -30,7 +30,7 @@
     <result column="mphoto" property="profilePicture"/>
   </resultMap>
  
-
+ <!--  모임약속시간 이 현재시간보다 나중이어야 출력하는걸로 수정 -->
   <select id="list" resultMap="FriendFeedMap" parameterType="int">
   select 
    t1.nicknm,
@@ -46,10 +46,11 @@
    t2.TITLE
    from memb_t t1 left outer join feed_t t2 
    on t1.mno=t2.mno
-   where t2.categry is not null and t2.cre_dt  > curdate()-1 and t1.mno IN (select frdno from frd_t where mno=#{values} and state=2)
+   where t2.categry is not null and t2.meet_time > now() and t1.mno IN (select frdno from frd_t where mno=#{values} and state=2)
    ORDER by t2.cre_dt desc;
   </select>	
   
+  <!--  모임약속시간 이 현재시간보다 나중이어야 출력하는걸로 수정 -->
   <select id="noneFriendFeed" resultMap="FriendFeedMap" parameterType="int">
   select 
    t1.nicknm,
@@ -65,13 +66,13 @@
    t2.TITLE
    from memb_t t1 left outer join feed_t t2
    on t1.mno=t2.mno
-   where t2.categry is not null and t1.mno=#{values} and t2.cre_dt > curdate()-1
+   where t2.categry is not null and t1.mno=#{values} and t2.meet_time > now()
   </select>
   
   <insert id="insert" parameterType="Feed">
   INSERT INTO 
-  feed_t(mno,categry,contnt,cre_dt,title,max_headcnt,CURRENT_CNT,meet_time)
-  VALUES (#{mno},#{category},#{content},now(),#{title},#{maxHeadCount},#{stuffCount},#{meetTime})
+  feed_t(mno,categry,contnt,cre_dt,title,max_headcnt,meet_time)
+  VALUES (#{mno},#{category},#{content},now(),#{title},#{maxHeadCount},#{meetTime})
   </insert>
   
  <!-- 내정보 에서 밑에 게시물 출력 -->

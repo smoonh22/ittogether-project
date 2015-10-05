@@ -43,7 +43,7 @@ public class MemberController {
   @RequestMapping("/updateUser")
   public Object update(Member member) {
     Map<String,Object> result = new HashMap<String,Object>();
-    System.out.println(member.getAddress());
+    System.out.println(member.getLatitude());
     int count = memberService.update(member);
     
     if ( count > 0) {

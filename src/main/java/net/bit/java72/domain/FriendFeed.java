@@ -13,7 +13,7 @@ public class FriendFeed implements Serializable {
   protected String title;
   protected Date createDate;
   protected int maxHeadCount;
-  protected int stuffCount;
+  protected int currentCount;
   protected Date meetTime;
   protected String nickname;
   protected String email;
@@ -28,14 +28,6 @@ public class FriendFeed implements Serializable {
 
   
 
-  @Override
-  public String toString() {
-    return "FriendFeed [fno=" + fno + ", mno=" + mno + ", category=" + category + ", content=" + content + ", title="
-        + title + ", createDate=" + createDate + ", maxHeadCount=" + maxHeadCount + ", stuffCount=" + stuffCount
-        + ", meetTime=" + meetTime + ", nickname=" + nickname + ", email=" + email + ", password=" + password
-        + ", name=" + name + ", address=" + address + ", latitude=" + latitude + ", longitude=" + longitude + ", sex="
-        + sex + ", hometown=" + hometown + ", profilePicture=" + profilePicture + "]";
-  }
 
 
 
@@ -97,13 +89,18 @@ public class FriendFeed implements Serializable {
     this.maxHeadCount = maxHeadCount;
   }
 
-  public int getStuffCount() {
-    return stuffCount;
+
+  public int getCurrentCount() {
+    return currentCount;
   }
 
-  public void setStuffCount(int stuffCount) {
-    this.stuffCount = stuffCount;
+
+
+  public void setCurrentCount(int currentCount) {
+    this.currentCount = currentCount;
   }
+
+
 
   public Date getMeetTime() {
     return meetTime;

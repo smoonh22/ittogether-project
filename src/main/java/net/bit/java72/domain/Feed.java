@@ -14,7 +14,7 @@ public class Feed implements Serializable {
   protected String title;
   protected Date createDate;
   protected int maxHeadCount;
-  protected int stuffCount;
+  protected int currentCount;
   protected Date meetTime;
   protected String tempDate;
   
@@ -76,12 +76,14 @@ public class Feed implements Serializable {
     this.maxHeadCount = maxHeadCount;
   }
 
-  public int getStuffCount() {
-    return stuffCount;
+  
+
+  public int getCurrentCount() {
+    return currentCount;
   }
 
-  public void setStuffCount(int stuffCount) {
-    this.stuffCount = stuffCount;
+  public void setCurrentCount(int currentCount) {
+    this.currentCount = currentCount;
   }
 
   public Date getMeetTime() {

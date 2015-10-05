@@ -1,62 +1,62 @@
 <link rel='stylesheet' href="css/myFriendList.css" />
 <!-- Navigation -->
-<nav class="navbar navbar-fixed-top" role="navigation">
-  <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#/home">
-        <img src="images/together-logo.png" alt="">
-      </a>
-    </div>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li>
-          <a href="#/activity" id="myActivities">내 활동</a>
-        </li>
-        <li>
-          <a href="#/myMap" id="myMap">내가 만든 지도</a>
-        </li>
-        <li>
-          <a data-toggle="modal" href="#boredModal">
-            <span class="glyphicon glyphicon-bullhorn"></span> 심심해</a>
-        </li>
-      </ul>
+  <nav class="navbar navbar-fixed-top" role="navigation">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#/home">
+          <img src="images/together-logo.png" alt="">
+        </a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="#/activity" id="myActivities">내 활동</a>
+          </li>
+          <li>
+            <a href="#/myMap" id="myMap">내가 만든 지도</a>
+          </li>
+          <li>
+            <a data-toggle="modal" href="#boredModal">
+              <span class="glyphicon glyphicon-bullhorn"></span> 심심해</a>
+          </li>
+        </ul>
+        
+        <ul class="nav navbar-nav navbar-right" ng-controller='myFriendCtrl as mFCtrl'>
+          
+          <li class="dropdown"><a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> 내 친구들</a>
+             <ul class="dropdown-menu" aria-labelledby="dLabel">   
+<ul class="nav nav-tabs" role="tablist">
+   <li role="presentation" class="active"><a href="#myFriendList" aria-controls="home" role="tab" data-toggle="tab">친구 목록</a></li>
+    <li role="presentation"><a href="#myApplyList" aria-controls="fflist" role="tab" data-toggle="tab">친구 요청</a></li>
+    <li role="presentation"><a href="#findFriend" aria-controls="aflist" role="tab" data-toggle="tab">친구 검색</a></li>
+  </ul>
 
-      <ul class="nav navbar-nav navbar-right" ng-controller='myFriendCtrl as mFCtrl'>
-
-        <li class="dropdown"><a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> 내 친구들</a>
-          <ul class="dropdown-menu" aria-labelledby="dLabel">
-            <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation" class="active"><a href="#findFriend" aria-controls="home" role="tab" data-toggle="tab">친구 검색</a></li>
-              <li role="presentation"><a href="#myFriendList" aria-controls="fflist" role="tab" data-toggle="tab">친구 목록</a></li>
-              <li role="presentation"><a href="#myApplyList" aria-controls="aflist" role="tab" data-toggle="tab">친구 요청</a></li>
-            </ul>
-
-            <!-- Tab panes -->
-            <div class="tab-content">
-              <div role="tabpanel" class="tab-pane active" id="findFriend">
+  <!-- Tab panes -->
+  <div class="tab-content">
+     <div role="tabpanel" class="tab-pane" id="findFriend">
                 <div class="panel panel-success">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">친구 검색</h3>
-                    <select class='searchType' ng-model='typeBox'>
-                      <option value="1">이름</option>
-                      <option value="2">닉네임</option>
-                      <option value="3">이메일</option>
-                    </select>
-                    <input type="text" ng-model='searchQuery'>
-                    <button class='searchBtn' ng-click='search(typeBox,searchQuery)'>검색</button>
-                  </div>
-                  <div class="panel-body">
-                    <div class='row' ng-repeat-start="findList in mFCtrl.searchLists">
-                      <div class='col-md-4'>
-                        <img class="img-circle header-image" src="images/{{findList.profilePicture}}" />
+                 <div class="panel-heading">
+                   <h3 class="panel-title">친구 검색</h3>
+                        <select id='typeBox'>
+                           <option value="1">이름</option>
+                           <option value="2" selected="selected">닉네임</option>
+                           <option value="3">이메일</option>
+                        </select>
+                  <input type="text" ng-model='searchQuery'>
+                  <button class='searchBtn' ng-click='search(searchQuery)'>검색</button>
+                 </div>
+                 <div class="panel-body" >
+                       <div class='row'  ng-repeat-start="findList in mFCtrl.searchLists">
+                      <div class='col-md-4' >
+                         <img class="img-circle header-image" src="{{findList.profilePicture}}"/>
                       </div>
                       <div class='col-md-5'>
                         <table>
@@ -72,50 +72,48 @@
                           </tr>
                         </table>
                       </div>
-                      <div class='col-md-3'>
-                        <br>
-                        <br>
-                        <button href='#' ng-click='insertfrd(findList.mno)' class='insertfrdbtn'>친구신청</button>
-                      </div>
-                    </div>
-                    <div ng-repeat-end></div>
-                  </div>
-                </div>
-              </div>
-              <div role="tabpanel" class="tab-pane" id="myFriendList">
-                <div class="panel panel-info">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">친구 목록</h3>
-                  </div>
-                  <div class="panel-body">
-                    <div class='row' ng-repeat-start="frdList in mFCtrl.frdLists">
-                      <div class='col-md-4'>
-                        <img class="img-circle header-image" src="images/{{frdList.profilePicture}}" />
+                  <!--     <div class='col-md-3' >
+                      <br><br>
+                      <button href='#' ng-click='insertfrd(findList.mno)' class='insertfrdbtn'>친구신청</button>
+                      </div> -->
+                   </div>
+                   <div  ng-repeat-end></div>
+                 </div >
+            </div>
+    </div>
+    <div role="tabpanel" class="tab-pane active" id="myFriendList">
+        <div class="panel panel-info">
+                 <div class="panel-heading">
+                   <h3 class="panel-title">친구 목록</h3>
+                 </div>
+                 <div class="panel-body" >
+                       <div class='row'  ng-repeat-start="frdList in mFCtrl.frdLists">
+                      <div class='col-md-4' >
+                         <img class="img-circle header-image" src="{{frdList.profilePicture}}"/>
                       </div>
                       <div class='col-md-6'>
-                        <table>
-                          <br>
-                          <tr>
-                            <td>이름 : {{frdList.name}}</td>
-                          </tr>
-                          <tr>
-                            <td>주소 : {{frdList.address}}</td>
-                          </tr>
-                          <tr>
-                            <td>이메일 : {{frdList.email}}</td>
-                          </tr>
-                        </table>
+                         <table>
+                         <br>
+                            <tr>   
+                               <td>이름 : {{frdList.name}}</td>
+                            </tr>
+                            <tr>
+                               <td>주소 : {{frdList.address}}</td>
+                            </tr>
+                            <tr>
+                               <td>이메일 : {{frdList.email}}</td>
+                            </tr>
+                         </table>
                       </div>
-                      <div class='col-md-2'>
-                        <br>
-                        <br>
-                        <button href='#' ng-click='delfrd(frdList.mno)' class='delfrdbtn'>삭제</button>
+                      <div class='col-md-2' >
+                      <br><br>
+                      <button href='#' ng-click='delfrd(frdList.mno)' class='delfrdbtn'>삭제</button>
                       </div>
-                    </div>
-                    <div ng-repeat-end></div>
-                  </div>
-                </div>
-              </div>
+                   </div>
+                   <div  ng-repeat-end></div>
+                 </div >
+            </div>
+    </div>
               <div role="tabpanel" class="tab-pane" id="myApplyList">
                 <div class="panel panel-primary">
                   <div class="panel-heading">
@@ -124,7 +122,7 @@
                   <div class="panel-body" ng-repeat="applyList in mFCtrl.applyLists">
                     <div class='row'>
                       <div class='col-md-4'>
-                        <img class="img-circle header-image" src="images/{{applyList.profilePicture}}" />
+                        <img class="img-circle header-image" src="{{applyList.profilePicture}}" />
                       </div>
                       <div class='col-md-6'>
                         <table>
@@ -150,7 +148,7 @@
                   <div class="panel-body" ng-repeat="applyList2 in mFCtrl.applyList2s">
                     <div class='row'>
                       <div class='col-md-4'>
-                        <img class="img-circle header-image" src="images/{{applyList2.profilePicture}}" />
+                        <img class="img-circle header-image" src="{{applyList2.profilePicture}}" />
                       </div>
                       <div class='col-md-6'>
                         <table>
@@ -186,7 +184,6 @@
     </div>
     <!-- /.container -->
 </nav>
-
 
 <script type="text/javascript">
   $('#userid').text(" " + sessionStorage.getItem('nickname') + " 님 ");
