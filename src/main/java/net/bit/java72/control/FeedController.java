@@ -51,10 +51,10 @@ public class FeedController {
 
   
   @RequestMapping("/myActivity")
-  public Object feedlist() {  
+  public Object feedlist(int mno) {  
     Map<String,Object> result = new HashMap<String,Object>();
     
-    result.put("activity", feedService.myActivityList());
+    result.put("activity", feedService.myActivityList(mno));
     
     return  result;
   }
@@ -98,7 +98,7 @@ public class FeedController {
   @RequestMapping("/insertUser")
   public Object insert(Feed feed) throws Exception{
     Map<String,Object> result = new HashMap<String,Object>();
-    
+    System.out.println(feed.getContent());
     int count = feedService.insert(feed);
     
     if ( count > 0 ) {

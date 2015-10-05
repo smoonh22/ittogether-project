@@ -16,6 +16,7 @@ requirejs.config({
       'angular-route': 'bower_components/angular-route/angular-route',
       'ng-file-upload': 'bower_components/ng-file-upload/ng-file-upload',
       'ng-file-upload-shim': 'bower_components/ng-file-upload/ng-file-upload-shim',
+      'kendo-ui':'bower_components/kendo-ui/kendo-ui',
       //컨트롤러
       'main': 'js/app/main',
       'myFriendList': 'js/app/myFriendList',
@@ -33,6 +34,9 @@ requirejs.config({
     },
     'ng-file-upload': {
       deps: ['angular']
+    },
+    'kendo-ui':{
+      deps: ['jquery']
     },
     'angular-route': {
       deps: ['angular']
@@ -53,7 +57,7 @@ requirejs.config({
       deps: ['angular']
     },
     'myActivities': {
-      deps: ['angular']
+      deps: ['angular','kendo-ui']
     },
     'myFriendList': {
       deps: ['angular']

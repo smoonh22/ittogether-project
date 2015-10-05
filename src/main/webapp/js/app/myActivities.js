@@ -1,10 +1,11 @@
-define(function () {
+  define(function () {
 
       var app = angular.module('myActivities', []);
 
       app.controller('activityCtrl', ['$http', function ($http) {
         var parent_scope = this;
-        $http.get('feed/myActivity.do').success(function (result) {
+        $http.get('feed/myActivity.do',{params : {mno: sessionStorage.getItem('mno') }}).success(function (result) {
+          console.log("ㅎ하하ㅏ" + result.activity);
           parent_scope.activities = result.activity;
         });
   }]);
