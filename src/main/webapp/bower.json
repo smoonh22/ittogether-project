@@ -1,14 +1,11 @@
 {
   "name": "ittogether",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "homepage": "https://github.com/moonhyucksong/ittogether",
   "authors": [
     "moonhyucksong <smoonh22@gmail.com>"
   ],
-  "moduleType": [
-    "amd",
-    "globals"
-  ],
+  "moduleType": [],
   "license": "MIT",
   "ignore": [
     "**/.*",
@@ -31,5 +28,7 @@
     "requirejs": "~2.1.20",
     "requirejs-plugins": "~1.0.3",
     "ng-file-upload": "~8.0.5"
-  }
+  },
+  "description": "",
+  "main": ""
 }

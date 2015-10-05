@@ -34,8 +34,11 @@ public class FeedController {
   Map<String,Object> result = new HashMap<String,Object>();
   try {
     List<FriendFeed> test = feedService.list(mno);
+    SimpleDateFormat format = new SimpleDateFormat("MM월 dd일 E요일");
     for(FriendFeed feed : test){
-     feed.setDday(CalcTime(feed.getMeetTime()));
+      String meetdate = format.format(feed.getMeetTime());
+      feed.setMeetDday(meetdate);
+      feed.setDday(CalcTime(feed.getCreateDate()));
     }
     result.put("data",test);
     
@@ -96,11 +99,6 @@ public class FeedController {
   public Object insert(Feed feed) throws Exception{
     Map<String,Object> result = new HashMap<String,Object>();
     
-    String temp = feed.getTempDate();
-    temp = temp.replaceFirst("T"," ");
-    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-    feed.setMeetTime(format.parse(temp));
-    
     int count = feedService.insert(feed);
     
     if ( count > 0 ) {
@@ -108,7 +106,6 @@ public class FeedController {
     } else {
        result.put("data", "failure");
     }
-    
     
     return result;
   }
@@ -147,7 +144,7 @@ public class FeedController {
     long orderTime = calendar.getTimeInMillis();
     long currentTime = System.currentTimeMillis();
     
-    long calcTime = (orderTime - currentTime)/1000;
+    long calcTime = (currentTime - orderTime)/1000;
    if (calcTime > 0){ 
        if((calcTime/86400) > 0) {
          return calcTime/86400 +"일 전";

@@ -15,7 +15,6 @@ define(function () {
             var parent_scope = this;
 
              $('#btn').click(function (event) {
-               console.log("버튼은찍혀");
                $.ajax('feed/insertUser.do',
                   {
                    method: 'POST',
@@ -26,7 +25,8 @@ define(function () {
                       title: $('#title').val(), 
                       content: $('#content').val(),
                       maxHeadCount: $('#maxHeadCount').val(),
-                      tempDate: $('#meetTime').val(),
+                      meetTime : $('#meetTime').val()
+
                    },
                   success: function(result){
                      if (result.data == 'success') {
@@ -37,9 +37,20 @@ define(function () {
                   }
                });
             });
+             $("#meetTime").kendoDateTimePicker({
+               format: "yyyy/MM/dd hh:mm tt",
+               parseFormats: ["MMMM yyyy", "HH:mm"] //format also will be added to parseFormats
+           });
+             
+             $("#content").kendoEditor({
+               messages: {
+                 italic: "Italic"
+               }
+             });
           },
           controllerAs: 'MCtrl',
           templateUrl: 'templates/modals/insert-modal.html'
         };
-      });      
+      }); 
+      
 });

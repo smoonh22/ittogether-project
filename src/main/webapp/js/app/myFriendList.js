@@ -16,18 +16,9 @@ app.controller('myFriendCtrl',['$http','$scope', function($http,$scope) {
       
     });
 
- $scope.typeBox = {
-    
-     availableOptions : [
-                         {value : '1', name : '이름'},
-                         {value : '2', name : '닉네임'},
-                         {value : '3', name : '이메일'}
-                         ],
-     selectedOption : {value : '3', name : '이메일'}
- };   
    
  $scope.search = function(searchQuery) {
-   $http.get('frd/search.do',{params : {mno: sessionStorage.getItem('mno') ,searchCnt : searchQuery ,searchType : $('#typeBox').val() }}).success(function(result){
+   $http.get('frd/search.do',{params : {mno: sessionStorage.getItem('mno') ,searchCnt : searchQuery }}).success(function(result){
      parent_scope.searchLists = result.searchList;
    })
  };

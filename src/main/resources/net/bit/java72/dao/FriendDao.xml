@@ -80,16 +80,10 @@
   </delete>
 
 <sql id="search">
-		<if test="searchType != null">
-			<if test="searchType == 1">
-				and NAME like concat( '%', #{searchCnt}, '%' )
-			</if>
-			<if test="searchType == 2">
-				and NICKNM like concat( '%', #{searchCnt}, '%' )
-			</if>
-			<if test="searchType == 3">
-				and EMAIL like concat( '%', #{searchCnt}, '%' )
-			</if>
+		<if test="searchCnt != null">
+				and( NAME like concat( '%', #{searchCnt}, '%' )
+				or NICKNM like concat( '%', #{searchCnt}, '%' )
+				or EMAIL like concat( '%', #{searchCnt}, '%' ))
 		</if>
 </sql>
 	
