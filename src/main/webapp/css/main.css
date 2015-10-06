@@ -389,3 +389,15 @@ hr {
 .detail-user-name {
   left: 10px;
 }
+
+textarea {
+	resize : none;
+}
+
+.comment-insert {
+	width : 525px;
+}
+.comment-insrtbtn{
+	height : 46px;
+	margin-bottom : 5px;
+}

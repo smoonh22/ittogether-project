@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import net.bit.java72.dao.FeedDao;
+import net.bit.java72.domain.Comment;
 import net.bit.java72.domain.Feed;
 import net.bit.java72.domain.FriendFeed;
 import net.bit.java72.service.FeedService;
@@ -43,6 +44,35 @@ public class FeedServiceImpl implements FeedService {
   
   public int insert(Feed feed) {
     return feedDao.insert(feed);
+  }
+
+  @Override
+  public Feed checkFeed(int fno, int mno) {
+    HashMap<String, Integer> map = 
+        new HashMap<String,Integer>();
+    map.put("mno", mno);
+    map.put("fno", fno);
+    return feedDao.checkFeed(map);
+  }
+  @Override
+  public int friendOutActivity(int mno, int fno) {
+    HashMap<String, Integer> map = 
+        new HashMap<String,Integer>();
+    map.put("mno", mno);
+    map.put("fno", fno);
+    return feedDao.friendOutActivity(map);
+  }
+  @Override
+  public int friendOut(int fno) {
+    return feedDao.friendOut(fno);
+  }
+  @Override
+  public int friendIn(int fno) {
+    return feedDao.friendIn(fno);
+  }
+  @Override
+  public List<Comment> getComment(int fno) {
+    return feedDao.getComment(fno);
   }
   
 }

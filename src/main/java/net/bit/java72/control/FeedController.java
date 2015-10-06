@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import net.bit.java72.domain.Comment;
 import net.bit.java72.domain.Feed;
 import net.bit.java72.domain.FriendFeed;
 import net.bit.java72.domain.Member;
@@ -98,7 +99,6 @@ public class FeedController {
   @RequestMapping("/insertUser")
   public Object insert(Feed feed) throws Exception{
     Map<String,Object> result = new HashMap<String,Object>();
-    System.out.println(feed.getContent());
     int count = feedService.insert(feed);
     
     if ( count > 0 ) {
@@ -112,10 +112,13 @@ public class FeedController {
 
   //최근 피드 클릭시 디테일 정보 
   @RequestMapping("/detail")
-  public Object detail(int fno) throws Exception {
-    System.out.println(fno + "jjjjjj");
+  public Object detail(int fno,int mno) throws Exception {
     Map<String,Object> result = new HashMap<String,Object>();
     FriendFeed friendFeed = feedService.getDetail(fno);
+    
+    Feed feed = feedService.checkFeed(fno, mno);
+    
+    result.put("check", feed);
     result.put("detail", friendFeed);
    
     return result;
@@ -124,11 +127,13 @@ public class FeedController {
   
   @RequestMapping("/friendjoin")
   public Object friendJoin(int mno, int fno) throws Exception {
-    System.out.println(fno + " : :" + mno);
+    
+    
     Map<String,Object> result = new HashMap<String,Object>();
     int count = feedService.friendJoinActivity(mno, fno);
   
-    
+    feedService.friendIn(fno);
+
     if (count > 0) {
       result.put("data", "success");
     } else {
@@ -137,6 +142,39 @@ public class FeedController {
    
     return result;
   }
+  
+  @RequestMapping("/friendout")
+  public Object friendOut(int mno, int fno) throws Exception {
+    
+    Map<String,Object> result = new HashMap<String,Object>();
+    int count = feedService.friendOutActivity(mno, fno);
+   
+    feedService.friendOut(fno);  
+    if (count > 0) {
+      result.put("data", "success");
+    } else {
+      result.put("data", "failure");
+    }
+    return result;
+  }
+  //댓글 처리
+  @RequestMapping("/comment")
+  public Object comment(int fno) throws Exception {
+    Map<String,Object> result = new HashMap<>();
+    
+    List<Comment> comen = feedService.getComment(fno);
+    
+    result.put("coment",comen);
+    return result;
+  }
+  @RequestMapping("/commentinsert")
+  public Object commentinsert(int fno,String content) throws Exception {
+    Map<String,Object> result = new HashMap<>();
+    
+    System.out.println(content);
+    return result;
+  }
+  
   
   public String CalcTime(Date meetTime){
     Calendar calendar = Calendar.getInstance();

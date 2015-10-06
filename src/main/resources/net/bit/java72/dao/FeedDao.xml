@@ -30,6 +30,20 @@
     <result column="mphoto" property="profilePicture"/>
   </resultMap>
  
+  <resultMap type="FriendList" id="FriendListMap">
+	<id     column="fno"      property="fno" />
+	<id     column="mno"      property="mno" />
+  </resultMap>
+  
+  <resultMap type="Comment" id="CommentMap">
+  	 <id     	 column="fno"        property="fno"/>
+  	 <id         column="mno"        property="mno"/>
+  	 <id    	 column="cno"        property="cno"/>
+  	 <result     column="contnt"     property="content"/>
+  	 <result     column="pwd"        property="password"/>
+  	 <result     column="nicknm"     property="nickname" />
+  	 <result	 column="mphoto"     property="profilePicture"/>
+  </resultMap>
  <!--  모임약속시간 이 현재시간보다 나중이어야 출력하는걸로 수정 -->
   <select id="list" resultMap="FriendFeedMap" parameterType="int">
   select 
@@ -92,7 +106,8 @@
   t2.TITLE
   from memb_t t1 inner join feed_t t2 on t1.mno=t2.mno
   where t2.meet_time > now() and t2.mno = #{values}  
-  or t2.fno IN (select t3.fno from JOINFRD_T t3 inner join feed_t t4 on t3.fno=t4.fno where t3.mno=#{values} and t4.meet_Time > now()) 
+  or t2.fno IN (select t3.fno from JOINEDFRD_T t3 inner join feed_t t4 on t3.fno=t4.fno where t3.mno=#{values} and t4.meet_Time > now()) 
+  ORDER by t2.cre_dt desc
   </select>
  
  <select id="getDetail" resultMap="FriendFeedMap" parameterType="int">
@@ -111,10 +126,42 @@
    from memb_t t1 inner join feed_t t2 
    on t2.fno= #{value} and t1.mno = t2.mno
   </select>
+  
    <insert id="friendJoinActivity" parameterType="map">
       insert into joinedfrd_t(mno, fno) values(#{mno}, #{fno})
   </insert>
+  
+   <delete id="friendOutActivity" parameterType="map">
+      delete from joinedfrd_t where fno=#{fno} and mno=#{mno}
+   </delete>
 
+   <update id="friendIn" parameterType="int">
+   	 update feed_t set current_cnt=current_cnt+1 where fno=#{fno}
+   </update>
+   
+   <update id="friendOut" parameterType="int">
+     update feed_t set current_cnt=current_cnt-1 where fno=#{fno}
+   </update>
+    
+
+  <select id="checkFeed" parameterType="map" resultMap="FeedMap">
+  	select *
+  	FROM joinedFrd_t where fno=#{fno} and mno=#{mno}
+  </select>
+  
+  <select id="getComment" parameterType="int" resultMap="CommentMap">
+   select
+   	t1.mno,
+   	t1.nicknm,
+   	t1.name,
+   	t1.mphoto,
+   	t2.fno,
+   	t2.cno,
+   	t2.countnt,
+   	t2.pwd
+   from memb_t t1 inner join comment_t t2
+   on t1.mno = t2.mno where fno = #{values} 
+  </select>
 </mapper>
 
 

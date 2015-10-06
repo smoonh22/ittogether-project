@@ -4,10 +4,12 @@ define(function() {
 app.controller('myFriendCtrl',['$http','$scope', function($http,$scope) {
     var parent_scope = this;
     var data = $scope.delfrdmno;
-    $http.get('frd/list.do',
+    $.ajax("frd/list.do",
          {
-        params: {
-          mno: sessionStorage.getItem('mno')
+        method: 'POST',
+        dataType : 'json',
+        data: {
+          mno: window.sessionStorage.getItem('mno')
         }
     }).success(function(result){
       parent_scope.frdLists = result.data;
@@ -15,7 +17,7 @@ app.controller('myFriendCtrl',['$http','$scope', function($http,$scope) {
       parent_scope.applyList2s = result.applyU;
       
     });
-
+ 
    
  $scope.search = function(searchQuery) {
    $http.get('frd/search.do',{params : {mno: sessionStorage.getItem('mno') ,searchCnt : searchQuery }}).success(function(result){
@@ -23,18 +25,11 @@ app.controller('myFriendCtrl',['$http','$scope', function($http,$scope) {
    })
  };
  
- $scope.insertfrd = function(mno) {
-   $http.get('frd/insert.do',{params : {frdmno : mno, mno: sessionStorage.getItem('mno')}}).success(function(result){
-     alert("신청이 완료되었습니다");
-     
-     window.location.reload();
-   })
- };
   
  $scope.delfrd = function(mno){
    $http.get('frd/delete.do',{params : { frdmno : mno,  mno: sessionStorage.getItem('mno')}}).success(function(result){
        alert("삭제 되었습니다!");
-
+       
        window.location.reload();
        })
    };
