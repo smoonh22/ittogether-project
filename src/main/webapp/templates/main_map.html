@@ -57,7 +57,8 @@
   var friendLocArr = [];
   (function() {
     $.getJSON('member/getFriends.do', {
-      frdno: sessionStorage.getItem('mno')
+      frdno: sessionStorage.getItem('mno'),
+      mno: sessionStorage.getItem('mno')
     }, function(results) {
       for (var i = 0; i < results.data.length; i++) {
         var tempArr = [
@@ -65,7 +66,8 @@
           Number(results.data[i].latitude),
           Number(results.data[i].longitude),
           results.data[i].introduction,
-          results.data[i].profilePicture
+          results.data[i].profilePicture,
+          results.distance[i]
         ];
         friendLocArr.push(tempArr);
         console.log("친구" + i + ": " + friendLocArr[i]);
@@ -179,7 +181,9 @@
 
     markMyLoc();
     for (var i = 0; i < friendLocArr.length; i++) {
-      markFriends(i); /* 친구 마킹 */
+      if(notFriendLocArr[i][5] < distant) {
+        markFriends(i); /* 친구 마킹 */
+      }
     }
     for (var i = 0; i < notFriendLocArr.length; i++) {
       if(notFriendLocArr[i][5] < distant) {

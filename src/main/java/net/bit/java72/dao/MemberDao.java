@@ -22,5 +22,6 @@ public interface MemberDao {
   List<Member> getMyLoc(int mno);
   List<Member> getFriends(int frdno);
   List<Member> getNoneFriendMarks(int mno);  
+  List<Member> getFriendMarks(int mno);  
   
 }

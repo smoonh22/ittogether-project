@@ -68,12 +68,45 @@ public class MemberController {
   }
   
   @RequestMapping("/getFriends")
-  public Object getFriends(int frdno) {
+  public Object getFriends(int frdno, int mno) {
     Map<String,Object> result = new HashMap<String,Object>();
     
-    List<Member> members = memberService.getFriends(frdno);
-    result.put("data", members);
-    System.out.println(members);
+    try {
+      Member myInfo = memberService.getOne(mno);
+      double lat = Double.parseDouble(myInfo.getLatitude());
+      double lon = Double.parseDouble(myInfo.getLongitude());
+      
+      List<Member> distanceList = memberService.getFriends(frdno);
+      System.out.println("distanceList: " + distanceList);
+      
+      List<Member> friendMarks = new ArrayList<>();
+      List<Integer> distances = new ArrayList<>();
+      
+      for(Member member : distanceList){
+        double lat2 = Double.parseDouble(member.getLatitude());
+        double lon2 = Double.parseDouble(member.getLongitude());
+        
+        double distance = CalculateDistance.getDistance(lat,lon,lat2,lon2);
+        System.out.println("나와 [친구]들과의 거리 : " + distance);
+        if (distance <= 1000) {
+          distances.add((int)distance);
+          System.out.println("member.getMno(친구): " + member.getMno());
+          List<Member> members = memberService.getFriendMarks(member.getMno());
+          for(Member temp : members){
+            if( temp != null){
+              friendMarks.add(temp);
+            }
+          }
+        }
+      }
+      
+      System.out.println("friendMarks: " + friendMarks);
+      
+      result.put("distance", distances);
+      result.put("data", friendMarks);
+    } catch (Exception e) {
+      result.put("data", "nothingFound");
+    }
     
     return result;
   }
@@ -96,9 +129,10 @@ public class MemberController {
         double lon2 = Double.parseDouble(member.getLongitude());
         
         double distance = CalculateDistance.getDistance(lat,lon,lat2,lon2);
-        System.out.println("거리 : " + distance);
+        System.out.println("나와 회원들과의 거리 : " + distance);
         if(distance <= 1000){
            distances.add((int)distance);
+           System.out.println("member.getMno(회원): " + member.getMno());
           List<Member> members = memberService.getNoneFriendMarks(member.getMno());
           for(Member temp : members){
           if( temp != null){
@@ -107,6 +141,9 @@ public class MemberController {
           }
         }
       }
+      
+      System.out.println("noneFriendMarks: " + noneFriendMarks);
+      
       result.put("distance", distances);
       result.put("data", noneFriendMarks);
     } catch (Exception e) {
