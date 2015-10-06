@@ -4,27 +4,34 @@
 </div>
 
 <div id="finder-box">
-  <div class="dropdown">
-    <button class="btn btn-info btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">모두
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-      <li><a href="#">남자</a></li>
-      <li><a href="#">여자</a></li>
-    </ul>
-    <button type="button" class="btn btn-info btn-xs btn-on-map">취미</button>
-    <button type="button" class="btn btn-info btn-xs btn-on-map">고향 </button>
-    <button type="button" class="btn btn-info btn-xs btn-on-map">나이 </button>
+  <div class="btn-group" data-toggle="buttons">
+  <label class="btn btn-info btn-sm active">
+    <input type="checkbox" autocomplete="off">남자</label><br>
+  <label class="btn btn-info btn-sm">
+    <input type="checkbox" autocomplete="off">여자</label><br>
+  <label class="btn btn-info btn-sm">
+    <input type="checkbox" autocomplete="off">나이</label><br>
+  <label class="btn btn-info btn-sm">
+    <input type="checkbox" autocomplete="off">취미</label><br>
+  <label class="btn btn-info btn-sm">
+    <input type="checkbox" autocomplete="off">고향</label>
+  </div>
+  
+  <div class="radius-control">
     <div class="btn-group" role="group" aria-label="...">
-      <button type="button" class="btn btn-info btn-xs" onclick="radiusDistance(26);">200m</button>
-      <button type="button" class="btn btn-info btn-xs" onclick="radiusDistance(65);">500m</button>
-      <button type="button" class="btn btn-info btn-xs" onclick="radiusDistance(130);">1km</button>
+      <button type="button" class="btn btn-info btn-xs radius-200" >200m</button>
+      <button type="button" class="btn btn-info btn-xs radius-500" >500m</button>
+      <button type="button" class="btn btn-info btn-xs radius-1000" >1km</button>
     </div>
   </div>
 </div>
+  
 
 <div id="friend-box">
 </div>
+
+
+
 
 <script>
   //json형식으로 받아온 데이터를 뿌려줌
@@ -78,11 +85,11 @@
           Number(results.data[i].latitude),
           Number(results.data[i].longitude),
           results.data[i].introduction,
-          results.data[i].profilePicture
+          results.data[i].profilePicture,
+          results.distance[i]
         ];
         notFriendLocArr.push(tempArr);
         console.log("주변회원" + i + ": " + notFriendLocArr[i]);
-
         $('#friend-box').append('<div class="panel panel-info">' +
           '<div class="panel-heading match-heading">' +
           "BestMatch" +
@@ -115,7 +122,7 @@
   //  console.log(myBalloon);
 
 
-  function initMap() {
+  function initMap(distant) {
     var radius = { /* 반경 보여줄 지점 */
       radiusCenter: {
         center: {
@@ -175,7 +182,9 @@
       markFriends(i); /* 친구 마킹 */
     }
     for (var i = 0; i < notFriendLocArr.length; i++) {
-      markNotFriends(i); /* 주변 회원 마킹 */
+      if(notFriendLocArr[i][5] < distant) {
+        markNotFriends(i); /* 주변 회원 마킹 */
+      }
     }
     markCircle(); /* 반경 렌더링 */
 
@@ -221,7 +230,7 @@
           "<div class='iw-title'>" + notFriendLocArr[i][0] + "</div>" +
           "<div class='iw-content'>" +
           "<div class='iw-subTitle'>" +
-          "<img src=" + notFriendLocArr[i][4] + " class='img-circle iw-img'>" +
+          "<img src='images/defaultProfilePicture.png' class='img-circle iw-img'>" +
           "</div>" +
           "<div class='iw-subTitle'>" +
           "<input type='txt' class='form-control input-xs' value=" + notFriendLocArr[i][3] + ">" +
@@ -307,6 +316,7 @@
       }
     }
 
+  }
     function radiusDistance(m) { /* 반경 렌더링 거리 조정 함수 */
       radius = { /* 반경 보여줄때의 변수 */
         radiusCenter: {
@@ -321,10 +331,18 @@
       circle.setMap(null);
       markCircle();
     }
-  }
+  
+  $(document).on('click','.radius-200', function() {
+    initMap(200);
+  });
+  $(document).on('click','.radius-500', function() {
+    initMap(500);
+  });
+  $(document).on('click','.radius-1000', function() {
+    initMap(1000);
+  });
 
   $(document).on('click','.addfriend-btn', function() {
-    console.log('ahahah');
       var parent = this;
     $.ajax('frd/insert.do', {
         method: 'post',

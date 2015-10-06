@@ -18,6 +18,8 @@
     <result column="sex"      property="sex"/>
     <result column="intro"    property="introduction"/>
     <result column="age"      property="age"/>
+    <result column="hb"    property="hobby"/>
+    
   </resultMap>
   
   <select id="exist" 
@@ -72,9 +74,11 @@
       pwd=#{password},
       mphoto=#{profilePicture},
       intro=#{introduction},
+      lat=#{latitude},
+      lon=#{longitude},
       sex=#{sex},
       age=#{age},
-      hobby=#{hobby},
+      hb=#{hobby},
       hometwn=#{hometown},
       addr=#{address}
     WHERE email = #{email}    

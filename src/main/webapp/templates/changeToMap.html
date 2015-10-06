@@ -105,10 +105,11 @@
   <div class="modal-dialog">
     <div class="modal-content">
       
-      <div class="modal-header detail-header">
+      <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h5 class="modal-title" id="detail-title"></h5>
-        <input type="hidden" id="detail-number"/>
+        <input type="hidden" id="detail-number">
+        <input type="hidden" id="detail-category">
       </div>
       
       <div class="modal-body">
@@ -118,12 +119,12 @@
           <div class="form-group detail-detail">
             <div class="form-group">
               <img src="images/icons/calendar.png">
-              <span id="detail-mTime"></span>
+              <span id="detail-mTime"></span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
               <img src="images/icons/multiple.png">
-              <span id="detail-headCnt"></span>
-              <img src="images/icons/time.png"><span>    </span>
+              <span id="detail-stuffCount"></span><span>/</span><span id="detail-headCnt"></span>
+              <span>&nbsp;&nbsp;&nbsp;</span>
+              <img src="images/icons/time.png">
               <span id="detail-createDate"></span>
-              <span>stuffCount: </span><span id="detail-stuffCount"></span>
               <button type="button" class="btn btn-info btn-xs detail-btn" id="join-btn">참여하기</button>
             </div>
             <div class="form-group">
@@ -134,10 +135,11 @@
           
           
           <div class="detail-user-info">
-            <div><img class="img-circle" src="" id="detail-profilePicture"></div>
+            <div class="detail-profile-img-div"><img class="img-circle detail-profile-img" src="" id="detail-profilePicture"></div>
             <div class="detail-user-name">
-            <span id="detail-name"></span>(
-            <span id="detail-nickname"></span>)
+              <div class="detail-user-name-middle"><span id="detail-name"></span><span>&nbsp;님</span></div>
+              <div class="detail-user-nickname-middle">
+            <span>(</span><span id="detail-nickname"></span><span>)</span></div>
               </div>
           </div>
           
@@ -176,9 +178,30 @@
        $('#detail-headCnt').text(result.detail.maxHeadCount);
        $('#detail-createDate').text(result.detail.createDate);
        $('#detail-stuffCount').text(result.detail.stuffCount);
+       $('#detail-category').val(result.detail.category);
        
+       // 모달 창에서 카테고리에 따라 modal-header 색깔 바꿔주는 if문
+       if ($('#detail-category').val() == '1') {
+          removeDetailClass()
+          $('.modal-header').addClass('detail-header-1');
+        } else if ($('#detail-category').val() == '2') {
+          removeDetailClass()
+          $('.modal-header').addClass('detail-header-2');
+        } else {
+          removeDetailClass()
+          $('.modal-header').addClass('detail-header-3');
+        }
+       // 모달 창에서 카테고리에 따른 클래스 삭제해주는 함수 
+      function removeDetailClass() {
+        $('.modal-header').removeClass('detail-header-1 detail-header-2 detail-header-3');
+      } 
      });
+     
+        
    });
+  
+
+    
   
   $('#join-btn').on('click', function() {
       console.log(sessionStorage.getItem('mno'));
@@ -196,4 +219,5 @@
           }
       });
     });
+  
 </script>
