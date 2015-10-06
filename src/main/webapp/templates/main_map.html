@@ -25,20 +25,16 @@
     </div>
   </div>
 </div>
-  
 
 <div id="friend-box">
 </div>
-
-
-
 
 <script>
   //json형식으로 받아온 데이터를 뿌려줌
   var myLoc = [];
   var myNickname,
-    myIntro,
-    myPhoto;
+      myIntro,
+      myPhoto;
   (function() {
     $.getJSON('member/getMyLoc.do', {
       mno: sessionStorage.getItem('mno')
@@ -80,7 +76,6 @@
     $.getJSON('member/getMembers.do', {
       mno: sessionStorage.getItem('mno')
     }, function(results) {
-      console.log(results.data.length);
       for (var i = 0; i < results.data.length; i++) {
         var tempArr = [
           results.data[i].nickname,
@@ -106,7 +101,6 @@
           '</button>' +
           '</div>' +
           '</div>');
-
       }
     });
   })();
@@ -119,29 +113,19 @@
   var friendWindow = []; /* 친구들 팝업창 */
   var notFriendWindow = []; /* 회원들 팝업창 */
 
-  //  var myInfoWindow = $('#myInfoWindow');
-  //  var myBalloon = myInfoWindow[0].innerHTML;
-  //  console.log(myBalloon);
-
-
-  function initMap(distant) {
+  function initMap() {
     var radius = { /* 반경 보여줄 지점 */
       radiusCenter: {
-        center: {
-          lat: myLoc[0],
-          lng: myLoc[1]
-        },
+        center: { lat: myLoc[0], lng: myLoc[1] },
         /* 반경의 중심 */
-        population: 26 /* 반경 설정 200m: 26, 500m: 65, 1km: 130 */
+        population: 4 /* 반경 설정 200m: 26, 500m: 65, 1km: 130 */
       }
     };
+    
     map = new google.maps.Map(document.getElementById('mainMap'), {
       zoom: 17,
       /* 처음 화면을 보여주는 위도, 경도 */
-      center: {
-        lat: myLoc[0],
-        lng: myLoc[1]
-      },
+      center: { lat: myLoc[0], lng: myLoc[1] },
       disableDefaultUI: true,
       /* DEFAULT UI 사용*/
       panControl: false,
@@ -180,18 +164,19 @@
     }
 
     markMyLoc();
+    
     for (var i = 0; i < friendLocArr.length; i++) {
-      if(notFriendLocArr[i][5] < distant) {
+//      if(friendLocArr[i][5] < 200) {
         markFriends(i); /* 친구 마킹 */
-      }
+//      }
     }
     for (var i = 0; i < notFriendLocArr.length; i++) {
-      if(notFriendLocArr[i][5] < distant) {
+//      if(notFriendLocArr[i][5] < 200) {
         markNotFriends(i); /* 주변 회원 마킹 */
-      }
+//      }
     }
+    
     markCircle(); /* 반경 렌더링 */
-
 
     myWindow = new google.maps.InfoWindow({ /* 팝업창 생성 */
       content: "<div id='iw-container'>" +
@@ -205,7 +190,9 @@
         "</div>" +
         "</div>" +
         "</div>"
-
+    });
+    google.maps.event.addListener(myWindow, 'domready', function() {
+      infoWindowsCSS();
     });
 
     for (var i = 0; i < friendLocArr.length; i++) {
@@ -222,7 +209,6 @@
           "</div>" +
           "</div>"
       });
-
       google.maps.event.addListener(friendWindow[i], 'domready', function() {
         infoWindowsCSS();
       });
@@ -242,23 +228,15 @@
           "</div>" +
           "</div>"
       });
-
       google.maps.event.addListener(notFriendWindow[i], 'domready', function() {
         infoWindowsCSS();
       });
     }
 
-    google.maps.event.addListener(myWindow, 'domready', function() {
-      infoWindowsCSS();
-    });
-
 
     function markMyLoc() {
       var marker = new google.maps.Marker({
-        position: {
-          lat: myLoc[0],
-          lng: myLoc[1]
-        },
+        position: { lat: myLoc[0], lng: myLoc[1] },
         map: map,
         icon: 'images/icons/myHome.png'
       });
@@ -269,13 +247,9 @@
 
     function markFriends(i) {
       var friendLoc = friendLocArr[i];
-      //    window.setTimeout(function() {
       friendMarkers.push(new google.maps.Marker({
         title: friendLoc[0],
-        position: {
-          lat: friendLoc[1],
-          lng: friendLoc[2]
-        },
+        position: { lat: friendLoc[1], lng: friendLoc[2] },
         map: map,
         animation: google.maps.Animation.DROP,
         icon: 'images/icons/friendHome.png'
@@ -289,10 +263,7 @@
       var notFriendLoc = notFriendLocArr[i];
       notFriendMarkers.push(new google.maps.Marker({
         title: notFriendLoc[0],
-        position: {
-          lat: notFriendLoc[1],
-          lng: notFriendLoc[2]
-        },
+        position: { lat: notFriendLoc[1], lng: notFriendLoc[2] },
         map: map,
         animation: google.maps.Animation.DROP,
         icon: 'images/icons/pin.png'
@@ -300,7 +271,6 @@
       notFriendMarkers[i].addListener('click', function() {
         notFriendWindow[i].open(map, notFriendMarkers[i]);
       });
-      //    }, i * 100);
     }
 
     function markCircle() {
@@ -319,33 +289,65 @@
         });
       }
     }
-
-  }
-    function radiusDistance(m) { /* 반경 렌더링 거리 조정 함수 */
-      radius = { /* 반경 보여줄때의 변수 */
-        radiusCenter: {
-          /* 반경의 중심 */
-          center: {
-            lat: myLoc[0],
-            lng: myLoc[1]
-          },
-          population: m /* 반경 설정 200m: 26, 500m: 65, 1km: 130 */
-        }
-      };
-      circle.setMap(null);
-      markCircle();
+    
+  var distant;
+  function dropMarkers(distant) {
+    for (var i = 0; i < friendLocArr.length; i++) {
+      console.log("distant" + distant);
+      if(friendLocArr[i][5] <= distant) {
+        markFriends(i); /* 친구 마킹 */
+      } else {}
     }
+    for (var i = 0; i < notFriendLocArr.length; i++) {
+      if(notFriendLocArr[i][5] <= distant) {
+        markNotFriends(i); /* 주변 회원 마킹 */
+      } else {}
+    }
+  }
   
+  function clearMarkers() {
+    for (var i = 0; i < friendMarkers.length; i++) {
+      friendMarkers[i].setMap(null);
+    }
+    for (var i = 0; i < notFriendMarkers.length; i++) {
+      notFriendMarkers[i].setMap(null);
+    }
+    friendMarkers = [];
+    notFriendMarkers = [];
+  }
+    
+  function radiusDistance(m) { /* 반경 렌더링 거리 조정 함수 */
+    radius = { /* 반경 보여줄때의 변수 */
+      radiusCenter: {
+        /* 반경의 중심 */
+        center: { lat: myLoc[0], lng: myLoc[1] },
+        population: m /* 반경 설정 200m: 4, 500m: 27, 1km: 97 */
+      }
+    };
+    circle.setMap(null);
+    markCircle();
+  }  
+    
   $(document).on('click','.radius-200', function() {
-    initMap(200);
+    clearMarkers();
+    dropMarkers(200);
+    radiusDistance(4);
   });
+  
   $(document).on('click','.radius-500', function() {
-    initMap(500);
+    clearMarkers();
+    dropMarkers(500);
+    radiusDistance(27);
   });
+  
   $(document).on('click','.radius-1000', function() {
-    initMap(1000);
+    clearMarkers();
+    dropMarkers(1000);
+    radiusDistance(97);
   });
-
+  
+} // initMap 끝 
+  
   $(document).on('click','.addfriend-btn', function() {
       var parent = this;
     $.ajax('frd/insert.do', {
@@ -359,11 +361,7 @@
           alert('친구 요청을 보냈습니다.');
       }
     });
-    
-    
   });
-  
-  
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&callback=initMap" async defer></script>

@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import net.bit.java72.domain.FriendFeed;
 import net.bit.java72.domain.Member;
 import net.bit.java72.service.MemberService;
 import net.bit.java72.util.CalculateDistance;
@@ -75,9 +74,10 @@ public class MemberController {
       Member myInfo = memberService.getOne(mno);
       double lat = Double.parseDouble(myInfo.getLatitude());
       double lon = Double.parseDouble(myInfo.getLongitude());
+      System.out.println("\n[[[[ 나의 위치: " + lat + ", " + lon + " ]]]]");
       
       List<Member> distanceList = memberService.getFriends(frdno);
-      System.out.println("distanceList: " + distanceList);
+//      System.out.println("distanceList: " + distanceList);
       
       List<Member> friendMarks = new ArrayList<>();
       List<Integer> distances = new ArrayList<>();
@@ -86,20 +86,21 @@ public class MemberController {
         double lat2 = Double.parseDouble(member.getLatitude());
         double lon2 = Double.parseDouble(member.getLongitude());
         
-        double distance = CalculateDistance.getDistance(lat,lon,lat2,lon2);
-        System.out.println("나와 [친구]들과의 거리 : " + distance);
-        if (distance <= 1000) {
-          distances.add((int)distance);
-          System.out.println("member.getMno(친구): " + member.getMno());
+        double distanceDouble = CalculateDistance.getDistance(lat,lon,lat2,lon2);
+        int distance = (int)Math.floor(distanceDouble);
+        
+        System.out.println("#친구" + member.getMno() + "의 거리: " + distance + "m"); 
+        
+          distances.add(distance);
+          
           List<Member> members = memberService.getFriendMarks(member.getMno());
           for(Member temp : members){
             if( temp != null){
               friendMarks.add(temp);
             }
-          }
         }
       }
-      
+      System.out.println("나와 친구와의 거리: " + distances.toString());
       System.out.println("friendMarks: " + friendMarks);
       
       result.put("distance", distances);
@@ -128,21 +129,21 @@ public class MemberController {
         double lat2 = Double.parseDouble(member.getLatitude());
         double lon2 = Double.parseDouble(member.getLongitude());
         
-        double distance = CalculateDistance.getDistance(lat,lon,lat2,lon2);
-        System.out.println("나와 회원들과의 거리 : " + distance);
-        if(distance <= 1000){
-           distances.add((int)distance);
-           System.out.println("member.getMno(회원): " + member.getMno());
+        double distanceDouble = CalculateDistance.getDistance(lat,lon,lat2,lon2);
+        int distance = (int)Math.floor(distanceDouble);
+        
+        System.out.println("*회원" + member.getMno() + "의 거리: " + distance + "m");
+        
+           distances.add(distance);
           List<Member> members = memberService.getNoneFriendMarks(member.getMno());
           for(Member temp : members){
-          if( temp != null){
-            noneFriendMarks.add(temp);
+            if( temp != null){
+              noneFriendMarks.add(temp);
+            }
           }
-          }
-        }
       }
       
-      System.out.println("noneFriendMarks: " + noneFriendMarks);
+      System.out.println("noneFriendMarks: " + noneFriendMarks.iterator());
       
       result.put("distance", distances);
       result.put("data", noneFriendMarks);
