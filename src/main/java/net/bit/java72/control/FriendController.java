@@ -31,7 +31,6 @@ public class FriendController {
     Map<String,Object> result = new HashMap<String,Object>();
     
     try {
-      System.out.println(friendService.frdList(mno));
       ArrayList<Integer> fno = friendService.frdList(mno);
       List<Member> frdList = new ArrayList<>();
       for(int i = 0; i < fno.size(); i++){

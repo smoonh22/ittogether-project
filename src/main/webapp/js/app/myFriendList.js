@@ -1,7 +1,7 @@
 define(function() {
   var app = angular.module('myFriendList', []);
   
-app.controller('myFriendCtrl',['$http','$scope', function($http,$scope) {
+app.controller('myFriendCtrl',['$http','$scope', function friend($http,$scope) {
     var parent_scope = this;
     var data = $scope.delfrdmno;
     $.ajax("frd/list.do",
@@ -29,15 +29,13 @@ app.controller('myFriendCtrl',['$http','$scope', function($http,$scope) {
  $scope.delfrd = function(mno){
    $http.get('frd/delete.do',{params : { frdmno : mno,  mno: sessionStorage.getItem('mno')}}).success(function(result){
        alert("삭제 되었습니다!");
-       
-       window.location.reload();
+       return friend($http,$scope);
        })
    };
    $scope.applyfrd = function(mno){
      $http.get('frd/apply.do',{params : { frdmno : mno,  mno: sessionStorage.getItem('mno')}}).success(function(result){
        alert("수락 되었습니다!");
-   
-      window.location.reload();
+       return friend($http,$scope);
      })
    };
   }]);

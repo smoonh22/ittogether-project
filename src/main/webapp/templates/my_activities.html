@@ -1,37 +1,36 @@
-  <div id='moim-Img' ng-controller="activityCtrl as MCtrl">
+<div id='moim-Img' ng-controller="activityCtrl as MCtrl">
    <div class="span6 col-sm-6  editorial-moim-container">
       <div class="editorial-cell">
          <h1 class="editorial-title">내 모든 활동들을 볼수 있습니다</h1>
          <p class="editorial-para">친구들의 도움을 주고 받거나 모임을 만들고 싶으면 새 활동을 만들어
             보세요</p>
-         <br><br><br><br><br><br>
-         <div id="map-link-div" >
+         <br>
+         <div id="map-link-div">
             <div class="btn btn-info btn-ms btn-block map-btn"
-               data-target="#layerpop" data-toggle="modal"   >새 활동 만들기</div>
-               
-
+               data-target="#layerpop" data-toggle="modal">새 활동 만들기</div>
          </div>
       </div>
    </div>
-   
-    <div class='row'>
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
+   <div class='row'>
       <div ng-controller="activityCtrl as MCtrl">
          <div ng-repeat-start="myact in MCtrl.activities">
             <div id="myactfeed" class="col-md-4">
                <div class="masonry_title">
-                  <div class="panel-heading" id='category-color-{{myact.category}}'></div>
+                  <div class="panel-heading" id='category-color-{{myact.category}}'></div><br>
                   <div class='row'>
                      <div class='col-md-3'>
-                        <img src="images/cat01.jpg" class="img-circle act-profile-img" /><br>
+                        <img src={{myact.profilePicture}} class="img-circle act-profile-img" /><br>
                         <br>
                      </div>
                      <div class='col-md-9'>
                         <div id='feed-header'>
-                           <b id="nametag">{{myact.content}}</b>님이 새로운 모임을 만드셧습니다.
+                           <b id="nametag">{{myact.nickname}}</b>님이 새로운 모임을 만드셧습니다.<br>
+                           <br><br>
                         </div>
                      </div>
+                     <pre>{{myact.content}}</pre>
+                     <br>
+                     <br>
                   </div>
                   <div class='row'>
                      <h5 id="feed-info">
@@ -58,9 +57,7 @@
          <div ng-repeat-end></div>
       </div>
    </div>
-   </div>
-   <div class="col-md-2"></div>
-   </div>
-   
-   
-   <act-modal></act-modal>
+</div>
+
+
+<act-modal></act-modal>

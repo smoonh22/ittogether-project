@@ -31,10 +31,13 @@ public class MemberController {
   @RequestMapping("/userInfo")
   public Object getUserInfo(String nickname) {
     Map<String,Object> result = new HashMap<String,Object>();
-    
-    Member member = memberService.getUserInfo(nickname);
-    
-    result.put("data", member);
+    try {
+      
+      Member member = memberService.getUserInfo(nickname);
+      
+      result.put("data", member);
+    } catch (Exception e) {
+    }
   
     
     return result;

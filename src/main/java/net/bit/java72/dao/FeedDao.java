@@ -19,5 +19,7 @@ public interface FeedDao {
   int friendOut(int fno);
   int friendIn(int fno);
   List<Comment> getComment(int fno);
-
+  int insertComment(Comment commnet);
+  int updateComment(Comment comment);
+  int deleteComment(int cno);
 }

@@ -115,8 +115,12 @@ public class FeedController {
   public Object detail(int fno,int mno) throws Exception {
     Map<String,Object> result = new HashMap<String,Object>();
     FriendFeed friendFeed = feedService.getDetail(fno);
-    
     Feed feed = feedService.checkFeed(fno, mno);
+    SimpleDateFormat format = new SimpleDateFormat("MM월 dd일 E요일");
+    String meetdate = format.format(friendFeed.getMeetTime());
+    
+    friendFeed.setMeetDday(meetdate);
+    friendFeed.setDday(CalcTime(friendFeed.getCreateDate()));
     
     result.put("check", feed);
     result.put("detail", friendFeed);
@@ -165,15 +169,54 @@ public class FeedController {
     List<Comment> comen = feedService.getComment(fno);
     
     result.put("coment",comen);
+    
     return result;
   }
-  @RequestMapping("/commentinsert")
-  public Object commentinsert(int fno,String content) throws Exception {
+  @RequestMapping("/comentinsert")
+  public Object commentinsert(int fno,int mno,String content) throws Exception {
     Map<String,Object> result = new HashMap<>();
     
-    System.out.println(content);
+    Comment comment = new Comment();
+    comment.setContent(content);
+    comment.setFno(fno);
+    comment.setMno(mno);
+    
+    int count = feedService.insertComment(comment);
+    
+    if(count > 0){
+      result.put("data", "success");
+    } else {
+      result.put("data", "fail");
+    }
+    
     return result;
   }
+  
+  @RequestMapping("/comentupdate")
+  public Object commentUpdate(int cno,String content) throws Exception {
+    Map<String,Object> result = new HashMap<>();
+    
+    Comment comment = new Comment();
+    comment.setContent(content);
+    comment.setCno(cno);
+    
+    int count = feedService.updateComment(comment);
+    
+    if(count > 0){
+      result.put("data", "success");
+    } else {
+      result.put("data", "fail");
+    }
+    
+    return result;
+  }
+  
+   @RequestMapping("/comentdelete")
+   public void commentDelete(int cno) throws Exception {
+     
+     feedService.deleteComment(cno);
+     
+   }
   
   
   public String CalcTime(Date meetTime){

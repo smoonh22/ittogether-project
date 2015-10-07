@@ -74,6 +74,18 @@ public class FeedServiceImpl implements FeedService {
   public List<Comment> getComment(int fno) {
     return feedDao.getComment(fno);
   }
+  @Override
+  public int insertComment(Comment commnet) {
+    return feedDao.insertComment(commnet);
+  }
+  @Override
+  public int updateComment(Comment comment) {
+    return feedDao.updateComment(comment);
+  }
+  @Override
+  public int deleteComment(int cno) {
+    return feedDao.deleteComment(cno);
+  }
   
 }
 
