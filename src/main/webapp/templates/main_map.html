@@ -118,12 +118,12 @@
       radiusCenter: {
         center: { lat: myLoc[0], lng: myLoc[1] },
         /* 반경의 중심 */
-        population: 4 /* 반경 설정 200m: 26, 500m: 65, 1km: 130 */
+        population: 130 /* 반경 설정 200m: 26, 500m: 65, 1km: 130 */
       }
     };
     
     map = new google.maps.Map(document.getElementById('mainMap'), {
-      zoom: 17,
+      zoom: 16,
       /* 처음 화면을 보여주는 위도, 경도 */
       center: { lat: myLoc[0], lng: myLoc[1] },
       disableDefaultUI: true,
@@ -133,6 +133,125 @@
       scaleControl: false /* 척도 */
     });
 
+
+    markMyLoc();
+    
+    for (var i = 0; i < friendLocArr.length; i++) {
+        markFriends(i); /* 친구 마킹 */
+    }
+    for (var i = 0; i < notFriendLocArr.length; i++) {
+//      if(notFriendLocArr[i][5] < 200) {
+//        markNotFriends(i); /* 주변 회원 마킹 */
+//      }
+    }
+    
+    markCircle(); /* 반경 렌더링 */
+
+    function markMyLoc() {
+      var marker = new google.maps.Marker({
+        position: { lat: myLoc[0], lng: myLoc[1] },
+        map: map,
+        icon: 'images/icons/myHome.png'
+      });
+      marker.addListener('click', function() {
+        myWindow.open(map, marker);
+      });
+      myWindow = new google.maps.InfoWindow({ /* 팝업창 생성 */
+      content: "<div id='iw-container'>" +
+        "<div class='iw-title'>" + myNickname + "</div>" +
+        "<div class='iw-content'>" +
+        "<div class='iw-subTitle'>" +
+        "<img src=" + myPhoto + " class='img-circle iw-img'>" +
+        "</div>" +
+        "<div class='iw-subTitle'>" +
+        "<textarea class='form-control' rows='2'>" + myIntro + "</textarea>" +
+        "</div>" +
+        "</div>" +
+        "</div>"
+    });
+    google.maps.event.addListener(myWindow, 'domready', function() {
+      infoWindowsCSS();
+    });
+    }
+
+    function markFriends(i) {
+      var friendLoc = friendLocArr[i];
+      friendMarkers.push(new google.maps.Marker({
+        title: friendLoc[0],
+        position: { lat: friendLoc[1], lng: friendLoc[2] },
+        map: map,
+        animation: google.maps.Animation.DROP,
+        icon: 'images/icons/friendHome.png'
+      }));
+      friendMarkers[i].addListener('click', function() {
+        friendWindow[i].open(map, friendMarkers[i]);
+      });
+      friendWindow[i] = new google.maps.InfoWindow({ /* 팝업창 생성 */
+        content: "<div id='iw-container'>" +
+          "<div class='iw-title'>" + friendLocArr[i][0] + "</div>" +
+          "<div class='iw-content'>" +
+          "<div class='iw-subTitle'>" +
+          "<img src=" + friendLocArr[i][4] + " class='img-circle iw-img'>" +
+          "</div>" +
+          "<div class='iw-subTitle'>" +
+          "<input type='txt' class='form-control input-xs' value=" + friendLocArr[i][3] + ">" +
+          "</div>" +
+          "</div>" +
+          "</div>"
+      });
+      google.maps.event.addListener(friendWindow[i], 'domready', function() {
+        infoWindowsCSS();
+      });
+    }
+    function markFriends1(i) {
+      var friendLoc = friendLocArr[i];
+      friendMarkers.push(new google.maps.Marker({
+        title: friendLoc[0],
+        position: { lat: friendLoc[1], lng: friendLoc[2] },
+        animation: google.maps.Animation.DROP,
+        icon: 'images/icons/friendHome.png'
+      }));
+    }
+
+    function markNotFriends(i) {
+      var notFriendLoc = notFriendLocArr[i];
+      notFriendMarkers.push(new google.maps.Marker({
+        title: notFriendLoc[0],
+        position: { lat: notFriendLoc[1], lng: notFriendLoc[2] },
+        map: map,
+        animation: google.maps.Animation.DROP,
+        icon: 'images/icons/pin.png'
+      }));
+      notFriendMarkers[i].addListener('click', function() {
+        notFriendWindow[i].open(map, notFriendMarkers[i]);
+      });
+      notFriendWindow[i] = new google.maps.InfoWindow({ /* 팝업창 생성 */
+        content: "<div id='iw-container'>" +
+          "<div class='iw-title'>" + notFriendLocArr[i][0] + "</div>" +
+          "<div class='iw-content'>" +
+          "<div class='iw-subTitle'>" +
+          "<img src='images/defaultProfilePicture.png' class='img-circle iw-img'>" +
+          "</div>" +
+          "<div class='iw-subTitle'>" +
+          "<input type='txt' class='form-control input-xs' value=" + notFriendLocArr[i][3] + ">" +
+          "</div>" +
+          "</div>" +
+          "</div>"
+      });
+      google.maps.event.addListener(notFriendWindow[i], 'domready', function() {
+        infoWindowsCSS();
+      });
+    }
+
+    function markNotFriends1(i) {
+      var notFriendLoc = notFriendLocArr[i];
+      notFriendMarkers.push(new google.maps.Marker({
+        title: notFriendLoc[0],
+        position: { lat: notFriendLoc[1], lng: notFriendLoc[2] },
+        animation: google.maps.Animation.DROP,
+        icon: 'images/icons/pin.png'
+      }));
+    }
 
     //info 윈도우 CSS 정의
     function infoWindowsCSS() {
@@ -162,117 +281,7 @@
         });
       });
     }
-
-    markMyLoc();
     
-    for (var i = 0; i < friendLocArr.length; i++) {
-//      if(friendLocArr[i][5] < 200) {
-        markFriends(i); /* 친구 마킹 */
-//      }
-    }
-    for (var i = 0; i < notFriendLocArr.length; i++) {
-//      if(notFriendLocArr[i][5] < 200) {
-        markNotFriends(i); /* 주변 회원 마킹 */
-//      }
-    }
-    
-    markCircle(); /* 반경 렌더링 */
-
-    myWindow = new google.maps.InfoWindow({ /* 팝업창 생성 */
-      content: "<div id='iw-container'>" +
-        "<div class='iw-title'>" + myNickname + "</div>" +
-        "<div class='iw-content'>" +
-        "<div class='iw-subTitle'>" +
-        "<img src=" + myPhoto + " class='img-circle iw-img'>" +
-        "</div>" +
-        "<div class='iw-subTitle'>" +
-        "<textarea class='form-control' rows='2'>" + myIntro + "</textarea>" +
-        "</div>" +
-        "</div>" +
-        "</div>"
-    });
-    google.maps.event.addListener(myWindow, 'domready', function() {
-      infoWindowsCSS();
-    });
-
-    for (var i = 0; i < friendLocArr.length; i++) {
-      friendWindow[i] = new google.maps.InfoWindow({ /* 팝업창 생성 */
-        content: "<div id='iw-container'>" +
-          "<div class='iw-title'>" + friendLocArr[i][0] + "</div>" +
-          "<div class='iw-content'>" +
-          "<div class='iw-subTitle'>" +
-          "<img src=" + friendLocArr[i][4] + " class='img-circle iw-img'>" +
-          "</div>" +
-          "<div class='iw-subTitle'>" +
-          "<input type='txt' class='form-control input-xs' value=" + friendLocArr[i][3] + ">" +
-          "</div>" +
-          "</div>" +
-          "</div>"
-      });
-      google.maps.event.addListener(friendWindow[i], 'domready', function() {
-        infoWindowsCSS();
-      });
-    }
-
-    for (var i = 0; i < notFriendLocArr.length; i++) {
-      notFriendWindow[i] = new google.maps.InfoWindow({ /* 팝업창 생성 */
-        content: "<div id='iw-container'>" +
-          "<div class='iw-title'>" + notFriendLocArr[i][0] + "</div>" +
-          "<div class='iw-content'>" +
-          "<div class='iw-subTitle'>" +
-          "<img src='images/defaultProfilePicture.png' class='img-circle iw-img'>" +
-          "</div>" +
-          "<div class='iw-subTitle'>" +
-          "<input type='txt' class='form-control input-xs' value=" + notFriendLocArr[i][3] + ">" +
-          "</div>" +
-          "</div>" +
-          "</div>"
-      });
-      google.maps.event.addListener(notFriendWindow[i], 'domready', function() {
-        infoWindowsCSS();
-      });
-    }
-
-
-    function markMyLoc() {
-      var marker = new google.maps.Marker({
-        position: { lat: myLoc[0], lng: myLoc[1] },
-        map: map,
-        icon: 'images/icons/myHome.png'
-      });
-      marker.addListener('click', function() {
-        myWindow.open(map, marker);
-      });
-    }
-
-    function markFriends(i) {
-      var friendLoc = friendLocArr[i];
-      friendMarkers.push(new google.maps.Marker({
-        title: friendLoc[0],
-        position: { lat: friendLoc[1], lng: friendLoc[2] },
-        map: map,
-        animation: google.maps.Animation.DROP,
-        icon: 'images/icons/friendHome.png'
-      }));
-      friendMarkers[i].addListener('click', function() {
-        friendWindow[i].open(map, friendMarkers[i]);
-      });
-    }
-
-    function markNotFriends(i) {
-      var notFriendLoc = notFriendLocArr[i];
-      notFriendMarkers.push(new google.maps.Marker({
-        title: notFriendLoc[0],
-        position: { lat: notFriendLoc[1], lng: notFriendLoc[2] },
-        map: map,
-        animation: google.maps.Animation.DROP,
-        icon: 'images/icons/pin.png'
-      }));
-      notFriendMarkers[i].addListener('click', function() {
-        notFriendWindow[i].open(map, notFriendMarkers[i]);
-      });
-    }
-
     function markCircle() {
       for (var city in radius) {
         circle = new google.maps.Circle({
@@ -290,18 +299,34 @@
       }
     }
     
+  function radiusDistance(m) { /* 반경 렌더링 거리 조정 함수 */
+    radius = { /* 반경 보여줄때의 변수 */
+      radiusCenter: {
+        /* 반경의 중심 */
+        center: { lat: myLoc[0], lng: myLoc[1] },
+        population: m /* 반경 설정 200m: 4, 500m: 27, 1km: 97 */
+      }
+    };
+    circle.setMap(null);
+    markCircle();
+  }  
+    
   var distant;
   function dropMarkers(distant) {
+    
     for (var i = 0; i < friendLocArr.length; i++) {
-      console.log("distant" + distant);
-      if(friendLocArr[i][5] <= distant) {
+      if (friendLocArr[i][5] <= distant) {
         markFriends(i); /* 친구 마킹 */
-      } else {}
+      } else {
+        markFriends1(i);
+      }
     }
     for (var i = 0; i < notFriendLocArr.length; i++) {
-      if(notFriendLocArr[i][5] <= distant) {
+      if (notFriendLocArr[i][5] <= distant) {
         markNotFriends(i); /* 주변 회원 마킹 */
-      } else {}
+      } else {
+        markNotFriends1(i);
+      }
     }
   }
   
@@ -316,34 +341,22 @@
     notFriendMarkers = [];
   }
     
-  function radiusDistance(m) { /* 반경 렌더링 거리 조정 함수 */
-    radius = { /* 반경 보여줄때의 변수 */
-      radiusCenter: {
-        /* 반경의 중심 */
-        center: { lat: myLoc[0], lng: myLoc[1] },
-        population: m /* 반경 설정 200m: 4, 500m: 27, 1km: 97 */
-      }
-    };
-    circle.setMap(null);
-    markCircle();
-  }  
-    
   $(document).on('click','.radius-200', function() {
     clearMarkers();
-    dropMarkers(200);
     radiusDistance(4);
+    dropMarkers(200);
   });
   
   $(document).on('click','.radius-500', function() {
     clearMarkers();
-    dropMarkers(500);
     radiusDistance(27);
+    dropMarkers(500);
   });
   
   $(document).on('click','.radius-1000', function() {
     clearMarkers();
-    dropMarkers(1000);
     radiusDistance(97);
+    dropMarkers(1000);
   });
   
 } // initMap 끝 
