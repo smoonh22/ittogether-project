@@ -89,8 +89,9 @@ public class MemberController {
         double distanceDouble = CalculateDistance.getDistance(lat,lon,lat2,lon2);
         int distance = (int)Math.floor(distanceDouble);
         
-        System.out.println("#친구" + member.getMno() + "의 거리: " + distance + "m"); 
+        System.out.println("#친구" + member.getMno() + "의 거리: " + distance + "m");
         
+        if(distance <= 2000){
           distances.add(distance);
           
           List<Member> members = memberService.getFriendMarks(member.getMno());
@@ -98,7 +99,8 @@ public class MemberController {
             if( temp != null){
               friendMarks.add(temp);
             }
-        }
+          }
+         }
       }
       System.out.println("나와 친구와의 거리: " + distances.toString());
       System.out.println("friendMarks: " + friendMarks);
@@ -134,13 +136,16 @@ public class MemberController {
         
         System.out.println("*회원" + member.getMno() + "의 거리: " + distance + "m");
         
+        if(distance <= 2000){
            distances.add(distance);
+           
           List<Member> members = memberService.getNoneFriendMarks(member.getMno());
           for(Member temp : members){
             if( temp != null){
               noneFriendMarks.add(temp);
             }
           }
+        }
       }
       
       System.out.println("noneFriendMarks: " + noneFriendMarks.iterator());

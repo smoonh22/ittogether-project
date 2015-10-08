@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.bit.java72.dao.MemberDao">
 
-  <resultMap type="Member" id="MemberMap">
+  <resultMap type="Member"    id="MemberMap">
     <id     column="mno"      property="mno" />
     <result column="email"    property="email"/>
     <result column="nicknm"   property="nickname" />
@@ -18,7 +18,7 @@
     <result column="sex"      property="sex"/>
     <result column="intro"    property="introduction"/>
     <result column="age"      property="age"/>
-    <result column="hb"    property="hobby"/>
+    <result column="hb"       property="hobby"/>
     
   </resultMap>
   
@@ -111,7 +111,10 @@
       t1.lat, 
       t1.lon, 
       t1.intro, 
-      t1.mphoto 
+      t1.mphoto,
+      t1.sex,
+      t1.age,
+      t1.hb
     FROM memb_t t1 JOIN frd_t t2 using(mno)
     WHERE frdno=#{frdno} and state=2;
   </select>

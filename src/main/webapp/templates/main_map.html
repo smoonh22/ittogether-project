@@ -5,23 +5,23 @@
 
 <div id="finder-box">
   <div class="btn-group" data-toggle="buttons">
-  <label class="btn btn-info btn-sm active">
+  <label class="btn btn-info btn-sm btn-man active">
     <input type="checkbox" autocomplete="off">남자</label><br>
-  <label class="btn btn-info btn-sm">
+  <label class="btn btn-info btn-sm btn-woman active">
     <input type="checkbox" autocomplete="off">여자</label><br>
-  <label class="btn btn-info btn-sm">
+  <label class="btn btn-info btn-sm btn-age">
     <input type="checkbox" autocomplete="off">나이</label><br>
-  <label class="btn btn-info btn-sm">
+  <label class="btn btn-info btn-sm btn-hobby">
     <input type="checkbox" autocomplete="off">취미</label><br>
-  <label class="btn btn-info btn-sm">
+  <label class="btn btn-info btn-sm btn-hobby">
     <input type="checkbox" autocomplete="off">고향</label>
   </div>
   
   <div class="radius-control">
     <div class="btn-group" role="group" aria-label="...">
-      <button type="button" class="btn btn-info btn-xs radius-200" >200m</button>
-      <button type="button" class="btn btn-info btn-xs radius-500" >500m</button>
-      <button type="button" class="btn btn-info btn-xs radius-1000" >1km</button>
+      <button type="button" class="btn btn-info btn-xs radius-500" value="500" >500m</button>
+      <button type="button" class="btn btn-info btn-xs radius-1000" value="1000" >1km</button>
+      <button type="button" class="btn btn-info btn-xs radius-2000" value="2000" >2km</button>
     </div>
   </div>
 </div>
@@ -63,7 +63,10 @@
           Number(results.data[i].longitude),
           results.data[i].introduction,
           results.data[i].profilePicture,
-          results.distance[i]
+          results.distance[i],
+          results.data[i].sex,
+          results.data[i].age,
+          results.data[i].hobby
         ];
         friendLocArr.push(tempArr);
         console.log("친구" + i + ": " + friendLocArr[i]);
@@ -85,7 +88,10 @@
           results.data[i].introduction,
           results.data[i].profilePicture,
           results.distance[i],
-          Number(results.data[i].mno)
+          Number(results.data[i].mno),
+          results.data[i].sex,
+          results.data[i].age,
+          results.data[i].hobby
         ];
         notFriendLocArr.push(tempArr);
         console.log("주변회원" + i + ": " + notFriendLocArr[i]);
@@ -121,13 +127,13 @@
       radiusCenter: {
         center: { lat: myLoc[0], lng: myLoc[1] },
         /* 반경의 중심 */
-        population: 130 /* 반경 설정 200m: 26, 500m: 65, 1km: 130 */
+        population: 130 /* 반경 설정 200m: 26, 500m: 65, 1km: 130, 2km: 500*/
       }
     };
     
     // 구글맵을 보여줌
     map = new google.maps.Map(document.getElementById('mainMap'), {
-      zoom: 16,
+      zoom: 15,
       /* 처음 화면을 보여주는 위도, 경도 */
       center: { lat: myLoc[0], lng: myLoc[1] },
       disableDefaultUI: true,
@@ -361,12 +367,7 @@
     notFriendMarkers = [];
   }
   
-  // 200m 버튼  
-  $(document).on('click','.radius-200', function() {
-    clearMarkers();
-    radiusDistance(4);
-    dropMarkers(200);
-  });
+  
   // 500m 버튼  
   $(document).on('click','.radius-500', function() {
     clearMarkers();
@@ -380,10 +381,19 @@
     dropMarkers(1000);
   });
     
-  $(document).ready(function(){
-    $('.btn-addfriend-done').attr("disabled", true);
-    $('.btn-addfriend-done').attr('value', '친구 요청중');
+  // 2000m 버튼  
+  $(document).on('click','.radius-2000', function() {
+    clearMarkers();
+    radiusDistance(500);
+    dropMarkers(2000);
   });
+    
+    
+  $(document).on('click', '.btn-man', function() {
+    clearMarkers();
+//    $('.btn-man').addClass('active');
+  });
+    
 } // initMap 끝 
   
   $(document).on('click', '.addfriend-btn', function() {
