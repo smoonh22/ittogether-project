@@ -4,21 +4,24 @@
 </div>
 
 <div id="finder-box">
-  <div class="dropdown">
-    <button class="btn btn-info btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">모두
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-      <li><a href="#">남자</a></li>
-      <li><a href="#">여자</a></li>
-    </ul>
-    <button type="button" class="btn btn-info btn-xs btn-on-map">취미</button>
-    <button type="button" class="btn btn-info btn-xs btn-on-map">고향 </button>
-    <button type="button" class="btn btn-info btn-xs btn-on-map">나이 </button>
+  <div class="btn-group" data-toggle="buttons">
+  <label class="btn btn-info btn-sm btn-man active">
+    <input type="checkbox" autocomplete="off">남자</label><br>
+  <label class="btn btn-info btn-sm btn-woman active">
+    <input type="checkbox" autocomplete="off">여자</label><br>
+  <label class="btn btn-info btn-sm btn-age">
+    <input type="checkbox" autocomplete="off">나이</label><br>
+  <label class="btn btn-info btn-sm btn-hobby">
+    <input type="checkbox" autocomplete="off">취미</label><br>
+  <label class="btn btn-info btn-sm btn-hobby">
+    <input type="checkbox" autocomplete="off">고향</label>
+  </div>
+  
+  <div class="radius-control">
     <div class="btn-group" role="group" aria-label="...">
-      <button type="button" class="btn btn-info btn-xs" onclick="radiusDistance(26);">200m</button>
-      <button type="button" class="btn btn-info btn-xs" onclick="radiusDistance(65);">500m</button>
-      <button type="button" class="btn btn-info btn-xs" onclick="radiusDistance(130);">1km</button>
+      <button type="button" class="btn btn-info btn-xs radius-500" value="500" >500m</button>
+      <button type="button" class="btn btn-info btn-xs radius-1000" value="1000" >1km</button>
+      <button type="button" class="btn btn-info btn-xs radius-2000" value="2000" >2km</button>
     </div>
   </div>
 </div>
@@ -27,11 +30,11 @@
 </div>
 
 <script>
-  //json형식으로 받아온 데이터를 뿌려줌
+  // json형식으로 받아온 나의 위치 데이터를 받아옴
   var myLoc = [];
   var myNickname,
-    myIntro,
-    myPhoto;
+      myIntro,
+      myPhoto;
   (function() {
     $.getJSON(contextRoot + '/member/getMyLoc.do', {
       mno: sessionStorage.getItem('mno')
@@ -46,11 +49,12 @@
     });
   })();
 
-
+  //json형식으로 받아온 친구의 위치 데이터를 받아옴
   var friendLocArr = [];
   (function() {
-    $.getJSON(contextRoot + '/member/getFriends.do', {
-      frdno: sessionStorage.getItem('mno')
+    $.getJSON('member/getFriends.do', {
+      frdno: sessionStorage.getItem('mno'),
+      mno: sessionStorage.getItem('mno')
     }, function(results) {
       for (var i = 0; i < results.data.length; i++) {
         var tempArr = [
@@ -58,7 +62,11 @@
           Number(results.data[i].latitude),
           Number(results.data[i].longitude),
           results.data[i].introduction,
-          results.data[i].profilePicture
+          results.data[i].profilePicture,
+          results.distance[i],
+          results.data[i].sex,
+          results.data[i].age,
+          results.data[i].hobby
         ];
         friendLocArr.push(tempArr);
         console.log("친구" + i + ": " + friendLocArr[i]);
@@ -66,23 +74,27 @@
     });
   })();
 
+  // json형식으로 받아온 주변 회원의 위치 데이터를 받아옴
   var notFriendLocArr = [];
   (function() {
     $.getJSON(contextRoot + '/member/getMembers.do', {
       mno: sessionStorage.getItem('mno')
     }, function(results) {
-      console.log(results.data.length);
       for (var i = 0; i < results.data.length; i++) {
         var tempArr = [
           results.data[i].nickname,
           Number(results.data[i].latitude),
           Number(results.data[i].longitude),
           results.data[i].introduction,
-          results.data[i].profilePicture
+          results.data[i].profilePicture,
+          results.distance[i],
+          Number(results.data[i].mno),
+          results.data[i].sex,
+          results.data[i].age,
+          results.data[i].hobby
         ];
         notFriendLocArr.push(tempArr);
         console.log("주변회원" + i + ": " + notFriendLocArr[i]);
-
         $('#friend-box').append('<div class="panel panel-info">' +
           '<div class="panel-heading match-heading">' +
           "BestMatch" +
@@ -97,7 +109,6 @@
           '</button>' +
           '</div>' +
           '</div>');
-
       }
     });
   })();
@@ -105,34 +116,26 @@
   var friendMarkers = []; /*팝업창 띄울 때의 마커들 */
   var notFriendMarkers = []; /* 팝업창 띄울 때의 마커들  */
 
-  var map;
-  var circle;
+  var map; // 맵객체에 필요
+  var circle; // 주변 동그라미 그릴 변수
   var friendWindow = []; /* 친구들 팝업창 */
   var notFriendWindow = []; /* 회원들 팝업창 */
 
-  //  var myInfoWindow = $('#myInfoWindow');
-  //  var myBalloon = myInfoWindow[0].innerHTML;
-  //  console.log(myBalloon);
-
-
+  // 구글맵 초기화 함수.
   function initMap() {
     var radius = { /* 반경 보여줄 지점 */
       radiusCenter: {
-        center: {
-          lat: myLoc[0],
-          lng: myLoc[1]
-        },
+        center: { lat: myLoc[0], lng: myLoc[1] },
         /* 반경의 중심 */
-        population: 26 /* 반경 설정 200m: 26, 500m: 65, 1km: 130 */
+        population: 130 /* 반경 설정 200m: 26, 500m: 65, 1km: 130, 2km: 500*/
       }
     };
+    
+    // 구글맵을 보여줌
     map = new google.maps.Map(document.getElementById('mainMap'), {
-      zoom: 17,
+      zoom: 15,
       /* 처음 화면을 보여주는 위도, 경도 */
-      center: {
-        lat: myLoc[0],
-        lng: myLoc[1]
-      },
+      center: { lat: myLoc[0], lng: myLoc[1] },
       disableDefaultUI: true,
       /* DEFAULT UI 사용*/
       panControl: false,
@@ -140,6 +143,140 @@
       scaleControl: false /* 척도 */
     });
 
+    markMyLoc(); // 나의 위치 마킹해줌
+    for (var i = 0; i < friendLocArr.length; i++) {
+        markFriends(i); /* 친구 마킹 */
+    }
+    for (var i = 0; i < notFriendLocArr.length; i++) {
+//      if(notFriendLocArr[i][5] < 200) {
+//        markNotFriends(i); /* 주변 회원 마킹 */
+//      }
+    }
+    markCircle(); /* 반경 렌더링 */
+
+    function markMyLoc() {
+      var marker = new google.maps.Marker({
+        position: { lat: myLoc[0], lng: myLoc[1] },
+        map: map,
+        icon: 'images/icons/myHome.png'
+      });
+      
+      marker.addListener('click', function() {
+        myWindow.open(map, marker);
+      });
+      myWindow = new google.maps.InfoWindow({ /* 팝업창 생성 */
+      content: "<div id='iw-container'>" +
+        "<div class='iw-title'>" + myNickname + "</div>" +
+        "<div class='iw-content'>" +
+        "<div class='iw-subTitle'>" +
+        "<img src=" + myPhoto + " class='img-circle iw-img'>" +
+        "</div>" +
+        "<div class='iw-subTitle'>" +
+        "<textarea class='form-control' rows='2'>" +myIntro+ "</textarea>" +
+        "</div>" +
+        "</div>" +
+        "</div>"
+    });
+    google.maps.event.addListener(myWindow, 'domready', function() {
+      infoWindowsCSS(); // 팝업창 css 설정해줌
+    });
+    }
+
+    function markFriends(i) {
+      var friendLoc = friendLocArr[i];
+      friendMarkers.push(new google.maps.Marker({
+        title: friendLoc[0],
+        position: { lat: friendLoc[1], lng: friendLoc[2] },
+        map: map,
+        animation: google.maps.Animation.DROP,
+        icon: 'images/icons/friendHome.png'
+      }));
+      friendMarkers[i].addListener('click', function() {
+        if (friendMarkers[i].getAnimation() !== null) {
+            friendMarkers[i].setAnimation(null);
+            friendWindow[i].close(map, friendMarkers[i]);
+        } else {
+            friendMarkers[i].setAnimation(google.maps.Animation.BOUNCE);
+            friendWindow[i].open(map, friendMarkers[i]);
+        }
+      });
+      friendWindow[i] = new google.maps.InfoWindow({ /* 팝업창 생성 */
+        content: "<div id='iw-container'>" +
+          "<div class='iw-title'>" + friendLocArr[i][0] + "</div>" +
+          "<div class='iw-content'>" +
+          "<div class='iw-subTitle'>" +
+          "<img src=" + friendLocArr[i][4] + " class='img-circle iw-img'>" +
+          "</div>" +
+          "<div class='iw-subTitle'>" +
+          "<input type='txt' class='form-control input-xs' value=" + friendLocArr[i][3] + ">" +
+          "</div>" +
+          "</div>" +
+          "</div>"
+      });
+      google.maps.event.addListener(friendWindow[i], 'domready', function() {
+        infoWindowsCSS();// 팝업창 css 설정해줌
+      });
+    }
+    // 거리 설정에서 에러 안뜨게 하는데 필요
+    function markFriends1(i) {
+      var friendLoc = friendLocArr[i];
+      friendMarkers.push(new google.maps.Marker({
+        title: friendLoc[0],
+        position: { lat: friendLoc[1], lng: friendLoc[2] },
+        animation: google.maps.Animation.DROP,
+        icon: 'images/icons/friendHome.png'
+      }));
+    }
+
+    function markNotFriends(i) {
+      var notFriendLoc = notFriendLocArr[i];
+      notFriendMarkers.push(new google.maps.Marker({
+        title: notFriendLoc[0],
+        position: { lat: notFriendLoc[1], lng: notFriendLoc[2] },
+        map: map,
+        animation: google.maps.Animation.DROP,
+        icon: 'images/icons/pin.png'
+      }));
+      notFriendMarkers[i].addListener('click', function() {
+        if (notFriendMarkers[i].getAnimation() !== null) {
+            notFriendMarkers[i].setAnimation(null);
+            notFriendWindow[i].close(map, notFriendMarkers[i]);
+        } else {
+            notFriendWindow[i].open(map, notFriendMarkers[i]);
+            notFriendMarkers[i].setAnimation(google.maps.Animation.BOUNCE);
+        }
+      });
+      notFriendWindow[i] = new google.maps.InfoWindow({ /* 팝업창 생성 */
+        content: "<div id='iw-container'>" +
+          "<div class='iw-title'>" + notFriendLocArr[i][0] + "</div>" +
+          "<div class='iw-content'>" +
+          "<div class='iw-subTitle'>" +
+          "<img src='images/defaultProfilePicture.png' class='img-circle iw-img'>" +
+          "</div>" +
+          "<div class='iw-subTitle'>" +
+          "<input type='txt' class='form-control input-xs' value=" + notFriendLocArr[i][3] + ">" +
+        "<input type='button' class='btn btn-info btn-xs btn-block btn-addfriend' value='친구추가' mno-data='" + notFriendLocArr[i][6] + "'>" +
+          "</div>" +
+          "</div>" +
+          "</div>"
+        
+        
+      });
+      google.maps.event.addListener(notFriendWindow[i], 'domready', function() {
+        infoWindowsCSS();// 팝업창 css 설정해줌
+      });
+    }
+
+    // 거리 설정에서 에러 안뜨게 하는데 필요
+    function markNotFriends1(i) {
+      var notFriendLoc = notFriendLocArr[i];
+      notFriendMarkers.push(new google.maps.Marker({
+        title: notFriendLoc[0],
+        position: { lat: notFriendLoc[1], lng: notFriendLoc[2] },
+        animation: google.maps.Animation.DROP,
+        icon: 'images/icons/pin.png'
+      }));
+    }
 
     //info 윈도우 CSS 정의
     function infoWindowsCSS() {
@@ -169,161 +306,97 @@
         });
       });
     }
-
-    markMyLoc();
-    for (var i = 0; i < friendLocArr.length; i++) {
-      markFriends(i); /* 친구 마킹 */
-    }
-    for (var i = 0; i < notFriendLocArr.length; i++) {
-      markNotFriends(i); /* 주변 회원 마킹 */
-    }
-    markCircle(); /* 반경 렌더링 */
-
-
-    myWindow = new google.maps.InfoWindow({ /* 팝업창 생성 */
-      content: "<div id='iw-container'>" +
-        "<div class='iw-title'>" + myNickname + "</div>" +
-        "<div class='iw-content'>" +
-        "<div class='iw-subTitle'>" +
-        "<img src=" + myPhoto + " class='img-circle iw-img'>" +
-        "</div>" +
-        "<div class='iw-subTitle'>" +
-        "<textarea class='form-control' rows='2'>" + myIntro + "</textarea>" +
-        "</div>" +
-        "</div>" +
-        "</div>"
-
-    });
-
-    for (var i = 0; i < friendLocArr.length; i++) {
-      friendWindow[i] = new google.maps.InfoWindow({ /* 팝업창 생성 */
-        content: "<div id='iw-container'>" +
-          "<div class='iw-title'>" + friendLocArr[i][0] + "</div>" +
-          "<div class='iw-content'>" +
-          "<div class='iw-subTitle'>" +
-          "<img src=" + friendLocArr[i][4] + " class='img-circle iw-img'>" +
-          "</div>" +
-          "<div class='iw-subTitle'>" +
-          "<input type='txt' class='form-control input-xs' value=" + friendLocArr[i][3] + ">" +
-          "</div>" +
-          "</div>" +
-          "</div>"
-      });
-
-      google.maps.event.addListener(friendWindow[i], 'domready', function() {
-        infoWindowsCSS();
-      });
-    }
-
-    for (var i = 0; i < notFriendLocArr.length; i++) {
-      notFriendWindow[i] = new google.maps.InfoWindow({ /* 팝업창 생성 */
-        content: "<div id='iw-container'>" +
-          "<div class='iw-title'>" + notFriendLocArr[i][0] + "</div>" +
-          "<div class='iw-content'>" +
-          "<div class='iw-subTitle'>" +
-          "<img src=" + notFriendLocArr[i][4] + " class='img-circle iw-img'>" +
-          "</div>" +
-          "<div class='iw-subTitle'>" +
-          "<input type='txt' class='form-control input-xs' value=" + notFriendLocArr[i][3] + ">" +
-          "</div>" +
-          "</div>" +
-          "</div>"
-      });
-
-      google.maps.event.addListener(notFriendWindow[i], 'domready', function() {
-        infoWindowsCSS();
-      });
-    }
-
-    google.maps.event.addListener(myWindow, 'domready', function() {
-      infoWindowsCSS();
-    });
-
-
-    function markMyLoc() {
-      var marker = new google.maps.Marker({
-        position: {
-          lat: myLoc[0],
-          lng: myLoc[1]
-        },
+    
+  function markCircle() {
+    for (var city in radius) {
+      circle = new google.maps.Circle({
+        strokeColor: '#000',
+        /* 반경 렌더링 보더 색*/
+        strokeOpacity: 0.4,
+        strokeWeight: 1,
+        fillColor: '#FFFFFF',
+        /* 반경 렌더링 채움 색 */
+        fillOpacity: 0.25,
         map: map,
-        icon: 'images/icons/myHome.png'
+        center: radius[city].center,
+        radius: Math.sqrt(radius[city].population) * 100
       });
-      marker.addListener('click', function() {
-        myWindow.open(map, marker);
-      });
-    }
-
-    function markFriends(i) {
-      var friendLoc = friendLocArr[i];
-      //    window.setTimeout(function() {
-      friendMarkers.push(new google.maps.Marker({
-        title: friendLoc[0],
-        position: {
-          lat: friendLoc[1],
-          lng: friendLoc[2]
-        },
-        map: map,
-        animation: google.maps.Animation.DROP,
-        icon: 'images/icons/friendHome.png'
-      }));
-      friendMarkers[i].addListener('click', function() {
-        friendWindow[i].open(map, friendMarkers[i]);
-      });
-    }
-
-    function markNotFriends(i) {
-      var notFriendLoc = notFriendLocArr[i];
-      notFriendMarkers.push(new google.maps.Marker({
-        title: notFriendLoc[0],
-        position: {
-          lat: notFriendLoc[1],
-          lng: notFriendLoc[2]
-        },
-        map: map,
-        animation: google.maps.Animation.DROP,
-        icon: 'images/icons/pin.png'
-      }));
-      notFriendMarkers[i].addListener('click', function() {
-        notFriendWindow[i].open(map, notFriendMarkers[i]);
-      });
-      //    }, i * 100);
-    }
-
-    function markCircle() {
-      for (var city in radius) {
-        circle = new google.maps.Circle({
-          strokeColor: '#000',
-          /* 반경 렌더링 보더 색*/
-          strokeOpacity: 0.4,
-          strokeWeight: 1,
-          fillColor: '#FFFFFF',
-          /* 반경 렌더링 채움 색 */
-          fillOpacity: 0.25,
-          map: map,
-          center: radius[city].center,
-          radius: Math.sqrt(radius[city].population) * 100
-        });
-      }
-    }
-
-    function radiusDistance(m) { /* 반경 렌더링 거리 조정 함수 */
-      radius = { /* 반경 보여줄때의 변수 */
-        radiusCenter: {
-          /* 반경의 중심 */
-          center: {
-            lat: myLoc[0],
-            lng: myLoc[1]
-          },
-          population: m /* 반경 설정 200m: 26, 500m: 65, 1km: 130 */
-        }
-      };
-      circle.setMap(null);
-      markCircle();
     }
   }
-
-  $(document).on('click','.addfriend-btn', function() {
+    
+  function radiusDistance(m) { /* 반경 렌더링 거리 조정 함수 */
+    radius = { /* 반경 보여줄때의 변수 */
+      radiusCenter: {
+        /* 반경의 중심 */
+        center: { lat: myLoc[0], lng: myLoc[1] },
+        population: m /* 반경 설정 200m: 4, 500m: 27, 1km: 97 */
+      }
+    };
+    circle.setMap(null);
+    markCircle();
+  }  
+    
+  var distant;  //  거리 설정의 단위 변수 200m, 500m, 1km
+  // 거리 설정 후 마킹해주는 함수  
+  function dropMarkers(distant) {
+    for (var i = 0; i < friendLocArr.length; i++) {
+      if (friendLocArr[i][5] <= distant) {
+        markFriends(i); /* 친구 마킹 */
+      } else {
+        markFriends1(i);
+      }
+    }
+    for (var i = 0; i < notFriendLocArr.length; i++) {
+      if (notFriendLocArr[i][5] <= distant) {
+        markNotFriends(i); /* 주변 회원 마킹 */
+      } else {
+        markNotFriends1(i);
+      }
+    }
+  }
+  
+  // 거리 설정 후 마킹하기전 맵의 마커들을 없애주는 함수
+  function clearMarkers() {
+    for (var i = 0; i < friendMarkers.length; i++) {
+      friendMarkers[i].setMap(null);
+    }
+    for (var i = 0; i < notFriendMarkers.length; i++) {
+      notFriendMarkers[i].setMap(null);
+    }
+    friendMarkers = [];
+    notFriendMarkers = [];
+  }
+  
+  
+  // 500m 버튼  
+  $(document).on('click','.radius-500', function() {
+    clearMarkers();
+    radiusDistance(27);
+    dropMarkers(500);
+  });
+  // 1000m 버튼
+  $(document).on('click','.radius-1000', function() {
+    clearMarkers();
+    radiusDistance(97);
+    dropMarkers(1000);
+  });
+    
+  // 2000m 버튼  
+  $(document).on('click','.radius-2000', function() {
+    clearMarkers();
+    radiusDistance(500);
+    dropMarkers(2000);
+  });
+    
+    
+  $(document).on('click', '.btn-man', function() {
+    clearMarkers();
+//    $('.btn-man').addClass('active');
+  });
+    
+} // initMap 끝 
+  
+  $(document).on('click', '.addfriend-btn', function() {
       var parent = this;
     $.ajax(contextRoot + '/frd/insert.do', {
         method: 'post',
@@ -334,11 +407,26 @@
         },
       success: function(result) {
           alert('친구 요청을 보냈습니다.');
-          
+        $('.addfriend-btn').attr('value', '친구 요청중');
       }
     });
-    
-    
+  });
+  
+  $(document).on('click', '.btn-addfriend', function() {
+      var parent = this;
+    $.ajax('frd/insert.do', {
+        method: 'post',
+        dataType: 'json',
+        data: {
+            frdmno: $(parent).attr('mno-data'),
+            mno: sessionStorage.getItem('mno')
+        },
+      success: function(result) {
+        alert('친구 요청을 보냈습니다.');
+        $('.btn-addfriend').attr('value', '친구 요청중');
+        $('.btn-addfriend').attr('disabled', true);
+      }
+    });
   });
   
   

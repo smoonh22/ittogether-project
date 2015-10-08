@@ -337,7 +337,8 @@ hr {
 .detail-content {
   background-color: #F2F4F5;
 /*  width: 400px;*/
-  height: 100px;
+  height: 115px;
+  padding: 10px;
 }
 .detail-footer {
 }
@@ -371,13 +372,39 @@ hr {
 .detail-title {
   vertical-align: text-top;
 }
-.detail-header {
+.detail-header-1 {
   height: 45px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   background-color: #009AF3;
   color: white;
 }
+.detail-header-2 {
+  height: 45px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #00C6DB;
+  color: white;
+}
+.detail-header-3 {
+  height: 45px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #00DCA4;
+  color: white;
+}
+
 .detail-user-name {
-  left: 10px;
+  left: 1x;
+}
+.detail-user-name-middle {
+  width: 140px;
+  text-align: center;
+}
+.detail-user-nickname-middle {
+  width: 140px;
+  text-align: center;
+}
+.detail-profile-img {
+  width: 120px;
 }

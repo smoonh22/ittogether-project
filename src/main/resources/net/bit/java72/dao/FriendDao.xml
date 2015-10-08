@@ -21,6 +21,7 @@
     <result column="addr"     property="address"/>
     <result column="mphoto"   property="profilePicture"/>
   </resultMap>
+  
   <resultMap type="Search" id="SearchMap">
   	<result column="mno"		property="mno"/>
   	<result column="searchType"	property="searchType"/>

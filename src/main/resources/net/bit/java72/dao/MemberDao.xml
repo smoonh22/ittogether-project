@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.bit.java72.dao.MemberDao">
 
-  <resultMap type="Member" id="MemberMap">
+  <resultMap type="Member"    id="MemberMap">
     <id     column="mno"      property="mno" />
     <result column="email"    property="email"/>
     <result column="nicknm"   property="nickname" />
@@ -18,6 +18,8 @@
     <result column="sex"      property="sex"/>
     <result column="intro"    property="introduction"/>
     <result column="age"      property="age"/>
+    <result column="hb"       property="hobby"/>
+    
   </resultMap>
   
   <select id="exist" 
@@ -72,9 +74,11 @@
       pwd=#{password},
       mphoto=#{profilePicture},
       intro=#{introduction},
+      lat=#{latitude},
+      lon=#{longitude},
       sex=#{sex},
       age=#{age},
-      hobby=#{hobby},
+      hb=#{hobby},
       hometwn=#{hometown},
       addr=#{address},
       lat = #{latitude},
@@ -104,15 +108,22 @@
    <!-- 내 친구들 정보 가져와서 메인맵에 뿌려줌 -->
   <select id="getFriends" parameterType="int" resultMap="MemberMap">
     SELECT
+      t1.mno,
       t1.nicknm, 
       t1.lat, 
       t1.lon, 
       t1.intro, 
-      t1.mphoto 
+      t1.mphoto,
+      t1.sex,
+      t1.age,
+      t1.hobby
     FROM memb_t t1 JOIN frd_t t2 using(mno)
     WHERE frdno=#{frdno} and state=2;
   </select>
   
+  <select id="getFriendMarks" parameterType="int" resultMap="MemberMap">
+    SELECT * FROM memb_t where mno = #{value}
+  </select>
   
   <!-- 비 친구들 뿌려줌 -->
   <select id="getNoneFriendMarks" parameterType="int" resultMap="MemberMap">

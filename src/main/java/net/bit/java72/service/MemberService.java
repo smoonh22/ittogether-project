@@ -17,7 +17,9 @@ public interface MemberService {
   List<Member> getlatlon(int mno);
   List<Member> getMyLoc(int mno);
   List<Member> getFriends(int frdno);
-  List<Member> getNoneFriendMarks(int mno);  
+  List<Member> getNoneFriendMarks(int mno);
+  List<Member> getFriendMarks(int mno);
+  
  
 }
 

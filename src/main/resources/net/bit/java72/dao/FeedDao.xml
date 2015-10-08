@@ -3,21 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.bit.java72.dao.FeedDao">
-  <resultMap type="Feed" id="FeedMap">
-    <id     column="fno"      property="fno" />
-    <result column="categry"    property="category" />
+  <resultMap  type="Feed"        id="FeedMap">
+    <id     column="fno"         property="fno" />
+    <result column="categry"     property="category" />
     <result column="contnt"      property="content" />
-    <result column="cre_dt"   property="createDate" />
+    <result column="cre_dt"      property="createDate" />
     <result column="max_headcnt" property="maxHeadCount"/>
     <result column="current_cnt" property="currentCount"/>
     <result column="meet_time" property="meetTime"/>
   </resultMap>
   
-  <resultMap type="FriendFeed" id="FriendFeedMap">
-    <id     column="fno"      property="fno" />
-    <result column="categry"    property="category" />
+  <resultMap  type="FriendFeed"  id="FriendFeedMap">
+    <id     column="fno"         property="fno" />
+    <result column="categry"     property="category" />
     <result column="contnt"      property="content" />
-    <result column="cre_dt"   property="createDate" />
+    <result column="cre_dt"      property="createDate" />
     <result column="max_headcnt" property="maxHeadCount"/>
     <result column="current_cnt" property="currentCount"/>
     <result column="meet_time" property="meetTime"/>

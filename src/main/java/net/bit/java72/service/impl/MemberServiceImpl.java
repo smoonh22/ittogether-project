@@ -78,6 +78,11 @@ public class MemberServiceImpl implements MemberService {
     // TODO Auto-generated method stub
     return memberDao.getNoneFriendMarks(mno);
   }
+  @Override
+  public List<Member> getFriendMarks(int mno) {
+    // TODO Auto-generated method stub
+    return memberDao.getFriendMarks(mno);
+  }
  
 
 }
