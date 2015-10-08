@@ -13,7 +13,7 @@ public interface FeedDao {
   FriendFeed getDetail(int fno);
   int friendJoinActivity(HashMap<String, Integer> map);
   int insert(Feed feed);
-  List<Feed> myActivityList(int mno);
+  List<FriendFeed> myActivityList(int mno);
   Feed checkFeed(HashMap<String, Integer> map);
   int friendOutActivity(HashMap<String, Integer> map);
   int friendOut(int fno);

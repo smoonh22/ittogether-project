@@ -32,15 +32,15 @@
         <ul class="nav navbar-nav navbar-right" ng-controller='myFriendCtrl as mFCtrl'>
           
           <li class="dropdown"><a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> 내 친구들</a>
-             <ul class="dropdown-menu" aria-labelledby="dLabel">   
-<ul class="nav nav-tabs" role="tablist">
-   <li role="presentation" class="active"><a href="#myFriendList" aria-controls="home" role="tab" data-toggle="tab">친구 목록</a></li>
-    <li role="presentation"><a href="#myApplyList" aria-controls="fflist" role="tab" data-toggle="tab">친구 요청</a></li>
-    <li role="presentation"><a href="#findFriend" aria-controls="aflist" role="tab" data-toggle="tab">친구 검색</a></li>
-  </ul>
+           <ul class="dropdown-menu" aria-labelledby="dLabel">   
+			<li><ul class="nav nav-tabs" role="tablist">
+			   <li role="presentation" class="active"><a href="#myFriendList" aria-controls="home" role="tab" data-toggle="tab">친구 목록</a></li>
+   			   <li role="presentation"><a href="#myApplyList" aria-controls="fflist" role="tab" data-toggle="tab">친구 요청</a></li>
+		       <li role="presentation"><a href="#findFriend" aria-controls="aflist" role="tab" data-toggle="tab">친구 검색</a></li>
+  			</ul></li>
 
   <!-- Tab panes -->
-  <div class="tab-content">
+  	<li><div class="tab-content">
      <div role="tabpanel" class="tab-pane" id="findFriend">
                 <div class="panel panel-success">
                  <div class="panel-heading">
@@ -82,7 +82,7 @@
                    <h3 class="panel-title">친구 목록</h3>
                  </div>
                  <div class="panel-body" >
-                       <div class='row'  ng-repeat-start="frdList in mFCtrl.frdLists">
+                       <div class='row'  ng-repeat="frdList in frdLists">
                       <div class='col-md-4' >
                          <img class="img-circle header-image" src="{{frdList.profilePicture}}"/>
                       </div>
@@ -102,10 +102,10 @@
                       </div>
                       <div class='col-md-2' >
                       <br><br>
-                      <button href='#' ng-click='delfrd(frdList.mno)' class='delfrdbtn'>삭제</button>
+                      <button ng-click='delfrd(frdList.mno)' class='delfrdbtn'>삭제</button><div ng-show='resetBtn(frdList.mno)'><button class='delfrdbtn'>취소</button>
+                      <br>삭제하시겠습니까?<br></div>
                       </div>
                    </div>
-                   <div  ng-repeat-end></div>
                  </div >
             </div>
     </div>
@@ -114,7 +114,7 @@
                   <div class="panel-heading">
                     <h3 class="panel-title">요청 목록</h3>
                   </div>
-                  <div class="panel-body" ng-repeat="applyList in mFCtrl.applyLists">
+                  <div class="panel-body" ng-repeat="applyList in applyLists">
                     <div class='row'>
                       <div class='col-md-4'>
                         <img class="img-circle header-image" src="{{applyList.profilePicture}}" />
@@ -140,7 +140,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="panel-body" ng-repeat="applyList2 in mFCtrl.applyList2s">
+                  <div class="panel-body" ng-repeat="applyList2 in applyList2s">
                     <div class='row'>
                       <div class='col-md-4'>
                         <img class="img-circle header-image" src="{{applyList2.profilePicture}}" />
@@ -167,6 +167,8 @@
                   </div>
                 </div>
               </div>
+              </div>
+              </li>
           </ul>
         </li>
         <li class="user-prof">

@@ -54,8 +54,15 @@ public class FeedController {
   @RequestMapping("/myActivity")
   public Object feedlist(int mno) {  
     Map<String,Object> result = new HashMap<String,Object>();
+    List<FriendFeed> test = feedService.myActivityList(mno);
+    SimpleDateFormat format = new SimpleDateFormat("MM월 dd일 E요일");
+    for(FriendFeed feed : test){
+      String meetdate = format.format(feed.getMeetTime());
+      feed.setMeetDday(meetdate);
+      feed.setDday(CalcTime(feed.getCreateDate()));
+    }
     
-    result.put("activity", feedService.myActivityList(mno));
+    result.put("activity", test);
     
     return  result;
   }
@@ -82,9 +89,12 @@ public class FeedController {
       double distance = CalculateDistance.getDistance(lat,lon,lat2,lon2);
       if(distance <= 1000){
         List<FriendFeed> feeds = feedService.noneFriendFeed(member.getMno());
+        SimpleDateFormat format = new SimpleDateFormat("MM월 dd일 E요일");
         for(FriendFeed test : feeds){
         if( test != null){
-          test.setDday(CalcTime(test.getMeetTime()));
+          String meetdate = format.format(test.getMeetTime());
+          test.setMeetDday(meetdate);
+          test.setDday(CalcTime(test.getCreateDate()));
           frdList.add(test);
         }
         }

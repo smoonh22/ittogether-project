@@ -419,3 +419,9 @@ textarea {
 .comment-screen {
 	background-color: #F2F4F5;
 }
+.comment-updatebtn {
+	height : 20px;
+}
+.commentInputArea{
+	width : 470px;
+}

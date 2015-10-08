@@ -73,6 +73,7 @@
 									class="img-circle">
 							</div>
 							</div>
+					<a href="#detailModal" data-toggle="modal" ng-click="detailview(nfeed.fno)" class="detail-view">
 							<div class="col-md-9">
 							<div class="content-div">
 								<p id="user-name">{{nfeed.name}}</p>
@@ -81,7 +82,7 @@
 										src="images/icons/calendar.png"> {{nfeed.meetDday}} </small> <small
 										class="text-muted"><img
 										src="images/icons/multiple.png">
-										{{nfeed.stuffCount}}/{{nfeed.maxHeadCount}} </small> <small
+										{{nfeed.currentCount}}/{{nfeed.maxHeadCount}} </small> <small
 										class="text-muted"><img src="images/icons/time.png">
 										{{nfeed.dday}}</small>
 								</h5>
@@ -89,6 +90,7 @@
 								<div id="unfriend-content">{{nfeed.content}}</div>
 							</div>
 							</div>
+					        </a>
 						</div>
 					</div>
 				</div>
@@ -153,8 +155,8 @@
         	  <table class='commentTable'>
         	  <tr><td><b>{{comment.nickname}}</b></td></tr>
         	  <tr><td rowspan="5"><div ng-hide='commentArea(comment.cno)' id='commentarea{{comment.cno}}'>{{comment.content}}</div>
-        	  <div ng-show='updateArea(comment.cno)'><textarea ng-model='rewriteComment' id='commentinputarea{{comment.cno}}' >{{comment.content}}</textarea>
-        	  <button ng-click='updateCmt($index,comment.cno,comment.fno,rewriteComment)' class='comment-insrtbtn'>등록</button><button ng-click='cancelBtn($index,comment.cno)' class='comment-insrtbtn'>취소</button></div></td></tr>
+        	  <div ng-show='updateArea(comment.cno)'><textarea ng-model='rewriteComment' class='commentInputArea'>{{comment.content}}</textarea>
+        	  <button ng-click='updateCmt($index,comment.cno,comment.fno,rewriteComment)' class='comment-updatebtn'>등록</button><button ng-click='cancelBtn($index,comment.cno)' class='comment-updatebtn'>취소</button></div></td></tr>
         	  </table>
         	  </div>
         	  <div ng-show='checkAuthority(comment.mno)' class='checkAuthority'>

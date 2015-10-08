@@ -25,7 +25,7 @@ define(function () {
     })
     
     //디테일 정보
-    $scope.detailview =  function reload(fno){
+    $scope.detailview =  function (fno){
       $.ajax('feed/detail.do',{
         method : 'get',
         dataType : 'json',
@@ -115,7 +115,7 @@ define(function () {
       });
       
     }
-    
+    // 댓글 삭제 버튼
     $scope.deleteCmt = function (cno,fno) {
       $.ajax('feed/comentdelete.do',{
         method : 'get',

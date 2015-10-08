@@ -1,9 +1,11 @@
 define(function() {
   var app = angular.module('myFriendList', []);
   
-app.controller('myFriendCtrl',['$http','$scope', function friend($http,$scope) {
+ app.controller('myFriendCtrl',['$http','$scope', function friend($http,$scope) {
     var parent_scope = this;
-    var data = $scope.delfrdmno;
+   friendList();
+   function friendList() {
+     console.log("하하하");
     $.ajax("frd/list.do",
          {
         method: 'POST',
@@ -12,13 +14,12 @@ app.controller('myFriendCtrl',['$http','$scope', function friend($http,$scope) {
           mno: window.sessionStorage.getItem('mno')
         }
     }).success(function(result){
-      parent_scope.frdLists = result.data;
-      parent_scope.applyLists = result.apply;
-      parent_scope.applyList2s = result.applyU;
+      $scope.frdLists = result.data;
+      $scope.applyLists = result.apply;
+      $scope.applyList2s = result.applyU;
       
-    });
- 
-   
+    })
+  };
  $scope.search = function(searchQuery) {
    $http.get('frd/search.do',{params : {mno: sessionStorage.getItem('mno') ,searchCnt : searchQuery }}).success(function(result){
      parent_scope.searchLists = result.searchList;
@@ -28,16 +29,24 @@ app.controller('myFriendCtrl',['$http','$scope', function friend($http,$scope) {
   
  $scope.delfrd = function(mno){
    $http.get('frd/delete.do',{params : { frdmno : mno,  mno: sessionStorage.getItem('mno')}}).success(function(result){
-       alert("삭제 되었습니다!");
-       return friend($http,$scope);
+     
+     $scope.resetBtn = function(resetmno){
+       if (mno == resetmno){
+         return false;
+       } else {
+         true;
+       }
+     }
+     return friendList();
        })
    };
    $scope.applyfrd = function(mno){
      $http.get('frd/apply.do',{params : { frdmno : mno,  mno: sessionStorage.getItem('mno')}}).success(function(result){
-       alert("수락 되었습니다!");
-       return friend($http,$scope);
+
+       return friendList();
      })
    };
+   
   }]);
 // 수락 버튼
 });

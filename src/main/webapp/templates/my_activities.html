@@ -25,7 +25,7 @@
                      <div class='col-md-9'>
                         <div id='feed-header'>
                            <b id="nametag">{{myact.nickname}}</b>님이 새로운 모임을 만드셧습니다.<br>
-                           <br><br>
+                           <br><br><br><br>
                         </div>
                      </div>
                      <pre>{{myact.content}}</pre>
@@ -34,20 +34,20 @@
                   </div>
                   <div class='row'>
                      <h5 id="feed-info">
-                        <div class='col-md-3'>
+                        <div class='col-md-4'>
                            <small class="text-muted"><img
-                              src="images/icons/calendar.png"> </small>{{myact.createDate}}
+                              src="images/icons/calendar.png"> </small>{{myact.meetDday}}
                         </div>
                         <div class='col-md-3'>
                            <h5 id="feed-info">
                               <small class="text-muted"> <img
                                  src="images/icons/multiple.png">
-                              </small>{{myact.stuffCount}}/{{myact.maxHeadCount}}
+                              </small>{{myact.currentCount}}/{{myact.maxHeadCount}}
                         </div>
-                        <div class='col-md-3'>
+                        <div class='col-md-5'>
                            <h5 id="feed-info">
                               <small class="text-muted"><img
-                                 src="images/icons/time.png"> </small>{{myact.meetTime}}
+                                 src="images/icons/time.png"> </small>{{myact.dday}}
                         </div>
                      </h5>
                   </div>

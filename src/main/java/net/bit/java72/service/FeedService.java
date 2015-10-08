@@ -10,7 +10,7 @@ import net.bit.java72.domain.FriendFeed;
 
 public interface FeedService {
   List<FriendFeed> list(int mno);
-  List<Feed> myActivityList(int mno);
+  List<FriendFeed> myActivityList(int mno);
   List<FriendFeed> noneFriendFeed(int mno);
   FriendFeed getDetail(int fno);
   int friendJoinActivity(int mno, int fno);
