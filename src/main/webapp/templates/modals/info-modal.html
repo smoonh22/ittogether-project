@@ -132,7 +132,6 @@ function initAutocomplete() { /* 초기화 함수*/
     markers = [];
 
     var bounds = new google.maps.LatLngBounds();
-      console.log('bounds: ' + bounds);
     
     places.forEach(function (place) {
       markers.push(new google.maps.Marker({
@@ -153,19 +152,21 @@ function initAutocomplete() { /* 초기화 함수*/
     
     $(".info-latitude").val(markers[0].position.H); /* 위도 경도 */
     $(".info-longitude").val(markers[0].position.L);
-console.log('markers[0].position.H: ' + markers[0].position.H);
-console.log('markers[0].position.L: ' + markers[0].position.L);
+    console.log('markers[0].position.H: ' + markers[0].position.H);
+    console.log('markers[0].position.L: ' + markers[0].position.L);
 
     google.maps.event.addListener(map, 'click', function (event) {
       addMarker(event.latLng, map); /* 마커 찍어주는 함수 */
-console.log(event.latLng);
+      console.log(event.latLng);    
     });
 
     function addMarker(location, map) {
       markers[0].setPosition(location);
       markers[0].setPosition(location);
-      $(".info-latitude").val(markers[0].position.H); /* 위도 경도 */
-      $(".info-longitude").val(markers[0].position.L);
+//      $(".info-latitude").val(markers[0].position.H); /* 위도 경도 */
+//      $(".info-longitude").val(markers[0].position.L);
+      $(".info-latitude").val(location.lat());
+      $(".info-longitude").val(location.lng());
     }
   });
   
