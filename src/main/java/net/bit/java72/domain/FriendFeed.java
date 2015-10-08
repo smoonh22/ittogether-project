@@ -25,9 +25,28 @@ public class FriendFeed implements Serializable {
   protected int sex;
   protected String hometown;
   protected String Dday;
-
+  protected String meetDday;
   
 
+
+
+
+
+
+
+
+
+
+
+  public String getMeetDday() {
+    return meetDday;
+  }
+
+
+
+  public void setMeetDday(String meetDday) {
+    this.meetDday = meetDday;
+  }
 
 
 
@@ -203,5 +222,11 @@ public class FriendFeed implements Serializable {
   }
 
   protected String profilePicture;
+
+
+
+
+
+
 
 }

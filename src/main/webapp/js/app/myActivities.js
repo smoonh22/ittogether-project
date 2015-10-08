@@ -1,10 +1,11 @@
-define(function () {
+  define(function () {
 
       var app = angular.module('myActivities', []);
 
       app.controller('activityCtrl', ['$http', function ($http) {
         var parent_scope = this;
-        $http.get(contextRoot + '/feed/myActivity.do').success(function (result) {
+        $http.get('feed/myActivity.do',{params : {mno: sessionStorage.getItem('mno') }}).success(function (result) {
+          console.log("ㅎ하하ㅏ" + result.activity);
           parent_scope.activities = result.activity;
         });
   }]);
@@ -15,8 +16,7 @@ define(function () {
             var parent_scope = this;
 
              $('#btn').click(function (event) {
-               console.log("버튼은찍혀");
-               $.ajax(contextRoot + '/feed/insertUser.do',
+               $.ajax('feed/insertUser.do',
                   {
                    method: 'POST',
                    dataType: 'json',
@@ -26,7 +26,8 @@ define(function () {
                       title: $('#title').val(), 
                       content: $('#content').val(),
                       maxHeadCount: $('#maxHeadCount').val(),
-                      tempDate: $('#meetTime').val(),
+                      meetTime : $('#meetTime').val()
+
                    },
                   success: function(result){
                      if (result.data == 'success') {
@@ -37,9 +38,15 @@ define(function () {
                   }
                });
             });
+             $("#meetTime").kendoDateTimePicker({
+               format: "yyyy/MM/dd hh:mm tt",
+               parseFormats: ["MMMM yyyy", "HH:mm"] //format also will be added to parseFormats
+           });
+             
           },
           controllerAs: 'MCtrl',
           templateUrl: 'templates/modals/insert-modal.html'
         };
-      });      
+      }); 
+      
 });

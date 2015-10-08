@@ -1,5 +1,17 @@
 # Changelog
 
+### v3.3.1
+
++ Updated Outlayer v1.4.1
+  + Added jQuery events
+  + Fixed Safari layout and transition bugs. Fixed [#698](https://github.com/desandro/masonry/issues/698)
+
+## v3.3.0
+
++ Added `percentPosition` option. Fixed [#574](https://github.com/desandro/masonry/issues/574)
++ Removed first `instance` argument from `layoutComplete` and `removeComplete` events
++ Added use of [fizzy-ui-utils](https://github.com/metafizzy/fizzy-ui-utils)
+
 ### v3.2.3
 
 + Fixed pixel rounding errors related to Firefox, gutters. Fixed [#580](https://github.com/desandro/masonry/pull/580)

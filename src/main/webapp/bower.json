@@ -1,14 +1,11 @@
 {
   "name": "ittogether",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "homepage": "https://github.com/moonhyucksong/ittogether",
   "authors": [
     "moonhyucksong <smoonh22@gmail.com>"
   ],
-  "moduleType": [
-    "amd",
-    "globals"
-  ],
+  "moduleType": [],
   "license": "MIT",
   "ignore": [
     "**/.*",

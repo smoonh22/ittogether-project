@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import net.bit.java72.domain.Comment;
 import net.bit.java72.domain.Feed;
 import net.bit.java72.domain.FriendFeed;
 import net.bit.java72.domain.Member;
@@ -34,8 +35,11 @@ public class FeedController {
   Map<String,Object> result = new HashMap<String,Object>();
   try {
     List<FriendFeed> test = feedService.list(mno);
+    SimpleDateFormat format = new SimpleDateFormat("MM월 dd일 E요일");
     for(FriendFeed feed : test){
-     feed.setDday(CalcTime(feed.getMeetTime()));
+      String meetdate = format.format(feed.getMeetTime());
+      feed.setMeetDday(meetdate);
+      feed.setDday(CalcTime(feed.getCreateDate()));
     }
     result.put("data",test);
     
@@ -48,10 +52,17 @@ public class FeedController {
 
   
   @RequestMapping("/myActivity")
-  public Object feedlist() {  
+  public Object feedlist(int mno) {  
     Map<String,Object> result = new HashMap<String,Object>();
+    List<FriendFeed> test = feedService.myActivityList(mno);
+    SimpleDateFormat format = new SimpleDateFormat("MM월 dd일 E요일");
+    for(FriendFeed feed : test){
+      String meetdate = format.format(feed.getMeetTime());
+      feed.setMeetDday(meetdate);
+      feed.setDday(CalcTime(feed.getCreateDate()));
+    }
     
-    result.put("activity", feedService.myActivityList());
+    result.put("activity", test);
     
     return  result;
   }
@@ -79,10 +90,13 @@ public class FeedController {
       
       if(distance <= 1000){
         List<FriendFeed> feeds = feedService.noneFriendFeed(member.getMno());
-        for(FriendFeed temp : feeds){
-        if( temp != null){
-          temp.setDday(CalcTime(temp.getMeetTime()));
-          frdList.add(temp);
+        SimpleDateFormat format = new SimpleDateFormat("MM월 dd일 E요일");
+        for(FriendFeed test : feeds){
+        if( test != null){
+          String meetdate = format.format(test.getMeetTime());
+          test.setMeetDday(meetdate);
+          test.setDday(CalcTime(test.getCreateDate()));
+          frdList.add(test);
         }
         }
       }
@@ -97,12 +111,6 @@ public class FeedController {
   @RequestMapping("/insertUser")
   public Object insert(Feed feed) throws Exception{
     Map<String,Object> result = new HashMap<String,Object>();
-    
-    String temp = feed.getTempDate();
-    temp = temp.replaceFirst("T"," ");
-    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-    feed.setMeetTime(format.parse(temp));
-    
     int count = feedService.insert(feed);
     
     if ( count > 0 ) {
@@ -111,16 +119,22 @@ public class FeedController {
        result.put("data", "failure");
     }
     
-    
     return result;
   }
 
   //최근 피드 클릭시 디테일 정보 
   @RequestMapping("/detail")
-  public Object detail(int fno) throws Exception {
-    System.out.println(fno + "jjjjjj");
+  public Object detail(int fno,int mno) throws Exception {
     Map<String,Object> result = new HashMap<String,Object>();
     FriendFeed friendFeed = feedService.getDetail(fno);
+    Feed feed = feedService.checkFeed(fno, mno);
+    SimpleDateFormat format = new SimpleDateFormat("MM월 dd일 E요일");
+    String meetdate = format.format(friendFeed.getMeetTime());
+    
+    friendFeed.setMeetDday(meetdate);
+    friendFeed.setDday(CalcTime(friendFeed.getCreateDate()));
+    
+    result.put("check", feed);
     result.put("detail", friendFeed);
    
     return result;
@@ -129,11 +143,13 @@ public class FeedController {
   
   @RequestMapping("/friendjoin")
   public Object friendJoin(int mno, int fno) throws Exception {
-    System.out.println(fno + " : :" + mno);
+    
+    
     Map<String,Object> result = new HashMap<String,Object>();
     int count = feedService.friendJoinActivity(mno, fno);
   
-    
+    feedService.friendIn(fno);
+
     if (count > 0) {
       result.put("data", "success");
     } else {
@@ -143,13 +159,85 @@ public class FeedController {
     return result;
   }
   
+  @RequestMapping("/friendout")
+  public Object friendOut(int mno, int fno) throws Exception {
+    
+    Map<String,Object> result = new HashMap<String,Object>();
+    int count = feedService.friendOutActivity(mno, fno);
+   
+    feedService.friendOut(fno);  
+    if (count > 0) {
+      result.put("data", "success");
+    } else {
+      result.put("data", "failure");
+    }
+    return result;
+  }
+  //댓글 처리
+  @RequestMapping("/comment")
+  public Object comment(int fno) throws Exception {
+    Map<String,Object> result = new HashMap<>();
+    
+    List<Comment> comen = feedService.getComment(fno);
+    
+    result.put("coment",comen);
+    
+    return result;
+  }
+  @RequestMapping("/comentinsert")
+  public Object commentinsert(int fno,int mno,String content) throws Exception {
+    Map<String,Object> result = new HashMap<>();
+    
+    Comment comment = new Comment();
+    comment.setContent(content);
+    comment.setFno(fno);
+    comment.setMno(mno);
+    
+    int count = feedService.insertComment(comment);
+    
+    if(count > 0){
+      result.put("data", "success");
+    } else {
+      result.put("data", "fail");
+    }
+    
+    return result;
+  }
+  
+  @RequestMapping("/comentupdate")
+  public Object commentUpdate(int cno,String content) throws Exception {
+    Map<String,Object> result = new HashMap<>();
+    
+    Comment comment = new Comment();
+    comment.setContent(content);
+    comment.setCno(cno);
+    
+    int count = feedService.updateComment(comment);
+    
+    if(count > 0){
+      result.put("data", "success");
+    } else {
+      result.put("data", "fail");
+    }
+    
+    return result;
+  }
+  
+   @RequestMapping("/comentdelete")
+   public void commentDelete(int cno) throws Exception {
+     
+     feedService.deleteComment(cno);
+     
+   }
+  
+  
   public String CalcTime(Date meetTime){
     Calendar calendar = Calendar.getInstance();
     calendar.setTime(meetTime);
     long orderTime = calendar.getTimeInMillis();
     long currentTime = System.currentTimeMillis();
     
-    long calcTime = (orderTime - currentTime)/1000;
+    long calcTime = (currentTime - orderTime)/1000;
    if (calcTime > 0){ 
        if((calcTime/86400) > 0) {
          return calcTime/86400 +"일 전";

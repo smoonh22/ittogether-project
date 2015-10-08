@@ -4,10 +4,10 @@
         <div ng-switch-when="map_html"><div ng-include="'templates/main_map.html'"></div></div>
     </div>
   </div>
-  
+  <div ng-controller="friendFeedCtrl as ffCtrl" >
   <div class="col-md-8" id='left-section'>
     <div id="left-feed-title">친구들의 활동</div>
-    <div id='left-feed' ng-controller="friendFeedCtrl as ffCtrl">
+    <div id='left-feed'>
       <div ng-repeat="feed in ffCtrl.feeds">
         <div class="test">
           <div class='row'>
@@ -25,18 +25,18 @@
 									class="img-circle"></span>
 							</div>
 							</div>
-           <a href="#detailModal" data-toggle="modal" data-fno="{{feed.fno}}" class="detail-view">
+           <a href="#detailModal" data-toggle="modal" ng-click="detailview(feed.fno)" class="detail-view">
 							<div class="col-md-6">
 							<div class="content-div">
 								<p id="user-name">{{feed.name}}</p>
 								<h5 id="feed-info">
 									<small class="text-muted"><img
-										src="images/icons/calendar.png"> {{feed.dday}} </small> <small
+										src="images/icons/calendar.png">{{feed.meetDday}}</small> <small
 										class="text-muted"><img
 										src="images/icons/multiple.png">
 										{{feed.stuffCount}}/{{feed.maxHeadCount}} </small> <small
 										class="text-muted"><img src="images/icons/time.png">
-										{{feed.createDate}}</small>
+										{{feed.dday}}</small>
 								</h5>
 								<hr>
       
@@ -59,8 +59,8 @@
 
 	<div class="col-md-4" id='right-section'>
 			<div id="right-feed-title">주변 회원들의 활동</div>
-			<div id='right-feed' ng-controller="noneFriendFeedCtrl as nffCtrl">
-				<div ng-repeat="nfeed in nffCtrl.nfeeds">
+			<div id='right-feed'>
+				<div ng-repeat="nfeed in ffCtrl.nfeeds" >
 				<div class="test">
 						<div class="nonfriend-panel">
 						<div class="panel-heading" id='category-color-{{nfeed.category}}'></div>
@@ -73,22 +73,24 @@
 									class="img-circle">
 							</div>
 							</div>
+					<a href="#detailModal" data-toggle="modal" ng-click="detailview(nfeed.fno)" class="detail-view">
 							<div class="col-md-9">
 							<div class="content-div">
 								<p id="user-name">{{nfeed.name}}</p>
 								<h5 id="feed-info">
 									<small class="text-muted"><img
-										src="images/icons/calendar.png"> {{nfeed.dday}} </small> <small
+										src="images/icons/calendar.png"> {{nfeed.meetDday}} </small> <small
 										class="text-muted"><img
 										src="images/icons/multiple.png">
-										{{nfeed.stuffCount}}/{{nfeed.maxHeadCount}} </small> <small
+										{{nfeed.currentCount}}/{{nfeed.maxHeadCount}} </small> <small
 										class="text-muted"><img src="images/icons/time.png">
-										{{nfeed.createDate}}</small>
+										{{nfeed.dday}}</small>
 								</h5>
 								<hr>
 								<div id="unfriend-content">{{nfeed.content}}</div>
 							</div>
 							</div>
+					        </a>
 						</div>
 					</div>
 				</div>
@@ -96,7 +98,7 @@
 				</div>
 			</div>
 			</div>
-		</div>
+		
       
 
 <!-- modal start -->
@@ -106,50 +108,67 @@
       
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h5 class="modal-title" id="detail-title"></h5>
-        <input type="hidden" id="detail-number">
-        <input type="hidden" id="detail-category">
+        <h5 class="modal-title" id="detail-title">{{details.title}}</h5>
+        <input type="hidden" id="detail-number"/>
       </div>
       
-      <div class="modal-body">
+      <div class="modal-body"  >
         
         <form role="form">
           
           <div class="form-group detail-detail">
             <div class="form-group">
               <img src="images/icons/calendar.png">
-              <span id="detail-mTime"></span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              <span id="detail-mTime">{{details.meetDday}}</span>
               <img src="images/icons/multiple.png">
-              <span id="detail-stuffCount"></span><span>/</span><span id="detail-headCnt"></span>
-              <span>&nbsp;&nbsp;&nbsp;</span>
-              <img src="images/icons/time.png">
-              <span id="detail-createDate"></span>
-              <button type="button" class="btn btn-info btn-xs detail-btn" id="join-btn">참여하기</button>
-            </div>
+              <span id="detail-headCnt">{{details.currentCount}}/{{details.maxHeadCount}}</span>
+              <img src="images/icons/time.png"><span>    </span>
+              <span id="detail-createDate">{{details.dday}}</span>
+             <span><button type="button" class="btn btn-info btn-xs detail-btn" id="join-btn" ng-click="joinbtn(details.fno)">참여하기</button>
+             <button type="button" class="btn btn-info btn-xs detail-btn" id="out-btn" ng-click="outbtn(details.fno)">나가기</button></span>            </div>
             <div class="form-group">
-              <div class="detail-content" id="detail-content"></div>
+              <div class="detail-content" id="detail-content">{{details.content}}</div>
             </div>
           </div>
           
           
           
           <div class="detail-user-info">
-            <div class="detail-profile-img-div"><img class="img-circle detail-profile-img" src="" id="detail-profilePicture"></div>
+            <div><img class="img-circle" src="{{details.profilePicture}}" id="detail-profilePicture"></div>
             <div class="detail-user-name">
-              <div class="detail-user-name-middle"><span id="detail-name"></span><span>&nbsp;님</span></div>
-              <div class="detail-user-nickname-middle">
-            <span>(</span><span id="detail-nickname"></span><span>)</span></div>
+            <span id="detail-name"></span>{{details.nickname}}({{details.name}}
+            <span id="detail-nickname"></span>)
               </div>
           </div>
           
         </form>
-        
-      </div>
-      
-      <div class="modal-footer">
           <img src="images/default-img.png" class="dtail-default-img1">
           <img src="images/default-img.png" class="dtail-default-img2">
           <img src="images/default-img.png" class="dtail-default-img3">
+      </div>
+      
+      <div class="modal-footer comment-screen">
+        <div ng-repeat="comment in ffCtrl.comments">
+        	<div class='row commentFeed'>
+        	  <div class='col-md-2'><img src='{{comment.profilePicture}}' class='detailImg img-circle'/></div>
+        	  <div class='col-md-8'>
+        	  <table class='commentTable'>
+        	  <tr><td><b>{{comment.nickname}}</b></td></tr>
+        	  <tr><td rowspan="5"><div ng-hide='commentArea(comment.cno)' id='commentarea{{comment.cno}}'>{{comment.content}}</div>
+        	  <div ng-show='updateArea(comment.cno)'><textarea ng-model='rewriteComment' class='commentInputArea'>{{comment.content}}</textarea>
+        	  <button ng-click='updateCmt($index,comment.cno,comment.fno,rewriteComment)' class='comment-updatebtn'>등록</button><button ng-click='cancelBtn($index,comment.cno)' class='comment-updatebtn'>취소</button></div></td></tr>
+        	  </table>
+        	  </div>
+        	  <div ng-show='checkAuthority(comment.mno)' class='checkAuthority'>
+        	  	<span ng-click='openUpdateArea(comment.cno,rewriteComment)' class='commentBtn' role='button'>수정</span>|<span class='commentBtn' ng-click=deleteCmt(comment.cno,comment.fno); role='button'>삭제</span>
+        	  </div>
+        	</div>
+      	<table data-ng-show="$last">
+      	 <tr><td><textarea class='comment-insert' placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다.
+댓글 작성 시 타인에 대한 배려와 책임을 담아주세요." ng-model='content' /></td><td><button class='comment-insrtbtn' ng-click='commentinsert(comment.fno,content)'>등록</button></td></tr>
+      	</table>
+		</div>
+
       </div>
       
       </div>
@@ -158,65 +177,4 @@
   </div>
   <!-- /.modal -->
 </div>
-      
-<script type="text/javascript">
-   $(document).on('click', '.detail-view', function (e) {
-    getFno = $(this).attr('data-fno');
-     $.getJSON(contextRoot + '/feed/detail.do', 
-        {
-          fno: getFno    
-        }, function(result) {
-        //계속 쭉 해라 나머지 데이터들  
-       $('#detail-number').val(result.detail.fno);
-       $('#detail-title').text(result.detail.title);
-       $('#detail-profilePicture').attr('src', result.detail.profilePicture);
-       $('#detail-nickname').text(result.detail.nickname);
-       $('#detail-name').text(result.detail.name);
-       $('#detail-content').text(result.detail.content);
-       $('#detail-mTime').text(result.detail.meetTime);
-       $('#detail-headCnt').text(result.detail.currentCount + "/" + result.detail.maxHeadCount);
-       $('#detail-createDate').text(result.detail.createDate);
-       $('#detail-stuffCount').text(result.detail.stuffCount);
-       $('#detail-category').val(result.detail.category);
-       
-       // 모달 창에서 카테고리에 따라 modal-header 색깔 바꿔주는 if문
-       if ($('#detail-category').val() == '1') {
-          removeDetailClass()
-          $('.modal-header').addClass('detail-header-1');
-        } else if ($('#detail-category').val() == '2') {
-          removeDetailClass()
-          $('.modal-header').addClass('detail-header-2');
-        } else {
-          removeDetailClass()
-          $('.modal-header').addClass('detail-header-3');
-        }
-       // 모달 창에서 카테고리에 따른 클래스 삭제해주는 함수 
-      function removeDetailClass() {
-        $('.modal-header').removeClass('detail-header-1 detail-header-2 detail-header-3');
-      } 
-     });
-     
-        
-   });
-  
-
-    
-  
-  $('#join-btn').on('click', function() {
-      console.log(sessionStorage.getItem('mno'));
-    $.ajax('feed/friendjoin.do', {
-        method: 'get',
-        dataType: 'json',
-        data : {
-              mno: sessionStorage.getItem('mno'),
-              fno:  $('#detail-number').val()
-              },
-        success: function(result) {
-            if ( result.data === 'success' ) {
-                alert('참여 성공');
-              } 
-          }
-      });
-    });
-  
-</script>
+</div>

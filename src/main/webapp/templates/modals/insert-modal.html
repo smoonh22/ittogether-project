@@ -1,43 +1,41 @@
-
 <div class="modal fade" id="layerpop">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<!-- header -->
-			<div class="modal-header">
-				<!-- 닫기(x) 버튼 -->
-				<button type="button" class="close" data-dismiss="modal">×</button>
-				<!-- header title -->
-				<h4 class="modal-title">새 활동 만들기</h4>
-			</div>
-			<!-- body -->
-			<div class="modal-body">
-				<small class="text-muted"> <select name="carlist"
-					form="carform" id="category">
-						<option value="1">도움</option>
-						<option value="2">나눔</option>
-						<option value="3">요청</option>
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <!-- header -->
+         <div class="modal-header">
+            <!-- 닫기(x) 버튼 -->
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <!-- header title -->
+            <h4 class="modal-title">새 활동 만들기</h4>
+         </div>
+         <!-- body -->
+         <div class="modal-body">
+            <small class="text-muted"> <select name="carlist"
+               form="carform" id="category">
+                  <option value="1">모임</option>
+                  <option value="2">나눔</option>
+                  <option value="3">요청</option>
 
-				</select><br>
-				<br>
-				</small> <small class="text-muted"><input
-					type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
-				</small><br> <small class="text-muted"> <textarea rows="3" cols="50"
-						class="form-control" id="content" placeholder="내용을 입력하세요"></textarea>
-				</small><br> <small class="text-muted"> <label>인원수 </label> <input
-					type="number" value="1" min="1" max="10" id="maxHeadCount">
-				</small> <small class="text-muted"> <label>날짜 및 시간입력 </label> <input
-					type="datetime-local"  id="meetTime">
-				</small>
+            </select><br> <br>
+            </small> 
+            <textarea id="title" placeholder="제목을 입력하세요" cols="81" rows="1" style="resize:none;"></textarea>
+            <br><br>
+            <textarea id="content" placeholder="내용을 입력하세요" cols="81" rows="5"style="resize:none;"></textarea>
+            <br><br> <small class="text-muted"> <label>인원수</label> <input
+               type="number" value="1" min="1" max="10" id="maxHeadCount">
+            </small> <br><br> <small class="text-muted"><label>날짜 및
+                  시간입력</label> <input id="meetTime"/> </small>
 
-				<!-- Footer -->
-				<div class="modal-footer">
 
-					<button type="button" id="btn" class="btn btn-primary"
-						ng-click="btnClick()">새 활동 만들기</button>
+            <!-- Footer -->
+            <div class="modal-footer">
 
-				</div>
-			</div>
-		</div>
-	</div>
+               <button type="button" id="btn" class="btn btn-primary"
+                  ng-click="btnClick()">새 활동 만들기</button>
+               <button type="button" class="btn btn-primary" data-dismiss="modal">닫기</button>
 
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
