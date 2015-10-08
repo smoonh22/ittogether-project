@@ -93,7 +93,8 @@ public class MemberController {
         double distanceDouble = CalculateDistance.getDistance(lat,lon,lat2,lon2);
         int distance = (int)Math.floor(distanceDouble);
         
-        System.out.println("#친구" + member.getMno() + "의 거리: " + distance + "m");
+        System.out.println
+        ("#친구"+member.getMno()+"("+member.getNickname()+")의 거리: "+distance+"m");
         
         if(distance <= 2000){
           distances.add(distance);
