@@ -43,7 +43,6 @@ public class MemberController {
   @RequestMapping("/updateUser")
   public Object update(Member member) {
     Map<String,Object> result = new HashMap<String,Object>();
-    System.out.println(member.getLatitude());
     int count = memberService.update(member);
     
     if ( count > 0) {
@@ -62,7 +61,6 @@ public class MemberController {
     
     List<Member> members = memberService.getMyLoc(mno);
     result.put("data", members);
-    System.out.println(members);
     
     return result;
   }
@@ -73,7 +71,6 @@ public class MemberController {
     
     List<Member> members = memberService.getFriends(frdno);
     result.put("data", members);
-    System.out.println(members);
     
     return result;
   }
@@ -96,7 +93,6 @@ public class MemberController {
         double lon2 = Double.parseDouble(member.getLongitude());
         
         double distance = CalculateDistance.getDistance(lat,lon,lat2,lon2);
-        System.out.println("거리 : " + distance);
         if(distance <= 1000){
            distances.add((int)distance);
           List<Member> members = memberService.getNoneFriendMarks(member.getMno());

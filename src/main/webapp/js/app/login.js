@@ -1,6 +1,8 @@
+  window.contextRoot = '/ittogether';
+
 function login() {
   event.preventDefault();
-  $.getJSON('auth/login.do', {
+  $.getJSON(contextRoot + '/auth/login.do', {
       email: $('#login-email').val(),
       password: $('#login-pass').val()
     },
@@ -22,7 +24,7 @@ $('#signup-button').click(function (event) {
   if ($('#email').val() == '' || $('#name').val() == '' || $('#password').val() == '' || $('#pac-input').val() == '') {
     alert('값을 모두 입력해 주세요');
   } else {
-    $.ajax('auth/signup.do', {
+    $.ajax(contextRoot + '/auth/signup.do', {
       method: 'POST',
       dataType: 'json',
       data: {
@@ -49,7 +51,7 @@ $('#signup-button').click(function (event) {
 });
 
 $('#email').on('keyup', function (event) {
-  $.ajax('auth/existEmail.do', {
+  $.ajax(contextRoot + '/auth/existEmail.do', {
     method: 'POST',
     dataType: 'json',
     data: {
@@ -74,7 +76,7 @@ $('#email').on('keyup', function (event) {
 });
 
 $('#nickname').on('keyup', function (event) {
-  $.ajax('auth/existNickName.do', {
+  $.ajax(contextRoot + '/auth/existNickName.do', {
     method: 'POST',
     dataType: 'json',
     data: {

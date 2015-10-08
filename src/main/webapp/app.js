@@ -23,7 +23,8 @@ requirejs.config({
       'tour': 'js/app/tour',
       'myActivities': 'js/app/myActivities',
       'myFriendList': 'js/app/myFriendList',
-      'info-modal': 'js/app/info-modal'
+      'info-modal': 'js/app/info-modal',
+      'common': 'js/app/common'
     },
   
   shim: {
@@ -47,7 +48,7 @@ requirejs.config({
       deps:['jquery']
     },
     'main': {
-      deps: ['angular-route', 'ng-file-upload', 'friendsFeed', 'bootstrap.min', 'tour','myFriendList','myActivities']
+      deps: ['angular-route', 'ng-file-upload', 'friendsFeed', 'bootstrap.min', 'tour','myFriendList','myActivities','common']
     },
     'friendsFeed': {
       deps: ['angular']

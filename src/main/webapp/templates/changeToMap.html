@@ -159,7 +159,7 @@
 <script type="text/javascript">
    $(document).on('click', '.detail-view', function (e) {
     getFno = $(this).attr('data-fno');
-     $.getJSON('feed/detail.do', 
+     $.getJSON(contextRoot + '/feed/detail.do', 
         {
           fno: getFno    
         }, function(result) {

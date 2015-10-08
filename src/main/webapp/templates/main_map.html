@@ -33,7 +33,7 @@
     myIntro,
     myPhoto;
   (function() {
-    $.getJSON('member/getMyLoc.do', {
+    $.getJSON(contextRoot + '/member/getMyLoc.do', {
       mno: sessionStorage.getItem('mno')
     }, function(results) {
       myLoc[0] = parseFloat((results.data[0].latitude));
@@ -49,7 +49,7 @@
 
   var friendLocArr = [];
   (function() {
-    $.getJSON('member/getFriends.do', {
+    $.getJSON(contextRoot + '/member/getFriends.do', {
       frdno: sessionStorage.getItem('mno')
     }, function(results) {
       for (var i = 0; i < results.data.length; i++) {
@@ -68,7 +68,7 @@
 
   var notFriendLocArr = [];
   (function() {
-    $.getJSON('member/getMembers.do', {
+    $.getJSON(contextRoot + '/member/getMembers.do', {
       mno: sessionStorage.getItem('mno')
     }, function(results) {
       console.log(results.data.length);
@@ -325,7 +325,7 @@
 
   $(document).on('click','.addfriend-btn', function() {
       var parent = this;
-    $.ajax('frd/insert.do', {
+    $.ajax(contextRoot + '/frd/insert.do', {
         method: 'post',
         dataType: 'json',
         data: {
@@ -334,6 +334,7 @@
         },
       success: function(result) {
           alert('친구 요청을 보냈습니다.');
+          
       }
     });
     

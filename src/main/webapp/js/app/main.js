@@ -30,7 +30,7 @@ define(function () {
       controller: function () {
         var parent_scope = this;
         
-        $.getJSON('member/userInfo.do', {
+        $.getJSON(contextRoot + '/member/userInfo.do', {
           nickname: sessionStorage.getItem('nickname')
         }, function (result) {
           parent_scope.userDatas = result.data;
@@ -38,7 +38,7 @@ define(function () {
         
           parent_scope.uploadFiles = function(file) {
           Upload.upload({
-            url: 'file/upload.do',
+            url: contextRoot + '/file/upload.do',
             data: {file: file}
         }).success(function (data, status, headers, config) {
             $('#profile-img').attr('src', data.data[0].url);
@@ -51,7 +51,7 @@ define(function () {
          $('#save-changes').click(function (event) {
             var radio = $("input:radio[name='radioButton']:checked").val();
            
-           $.ajax('member/updateUser.do',
+           $.ajax(contextRoot + '/member/updateUser.do',
               {
                method: 'POST',
                dataType: 'json',

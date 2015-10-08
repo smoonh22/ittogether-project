@@ -27,7 +27,7 @@ $('#facebook-btn').click(function (event) {
        //response에 있는 name 데이터 저장
        var saveName = response.name;
        //getJSON으로 데이터베이스에 이메일정보가 있는지 확인
-       $.getJSON('auth/getNickName.do', { 
+       $.getJSON(contextRoot + '/auth/getNickName.do', { 
            email: response.email
          },
          function (result) {

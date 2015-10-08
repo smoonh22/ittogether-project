@@ -60,7 +60,6 @@ public class FeedController {
   @RequestMapping("/noneFriendFeed")
   public Object nonelist(int mno) {
   Map<String,Object> result = new HashMap<String,Object>();
-    
   try {
     
     Member myInfo = memberService.getOne(mno);
@@ -69,6 +68,7 @@ public class FeedController {
     
     List<Member> distanceList = memberService.getlatlon(mno);
     
+    
     List<FriendFeed> frdList = new ArrayList<>();
     
     for(Member member : distanceList){
@@ -76,16 +76,18 @@ public class FeedController {
       double lon2 = Double.parseDouble(member.getLongitude());
       
       double distance = CalculateDistance.getDistance(lat,lon,lat2,lon2);
+      
       if(distance <= 1000){
         List<FriendFeed> feeds = feedService.noneFriendFeed(member.getMno());
-        for(FriendFeed test : feeds){
-        if( test != null){
-          test.setDday(CalcTime(test.getMeetTime()));
-          frdList.add(test);
+        for(FriendFeed temp : feeds){
+        if( temp != null){
+          temp.setDday(CalcTime(temp.getMeetTime()));
+          frdList.add(temp);
         }
         }
       }
     }  
+    
     result.put("data", frdList);
   } catch (Exception e) {}
   

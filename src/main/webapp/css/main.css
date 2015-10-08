@@ -314,14 +314,6 @@ hr {
 }
 
 
-/*채팅 패널*/
-
-.chat-panel {
-  position: absolute;
-  bottom : 10px;
-  right: 10px;
-  width: 400px;
-}
 
 
 /* detailModal에서 친구 활동 디테일 관련*/

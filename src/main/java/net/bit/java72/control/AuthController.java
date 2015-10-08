@@ -24,7 +24,7 @@ public class AuthController {
   @RequestMapping("/login")
   public Object login(String email, String password,
       HttpServletResponse response) throws Exception { 
-
+    System.out.println("hahahah");
     Map<String,Object> result = new HashMap<String,Object>();
     Member member = memberService.getUser(email, password);
     if (member == null) {

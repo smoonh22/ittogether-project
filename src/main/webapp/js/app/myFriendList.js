@@ -4,7 +4,7 @@ define(function() {
 app.controller('myFriendCtrl',['$http','$scope', function($http,$scope) {
     var parent_scope = this;
     var data = $scope.delfrdmno;
-    $http.get('frd/list.do',
+    $http.get(contextRoot + '/frd/list.do',
          {
         params: {
           mno: sessionStorage.getItem('mno')
@@ -27,33 +27,37 @@ app.controller('myFriendCtrl',['$http','$scope', function($http,$scope) {
  };   
    
  $scope.search = function(searchQuery) {
-   $http.get('frd/search.do',{params : {mno: sessionStorage.getItem('mno') ,searchCnt : searchQuery ,searchType : $('#typeBox').val() }}).success(function(result){
+   $http.get(contextRoot + '/frd/search.do',{params : {mno: sessionStorage.getItem('mno') ,searchCnt : searchQuery ,searchType : $('#typeBox').val() }}).success(function(result){
      parent_scope.searchLists = result.searchList;
    })
  };
  
- $scope.insertfrd = function(mno) {
-   $http.get('frd/insert.do',{params : {frdmno : mno, mno: sessionStorage.getItem('mno')}}).success(function(result){
-     alert("신청이 완료되었습니다");
-     
-     window.location.reload();
-   })
- };
   
  $scope.delfrd = function(mno){
-   $http.get('frd/delete.do',{params : { frdmno : mno,  mno: sessionStorage.getItem('mno')}}).success(function(result){
+   $http.get(contextRoot + '/frd/delete.do',{params : { frdmno : mno,  mno: sessionStorage.getItem('mno')}}).success(function(result){
        alert("삭제 되었습니다!");
 
        window.location.reload();
        })
    };
-   $scope.applyfrd = function(mno){
-     $http.get('frd/apply.do',{params : { frdmno : mno,  mno: sessionStorage.getItem('mno')}}).success(function(result){
+   
+  $scope.applyfrd = function(mno){
+     $http.get(contextRoot + '/frd/apply.do',{params : { frdmno : mno,  mno: sessionStorage.getItem('mno')}}).success(function(result){
        alert("수락 되었습니다!");
    
       window.location.reload();
      })
    };
+  
+  
+  
+  $scope.startChatting = function(frdno) {
+      console.log(frdno + 'ffdfd');
+      startChatting(frdno, sessionStorage.getItem('mno'));
+  }
+  
+  
+  
   }]);
 // 수락 버튼
 });

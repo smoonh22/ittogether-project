@@ -1,4 +1,53 @@
-<<<<<<< HEAD
+select t1.chno, t2.nicknm, t2.mphoto from chat_t t1 left outer join memb_t t2 on t1.frdno = t2.mno;
+
+-- 채팅
+CREATE TABLE `chat_t` (
+  `chno`   INTEGER NOT NULL COMMENT '채팅글번호', -- 채팅글번호
+  `mno`    INTEGER NULL     COMMENT '회원번호', -- 회원번호
+  `frdno`  INTEGER NULL     COMMENT '친구번호', -- 친구번호
+  `status` INTEGER NULL default 1    COMMENT '상태' -- 상태
+)
+COMMENT '채팅';
+
+-- 채팅
+ALTER TABLE `chat_t`
+  ADD CONSTRAINT `PK_chat_t` -- 채팅 Primary key
+    PRIMARY KEY (
+      `chno` -- 채팅글번호
+    );
+
+ALTER TABLE `chat_t`
+  MODIFY COLUMN `chno` INTEGER NOT NULL AUTO_INCREMENT COMMENT '채팅글번호';
+
+-- 채팅내용
+CREATE TABLE `chat_contnt` (
+  `chcono`  INTEGER    NOT NULL COMMENT '채팅내용번호', -- 채팅내용번호
+  `chno`    INTEGER    NULL     COMMENT '채팅글번호', -- 채팅글번호
+  `content` MEDIUMTEXT NULL     COMMENT '내용' -- 내용
+)
+COMMENT '채팅내용';
+
+-- 채팅내용
+ALTER TABLE `chat_contnt`
+  ADD CONSTRAINT `PK_chat_contnt` -- 채팅내용 Primary key
+    PRIMARY KEY (
+      `chcono` -- 채팅내용번호
+    );
+
+ALTER TABLE `chat_contnt`
+  MODIFY COLUMN `chcono` INTEGER NOT NULL AUTO_INCREMENT COMMENT '채팅내용번호';
+
+-- 채팅내용
+ALTER TABLE `chat_contnt`
+  ADD CONSTRAINT `FK_chat_t_TO_chat_contnt` -- 채팅 -> 채팅내용
+    FOREIGN KEY (
+      `chno` -- 채팅글번호
+    )
+    REFERENCES `chat_t` ( -- 채팅
+      `chno` -- 채팅글번호
+    );
+
+
 -- 모임에 참여했을 때를 위한 테이
 -- 참여친구
 DROP TABLE IF EXISTS JoinedFrd_T RESTRICT;
@@ -38,7 +87,6 @@ ALTER TABLE JoinedFrd_T
       MNO -- 회원번호
     );
 -- 끝
-=======
 
 -- MEMB_T
 CREATE TABLE MEMB_T (
@@ -70,7 +118,6 @@ alter table memb_t add age integer null;
 
 
 
->>>>>>> refs/heads/LSH1001
 
 insert into frd_t (frdno, mno, state, frd_dt) values(1,2,1,now());
 insert into frd_t (frdno, mno, state, frd_dt) values(2,1,1,now());

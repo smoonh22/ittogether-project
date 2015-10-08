@@ -4,7 +4,7 @@ define(function () {
 
       app.controller('activityCtrl', ['$http', function ($http) {
         var parent_scope = this;
-        $http.get('feed/myActivity.do').success(function (result) {
+        $http.get(contextRoot + '/feed/myActivity.do').success(function (result) {
           parent_scope.activities = result.activity;
         });
   }]);
@@ -16,7 +16,7 @@ define(function () {
 
              $('#btn').click(function (event) {
                console.log("버튼은찍혀");
-               $.ajax('feed/insertUser.do',
+               $.ajax(contextRoot + '/feed/insertUser.do',
                   {
                    method: 'POST',
                    dataType: 'json',

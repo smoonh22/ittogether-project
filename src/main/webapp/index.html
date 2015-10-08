@@ -19,12 +19,13 @@
   <link rel='stylesheet' href="bower_components/blueimp-file-upload/css/jquery.fileupload.css" />
   <link rel='stylesheet' href="bower_components/blueimp-file-upload/css/jquery.fileupload-ui.css" />
   <link rel='stylesheet' href="css/info-modal.css" />
+  <link rel='stylesheet' href="css/chatting.css" />
 </head>
 
 <body>
   <!-- 네비게이션 directive-->
   <show-nav></show-nav>
-  
+
   <!---->
   <div ng-view></div>
 
@@ -34,29 +35,202 @@
   <!--  심심해 모달창  -->
   <bored-modal></bored-modal>
 
-
-<!--
-  <div class="panel panel-info chat-panel">
+   <div class="panel panel-info chat-panel">
+   <div class="panel-info panel1">
+   <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body chat-body">
+        <div id="messages1"> </div>
+      </div>
+    </div>
+     </div>
+     <div class="panel-info panel2">
     <div class="panel-heading" role="tab" id="headingTwo">
       <h4 class="panel-title">
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Collapsible Group Item #2
         </a>
       </h4>
     </div>
     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
       <div class="panel-body chat-body">
-      <ul id="messages"></ul>
-<form action="">
-<input id="m" autocomplete="off" /><button>Send</button>
-</form>
+        <div id="messages2"> </div>
       </div>
     </div>
-  </div>
--->
+     </div>
+    <div class="panel-info panel3">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body chat-body">
+        <div id="messages3"> </div>
+      </div>
+    </div>
+     </div>
+  </div> 
+
+
+
+
+
+
+  <script src="js/lib/socket.io/node_modules/socket.io-client/socket.io.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+  <script>
+    //처음 시작할 때 현재 진행중인 채팅이 있는지 확인
+    var checkRoomArr = [];
+    var chatWindowCnt = 1;
+    $(document).ready(function() {
+      initChat();
+      setInterval(initChat(), 10000);
+    });
+
+
+    function initChat() {
+      $.getJSON('http://192.168.168.100:8888/checkStatus.do', {
+        mno: sessionStorage.getItem('mno')
+      }, function(result) {
+        for (var i in result.frdno) { 
+        if (result.frdno[i].frdno == sessionStorage.getItem('mno')) {
+          result.frdno[i].frdno = result.frdno[i].mno;
+        }
+        console.log("--dd" + result.frdno[0].frdno + "-- mno: " + result.frdno[0].mno);
+        if (result.data === 'yes') {
+          $.getJSON('http://192.168.168.100:8888/checkRoom.do', {
+            frdno: result.frdno[i].frdno,
+            mno: sessionStorage.getItem('mno')
+          }, function(result) {
+            for (var i in checkRoomArr) {
+              if (checkRoomArr[i] == result.data.chno) {
+                result.exist = 'no';
+                console.log("exist " + result.exist);
+              }
+            }
+            if (result.exist === 'yes') {
+              checkRoomArr.push(result.data.chno);
+              chatStart(result.data);
+            }
+          });
+        } else {
+          console.log('활성화된 채팅창 없음');
+        }
+      }
+    });
+    };
+    function startChatting(frdno, mno) {
+      $('#messages').text('');
+      $.getJSON('http://192.168.168.100:8888/checkRoom.do', {
+        frdno: frdno,
+        mno: mno,
+      }, function(result) {
+        if (result.exist === 'yes') {
+          chatStart(result.data);
+
+        } else if (result.exist === 'no') {
+          chatStart(result.newData[0]);
+        }
+      });
+
+
+    };
+
+
+    //사용자가 친구목록에서 채팅하기 눌렀을 때     
+    function chatStart(data) {
+      var socket = io.connect('http://192.168.168.100:8888');
+      var roomId = data.chno;
+      var msg = '';
+      socket.emit('join:room', {
+        roomId: roomId
+      });
+      
+      
+      if( chatWindowCnt < 4) {
+      console.log('chatWindowCnt : ' + chatWindowCnt);
+      var parent = '.panel' + chatWindowCnt + ' a';
+      $(parent).text(data.nicknm);
+      $('#messages'+chatWindowCnt).append('<div id="messages'+data.chno+'" style="margin:0;width:100%;height:100%;overflow:scroll;"></div>');
+      $('#messages'+chatWindowCnt).append('<form class="chat-form' + data.chno + '" style="background-color: azure;position: fixed;bottom: 42px;width: 295px;margin-left: -14px;"><input class="send-text' + data.chno + '" autocomplete="off" /><button>전송</button></form>');
+      $('.panel' + chatWindowCnt).show();
+      chatWindowCnt++;
+      
+
+      $('.chat-form'+data.chno).submit(function() {
+        socket.emit('send:message', {
+          roomId: roomId,
+          message: sessionStorage.getItem('nickname') + ': ' + $('.send-text'+data.chno).val()
+        });
+        $('.send-text'+data.chno).val('');
+
+      });
+      } else {
+        $('.panel3 a').text(data.nicknm);
+        /* $('#message3').remove(); */
+        alert('3이상');
+        
+      }
+      
+      
+
+
+      socket.on('send:message' + data.chno, function(msg) {
+        console.log(msg + "data.chno : " + data.chno + "nicnkname : " + sessionStorage.getItem('nickname') + "data.nicknm : " + data.nicknm);
+        $('#messages' + data.chno).append(msg + "<br>");
+/* 
+        $.getJSON('http://192.168.168.100:8888/changeStatus.do', {
+          roomId: roomId
+        }, function(result) {
+          console.log('스테이터스 1로 변경');
+        });
+*/
+      });
+     };
+
+
+    /*   
+     function showChatting(roomName, data) {
+      $('.chat-panel a').text("과의 채팅");
+      $('.chat-panel').show();
+      var socket = io.connect('http://192.168..168.100:8888');
+      var roomId = '';
+      var msg = '';
+
+      socket.emit('join:room', {
+        roomId: roomName
+      });
+
+      $('.chat-form').submit(function() {
+        msg = $('#send-text').val();
+        socket.emit('send:message', {
+          roomId: roomName,
+          message: msg
+        });
+        $('#send-text').val('');
+
+      });
+
+      socket.on('send:message', function(msg) {
+          console.log(msg);
+          $('#messages').append(sessionStorage.getItem('nickname') + " : " + msg + "<br>");
+          chatContent += sessionStorage.getItem('nickname') + " : " + msg + "<br>";
+        });
+    } 
+
+ */
+
+  </script>
+
 
   <script data-main='app.js' src='bower_components/requirejs/require.js'></script>
-  
+
 </body>
 
 </html>

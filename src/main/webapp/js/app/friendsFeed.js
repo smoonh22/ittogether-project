@@ -6,7 +6,7 @@ define(function () {
   //친구 최근 게시물
   app.controller('friendFeedCtrl', ['$http', function ($http) {
     var parent = this;
-    $http.get('feed/friendFeed.do', {
+    $http.get(contextRoot + '/feed/friendFeed.do', {
       params: {
         mno: sessionStorage.getItem('mno')
       }
@@ -21,11 +21,12 @@ define(function () {
   //비친구 최근 게시물
   app.controller('noneFriendFeedCtrl',['$http', function($http) {
     var parent = this;
-    $http.get('feed/noneFriendFeed.do', {
+    $http.get(contextRoot + '/feed/noneFriendFeed.do', {
       params: {
         mno: sessionStorage.getItem('mno')
       }
       }).success(function(result){
+           console.log(result.data);
           parent.nfeeds = result.data
         })
       
