@@ -39,12 +39,13 @@
   <!--  심심해 모달창  -->
   <bored-modal></bored-modal>
 
-   <div class="panel panel-info chat-panel">
+   <div class="chat-panel">
    <div class="panel-info panel1">
    <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
         </a>
+           <button type="button" class="close chat-close1" aria-hidden="true">&times;</button> 
       </h4>
     </div>
     <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
@@ -58,6 +59,7 @@
       <h4 class="panel-title">
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
         </a>
+        <button type="button" class="close chat-close2" aria-hidden="true">&times;</button> 
       </h4>
     </div>
     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
@@ -71,6 +73,7 @@
       <h4 class="panel-title">
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
         </a>
+        <button type="button" class="close chat-close3" aria-hidden="true">&times;</button> 
       </h4>
     </div>
     <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
@@ -92,13 +95,45 @@
     //처음 시작할 때 현재 진행중인 채팅이 있는지 확인
     var checkRoomArr = [];
     var chatWindowCnt = 1;
-    $(document).ready(function() {
+     $(document).ready(function() {
       initChat();
-      setInterval(initChat(), 10000);
-    });
+    }); 
 
+      setInterval(function() {
+        $.getJSON('http://192.168.168.100:8888/checkStatus.do', {
+          mno: sessionStorage.getItem('mno')
+        }, function(result) {
+          for (var i in result.frdno) { 
+          if (result.frdno[i].frdno == sessionStorage.getItem('mno')) {
+            result.frdno[i].frdno = result.frdno[i].mno;
+          }
+          console.log("--dd" + result.frdno[0].frdno + "-- mno: " + result.frdno[0].mno);
+          if (result.data === 'yes') {
+            $.getJSON('http://192.168.168.100:8888/checkRoom.do', {
+              frdno: result.frdno[i].frdno,
+              mno: sessionStorage.getItem('mno')
+            }, function(result) {
+              for (var i in checkRoomArr) {
+                if (checkRoomArr[i] == result.data.chno) {
+                  result.exist = 'no';
+                  console.log("exist " + result.exist);
+                }
+              }
+              if (result.exist === 'yes') {
 
-    function initChat() {
+                checkRoomArr.push(result.data.chno);
+                chatStart(result.data);
+              }
+            });
+          } else {
+            console.log('활성화된 채팅창 없음');
+          }
+        }
+      });
+        
+      }, 10000);
+
+     function initChat() {
       $.getJSON('http://192.168.168.100:8888/checkStatus.do', {
         mno: sessionStorage.getItem('mno')
       }, function(result) {
@@ -119,6 +154,7 @@
               }
             }
             if (result.exist === 'yes') {
+
               checkRoomArr.push(result.data.chno);
               chatStart(result.data);
             }
@@ -128,16 +164,21 @@
         }
       }
     });
-    };
+    }; 
     function startChatting(frdno, mno) {
-      $('#messages').text('');
       $.getJSON('http://192.168.168.100:8888/checkRoom.do', {
         frdno: frdno,
         mno: mno,
       }, function(result) {
         if (result.exist === 'yes') {
+           if ( result.data.status == 1) {
+             $.getJSON('http://192.168.168.100:8888/updateStatus.do', {
+                roomId: result.data.chno
+             }, function(result){
+                console.log('status -> 2');
+             });
+           }
           chatStart(result.data);
-
         } else if (result.exist === 'no') {
           chatStart(result.newData[0]);
         }
@@ -156,80 +197,120 @@
         roomId: roomId
       });
       
+      $('.chat-close'+chatWindowCnt).attr('roomNo', data.chno);
       
       if( chatWindowCnt < 4) {
-      console.log('chatWindowCnt : ' + chatWindowCnt);
-      var parent = '.panel' + chatWindowCnt + ' a';
-      $(parent).text(data.nicknm);
-      $('#messages'+chatWindowCnt).append('<div id="messages'+data.chno+'" style="margin:0;width:100%;height:100%;overflow:scroll;"></div>');
-      $('#messages'+chatWindowCnt).append('<form class="chat-form' + data.chno + '" style="background-color: azure;position: fixed;bottom: 42px;width: 295px;margin-left: -14px;"><input class="send-text' + data.chno + '" autocomplete="off" /><button>전송</button></form>');
-      $('.panel' + chatWindowCnt).show();
-      chatWindowCnt++;
+          
       
-
+      $.getJSON('http://192.168.168.100:8888/selectChatContent.do',{
+        chno: data.chno
+      }, function(result) {
+        $('#messages'+chatWindowCnt).append('<div id="messages'+data.chno+'" style="margin:0;width:95%;height:90%;overflow:auto;"></div>');
+        console.log(result);
+        if(result.result==='yes'){
+        for(var i in result.data) {
+            $('#messages'+data.chno).append(result.data[i].content);
+        }
+        }
+        console.log('chatWindowCnt : ' + chatWindowCnt);
+        var parent = '.panel' + chatWindowCnt + ' a';
+        $(parent).text(data.nicknm);
+        $('#messages'+chatWindowCnt).append('<form class="chat-form' + data.chno + '" style="position: fixed;bottom: 1px;width: 300px;"><input class="send-text' + 
+            data.chno + '" autocomplete="off" /><button>전송</button></form>');        
+      $('.panel' + chatWindowCnt).show();
+      
+      chatWindowCnt++;
+      console.log(chatWindowCnt);
       $('.chat-form'+data.chno).submit(function() {
         socket.emit('send:message', {
           roomId: roomId,
-          message: sessionStorage.getItem('nickname') + ': ' + $('.send-text'+data.chno).val()
+          message: '<img src="'+ sessionStorage.getItem('profile-pic') + '" style="width:40px;height=40px;" class="img-circle"> ' +sessionStorage.getItem('nickname') + ': ' + $('.send-text'+data.chno).val()
         });
         $('.send-text'+data.chno).val('');
+      });
+
+        
 
       });
       } else {
-        $('.panel3 a').text(data.nicknm);
-        /* $('#message3').remove(); */
-        alert('3이상');
-        
+        var originalroom =$('.chat-close3').attr('roomNo');
+        socket.emit('leave:room', {
+          roomId: $('.chat-close3').attr('roomNo')
+        });
+        $('.panel3 a').text('');
+        $('#messages'+ originalroom).text('');
+        chatWindowCnt =3;
+        chatStart(data);
       }
       
       
 
 
       socket.on('send:message' + data.chno, function(msg) {
-        console.log(msg + "data.chno : " + data.chno + "nicnkname : " + sessionStorage.getItem('nickname') + "data.nicknm : " + data.nicknm);
-        $('#messages' + data.chno).append(msg + "<br>");
-/* 
-        $.getJSON('http://192.168.168.100:8888/changeStatus.do', {
-          roomId: roomId
+        $('#messages' + data.chno).append(' '+ msg + "<br>");
+        $('#messages'+data.chno).scrollTop($('#messages'+data.chno)[0].scrollHeight);
+        $('#messages'+data.chno).parents('.collapse').addClass('in');
+ 
+         $.getJSON('http://192.168.168.100:8888/updateStatus.do', {
+          roomId: data.chno
         }, function(result) {
-          console.log('스테이터스 1로 변경');
+          console.log('스테이터스 2로 변경');
+        }); 
+
+         $.getJSON('http://192.168.168.100:8888/insertChatContent.do', {
+          content: ' ' + msg + '<br>',
+          chno: data.chno
+        }, function(result) {
         });
-*/
-      });
-     };
-
-
-    /*   
-     function showChatting(roomName, data) {
-      $('.chat-panel a').text("과의 채팅");
-      $('.chat-panel').show();
-      var socket = io.connect('http://192.168..168.100:8888');
-      var roomId = '';
-      var msg = '';
-
-      socket.emit('join:room', {
-        roomId: roomName
-      });
-
-      $('.chat-form').submit(function() {
-        msg = $('#send-text').val();
-        socket.emit('send:message', {
-          roomId: roomName,
-          message: msg
+     /*      socket.emit('leave:room',{
+            
+          }); */
         });
-        $('#send-text').val('');
-
-      });
-
-      socket.on('send:message', function(msg) {
-          console.log(msg);
-          $('#messages').append(sessionStorage.getItem('nickname') + " : " + msg + "<br>");
-          chatContent += sessionStorage.getItem('nickname') + " : " + msg + "<br>";
+      
+      $('.chat-close1').on('click', function() {
+        var roomData = $('.chat-close1').attr('roomNo');
+        /* socket.leave('room' + data.chno); */
+        $.getJSON('http://192.168.168.100:8888/changeStatus.do',{
+          roomId: roomData
+        }, function(result) {
+          console.log('변경 성공');
+        })
+        socket.emit('leave:room', {
+          roomId: roomData
         });
-    } 
+        $('.panel1').css('display','none');
+        
+      /*   for (var i in checkRoomArr) {
+           if(checkRoomArr[i] ==  roomData) {
+             checkRoomArr.slice(i,1);
+           }
+        } */
+   });
+      $('.chat-close2').on('click', function() {
+        $.getJSON('http://192.168.168.100:8888/changeStatus.do',{
+          roomId: $('.chat-close2').attr('roomNo')
+        }, function(result) {
+          console.log('변경 성공');
+        })
+        socket.emit('leave:room', {
+          roomId: $('.chat-close2').attr('roomNo')
+        });
+        $('.panel2').css('display','none');
+   });
+      $('.chat-close3').on('click', function() {
+        $.getJSON('http://192.168.168.100:8888/changeStatus.do',{
+          roomId: $('.chat-close3').attr('roomNo')
+        }, function(result) {
+          console.log('변경 성공');
+        })
+        socket.emit('leave:room', {
+          roomId: $('.chat-close3').attr('roomNo')
+        });
+        $('.panel3').css('display','none');
+   });
+    };
 
- */
-
+      
   </script>
 
 
