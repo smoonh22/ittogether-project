@@ -10,17 +10,25 @@
 #finder-box {
   border: 0px solid black;
   top: 80px;
-  height: 3%;
+  position: absolute;
+/*  height: 3%;*/
   width: 400px;
   padding: 10px;
-  position: absolute;
 }
 
 .radius-control {
-  position: absolute;
-  left: 70px;
+/*  position: absolute;*/
+  width: 111px;
+  left: 10px;
   top: 20px;
 }
+.radius-control1 {
+  width: 55px;      
+}
+.radius-control2 {
+  width: 37px;
+}
+
 
 #friend-box {
   background-color: rgba(255, 255, 255, 0.93);

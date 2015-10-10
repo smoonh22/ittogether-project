@@ -4,27 +4,31 @@
 </div>
 
 <div id="finder-box">
-  <div class="btn-group" data-toggle="buttons">
-  <label class="btn btn-info btn-sm btn-man active">
-    <input type="checkbox" autocomplete="off">남자</label><br>
-  <label class="btn btn-info btn-sm btn-woman active">
-    <input type="checkbox" autocomplete="off">여자</label><br>
-  <label class="btn btn-info btn-sm btn-age">
-    <input type="checkbox" autocomplete="off">나이</label><br>
-  <label class="btn btn-info btn-sm btn-hobby">
-    <input type="checkbox" autocomplete="off">취미</label><br>
-  <label class="btn btn-info btn-sm btn-hobby">
-    <input type="checkbox" autocomplete="off">고향</label>
-  </div>
-  
   <div class="radius-control">
     <div class="btn-group" role="group" aria-label="...">
-      <button type="button" class="btn btn-info btn-xs radius-500" value="500" >500m</button>
-      <button type="button" class="btn btn-info btn-xs radius-1000" value="1000" >1km</button>
-      <button type="button" class="btn btn-info btn-xs radius-2000" value="2000" >2km</button>
+      <button type="button" class="btn btn-info btn-xs radius-500" value="500">500m</button>
+      <button type="button" class="btn btn-info btn-xs radius-1000" value="1000">1km</button>
+      <button type="button" class="btn btn-info btn-xs radius-2000" value="2000">2km</button>
     </div>
   </div>
+  
+  <div class="btn-group" data-toggle="buttons">
+    <label class="btn btn-info btn-sm btn-man radius-control1">
+      <input type="checkbox" autocomplete="off"><img src="images/icons/man.png"></label>
+    <label class="btn btn-info btn-sm btn-woman radius-control1">
+      <input type="checkbox" autocomplete="off"><img src="images/icons/woman.png"></label>
+  </div>
+  <br>
+  <div class="btn-group" data-toggle="buttons">
+    <label class="btn btn-info btn-sm btn-age radius-control2">
+      <input type="checkbox" autocomplete="off">나이</label>
+    <label class="btn btn-info btn-sm btn-hobby radius-control2">
+      <input type="checkbox" autocomplete="off">취미</label>
+    <label class="btn btn-info btn-sm btn-hobby radius-control2">
+      <input type="checkbox" autocomplete="off">고향</label>
+  </div>
 </div>
+
 
 <div id="friend-box">
 </div>
@@ -145,12 +149,18 @@
 
     markMyLoc(); // 나의 위치 마킹해줌
     for (var i = 0; i < friendLocArr.length; i++) {
+      if(friendLocArr[i][5] < 1000) {
         markFriends(i); /* 친구 마킹 */
+      } else {
+        markFriends1(i);
+      }
     }
     for (var i = 0; i < notFriendLocArr.length; i++) {
-//      if(notFriendLocArr[i][5] < 200) {
-//        markNotFriends(i); /* 주변 회원 마킹 */
-//      }
+      if(notFriendLocArr[i][5] < 1000) {
+        markNotFriends(i); /* 주변 회원 마킹 */
+      } else {
+        markNotFriends1(i);
+      }
     }
     markCircle(); /* 반경 렌더링 */
 
@@ -220,12 +230,7 @@
     // 거리 설정에서 에러 안뜨게 하는데 필요
     function markFriends1(i) {
       var friendLoc = friendLocArr[i];
-      friendMarkers.push(new google.maps.Marker({
-        title: friendLoc[0],
-        position: { lat: friendLoc[1], lng: friendLoc[2] },
-        animation: google.maps.Animation.DROP,
-        icon: 'images/icons/friendHome.png'
-      }));
+      friendMarkers.push(new google.maps.Marker({}));
     }
 
     function markNotFriends(i) {
@@ -270,12 +275,7 @@
     // 거리 설정에서 에러 안뜨게 하는데 필요
     function markNotFriends1(i) {
       var notFriendLoc = notFriendLocArr[i];
-      notFriendMarkers.push(new google.maps.Marker({
-        title: notFriendLoc[0],
-        position: { lat: notFriendLoc[1], lng: notFriendLoc[2] },
-        animation: google.maps.Animation.DROP,
-        icon: 'images/icons/pin.png'
-      }));
+      notFriendMarkers.push(new google.maps.Marker({}));
     }
 
     //info 윈도우 CSS 정의
@@ -367,7 +367,6 @@
     notFriendMarkers = [];
   }
   
-  
   // 500m 버튼  
   $(document).on('click','.radius-500', function() {
     clearMarkers();
@@ -391,7 +390,6 @@
     
   $(document).on('click', '.btn-man', function() {
     clearMarkers();
-//    $('.btn-man').addClass('active');
   });
     
 } // initMap 끝 
