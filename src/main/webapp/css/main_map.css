@@ -12,21 +12,22 @@
   top: 80px;
   position: absolute;
 /*  height: 3%;*/
-  width: 400px;
+  width: 140px;
   padding: 10px;
 }
 
 .radius-control {
 /*  position: absolute;*/
-  width: 111px;
+/*  width: 120px;*/
+  width: 100%;
   left: 10px;
   top: 20px;
 }
 .radius-control1 {
-  width: 55px;      
+  width: 40px;      
 }
 .radius-control2 {
-  width: 37px;
+  width: 40px;
 }
 
 

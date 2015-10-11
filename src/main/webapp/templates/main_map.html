@@ -3,20 +3,26 @@
   <!-- infoModal에 있는 구글맵 id가 map이라 mainMap으로 명명-->
 </div>
 
+
 <div id="finder-box">
   <div class="radius-control">
-    <div class="btn-group" role="group" aria-label="...">
-      <button type="button" class="btn btn-info btn-xs radius-500" value="500">500m</button>
-      <button type="button" class="btn btn-info btn-xs radius-1000" value="1000">1km</button>
-      <button type="button" class="btn btn-info btn-xs radius-2000" value="2000">2km</button>
+    <div class="btn-group" data-toggle="buttons">
+      <label class="btn btn-info btn-xs radius-500">
+        <input type="radio" name="options" id="option500" value="500">500m</label>
+      <label class="btn btn-info btn-xs radius-1000 active">
+        <input type="radio" name="options" id="option1000" value="1000" checked>&nbsp;1km&nbsp;</label>     
+      <label class="btn btn-info btn-xs radius-2000">
+        <input type="radio" name="options" id="option2000" value="2000">2km</label>
     </div>
   </div>
   
   <div class="btn-group" data-toggle="buttons">
+    <label class="btn btn-info btn-sm btn-manwoman radius-control1 active">
+      <input type="radio" name="options" id="optionManWoman" autocomplete="off" checked><img src="images/icons/manwoman.png"></label>
     <label class="btn btn-info btn-sm btn-man radius-control1">
-      <input type="checkbox" autocomplete="off"><img src="images/icons/man.png"></label>
+      <input type="radio" name="options" id="optionMan" autocomplete="off"><img src="images/icons/man.png"></label>
     <label class="btn btn-info btn-sm btn-woman radius-control1">
-      <input type="checkbox" autocomplete="off"><img src="images/icons/woman.png"></label>
+      <input type="radio" name="options" id="optionWoman" autocomplete="off"><img src="images/icons/woman.png"></label>
   </div>
   <br>
   <div class="btn-group" data-toggle="buttons">
@@ -24,7 +30,7 @@
       <input type="checkbox" autocomplete="off">나이</label>
     <label class="btn btn-info btn-sm btn-hobby radius-control2">
       <input type="checkbox" autocomplete="off">취미</label>
-    <label class="btn btn-info btn-sm btn-hobby radius-control2">
+    <label class="btn btn-info btn-sm btn-hometown radius-control2">
       <input type="checkbox" autocomplete="off">고향</label>
   </div>
 </div>
@@ -38,7 +44,10 @@
   var myLoc = [];
   var myNickname,
       myIntro,
-      myPhoto;
+      myPhoto,
+      myHobby,
+      myHometown;
+  
   (function() {
     $.getJSON(contextRoot + '/member/getMyLoc.do', {
       mno: sessionStorage.getItem('mno')
@@ -49,7 +58,11 @@
       myNickname = results.data[0].nickname;
       myIntro = results.data[0].introduction;
       myPhoto = results.data[0].profilePicture;
-      console.log("나의 위치(" + myNickname + ") - lat: " + myLoc[0] + " lon: " + myLoc[1]);
+      mySex = results.data[0].sex;
+      myAge = results.data[0].age;
+      myHobby = results.data[0].hobby;
+      myHometown = results.data[0].hometown;
+//      console.log("나의 위치(" + myNickname + ") - lat: " + myLoc[0] + " lon: " + myLoc[1]);
     });
   })();
 
@@ -70,10 +83,11 @@
           results.distance[i],
           results.data[i].sex,
           results.data[i].age,
-          results.data[i].hobby
+          results.data[i].hobby,
+          results.data[i].hometown
         ];
         friendLocArr.push(tempArr);
-        console.log("친구" + i + ": " + friendLocArr[i]);
+        console.log("친구" + i + ": " + friendLocArr[i][0]+"/"+ friendLocArr[i][5]+"/"+ friendLocArr[i][7]);
       }
     });
   })();
@@ -95,16 +109,23 @@
           Number(results.data[i].mno),
           results.data[i].sex,
           results.data[i].age,
-          results.data[i].hobby
+          results.data[i].hobby,
+          results.data[i].hometown
         ];
         notFriendLocArr.push(tempArr);
-        console.log("주변회원" + i + ": " + notFriendLocArr[i]);
-        $('#friend-box').append('<div class="panel panel-info">' +
+        console.log("주변회원" + i + ": " + notFriendLocArr[i][0]+"/"+ notFriendLocArr[i][5]+"/"+notFriendLocArr[i][8]);
+        console.log('asdfasdf');
+      }
+    });
+  })();
+  
+  (function() {
+    $('#friend-box').append('<div class="panel panel-info">' +
           '<div class="panel-heading match-heading">' +
           "BestMatch" +
           '</div>' +
           '<div class="panel-body">' +
-          '<img src="' + results.data[i].profilePicture +'" class="img-circle match-friendimg">' +
+          '<img src="' + friendLocArr[i][4] +'" class="img-circle match-friendimg">' +
           results.data[i].nickname + '<br>' +
           Number(results.distance[i]) + 
           "m 이내" +
@@ -113,9 +134,7 @@
           '</button>' +
           '</div>' +
           '</div>');
-      }
-    });
-  })();
+  })
 
   var friendMarkers = []; /*팝업창 띄울 때의 마커들 */
   var notFriendMarkers = []; /* 팝업창 띄울 때의 마커들  */
@@ -127,6 +146,13 @@
 
   // 구글맵 초기화 함수.
   function initMap() {
+    var distant;  //  거리 설정의 단위 변수 200m, 500m, 1km
+    var sex = 0;
+    var ageMin;
+    var ageMax;
+    var myRealHobby;
+    var myRealHometown;
+    
     var radius = { /* 반경 보여줄 지점 */
       radiusCenter: {
         center: { lat: myLoc[0], lng: myLoc[1] },
@@ -148,18 +174,19 @@
     });
 
     markMyLoc(); // 나의 위치 마킹해줌
+    distant = 1000;
     for (var i = 0; i < friendLocArr.length; i++) {
-      if(friendLocArr[i][5] < 1000) {
-        markFriends(i); /* 친구 마킹 */
+      if(friendLocArr[i][5] <= distant) {
+        markFriends(i,1,1); /* 친구 마킹 */
       } else {
-        markFriends1(i);
+        markFriends(i,0,0);
       }
     }
     for (var i = 0; i < notFriendLocArr.length; i++) {
-      if(notFriendLocArr[i][5] < 1000) {
-        markNotFriends(i); /* 주변 회원 마킹 */
+      if(notFriendLocArr[i][5] <= distant) {
+        markNotFriends(i,1,1); /* 주변 회원 마킹 */
       } else {
-        markNotFriends1(i);
+        markNotFriends(i,0,0);
       }
     }
     markCircle(); /* 반경 렌더링 */
@@ -192,15 +219,32 @@
     });
     }
 
-    function markFriends(i) {
+    function markFriends(i, mapAdj, dropAdj) {
       var friendLoc = friendLocArr[i];
-      friendMarkers.push(new google.maps.Marker({
-        title: friendLoc[0],
-        position: { lat: friendLoc[1], lng: friendLoc[2] },
-        map: map,
-        animation: google.maps.Animation.DROP,
-        icon: 'images/icons/friendHome.png'
-      }));
+      if (mapAdj == 0 && dropAdj == 0) {
+          friendMarkers.push(new google.maps.Marker({
+            title: friendLoc[0],
+            position: { lat: friendLoc[1], lng: friendLoc[2] },
+            icon: 'images/icons/friendHome.png'
+          }));
+      }
+      if (mapAdj == 1 && dropAdj == 0) {
+          friendMarkers.push(new google.maps.Marker({
+            title: friendLoc[0],
+            position: { lat: friendLoc[1], lng: friendLoc[2] },
+            map: map,
+            icon: 'images/icons/friendHome.png'
+          }));
+      }
+      if (mapAdj == 1 && dropAdj == 1) {
+          friendMarkers.push(new google.maps.Marker({
+            title: friendLoc[0],
+            position: { lat: friendLoc[1], lng: friendLoc[2] },
+            map: map,
+            animation: google.maps.Animation.DROP,
+            icon: 'images/icons/friendHome.png'
+          }));
+      }
       friendMarkers[i].addListener('click', function() {
         if (friendMarkers[i].getAnimation() !== null) {
             friendMarkers[i].setAnimation(null);
@@ -227,21 +271,33 @@
         infoWindowsCSS();// 팝업창 css 설정해줌
       });
     }
-    // 거리 설정에서 에러 안뜨게 하는데 필요
-    function markFriends1(i) {
-      var friendLoc = friendLocArr[i];
-      friendMarkers.push(new google.maps.Marker({}));
-    }
-
-    function markNotFriends(i) {
-      var notFriendLoc = notFriendLocArr[i];
-      notFriendMarkers.push(new google.maps.Marker({
-        title: notFriendLoc[0],
-        position: { lat: notFriendLoc[1], lng: notFriendLoc[2] },
-        map: map,
-        animation: google.maps.Animation.DROP,
-        icon: 'images/icons/pin.png'
-      }));
+        
+    function markNotFriends(i, mapAdj, dropAdj) {
+      var notFriendLoc = notFriendLocArr[i];      
+      if (mapAdj == 0 && dropAdj == 0) {
+          notFriendMarkers.push(new google.maps.Marker({
+            title: notFriendLoc[0],
+            position: { lat: notFriendLoc[1], lng: notFriendLoc[2] },
+            icon: 'images/icons/pin.png'
+          }));
+      }
+      if (mapAdj == 1 && dropAdj == 0) {
+          notFriendMarkers.push(new google.maps.Marker({
+            title: notFriendLoc[0],
+            position: { lat: notFriendLoc[1], lng: notFriendLoc[2] },
+            map: map,
+            icon: 'images/icons/pin.png'
+        }));
+      }
+      if (mapAdj == 1 && dropAdj == 1) {
+          notFriendMarkers.push(new google.maps.Marker({
+            title: notFriendLoc[0],
+            position: { lat: notFriendLoc[1], lng: notFriendLoc[2] },
+            map: map,
+            animation: google.maps.Animation.DROP,
+            icon: 'images/icons/pin.png'
+        }));
+      }
       notFriendMarkers[i].addListener('click', function() {
         if (notFriendMarkers[i].getAnimation() !== null) {
             notFriendMarkers[i].setAnimation(null);
@@ -264,22 +320,13 @@
           "</div>" +
           "</div>" +
           "</div>"
-        
-        
       });
       google.maps.event.addListener(notFriendWindow[i], 'domready', function() {
         infoWindowsCSS();// 팝업창 css 설정해줌
       });
     }
-
-    // 거리 설정에서 에러 안뜨게 하는데 필요
-    function markNotFriends1(i) {
-      var notFriendLoc = notFriendLocArr[i];
-      notFriendMarkers.push(new google.maps.Marker({}));
-    }
-
     //info 윈도우 CSS 정의
-    function infoWindowsCSS() {
+  function infoWindowsCSS() {
       var iwOuter = $('.gm-style-iw');
       var iwBackground = iwOuter.prev();
       iwBackground.children(':nth-child(2)').css({
@@ -336,25 +383,135 @@
     markCircle();
   }  
     
-  var distant;  //  거리 설정의 단위 변수 200m, 500m, 1km
-  // 거리 설정 후 마킹해주는 함수  
   function dropMarkers(distant) {
     for (var i = 0; i < friendLocArr.length; i++) {
       if (friendLocArr[i][5] <= distant) {
-        markFriends(i); /* 친구 마킹 */
+        markFriends(i,1,1); /* 친구 마킹 */
       } else {
-        markFriends1(i);
+        markFriends(i,0,0);
       }
     }
     for (var i = 0; i < notFriendLocArr.length; i++) {
       if (notFriendLocArr[i][5] <= distant) {
-        markNotFriends(i); /* 주변 회원 마킹 */
+        markNotFriends(i,1,1); /* 주변 회원 마킹 */
       } else {
-        markNotFriends1(i);
+        markNotFriends(i,0,0);
       }
     }
   }
   
+  function renderMarkers1(sex, ageMin, ageMax, hobby, hometown) {
+    for (var i = 0; i < friendLocArr.length; i++) {
+      friendMarkers[i].setVisible(true);
+    }
+    for (var i = 0; i < notFriendLocArr.length; i++) {
+      notFriendMarkers[i].setVisible(true);
+    }
+    if (sex == 0) {} else {
+      for (var i = 0; i < friendLocArr.length; i++) {
+        if (friendLocArr[i][6] != sex) {
+          friendMarkers[i].setVisible(false);
+        }
+      }
+      for (var i = 0; i < notFriendLocArr.length; i++) {
+        if (notFriendLocArr[i][7] != sex) {
+          notFriendMarkers[i].setVisible(false);
+        }
+      }
+    }
+    if (ageMax) {
+      for (var i = 0; i < friendLocArr.length; i++) {
+        if (friendLocArr[i][7] < ageMin ||
+            friendLocArr[i][7] > ageMax) {
+            friendMarkers[i].setVisible(false);
+        }
+      }
+      for (var i = 0; i < notFriendLocArr.length; i++) {
+        if (notFriendLocArr[i][8] < ageMin ||
+            notFriendLocArr[i][8] > ageMax) {
+          notFriendMarkers[i].setVisible(false);
+        }
+      }
+    }
+    if (hobby) {
+      for (var i = 0; i < friendLocArr.length; i++) {
+        if (friendLocArr[i][8] != hobby) {
+            friendMarkers[i].setVisible(false);
+        }
+      }
+      for (var i = 0; i < notFriendLocArr.length; i++) {
+        if (notFriendLocArr[i][9] != hobby) {
+          notFriendMarkers[i].setVisible(false);
+        }
+      }
+    }
+    if (hometown) {
+      for (var i = 0; i < friendLocArr.length; i++) {
+        if (friendLocArr[i][9] != hometown) {
+            friendMarkers[i].setVisible(false);
+        }
+      }
+      for (var i = 0; i < notFriendLocArr.length; i++) {
+        if (notFriendLocArr[i][10] != hometown) {
+          notFriendMarkers[i].setVisible(false);
+        }
+      }
+    }
+  }
+    
+  function renderMarkers2(sex, ageMin, ageMax, hobby, hometown) {  
+    if (hometown) {
+      for (var i = 0; i < friendLocArr.length; i++) {
+        if (friendLocArr[i][8] != hometown) {
+            friendMarkers[i].setVisible(true);
+        }
+      }
+      for (var i = 0; i < notFriendLocArr.length; i++) {
+        if (notFriendLocArr[i][9] != hometown) {
+          notFriendMarkers[i].setVisible(true);
+        }
+      }
+    }
+    if (hobby) {
+      for (var i = 0; i < friendLocArr.length; i++) {
+        if (friendLocArr[i][8] != hobby) {
+            friendMarkers[i].setVisible(true);
+        }
+      }
+      for (var i = 0; i < notFriendLocArr.length; i++) {
+        if (notFriendLocArr[i][9] != hobby) {
+          notFriendMarkers[i].setVisible(true);
+        }
+      }
+    }
+    if (ageMax) {
+      for (var i = 0; i < friendLocArr.length; i++) {
+        if (friendLocArr[i][7] < ageMin ||
+            friendLocArr[i][7] > ageMax) {
+            friendMarkers[i].setVisible(true);
+        }
+      }
+      for (var i = 0; i < notFriendLocArr.length; i++) {
+        if (notFriendLocArr[i][8] < ageMin ||
+            notFriendLocArr[i][8] > ageMax) {
+          notFriendMarkers[i].setVisible(true);
+        }
+      }
+    }
+    if (sex == 0) {} else {
+      for (var i = 0; i < friendLocArr.length; i++) {
+        if (friendLocArr[i][6] != sex) {
+          friendMarkers[i].setVisible(false);
+        }
+      }
+      for (var i = 0; i < notFriendLocArr.length; i++) {
+        if (notFriendLocArr[i][7] != sex) {
+          notFriendMarkers[i].setVisible(false);
+        }
+      }
+    }
+  }
+    
   // 거리 설정 후 마킹하기전 맵의 마커들을 없애주는 함수
   function clearMarkers() {
     for (var i = 0; i < friendMarkers.length; i++) {
@@ -366,30 +523,94 @@
     friendMarkers = [];
     notFriendMarkers = [];
   }
+    
+  function checkArray() {
+    for (var i = 0; i < friendLocArr.length; i++){
+      console.log("#" + i + "/" + friendLocArr[i][0]+"/"+ friendLocArr[i][5]);
+    }
+    for (var i = 0; i < notFriendLocArr.length; i++){
+      console.log("*" + i + "/" + notFriendLocArr[i][0]+"/"+ notFriendLocArr[i][5]);
+    }
+  }
   
+  // 고향 버튼
+  $(document).on('click', '.btn-hometown', function() {
+    if (!($('.btn-hometown').hasClass('active'))) {
+      myRealHometown = myHometown;
+      renderMarkers1(sex, ageMin, ageMax, myHobby, myHometown)
+    } else {
+      renderMarkers2(sex, ageMin, ageMax, myHobby, myHometown)
+      myRealHometown = null;
+    }
+  });
+  // 나이 버튼
+  $(document).on('click', '.btn-age', function() {
+    if (!($('.btn-age').hasClass('active'))) {
+      ageMin = myAge - 1;
+      ageMax = myAge + 1;
+      renderMarkers1(sex, ageMin, ageMax);
+    } else {
+      renderMarkers2(sex, ageMin, ageMax);
+    }
+  });
+  // 취미 버튼
+  $(document).on('click', '.btn-hobby', function() {
+    if (!($('.btn-hobby').hasClass('active'))) {
+      myRealHobby = myHobby;
+      renderMarkers1(sex, ageMin, ageMax, myHobby);
+    } else {
+      renderMarkers2(sex, ageMin, ageMax, myHobby);
+      myRealHobby = null;
+    }
+  });  
+  // 남녀 모두 버튼  
+  $(document).on('click', '.btn-manwoman', function() {
+    if (!($('.btn-manwoman').hasClass('active'))) {
+      sex = 0;
+      renderMarkers1(sex);
+    }
+  });
+  // 남자 버튼
+  $(document).on('click', '.btn-man', function() {
+    if (!($('.btn-man').hasClass('active'))) {
+      sex = 1;
+      renderMarkers1(sex);
+    }
+  });
+  // 여자 버튼
+  $(document).on('click', '.btn-woman', function() {
+    if (!($('.btn-woman').hasClass('active'))) {
+      sex = 2;  
+      renderMarkers1(sex);
+    }
+  });
+    
   // 500m 버튼  
   $(document).on('click','.radius-500', function() {
-    clearMarkers();
-    radiusDistance(27);
-    dropMarkers(500);
+    if (!($('.radius-500').hasClass('active'))) {
+      distant = 500;
+      clearMarkers();
+      radiusDistance(27);
+      dropMarkers(distant);
+    }
   });
   // 1000m 버튼
   $(document).on('click','.radius-1000', function() {
-    clearMarkers();
-    radiusDistance(97);
-    dropMarkers(1000);
+    if (!($('.radius-1000').hasClass('active'))) {
+      distant = 1000;
+      clearMarkers();
+      radiusDistance(97);
+      dropMarkers(distant);
+    }
   });
-    
   // 2000m 버튼  
   $(document).on('click','.radius-2000', function() {
-    clearMarkers();
-    radiusDistance(500);
-    dropMarkers(2000);
-  });
-    
-    
-  $(document).on('click', '.btn-man', function() {
-    clearMarkers();
+    if (!($('.radius-2000').hasClass('active'))) {
+      distant = 2000;
+      clearMarkers();
+      radiusDistance(500);
+      dropMarkers(distant);
+    }
   });
     
 } // initMap 끝 
@@ -429,5 +650,4 @@
   
   
 </script>
-
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&callback=initMap" async defer></script>

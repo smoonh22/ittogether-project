@@ -18,7 +18,7 @@
     <result column="sex"      property="sex"/>
     <result column="intro"    property="introduction"/>
     <result column="age"      property="age"/>
-    <result column="hb"       property="hobby"/>
+    <result column="hobby"       property="hobby"/>
     
   </resultMap>
   
@@ -78,7 +78,7 @@
       lon=#{longitude},
       sex=#{sex},
       age=#{age},
-      hb=#{hobby},
+      hobby=#{hobby},
       hometwn=#{hometown},
       addr=#{address},
       lat = #{latitude},
@@ -93,13 +93,7 @@
   
   <!-- 메인지도 내위치 -->
   <select id="getMyLoc" parameterType="int" resultMap="MemberMap">
-  SELECT 
-    mno,
-    nicknm,
-    lat,
-    lon,
-    intro,
-    mphoto
+  SELECT *
   FROM memb_t 
   WHERE mno=#{mno};
   </select>
@@ -116,7 +110,8 @@
       t1.mphoto,
       t1.sex,
       t1.age,
-      t1.hobby
+      t1.hobby,
+      t1.hometwn
     FROM memb_t t1 JOIN frd_t t2 using(mno)
     WHERE frdno=#{frdno} and state=2;
   </select>
