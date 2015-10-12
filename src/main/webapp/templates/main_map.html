@@ -1,7 +1,7 @@
 <link rel='stylesheet' href="css/main_map.css" />
-<div id="mainMap" onmousedown="return false">
-   infoModal에 있는 구글맵 id가 map이라 mainMap으로 명명
+<div id="mainMap" onmousedown="return false"> 
 </div>
+<!-- infoModal에 있는 구글맵 id가 map이라 mainMap으로 명명-->
 
 
 <div id="finder-box">
@@ -26,7 +26,7 @@
   </div>
   <br>
   <div class="btn-group" data-toggle="buttons">
-    <label class="btn btn-info btn-sm btn-age radius-control2">
+    <label class="btn btn-info btn-sm btn-age radius-control2 btn-selected ">
       <input type="checkbox" autocomplete="off">나이</label>
     <label class="btn btn-info btn-sm btn-hobby radius-control2">
       <input type="checkbox" autocomplete="off">취미</label>
@@ -34,7 +34,6 @@
       <input type="checkbox" autocomplete="off">고향</label>
   </div>
 </div>
-
 
 <div id="friend-box" onmousedown="return false">
 </div>
@@ -116,60 +115,153 @@
         console.log("주변회원" + i + ": " + notFriendLocArr[i][0]+"/"+
                     notFriendLocArr[i][5]+"/"+notFriendLocArr[i][8]);
       }
-      friendBox();
+      friendBoxD(1000);
     });
   })();
   
-  function friendBox() {
+  var queryString1 = [];
+  var queryString2 = [];
+  var queryString3 = [];
+  var queryString4 = [];
+  function friendBoxD(distant) {
+    $('.panel').remove();
     for (var i = 0; i < notFriendLocArr.length; i++) {
-      if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-    $('#friend-box').append('<div class="panel panel-info">' +
-          '<div class="panel-heading match-heading">' +
-          "BestMatch" +
-          '</div>' +
-          '<div class="panel-body">' +
-          '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg">' +
-          notFriendLocArr[i][0] + '<br>' +
-          notFriendLocArr[i][5] + 
-          "m 이내" +
-          '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-          '<div>취미와 고향이 일치합니다.</div>' +          
-          '</div>' +
-          '</div>');
+      if (notFriendLocArr[i][5] < distant) {
+          if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
+              queryString1.push('<div class="panel panel-info">' +
+              '<div class="panel-heading match-heading">' +
+              "BestMatch" +
+              '</div>' +
+              '<div class="panel-body">' +
+              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg">' +
+              notFriendLocArr[i][0] + '<br>' +
+              notFriendLocArr[i][5] + 
+              "m 이내" +
+              '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
+              '<div>취미와 고향이 일치합니다.</div>' +          
+              '</div>' +
+              '</div>');
+          }
+          if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
+              queryString2.push('<div class="panel panel-info">' +
+              '<div class="panel-body">' +
+              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg">' +
+              notFriendLocArr[i][0] + '<br>' +
+              notFriendLocArr[i][5] + 
+              "m 이내" +
+              '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
+              '<div>취미가 일치합니다.</div>' +          
+              '</div>' +
+              '</div>');
+          }
+          if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
+              queryString3.push('<div class="panel panel-info">' +
+              '<div class="panel-body">' +
+              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg">' +
+              notFriendLocArr[i][0] + '<br>' +
+              notFriendLocArr[i][5] + 
+              "m 이내" +
+              '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
+              '<div>고향이 일치합니다.</div>' +          
+              '</div>' +
+              '</div>');
+          }
+          if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
+              queryString4.push('<div class="panel panel-info">' +
+              '<div class="panel-body">' +
+              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg">' +
+              notFriendLocArr[i][0] + '<br>' +
+              notFriendLocArr[i][5] + 
+              "m 이내" +
+              '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
+              '</div>' +
+              '</div>');
+          }
       }
-      if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-    $('#friend-box').append('<div class="panel panel-info">' +
-          '<div class="panel-heading match-heading">' +
-          "BestMatch" +
-          '</div>' +
-          '<div class="panel-body">' +
-          '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg">' +
-          notFriendLocArr[i][0] + '<br>' +
-          notFriendLocArr[i][5] + 
-          "m 이내" +
-          '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-          '<div>취미가 일치합니다.</div>' +          
-          '</div>' +
-          '</div>');
-      }
-      if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-$('#friend-box').append('<div class="panel panel-info">' +
-          '<div class="panel-heading match-heading">' +
-          "BestMatch" +
-          '</div>' +
-          '<div class="panel-body">' +
-          '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg">' +
-          notFriendLocArr[i][0] + '<br>' +
-          notFriendLocArr[i][5] + 
-          "m 이내" +
-          '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-          '<div>고향이 일치합니다.</div>' +          
-          '</div>' +
-          '</div>');
-      }
-    }
+    }  
+    queryStringSpin();
   }
 
+  function friendBoxDS(distant, sex) {
+    $('.panel').remove();
+    for (var i = 0; i < notFriendLocArr.length; i++) {
+      if (notFriendLocArr[i][5] < distant) {
+        if (notFriendLocArr[i][7] == sex) {
+          if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
+              queryString1.push('<div class="panel panel-info">' +
+              '<div class="panel-heading match-heading">' +
+              "BestMatch" +
+              '</div>' +
+              '<div class="panel-body">' +
+              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg">' +
+              notFriendLocArr[i][0] + '<br>' +
+              notFriendLocArr[i][5] + 
+              "m 이내" +
+              '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
+              '<div>취미와 고향이 일치합니다.</div>' +          
+              '</div>' +
+              '</div>');
+          }
+          if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
+              queryString2.push('<div class="panel panel-info">' +
+              '<div class="panel-body">' +
+              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg">' +
+              notFriendLocArr[i][0] + '<br>' +
+              notFriendLocArr[i][5] + 
+              "m 이내" +
+              '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
+              '<div>취미가 일치합니다.</div>' +          
+              '</div>' +
+              '</div>');
+          }
+          if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
+              queryString3.push('<div class="panel panel-info">' +
+              '<div class="panel-body">' +
+              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg">' +
+              notFriendLocArr[i][0] + '<br>' +
+              notFriendLocArr[i][5] + 
+              "m 이내" +
+              '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
+              '<div>고향이 일치합니다.</div>' +          
+              '</div>' +
+              '</div>');
+          }
+          if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
+              queryString4.push('<div class="panel panel-info">' +
+              '<div class="panel-body">' +
+              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg">' +
+              notFriendLocArr[i][0] + '<br>' +
+              notFriendLocArr[i][5] + 
+              "m 이내" +
+              '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
+              '</div>' +
+              '</div>');
+          }
+        }
+      }
+    }
+    queryStringSpin();
+  }
+  
+  function queryStringSpin() {
+    for (var i = 0; i < queryString1.length; i++) {
+      $('#friend-box').append(queryString1[i]);
+    }
+    for (var i = 0; i < queryString2.length; i++) {
+      $('#friend-box').append(queryString2[i]);
+    }
+    for (var i = 0; i < queryString3.length; i++) {
+      $('#friend-box').append(queryString3[i]);
+    }
+    for (var i = 0; i < queryString4.length; i++) {
+      $('#friend-box').append(queryString4[i]);
+    }
+    queryString1 = [];
+    queryString2 = [];
+    queryString3 = [];
+    queryString4 = [];
+  }
+  
   var friendMarkers = []; /*팝업창 띄울 때의 마커들 */
   var notFriendMarkers = []; /* 팝업창 띄울 때의 마커들  */
 
@@ -178,16 +270,14 @@ $('#friend-box').append('<div class="panel panel-info">' +
   var friendWindow = []; /* 친구들 팝업창 */
   var notFriendWindow = []; /* 회원들 팝업창 */
 
+  var distant;  //  거리 설정의 단위 변수 200m, 500m, 1km
+  var sex = 0;
+  var ageMin;
+  var ageMax;
+  var myRealHobby;
+  var myRealHometown;
   // 구글맵 초기화 함수.
   function initMap() {
-    
-    var distant;  //  거리 설정의 단위 변수 200m, 500m, 1km
-    var sex = 0;
-    var ageMin;
-    var ageMax;
-    var myRealHobby;
-    var myRealHometown;
-    
     var radius = { /* 반경 보여줄 지점 */
       radiusCenter: {
         center: { lat: myLoc[0], lng: myLoc[1] },
@@ -569,16 +659,6 @@ $('#friend-box').append('<div class="panel panel-info">' +
     }
   }
   
-  // 고향 버튼
-  $(document).on('click', '.btn-hometown', function() {
-    if (!($('.btn-hometown').hasClass('active'))) {
-      myRealHometown = myHometown;
-      renderMarkers1(sex, ageMin, ageMax, myHobby, myHometown)
-    } else {
-      renderMarkers2(sex, ageMin, ageMax, myHobby, myHometown)
-      myRealHometown = null;
-    }
-  });
   // 나이 버튼
   $(document).on('click', '.btn-age', function() {
     if (!($('.btn-age').hasClass('active'))) {
@@ -599,11 +679,23 @@ $('#friend-box').append('<div class="panel panel-info">' +
       myRealHobby = null;
     }
   });  
+  // 고향 버튼
+  $(document).on('click', '.btn-hometown', function() {
+    if (!($('.btn-hometown').hasClass('active'))) {
+      myRealHometown = myHometown;
+      renderMarkers1(sex, ageMin, ageMax, myHobby, myHometown)
+    } else {
+      renderMarkers2(sex, ageMin, ageMax, myHobby, myHometown)
+      myRealHometown = null;
+    }
+  });
+
   // 남녀 모두 버튼  
   $(document).on('click', '.btn-manwoman', function() {
     if (!($('.btn-manwoman').hasClass('active'))) {
       sex = 0;
       renderMarkers1(sex);
+      friendBoxD(distant);
     }
   });
   // 남자 버튼
@@ -611,6 +703,7 @@ $('#friend-box').append('<div class="panel panel-info">' +
     if (!($('.btn-man').hasClass('active'))) {
       sex = 1;
       renderMarkers1(sex);
+      friendBoxDS(distant, sex);
     }
   });
   // 여자 버튼
@@ -618,6 +711,7 @@ $('#friend-box').append('<div class="panel panel-info">' +
     if (!($('.btn-woman').hasClass('active'))) {
       sex = 2;  
       renderMarkers1(sex);
+      friendBoxDS(distant, sex);
     }
   });
     
@@ -628,6 +722,8 @@ $('#friend-box').append('<div class="panel panel-info">' +
       clearMarkers();
       radiusDistance(27);
       dropMarkers(distant);
+//      $('.panel').remove();
+      friendBoxD(distant);
     }
   });
   // 1000m 버튼
@@ -637,6 +733,8 @@ $('#friend-box').append('<div class="panel panel-info">' +
       clearMarkers();
       radiusDistance(97);
       dropMarkers(distant);
+//      $('.panel').remove();
+      friendBoxD(distant);
     }
   });
   // 2000m 버튼  
@@ -646,6 +744,8 @@ $('#friend-box').append('<div class="panel panel-info">' +
       clearMarkers();
       radiusDistance(500);
       dropMarkers(distant);
+//      $('.panel').remove();
+      friendBoxD(distant);
     }
   });
     
