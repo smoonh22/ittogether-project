@@ -59,6 +59,11 @@ public int addFrd2(FriendList friendList) {
   return friendDao.addFRD2(friendList);
 }
 
+//@Override
+//public List<FriendList> checkFriendAddButton(int mno) {
+//  return friendDao.checkFriendAddButton(mno);
+//}
+
 
 
 }

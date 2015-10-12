@@ -14,7 +14,7 @@
             <div class="profile-info-div2">
               <img id="profile-img" class='img-circle' src='{{infoCtrl.userDatas.profilePicture}}' />
               <div class="col-sm-10">
-               <div class="btn btn-success fileinput-button" type="file" ngf-select="infoCtrl.uploadFiles($file)">
+               <div class="btn btn-success btn-xs fileinput-button" type="file" ngf-select="infoCtrl.uploadFiles($file)">
       <i class="glyphicon glyphicon-plus"></i>파일찾기</div>
             </div>
           </div>
@@ -59,15 +59,15 @@
               <input type="radio" name="radioButton" id="r2" value="2" ng-model="infoCtrl.userDatas.sex">여자
             </label>
           </div>
-          <div class="form-group">
+          <div class="form-group info-modal-age">
             <label>나이</label>
             <input class="form-control" id="age" value="{{infoCtrl.userDatas.age}}">
           </div>
-          <div class="form-group">
+          <div class="form-group info-modal-hobby">
             <label>취미</label>
             <input class="form-control" id="hobby" value="{{infoCtrl.userDatas.hobby}}">
           </div>
-          <div class="form-group">
+          <div class="form-group info-modal-hometown">
             <label>고향</label>
             <input class="form-control" id="hometown" value="{{infoCtrl.userDatas.hometown}}">
           </div>
@@ -112,7 +112,6 @@ function initAutocomplete() { /* 초기화 함수*/
   });
 
   var markers = [];
-  
   markers[0] = new google.maps.Marker({
     position: { lat: myHome[0], lng: myHome[1] },
     map: map,
@@ -148,7 +147,6 @@ function initAutocomplete() { /* 초기화 함수*/
     });
     
     map.fitBounds(bounds);
-//    map.setZoom(1);
     
     $(".info-latitude").val(markers[0].position.H); /* 위도 경도 */
     $(".info-longitude").val(markers[0].position.L);
@@ -163,8 +161,6 @@ function initAutocomplete() { /* 초기화 함수*/
     function addMarker(location, map) {
       markers[0].setPosition(location);
       markers[0].setPosition(location);
-//      $(".info-latitude").val(markers[0].position.H); /* 위도 경도 */
-//      $(".info-longitude").val(markers[0].position.L);
       $(".info-latitude").val(location.lat());
       $(".info-longitude").val(location.lng());
     }
@@ -176,7 +172,7 @@ function initAutocomplete() { /* 초기화 함수*/
   
   function resizeMap() {
     if(typeof map =="undefined") return;
-    setTimeout( function(){resizingMap();} , 400);
+    setTimeout( function(){resizingMap();} , 1000);
   }
   
   function resizingMap() {

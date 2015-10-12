@@ -1,6 +1,7 @@
 package net.bit.java72.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import net.bit.java72.domain.FriendList;
 import net.bit.java72.domain.Member;
@@ -24,4 +25,6 @@ public interface FriendDao {
   int addFRD(FriendList friendList);
 
   int addFRD2(FriendList friendList);
+  
+//  List<FriendList> checkFriendAddButton(int mno);
 }

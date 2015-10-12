@@ -10,17 +10,26 @@
 #finder-box {
   border: 0px solid black;
   top: 80px;
-  height: 3%;
-  width: 400px;
-  padding: 10px;
   position: absolute;
+/*  height: 3%;*/
+  width: 140px;
+  padding: 10px;
 }
 
 .radius-control {
-  position: absolute;
-  left: 70px;
+/*  position: absolute;*/
+/*  width: 120px;*/
+  width: 100%;
+  left: 10px;
   top: 20px;
 }
+.radius-control1 {
+  width: 40px;      
+}
+.radius-control2 {
+  width: 40px;
+}
+
 
 #friend-box {
   background-color: rgba(255, 255, 255, 0.93);
@@ -46,11 +55,7 @@
    width:35%;
   margin-left:60%;
 }
-.boredTable {
-  border: 1px solid grey;
-  background: #377CB6;
-  padding: 28px;
-}
+
 .friendBalloon {
   border : 1px;
 }

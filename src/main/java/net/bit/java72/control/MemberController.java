@@ -110,7 +110,6 @@ public class MemberController {
          }
       }
       System.out.println("나와 친구와의 거리: " + distances.toString());
-      System.out.println("friendMarks: " + friendMarks);
       
       result.put("distance", distances);
       result.put("data", friendMarks);
@@ -154,8 +153,6 @@ public class MemberController {
           }
         }
       }
-      
-      System.out.println("noneFriendMarks: " + noneFriendMarks.iterator());
       
       result.put("distance", distances);
       result.put("data", noneFriendMarks);

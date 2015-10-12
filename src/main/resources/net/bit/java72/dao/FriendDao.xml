@@ -53,6 +53,11 @@
   	where mno=#{values}
   </select>
    
+  <!-- <select id="checkFriendAddButton" parameterType="int" resultMap="MemberMap">
+    SELECT * 
+    FROM FRD_T
+    WHERE mno=#{value}
+  </select> -->
    
    <!-- 친구아닌사람 검색에서 친구 검색으로 수정 -->
   <select id="unFriendList" parameterType="Search" resultMap="MemberMap">
