@@ -196,4 +196,12 @@ define(function () {
     
   }]);
 
+  app.directive('fdetailModal', function () {
+    return {
+      restrict: 'E',
+      templateUrl: 'templates/modals/fdetail-modal.html'
+    };
+  }); 
+  
+  
 });
