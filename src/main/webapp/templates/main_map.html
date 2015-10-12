@@ -46,7 +46,7 @@
       myPhoto,
       myHobby,
       myHometown;
-  
+  var memberBtn = [];
   (function() {
     $.getJSON(contextRoot + '/member/getMyLoc.do', {
       mno: sessionStorage.getItem('mno')
@@ -126,14 +126,15 @@
   function friendBoxD(distant) {
     $('.panel').remove();
     for (var i = 0; i < notFriendLocArr.length; i++) {
+      memberBtn.push('#member'+notFriendLocArr[i][6]);
       if (notFriendLocArr[i][5] < distant) {
           if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
               queryString1.push('<div class="panel panel-info">' +
               '<div class="panel-heading match-heading">' +
               "BestMatch" +
               '</div>' +
-              '<div class="panel-body">' +
-              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg">' +
+              '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
+              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
               notFriendLocArr[i][0] + '<br>' +
               notFriendLocArr[i][5] + 
               "m 이내" +
@@ -144,8 +145,8 @@
           }
           if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
               queryString2.push('<div class="panel panel-info">' +
-              '<div class="panel-body">' +
-              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg">' +
+              '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
+              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
               notFriendLocArr[i][0] + '<br>' +
               notFriendLocArr[i][5] + 
               "m 이내" +
@@ -156,8 +157,8 @@
           }
           if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
               queryString3.push('<div class="panel panel-info">' +
-              '<div class="panel-body">' +
-              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg">' +
+              '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
+              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
               notFriendLocArr[i][0] + '<br>' +
               notFriendLocArr[i][5] + 
               "m 이내" +
@@ -168,8 +169,8 @@
           }
           if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
               queryString4.push('<div class="panel panel-info">' +
-              '<div class="panel-body">' +
-              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg">' +
+              '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
+              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
               notFriendLocArr[i][0] + '<br>' +
               notFriendLocArr[i][5] + 
               "m 이내" +
@@ -192,8 +193,8 @@
               '<div class="panel-heading match-heading">' +
               "BestMatch" +
               '</div>' +
-              '<div class="panel-body">' +
-              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg">' +
+              '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
+              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
               notFriendLocArr[i][0] + '<br>' +
               notFriendLocArr[i][5] + 
               "m 이내" +
@@ -204,8 +205,8 @@
           }
           if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
               queryString2.push('<div class="panel panel-info">' +
-              '<div class="panel-body">' +
-              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg">' +
+              '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
+              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
               notFriendLocArr[i][0] + '<br>' +
               notFriendLocArr[i][5] + 
               "m 이내" +
@@ -216,8 +217,8 @@
           }
           if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
               queryString3.push('<div class="panel panel-info">' +
-              '<div class="panel-body">' +
-              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg">' +
+              '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
+              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
               notFriendLocArr[i][0] + '<br>' +
               notFriendLocArr[i][5] + 
               "m 이내" +
@@ -228,8 +229,8 @@
           }
           if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
               queryString4.push('<div class="panel panel-info">' +
-              '<div class="panel-body">' +
-              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg">' +
+              '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
+              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
               notFriendLocArr[i][0] + '<br>' +
               notFriendLocArr[i][5] + 
               "m 이내" +
@@ -242,6 +243,10 @@
     }
     queryStringSpin();
   }
+  
+  
+  
+  
   
   function queryStringSpin() {
     for (var i = 0; i < queryString1.length; i++) {
@@ -276,6 +281,7 @@
   var ageMax;
   var myRealHobby;
   var myRealHometown;
+  var memberBtn = [];
   // 구글맵 초기화 함수.
   function initMap() {
     var radius = { /* 반경 보여줄 지점 */
@@ -450,7 +456,18 @@
       google.maps.event.addListener(notFriendWindow[i], 'domready', function() {
         infoWindowsCSS();// 팝업창 css 설정해줌
       });
+      $(document).on('click', memberBtn[i], function(e) {  
+        e.preventDefault();
+        if (notFriendMarkers[i].getAnimation() !== null) {
+            notFriendMarkers[i].setAnimation(null);
+            notFriendWindow[i].close(map, notFriendMarkers[i]);
+        } else {
+            notFriendWindow[i].open(map, notFriendMarkers[i]);
+            notFriendMarkers[i].setAnimation(google.maps.Animation.BOUNCE);
+        }
+      });
     }
+    
     //info 윈도우 CSS 정의
   function infoWindowsCSS() {
       var iwOuter = $('.gm-style-iw');
@@ -659,6 +676,9 @@
     }
   }
   
+    
+  
+  
   // 나이 버튼
   $(document).on('click', '.btn-age', function() {
     if (!($('.btn-age').hasClass('active'))) {
@@ -748,11 +768,9 @@
       friendBoxD(distant);
     }
   });
-    
-//    if ($('.btn-addfriend').attr('value', '친구 요청중'))
-//    $('.btn-addfriend').attr('value', '친구 요청중');
-//    $('.btn-addfriend').attr('disabled', true);
+   
 } // initMap 끝 
+  
   
   $(document).on('click', '.addfriend-btn', function() {
       var parent = this;
