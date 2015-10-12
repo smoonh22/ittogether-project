@@ -98,14 +98,15 @@ nav {
 }
 #friend-profileImg {
   display: inline-block;
-  width: 80%;
-  height : 80%;
+  width: 120px;
+  height : 120px;
   margin:0px;
+  
 }
 #nonefriend-profileImg {
 display: inline-block;
-  width: 80%;
-  height : 80%;
+  width: 100px;
+  height : 100px;
   margin:0px;
 }
 
