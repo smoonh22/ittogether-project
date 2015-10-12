@@ -582,8 +582,8 @@ $('#friend-box').append('<div class="panel panel-info">' +
   // 나이 버튼
   $(document).on('click', '.btn-age', function() {
     if (!($('.btn-age').hasClass('active'))) {
-      ageMin = myAge - 1;
-      ageMax = myAge + 1;
+      ageMin = myAge - 5;
+      ageMax = myAge + 5;
       renderMarkers1(sex, ageMin, ageMax);
     } else {
       renderMarkers2(sex, ageMin, ageMax);

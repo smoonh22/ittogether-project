@@ -16,15 +16,16 @@ nav {
 }
 
 .user-prof {
-	margin-top:-16px;
+	margin-top:-15px;
 	height:60px;
 	background-color: white;
   color: dodgerblue;
 }
 #header-user-img {
-  width:55px;
-  height: 55px;
+  width:50px;
+  height: 50px;
 }
+
 
 /* header nav css 끝 */
 
@@ -38,6 +39,7 @@ nav {
 #right-feed-title {
   padding-top: 3rem;
   height: 10rem;
+  margin-right: 2%;
   background-color: #ffffff;
   text-align: center;
   font-size: 3rem;
