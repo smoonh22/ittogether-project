@@ -89,10 +89,24 @@
 .signup-input {
   display:inline-block;
   width: 400px;
-  
 }
 
-
+.info-modal-age {
+  float: left;
+  display: inline-block;  
+  width: 200px;
+}
+.info-modal-hobby {
+  margin: auto;
+  display: inline-block;  
+  width: 170px;
+  text-align: center;
+}
+.info-modal-hometown {
+  float: right;
+  width: 170px;
+  text-align: right;
+}
 #hobby {
   display: inline-block;
   width:100px;
