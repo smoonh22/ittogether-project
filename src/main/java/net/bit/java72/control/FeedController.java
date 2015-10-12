@@ -39,6 +39,7 @@ public class FeedController {
     for(FriendFeed feed : test){
       String meetdate = format.format(feed.getMeetTime());
       feed.setMeetDday(meetdate);
+   
       feed.setDday(CalcTime(feed.getCreateDate()));
     }
     result.put("data",test);

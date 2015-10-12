@@ -3,7 +3,9 @@ define(function() {
   
  app.controller('myFriendCtrl',['$http','$scope', function friend($http,$scope) {
     var parent_scope = this;
-   friendList();
+
+      friendList();
+      
    function friendList() {
     $.ajax("frd/list.do",
          {
@@ -13,12 +15,13 @@ define(function() {
           mno: window.sessionStorage.getItem('mno')
         }
     }).success(function(result){
+      console.log(result.data);
       $scope.frdLists = result.data;
       $scope.applyLists = result.apply;
       $scope.applyList2s = result.applyU;
       
     })
-  };
+   };
  $scope.search = function(searchQuery) {
    $http.get('frd/search.do',{params : {mno: sessionStorage.getItem('mno') ,searchCnt : searchQuery }}).success(function(result){
      parent_scope.searchLists = result.searchList;
@@ -29,19 +32,16 @@ define(function() {
  $scope.delfrd = function(mno){
    $http.get('frd/delete.do',{params : { frdmno : mno,  mno: sessionStorage.getItem('mno')}}).success(function(result){
      
-     $scope.resetBtn = function(resetmno){
-       if (mno == resetmno){
-         return false;
-       } else {
-         true;
-       }
+     if (result.data == 1) {
+   /*  return friendList();*/
+     window.location.reload();
      }
-     return friendList();
+     
        })
    };
    $scope.applyfrd = function(mno){
      $http.get('frd/apply.do',{params : { frdmno : mno,  mno: sessionStorage.getItem('mno')}}).success(function(result){
-
+       window.location.reload();
        return friendList();
      })
    };

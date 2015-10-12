@@ -34,7 +34,7 @@
 										src="images/icons/calendar.png">{{feed.meetDday}}</small> <small
 										class="text-muted"><img
 										src="images/icons/multiple.png">
-										{{feed.stuffCount}}/{{feed.maxHeadCount}} </small> <small
+										{{feed.currentCount}}/{{feed.maxHeadCount}} </small> <small
 										class="text-muted"><img src="images/icons/time.png">
 										{{feed.dday}}</small>
 								</h5>
@@ -101,80 +101,5 @@
 		
       
 
-<!-- modal start -->
-<div id="detailModal" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h5 class="modal-title" id="detail-title">{{details.title}}</h5>
-        <input type="hidden" id="detail-number"/>
-      </div>
-      
-      <div class="modal-body"  >
-        
-        <form role="form">
-          
-          <div class="form-group detail-detail">
-            <div class="form-group">
-              <img src="images/icons/calendar.png">
-              <span id="detail-mTime">{{details.meetDday}}</span>
-              <img src="images/icons/multiple.png">
-              <span id="detail-headCnt">{{details.currentCount}}/{{details.maxHeadCount}}</span>
-              <img src="images/icons/time.png"><span>    </span>
-              <span id="detail-createDate">{{details.dday}}</span>
-             <span><button type="button" class="btn btn-info btn-xs detail-btn" id="join-btn" ng-click="joinbtn(details.fno)">참여하기</button>
-             <button type="button" class="btn btn-info btn-xs detail-btn" id="out-btn" ng-click="outbtn(details.fno)">나가기</button></span>            </div>
-            <div class="form-group">
-              <div class="detail-content" id="detail-content">{{details.content}}</div>
-            </div>
-          </div>
-          
-          
-          
-          <div class="detail-user-info">
-            <div><img class="img-circle" src="{{details.profilePicture}}" id="detail-profilePicture"></div>
-            <div class="detail-user-name">
-            <span id="detail-name"></span>{{details.nickname}}({{details.name}}
-            <span id="detail-nickname"></span>)
-              </div>
-          </div>
-          
-        </form>
-          <img src="images/default-img.png" class="dtail-default-img1">
-          <img src="images/default-img.png" class="dtail-default-img2">
-          <img src="images/default-img.png" class="dtail-default-img3">
-      </div>
-      
-      <div class="modal-footer comment-screen">
-        <div ng-repeat="comment in ffCtrl.comments">
-        	<div class='row commentFeed'>
-        	  <div class='col-md-2'><img src='{{comment.profilePicture}}' class='detailImg img-circle'/></div>
-        	  <div class='col-md-8'>
-        	  <table class='commentTable'>
-        	  <tr><td><b>{{comment.nickname}}</b></td></tr>
-        	  <tr><td rowspan="5"><div ng-hide='commentArea(comment.cno)' id='commentarea{{comment.cno}}'>{{comment.content}}</div>
-        	  <div ng-show='updateArea(comment.cno)'><textarea ng-model='rewriteComment' class='commentInputArea'>{{comment.content}}</textarea>
-        	  <button ng-click='updateCmt($index,comment.cno,comment.fno,rewriteComment)' class='comment-updatebtn'>등록</button><button ng-click='cancelBtn($index,comment.cno)' class='comment-updatebtn'>취소</button></div></td></tr>
-        	  </table>
-        	  </div>
-        	  <div ng-show='checkAuthority(comment.mno)' class='checkAuthority'>
-        	  	<span ng-click='openUpdateArea(comment.cno,rewriteComment)' class='commentBtn' role='button'>수정</span>|<span class='commentBtn' ng-click=deleteCmt(comment.cno,comment.fno); role='button'>삭제</span>
-        	  </div>
-        	</div>
-      	<table data-ng-show="$last">
-      	 <tr><td><textarea class='comment-insert' placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다.
-댓글 작성 시 타인에 대한 배려와 책임을 담아주세요." ng-model='content' /></td><td><button class='comment-insrtbtn' ng-click='commentinsert(comment.fno,comment.content)'>등록</button></td></tr>
-      	</table>
-		</div>
-
-      </div>
-      
-      </div>
-      <!-- /.modal-content -->
-    <!-- /.modal-dialog -->
-  </div>
-  <!-- /.modal -->
-</div>
+<fdetail-modal></fdetail-modal>
 </div>

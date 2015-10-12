@@ -55,7 +55,7 @@ define(function () {
         }
       }).success(function(result){
        parent.comments = result.coment;
-       
+     
         // 삭제 수정 권한 체크
        $scope.checkAuthority = function (Mmno) {
          var mno = sessionStorage.getItem('mno');  
@@ -195,4 +195,11 @@ define(function () {
     
   }]);
 
+  
+  app.directive('fdetailModal', function () {
+    return {
+      restrict: 'E',
+      templateUrl: 'templates/modals/fdetail-modal.html'
+    };
+  }); 
 });

@@ -12,9 +12,9 @@
       </div>
    </div>
    <div class='row'>
-      <div ng-controller="activityCtrl as MCtrl">
-         <div ng-repeat-start="myact in MCtrl.activities">
+         <div  ng-repeat-start="myact in activities">
             <div id="myactfeed" class="col-md-4">
+            <a href="#detailModal" data-toggle="modal" ng-click="detailview(myact.fno)" class="detail-view">
                <div class="masonry_title">
                   <div class="panel-heading" id='category-color-{{myact.category}}'></div><br>
                   <div class='row'>
@@ -42,22 +42,22 @@
                            <h5 id="feed-info">
                               <small class="text-muted"> <img
                                  src="images/icons/multiple.png">
-                              </small>{{myact.stuffCount}}/{{myact.maxHeadCount}}
+                              </small>{{myact.currentCount}}/{{myact.maxHeadCount}}
                         </div>
                         <div class='col-md-3'>
                            <h5 id="feed-info">
                               <small class="text-muted"><img
-                                 src="images/icons/time.png"> </small>{{myact.dDay}}
+                                 src="images/icons/time.png"> </small>{{myact.dday}}
                         </div>
                      </h5>
                   </div>
                </div>
+               </a>
             </div>
          </div>
          <div ng-repeat-end></div>
       </div>
-   </div>
-</div>
 
-
+<detail-modal></detail-modal>
 <act-modal></act-modal>
+</div>

@@ -29,15 +29,6 @@ public class FriendFeed implements Serializable {
   
 
 
-
-
-
-
-
-
-
-
-
   public String getMeetDday() {
     return meetDday;
   }
@@ -96,7 +87,7 @@ public class FriendFeed implements Serializable {
     return createDate;
   }
 
-  public void setCreateDate(java.sql.Date createDate) {
+  public void setCreateDate(Date createDate) {
     this.createDate = createDate;
   }
 

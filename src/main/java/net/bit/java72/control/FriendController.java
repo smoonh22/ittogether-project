@@ -74,8 +74,10 @@ public class FriendController {
   }
   
   @RequestMapping("/delete")
-  public void delete(int frdmno,int mno) {
+  public Object delete(int frdmno,int mno) {
   
+    HashMap<String,Object> result = new HashMap<>();
+    
     FriendList friendList = new FriendList();
     FriendList friendList2 = new FriendList();
     
@@ -85,8 +87,16 @@ public class FriendController {
     friendList2.setFrdmno(mno);
     friendList2.setMno(frdmno);
     
-    friendService.deleteFRD(friendList);
-    friendService.deleteFRD(friendList2);
+    int count = friendService.deleteFRD(friendList);
+    int count2 = friendService.deleteFRD(friendList2);
+    
+    if ( count > 0 && count2 > 0){
+      result.put("data", 1);
+    } else {
+      result.put("data", 0);
+    }
+    
+    return result;
   }
   
   @RequestMapping("/apply")
