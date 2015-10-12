@@ -128,6 +128,11 @@
 $(function () {
     $('#fileupload').fileupload({
         dataType: 'json',
+        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+        disableImageResize: false,
+        imageMaxWidth: 200,
+        imageMaxHeight: 200,
+        imageCrop: false,
         done: function (e, data) {
             $.each(data.result.data, function (index, file) {
                 $('#profile-img').attr('src', file.url);

@@ -70,6 +70,7 @@ public class FeedController {
   
   @RequestMapping("/noneFriendFeed")
   public Object nonelist(int mno) {
+    System.out.println(mno + "hhhhh");
   Map<String,Object> result = new HashMap<String,Object>();
   try {
     

@@ -22,6 +22,7 @@ define(function () {
     }
     }).success(function(result){
         parent.nfeeds = result.data;
+        console.log(result.data);
     })
     
     //디테일 정보

@@ -4,100 +4,98 @@
         <div ng-switch-when="map_html"><div ng-include="'templates/main_map.html'"></div></div>
     </div>
   </div>
+  
   <div ng-controller="friendFeedCtrl as ffCtrl" >
-  <div class="col-md-8" id='left-section'>
+  <div class="col-md-7" id='left-section'>
     <div id="left-feed-title">친구들의 활동</div>
     <div id='left-feed'>
+    
       <div ng-repeat="feed in ffCtrl.feeds">
-        <div class="test">
+    
+    
           <div class='row'>
-            <div class='col-md-1'></div>
-            <div class='col-md-10'>
               <div class="friend-panel">
+              
                 <div class="panel-heading" id='category-color-{{feed.category}}'></div>
-                <div class='row'>
-                  <div class="panel-body">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-3">
-                      <div class="img-div">
-                        <span id="img-in-box"> <img
-									src='{{feed.profilePicture}}' id='friend-profileImg'
-									class="img-circle"></span>
-							</div>
-							</div>
-           <a href="#detailModal" data-toggle="modal" ng-click="detailview(feed.fno)" class="detail-view">
-							<div class="col-md-6">
-							<div class="content-div">
+                
+                  <div class="panel-body col-md-12">
+
+								<div class="prof-img-div col-md-3">
+									 <img
+										src='{{feed.profilePicture}}' id='friend-profileImg'
+										class="img-circle">
+									</div>
+									
+           <a href="#detailModal" data-toggle="modal" ng-click="detailview(feed.fno)" class="detail-view"> 
+					   
+					   <div class="content-panel col-md-9">
 								<p id="user-name">{{feed.name}}</p>
 								<h5 id="feed-info">
 									<small class="text-muted"><img
 										src="images/icons/calendar.png">{{feed.meetDday}}</small> <small
 										class="text-muted"><img
 										src="images/icons/multiple.png">
-										{{feed.stuffCount}}/{{feed.maxHeadCount}} </small> <small
+										{{feed.currentCount}}/{{feed.maxHeadCount}} </small> <small
 										class="text-muted"><img src="images/icons/time.png">
 										{{feed.dday}}</small>
 								</h5>
 								<hr>
-      
-								<div id="unfriend-content">{{feed.title}}</div>
-		          
+								<div id="feed-content">{{feed.title}}</div>
 							</div>
+		         
+		         </a> 
 							</div>
-		          </a>
-							<div class="col-md-2"></div>
-						</div>
 					</div>
 				</div>
 				</div>
-				<div class='col-md-1'></div>
-				</div>
 				</div>
 			</div>
-			</div>
-		</div>
+		
 
-	<div class="col-md-4" id='right-section'>
+	<div class="col-md-5" id='right-section'>
 			<div id="right-feed-title">주변 회원들의 활동</div>
 			<div id='right-feed'>
-				<div ng-repeat="nfeed in ffCtrl.nfeeds" >
-				<div class="test">
-						<div class="nonfriend-panel">
-						<div class="panel-heading" id='category-color-{{nfeed.category}}'></div>
-						<div class='row'>
-						<div class="panel-body">
-							<div class="col-md-3">
-							<div class="img-div">
-								<span id="img-in-box"> <img
-									src='{{nfeed.profilePicture}}' id='nonfriend-profileImg'
-									class="img-circle">
-							</div>
-							</div>
-					<a href="#detailModal" data-toggle="modal" ng-click="detailview(nfeed.fno)" class="detail-view">
-							<div class="col-md-9">
-							<div class="content-div">
-								<p id="user-name">{{nfeed.name}}</p>
-								<h5 id="feed-info">
-									<small class="text-muted"><img
-										src="images/icons/calendar.png"> {{nfeed.meetDday}} </small> <small
-										class="text-muted"><img
-										src="images/icons/multiple.png">
-										{{nfeed.currentCount}}/{{nfeed.maxHeadCount}} </small> <small
-										class="text-muted"><img src="images/icons/time.png">
-										{{nfeed.dday}}</small>
-								</h5>
-								<hr>
-								<div id="unfriend-content">{{nfeed.content}}</div>
-							</div>
-							</div>
-					        </a>
-						</div>
-					</div>
-				</div>
-				</div>
-				</div>
-			</div>
-			</div>
+				
+      <div ng-repeat="nfeed in ffCtrl.nfeeds">
+    
+    
+          <div class='row'>
+              <div class="nonefriend-panel">
+              
+                <div class="panel-heading" id='category-color-{{nfeed.category}}'></div>
+                
+                  <div class="panel-body col-md-12">
+
+                <div class="prof-img-div col-md-3">
+                   <img
+                    src='{{nfeed.profilePicture}}' id='nonefriend-profileImg'
+                    class="img-circle">
+                  </div>
+                  
+           <a href="#detailModal" data-toggle="modal" ng-click="detailview(nfeed.fno)" class="detail-view"> 
+             
+             <div class="content-panel col-md-9">
+                <p id="user-name">{{nfeed.name}}</p>
+                <h5 id="feed-info">
+                  <small class="text-muted"><img
+                    src="images/icons/calendar.png">{{nfeed.meetDday}}</small> <small
+                    class="text-muted"><img
+                    src="images/icons/multiple.png">
+                    {{nfeed.currentCount}}/{{nfeed.maxHeadCount}} </small> <small
+                    class="text-muted"><img src="images/icons/time.png">
+                    {{nfeed.dday}}</small>
+                </h5>
+                <hr>
+                <div id="feed-content">{{nfeed.title}}</div>
+              </div>
+             
+             </a> 
+              </div>
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
 		
       
 
