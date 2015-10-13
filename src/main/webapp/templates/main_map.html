@@ -40,13 +40,15 @@
 
 <script>
   // json형식으로 받아온 나의 위치 데이터를 받아옴
-  var myLoc = [];
   var myNickname,
       myIntro,
       myPhoto,
       myHobby,
       myHometown;
   var memberBtn = [];
+  var myLoc = [];
+  var friendLocArr = [];
+  var notFriendLocArr = [];
   (function() {
     $.getJSON(contextRoot + '/member/getMyLoc.do', {
       mno: sessionStorage.getItem('mno')
@@ -61,14 +63,9 @@
       myAge = results.data[0].age;
       myHobby = results.data[0].hobby;
       myHometown = results.data[0].hometown;
-//      console.log("나의 위치(" + myNickname + ") - lat: " + myLoc[0] + " lon: " + myLoc[1]);
     });
-  })();
-
-  //json형식으로 받아온 친구의 위치 데이터를 받아옴
-  var friendLocArr = [];
-  (function() {
-    $.getJSON('member/getFriends.do', {
+      
+    $.getJSON(contextRoot + '/member/getFriends.do', {
       frdno: sessionStorage.getItem('mno'),
       mno: sessionStorage.getItem('mno')
     }, function(results) {
@@ -89,11 +86,7 @@
         console.log("친구" + i + ": " + friendLocArr[i][0]+"/"+ friendLocArr[i][5]+"/"+ friendLocArr[i][7]);
       }
     });
-  })();
-
-  // json형식으로 받아온 주변 회원의 위치 데이터를 받아옴
-  var notFriendLocArr = [];
-  (function() {
+      
     $.getJSON(contextRoot + '/member/getMembers.do', {
       mno: sessionStorage.getItem('mno')
     }, function(results) {
@@ -118,7 +111,7 @@
       friendBoxD(1000);
     });
   })();
-  
+
   var queryString1 = [];
   var queryString2 = [];
   var queryString3 = [];
@@ -243,11 +236,6 @@
     }
     queryStringSpin();
   }
-  
-  
-  
-  
-  
   function queryStringSpin() {
     for (var i = 0; i < queryString1.length; i++) {
       $('#friend-box').append(queryString1[i]);
@@ -282,6 +270,8 @@
   var myRealHobby;
   var myRealHometown;
   var memberBtn = [];
+    
+    
   // 구글맵 초기화 함수.
   function initMap() {
     var radius = { /* 반경 보여줄 지점 */
@@ -307,20 +297,21 @@
     markMyLoc(); // 나의 위치 마킹해줌
     distant = 1000;
     for (var i = 0; i < notFriendLocArr.length; i++) {
+      console.log(notFriendLocArr[i]);
       if(notFriendLocArr[i][5] <= distant) {
         markNotFriends(i,1,1); /* 주변 회원 마킹 */
       } else {
-        markNotFriends(i,0,0);
+        markNotFriends(i,0,0);   
       }
     }
     for (var i = 0; i < friendLocArr.length; i++) {
+      console.log(friendLocArr[i])
       if(friendLocArr[i][5] <= distant) {
         markFriends(i,1,1); /* 친구 마킹 */
       } else {
         markFriends(i,0,0);
       }
     }
-    
     markCircle(); /* 반경 렌더링 */
 
     function markMyLoc() {
@@ -456,8 +447,11 @@
       google.maps.event.addListener(notFriendWindow[i], 'domready', function() {
         infoWindowsCSS();// 팝업창 css 설정해줌
       });
+      
+      $(document).off('click', memberBtn[i]);
       $(document).on('click', memberBtn[i], function(e) {  
         e.preventDefault();
+        console.log(notFriendMarkers[i]);
         if (notFriendMarkers[i].getAnimation() !== null) {
             notFriendMarkers[i].setAnimation(null);
             notFriendWindow[i].close(map, notFriendMarkers[i]);
@@ -528,14 +522,14 @@
     
   function dropMarkers(distant) {
     for (var i = 0; i < friendLocArr.length; i++) {
-      if (friendLocArr[i][5] <= distant) {
+      if (friendLocArr[i][5] < distant) {
         markFriends(i,1,1); /* 친구 마킹 */
       } else {
         markFriends(i,0,0);
       }
     }
     for (var i = 0; i < notFriendLocArr.length; i++) {
-      if (notFriendLocArr[i][5] <= distant) {
+      if (notFriendLocArr[i][5] < distant) {
         markNotFriends(i,1,1); /* 주변 회원 마킹 */
       } else {
         markNotFriends(i,0,0);
@@ -543,62 +537,45 @@
     }
   }
   
-  function renderMarkers1(sex, ageMin, ageMax, hobby, hometown) {
+    
+  function renderMarkers(distant) {
     for (var i = 0; i < friendLocArr.length; i++) {
-      friendMarkers[i].setVisible(true);
+      if (friendLocArr[i][5] < distant) {
+        markFriends(i,1,0);
+      } else {
+        markFriends(i,0,0);
+      }
     }
     for (var i = 0; i < notFriendLocArr.length; i++) {
-      notFriendMarkers[i].setVisible(true);
-    }
-    if (sex == 0) {} else {
+      if (notFriendLocArr[i][5] < distant) {
+        markNotFriends(i,1,0);
+      } else {
+        markNotFriends(i,0,0);
+      }
+    } 
+  }
+    
+  function renderMarkers1(distant, sex, age) {
+    if (sex) {
       for (var i = 0; i < friendLocArr.length; i++) {
-        if (friendLocArr[i][6] != sex) {
-          friendMarkers[i].setVisible(false);
+        if (friendLocArr[i][6] == sex && friendLocArr[i][5] < distant) {
+          markFriends(i,1,0);
+        } else {
+          markFriends(i,0,0);
         }
       }
       for (var i = 0; i < notFriendLocArr.length; i++) {
-        if (notFriendLocArr[i][7] != sex) {
-          notFriendMarkers[i].setVisible(false);
+        if (notFriendLocArr[i][7] == sex && notFriendLocArr[i][5] < distant) {
+          markNotFriends(i,1,0);
+        } else {
+          markNotFriends(i,0,0);
         }
       }
     }
-    if (ageMax) {
-      for (var i = 0; i < friendLocArr.length; i++) {
-        if (friendLocArr[i][7] < ageMin ||
-            friendLocArr[i][7] > ageMax) {
-            friendMarkers[i].setVisible(false);
-        }
-      }
-      for (var i = 0; i < notFriendLocArr.length; i++) {
-        if (notFriendLocArr[i][8] < ageMin ||
-            notFriendLocArr[i][8] > ageMax) {
-          notFriendMarkers[i].setVisible(false);
-        }
-      }
-    }
-    if (hobby) {
-      for (var i = 0; i < friendLocArr.length; i++) {
-        if (friendLocArr[i][8] != hobby) {
-            friendMarkers[i].setVisible(false);
-        }
-      }
-      for (var i = 0; i < notFriendLocArr.length; i++) {
-        if (notFriendLocArr[i][9] != hobby) {
-          notFriendMarkers[i].setVisible(false);
-        }
-      }
-    }
-    if (hometown) {
-      for (var i = 0; i < friendLocArr.length; i++) {
-        if (friendLocArr[i][9] != hometown) {
-            friendMarkers[i].setVisible(false);
-        }
-      }
-      for (var i = 0; i < notFriendLocArr.length; i++) {
-        if (notFriendLocArr[i][10] != hometown) {
-          notFriendMarkers[i].setVisible(false);
-        }
-      }
+    if (sex) {
+      
+    } else {
+      
     }
   }
     
@@ -704,17 +681,18 @@
     if (!($('.btn-hometown').hasClass('active'))) {
       myRealHometown = myHometown;
       renderMarkers1(sex, ageMin, ageMax, myHobby, myHometown)
-    } else {
+    } else { 
       renderMarkers2(sex, ageMin, ageMax, myHobby, myHometown)
       myRealHometown = null;
     }
   });
 
-  // 남녀 모두 버튼  
+  // 남녀 모두 버튼   
   $(document).on('click', '.btn-manwoman', function() {
     if (!($('.btn-manwoman').hasClass('active'))) {
       sex = 0;
-      renderMarkers1(sex);
+      clearMarkers();
+      renderMarkers(distant);
       friendBoxD(distant);
     }
   });
@@ -722,7 +700,8 @@
   $(document).on('click', '.btn-man', function() {
     if (!($('.btn-man').hasClass('active'))) {
       sex = 1;
-      renderMarkers1(sex);
+      clearMarkers();
+      renderMarkers1(distant, sex);
       friendBoxDS(distant, sex);
     }
   });
@@ -730,7 +709,8 @@
   $(document).on('click', '.btn-woman', function() {
     if (!($('.btn-woman').hasClass('active'))) {
       sex = 2;  
-      renderMarkers1(sex);
+      clearMarkers();
+      renderMarkers1(distant, sex);
       friendBoxDS(distant, sex);
     }
   });
@@ -742,7 +722,6 @@
       clearMarkers();
       radiusDistance(27);
       dropMarkers(distant);
-//      $('.panel').remove();
       friendBoxD(distant);
     }
   });
@@ -753,7 +732,6 @@
       clearMarkers();
       radiusDistance(97);
       dropMarkers(distant);
-//      $('.panel').remove();
       friendBoxD(distant);
     }
   });
@@ -764,7 +742,6 @@
       clearMarkers();
       radiusDistance(500);
       dropMarkers(distant);
-//      $('.panel').remove();
       friendBoxD(distant);
     }
   });
