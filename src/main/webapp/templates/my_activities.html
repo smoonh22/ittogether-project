@@ -14,7 +14,7 @@
    <div class='row'>
       <div ng-controller="activityCtrl as MCtrl">
          <div ng-repeat-start="myact in MCtrl.activities">
-            <div id="myactfeed" class="col-md-4">
+            <div id="myactfeed" class="col-md-4 timeEffect-color-{{myact.setTimeEffect}}"><br><br><br>
                <div class="masonry_title">
                   <div class="panel-heading" id='category-color-{{myact.category}}'></div><br>
                   <div class='row'>
@@ -28,8 +28,9 @@
                            <br><br>
                         </div>
                      </div>
+                     <br>                     
                      <pre id='pre-content'>{{myact.content}}</pre>
-                     <br>
+                     <br>   
                      <br>
                   </div>
                   <div class='row'>
@@ -42,12 +43,12 @@
                            <h5 id="feed-info">
                               <small class="text-muted"> <img
                                  src="images/icons/multiple.png">
-                              </small>{{myact.stuffCount}}/{{myact.maxHeadCount}}
+                              </small>{{myact.currentCount}}/{{myact.maxHeadCount}}
                         </div>
-                        <div class='col-md-3'>
+                        <div class='col-md-3' >
                            <h5 id="feed-info">
                               <small class="text-muted"><img
-                                 src="images/icons/time.png"> </small>{{myact.dDay}}
+                                 src="images/icons/time.png"></small>{{myact.dday}}
                         </div>
                      </h5>
                   </div>

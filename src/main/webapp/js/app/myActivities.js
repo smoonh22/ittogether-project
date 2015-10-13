@@ -5,7 +5,7 @@
       app.controller('activityCtrl', ['$http', function ($http) {
         var parent_scope = this;
         $http.get('feed/myActivity.do',{params : {mno: sessionStorage.getItem('mno') }}).success(function (result) {
-          console.log("ㅎ하하ㅏ" + result.activity);
+          console.log("ㅎ하하ㅏ" + result.activity[0]);
           parent_scope.activities = result.activity;
         });
   }]);
