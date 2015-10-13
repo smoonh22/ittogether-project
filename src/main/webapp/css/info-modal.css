@@ -46,8 +46,7 @@
   position: absolute;
   float: left;
   width: 150px;
-  height: 150px;
-  margin-top: 50px;
+  margin-top:30px;
 }
 .profile-info-span2 {
   padding-top: 10px;
@@ -62,9 +61,16 @@
   width: 400px;
   left: 500px;
 }
-#profile-img {
-  width:150px;
-  height:150px;
+
+.fileinput-button {
+  width: 150px;
+  margin-left:-15px;
+}
+.info-profile-img {
+  width: 150px;
+  height: 150px;
+  margin-top:0;
+  margin-bottom: 20px;
 }
 
 .basic-info-div {

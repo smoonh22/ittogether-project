@@ -5,3 +5,23 @@
 	width: 80px;
 	height: 80px;
 }
+
+.friendlist-panel {
+  border:none;
+  
+}
+
+.friendrequest-panel {
+  border:none;
+}
+
+.friendsearch-panel {
+  border:none;
+  
+}
+
+.friendsearch-title {
+  display: inline-block;
+  margin-right: 5px;
+  margin-top:0px;
+}

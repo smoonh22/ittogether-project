@@ -39,11 +39,11 @@
   <!-- Tab panes -->
   	<li><div class="tab-content">
      <div role="tabpanel" class="tab-pane" id="findFriend">
-                <div class="panel panel-success">
+                <div class="panel panel-success friendsearch-panel">
                  <div class="panel-heading">
-                   <h3 class="panel-title">친구 검색</h3>
+                   <h3 class="panel-title friendsearch-title">친구 검색</h3>
                   <input type="text" ng-model='searchQuery'>
-                  <button class='searchBtn' ng-click='search(searchQuery)'>검색</button>
+                  <button class='searchBtn btn btn-success btn-xs' ng-click='search(searchQuery)'>검색</button>
                  </div>
                  <div class="panel-body" >
                        <div class='row'  ng-repeat-start="findList in mFCtrl.searchLists">
@@ -74,7 +74,7 @@
             </div>
     </div>
     <div role="tabpanel" class="tab-pane active" id="myFriendList">
-        <div class="panel panel-info">
+        <div class="panel panel-info friendlist-panel">
                  <div class="panel-heading">
                    <h3 class="panel-title">친구 목록</h3>
                  </div>
@@ -99,9 +99,9 @@
                       </div>
                       <div class='col-md-2' >
                       <br><br>
-                      <button ng-click='delfrd(frdList.mno)' class='delfrdbtn'>삭제</button>
-                      <button href='#' ng-click="startChatting(frdList.mno);" class='delfrdbtn'>채팅</button>
-                      <div ng-show='resetBtn(frdList.mno)'><button class='delfrdbtn'>취소</button>
+                      <button ng-click='delfrd(frdList.mno)' class='delfrdbtn btn btn-info btn-xs'>삭제</button>
+                      <button href='#' ng-click="startChatting(frdList.mno);" class='delfrdbtn btn btn-info btn-xs'>채팅</button>
+                      <div ng-show='resetBtn(frdList.mno)'><button class='delfrdbtn btn btn-default'>취소</button>
                       <br>삭제하시겠습니까?<br></div>
                       </div>
                    </div>
@@ -109,7 +109,7 @@
             </div>
     </div>
               <div role="tabpanel" class="tab-pane" id="myApplyList">
-                <div class="panel panel-primary">
+                <div class="panel panel-primary friendrequest-panel">
                   <div class="panel-heading">
                     <h3 class="panel-title">요청 목록</h3>
                   </div>
@@ -135,7 +135,7 @@
                       <div class='col-md-2'>
                         <br>
                         <br>
-                        <button ng-click="applyfrd(applyList.mno)">수락</button>
+                        <button ng-click="applyfrd(applyList.mno)" class="btn btn-primary btn-xs">수락</button>
                       </div>
                     </div>
                   </div>
