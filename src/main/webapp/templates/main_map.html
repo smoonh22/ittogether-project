@@ -35,7 +35,15 @@
   </div>
 </div>
 
+
 <div id="friend-box" onmousedown="return false">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title panel-friend-title">친구 추천</h3>
+    </div>
+    <div class="panel-body panel-member">
+    </div>
+  </div>
 </div>
 
 <script>
@@ -117,12 +125,12 @@
   var queryString3 = [];
   var queryString4 = [];
   function friendBoxD(distant) {
-    $('.panel').remove();
+    $('.myPanel').remove();
     for (var i = 0; i < notFriendLocArr.length; i++) {
       memberBtn.push('#member'+notFriendLocArr[i][6]);
       if (notFriendLocArr[i][5] < distant) {
           if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-              queryString1.push('<div class="panel panel-info">' +
+              queryString1.push('<div class="panel panel-info myPanel">' +
               '<div class="panel-heading match-heading">' +
               "BestMatch" +
               '</div>' +
@@ -137,7 +145,7 @@
               '</div>');
           }
           if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-              queryString2.push('<div class="panel panel-info">' +
+              queryString2.push('<div class="panel panel-info myPanel">' +
               '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
               '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
               notFriendLocArr[i][0] + '<br>' +
@@ -149,7 +157,7 @@
               '</div>');
           }
           if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-              queryString3.push('<div class="panel panel-info">' +
+              queryString3.push('<div class="panel panel-info myPanel">' +
               '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
               '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
               notFriendLocArr[i][0] + '<br>' +
@@ -161,7 +169,7 @@
               '</div>');
           }
           if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-              queryString4.push('<div class="panel panel-info">' +
+              queryString4.push('<div class="panel panel-info myPanel">' +
               '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
               '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
               notFriendLocArr[i][0] + '<br>' +
@@ -177,12 +185,12 @@
   }
 
   function friendBoxDS(distant, sex) {
-    $('.panel').remove();
+    $('.myPanel').remove();
     for (var i = 0; i < notFriendLocArr.length; i++) {
       if (notFriendLocArr[i][5] < distant) {
         if (notFriendLocArr[i][7] == sex) {
           if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-              queryString1.push('<div class="panel panel-info">' +
+              queryString1.push('<div class="panel panel-info myPanel">' +
               '<div class="panel-heading match-heading">' +
               "BestMatch" +
               '</div>' +
@@ -197,7 +205,7 @@
               '</div>');
           }
           if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-              queryString2.push('<div class="panel panel-info">' +
+              queryString2.push('<div class="panel panel-info myPanel">' +
               '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
               '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
               notFriendLocArr[i][0] + '<br>' +
@@ -209,7 +217,7 @@
               '</div>');
           }
           if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-              queryString3.push('<div class="panel panel-info">' +
+              queryString3.push('<div class="panel panel-info myPanel">' +
               '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
               '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
               notFriendLocArr[i][0] + '<br>' +
@@ -221,7 +229,7 @@
               '</div>');
           }
           if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-              queryString4.push('<div class="panel panel-info">' +
+              queryString4.push('<div class="panel panel-info myPanel">' +
               '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
               '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
               notFriendLocArr[i][0] + '<br>' +
@@ -263,13 +271,15 @@
   var friendWindow = []; /* 친구들 팝업창 */
   var notFriendWindow = []; /* 회원들 팝업창 */
 
-  var distant;  //  거리 설정의 단위 변수 200m, 500m, 1km
+  var distant = 1000;;  //  거리 설정의 단위 변수 200m, 500m, 1km
   var sex = 0;
-  var ageMin;
-  var ageMax;
-  var myRealHobby;
-  var myRealHometown;
-  var memberBtn = [];
+  var age = 0;
+  var ageMin = 0;
+  var ageMax = 0;
+  var myRealHobby = 0;
+  var myHobbyC = 0;
+  var myRealHometown = 0;
+  var myHometownC = 0;
     
     
   // 구글맵 초기화 함수.
@@ -538,101 +548,416 @@
   }
   
     
-  function renderMarkers(distant) {
-    for (var i = 0; i < friendLocArr.length; i++) {
-      if (friendLocArr[i][5] < distant) {
-        markFriends(i,1,0);
-      } else {
-        markFriends(i,0,0);
-      }
-    }
-    for (var i = 0; i < notFriendLocArr.length; i++) {
-      if (notFriendLocArr[i][5] < distant) {
-        markNotFriends(i,1,0);
-      } else {
-        markNotFriends(i,0,0);
-      }
-    } 
-  }
     
-  function renderMarkers1(distant, sex, age) {
-    if (sex) {
+    
+    
+    
+    
+    function renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC) {
+    if (sex == 0 && age == 0 && myHobbyC == 0 && myHometownC == 0) { // 1. ABCD = 0
+      console.log('========================================');
+      console.log('CONDITION: None');
       for (var i = 0; i < friendLocArr.length; i++) {
-        if (friendLocArr[i][6] == sex && friendLocArr[i][5] < distant) {
+        if (friendLocArr[i][5] <  distant) {
           markFriends(i,1,0);
+          console.log('#'+friendLocArr[i][0]);
         } else {
           markFriends(i,0,0);
         }
       }
       for (var i = 0; i < notFriendLocArr.length; i++) {
-        if (notFriendLocArr[i][7] == sex && notFriendLocArr[i][5] < distant) {
+        if (notFriendLocArr[i][5] <  distant) {
           markNotFriends(i,1,0);
+          console.log('*'+notFriendLocArr[i][0]);
         } else {
           markNotFriends(i,0,0);
         }
       }
     }
-    if (sex) {
-      
-    } else {
-      
+    if (sex != 0 && age == 0 && myHobbyC == 0 && myHometownC == 0) { // 2.  aBCD = 1
+      console.log('========================================');
+      console.log('CONDITION: sex');
+      for (var i = 0; i < friendLocArr.length; i++) {
+        if (friendLocArr[i][5] <  distant &&
+            friendLocArr[i][6] == sex) {
+          markFriends(i,1,0);
+          console.log('#'+friendLocArr[i][0]);
+        } else {
+          markFriends(i,0,0);
+        }
+      }
+      for (var i = 0; i < notFriendLocArr.length; i++) {
+        if (notFriendLocArr[i][5] <  distant &&
+            notFriendLocArr[i][7] == sex) {
+          markNotFriends(i,1,0);
+          console.log('*'+notFriendLocArr[i][0]);
+        } else {
+          markNotFriends(i,0,0);
+        }
+      }
+    }
+    if (sex == 0 && age != 0 && myHobbyC == 0 && myHometownC == 0) { // 3.  AbCD = 1
+      console.log('========================================');
+      console.log('CONDITION: age');
+      for (var i = 0; i < friendLocArr.length; i++) {
+        if (friendLocArr[i][5] <  distant &&
+            friendLocArr[i][7] >  ageMin  &&
+            friendLocArr[i][7] <  ageMax){
+          markFriends(i,1,0);
+          console.log('#'+friendLocArr[i][0]);
+        } else {
+          markFriends(i,0,0);
+        }
+      }
+      for (var i = 0; i < notFriendLocArr.length; i++) {
+        if (notFriendLocArr[i][5] <  distant &&
+            notFriendLocArr[i][8] >  ageMin  &&
+            notFriendLocArr[i][8] <  ageMax) {
+          markNotFriends(i,1,0);
+          console.log('*'+notFriendLocArr[i][0]);
+        } else {
+          markNotFriends(i,0,0);
+        }
+      }
+    }
+    if (sex == 0 && age == 0 && myHobbyC != 0 && myHometownC == 0) { // 4.  ABcD = 1
+      console.log('========================================');
+      console.log('CONDITION: hobby');
+     for (var i = 0; i < friendLocArr.length; i++) {
+        if (friendLocArr[i][5] <  distant &&
+            friendLocArr[i][8] == myHobbyC) {
+          markFriends(i,1,0);
+          console.log('#'+friendLocArr[i][0]);
+        } else {
+          markFriends(i,0,0);
+        }
+      }
+      for (var i = 0; i < notFriendLocArr.length; i++) {
+        if (notFriendLocArr[i][5] <  distant &&
+            notFriendLocArr[i][9] == myHobbyC) {
+          markNotFriends(i,1,0);
+          console.log('*'+notFriendLocArr[i][0]);
+        } else {
+          markNotFriends(i,0,0);
+        }
+      } 
+    }
+    if (sex == 0 && age == 0 && myHobbyC == 0 && myHometownC != 0) { // 5.  ABCd = 1
+      console.log('========================================');
+      console.log('CONDITION: hometown');
+      for (var i = 0; i < friendLocArr.length; i++) {
+        if (friendLocArr[i][5] <  distant    &&
+            friendLocArr[i][9] == myHometownC) {
+          markFriends(i,1,0);
+          console.log('#'+friendLocArr[i][0]);
+        } else {
+          markFriends(i,0,0);
+        }
+      }
+      for (var i = 0; i < notFriendLocArr.length; i++) {
+        if (notFriendLocArr[i][5]  <  distant    &&
+            notFriendLocArr[i][10] == myHometownC) {
+          markNotFriends(i,1,0);
+          console.log('*'+notFriendLocArr[i][0]);
+        } else {
+          markNotFriends(i,0,0);
+        }
+      }
+    }
+    if (sex != 0 && age != 0 && myHobbyC == 0 && myHometownC == 0) { // 6.  abCD = 2
+      console.log('========================================');
+      console.log('CONDITION: sex, age');
+      for (var i = 0; i < friendLocArr.length; i++) {
+        if (friendLocArr[i][5] <  distant &&
+            friendLocArr[i][6] == sex     &&
+            friendLocArr[i][7] >  ageMin  &&
+            friendLocArr[i][7] <  ageMax) {
+          markFriends(i,1,0);
+          console.log('#'+friendLocArr[i][0]);
+        } else {
+          markFriends(i,0,0);
+        }
+      }
+      for (var i = 0; i < notFriendLocArr.length; i++) {
+        if (notFriendLocArr[i][5] <  distant &&
+            notFriendLocArr[i][7] == sex     &&
+            notFriendLocArr[i][8] >  ageMin  &&
+            notFriendLocArr[i][8] <  ageMax) {
+          markNotFriends(i,1,0);
+          console.log('*'+notFriendLocArr[i][0]);
+        } else {
+          markNotFriends(i,0,0);
+        }
+      }
+    }
+    if (sex == 0 && age != 0 && myHobbyC != 0 && myHometownC == 0) { // 7.  AbcD = 2
+      console.log('========================================');
+      console.log('CONDITION: age, hobby');
+      for (var i = 0; i < friendLocArr.length; i++) {
+        if (friendLocArr[i][5] <  distant &&
+            friendLocArr[i][7] >  ageMin  &&
+            friendLocArr[i][7] <  ageMax  &&
+            friendLocArr[i][8] == myHobbyC){
+          markFriends(i,1,0);
+          console.log('#'+friendLocArr[i][0]);
+        } else {
+          markFriends(i,0,0);
+        }
+      }
+      for (var i = 0; i < notFriendLocArr.length; i++) {
+        if (notFriendLocArr[i][5] <  distant &&
+            notFriendLocArr[i][8] >  ageMin  &&
+            notFriendLocArr[i][8] <  ageMax  &&
+            notFriendLocArr[i][9] == myHobbyC) {
+          markNotFriends(i,1,0);
+          console.log('*'+notFriendLocArr[i][0]);
+        } else {
+          markNotFriends(i,0,0);
+        }
+      }
+    }
+    if (sex == 0 && age == 0 && myHobbyC != 0 && myHometownC != 0) { // 8.  ABcd = 2
+      console.log('========================================');
+      console.log('CONDITION: hobby, hometown');
+      for (var i = 0; i < friendLocArr.length; i++) {
+        if (friendLocArr[i][5] <  distant    &&
+            friendLocArr[i][8] == myHobbyC    &&
+            friendLocArr[i][9] == myHometownC) {
+          markFriends(i,1,0);
+          console.log('#'+friendLocArr[i][0]);
+        } else {
+          markFriends(i,0,0);
+        }
+      }
+      for (var i = 0; i < notFriendLocArr.length; i++) {
+        if (notFriendLocArr[i][5]  <  distant    &&
+            notFriendLocArr[i][9]  == myHobbyC    &&
+            notFriendLocArr[i][10] == myHometownC) {
+          markNotFriends(i,1,0);
+          console.log('*'+notFriendLocArr[i][0]);
+        } else {
+          markNotFriends(i,0,0);
+        }
+      }
+    }
+    if (sex != 0 && age == 0 && myHobbyC == 0 && myHometownC != 0) { // 9.  aBCd = 2
+      console.log('========================================');
+      console.log('CONDITION: sex, hometown');
+      for (var i = 0; i < friendLocArr.length; i++) {
+        if (friendLocArr[i][5] <  distant &&
+            friendLocArr[i][6] == sex     &&
+            friendLocArr[i][9] == myHometownC) {
+          markFriends(i,1,0);
+          console.log('#'+friendLocArr[i][0]);
+        } else {
+          markFriends(i,0,0);
+        }
+      }
+      for (var i = 0; i < notFriendLocArr.length; i++) {
+        if (notFriendLocArr[i][5]  <  distant    &&
+            notFriendLocArr[i][7]  == sex        &&
+            notFriendLocArr[i][10] == myHometownC) {
+          markNotFriends(i,1,0);
+          console.log('*'+notFriendLocArr[i][0]);
+        } else {
+          markNotFriends(i,0,0);
+        }
+      }
+    }
+    if (sex != 0 && age == 0 && myHobbyC != 0 && myHometownC == 0) { // 10.  aBcD = 2
+      console.log('========================================');
+      console.log('CONDITION: sex, hobby');
+      for (var i = 0; i < friendLocArr.length; i++) {
+        if (friendLocArr[i][5] <  distant &&
+            friendLocArr[i][6] == sex     &&
+            friendLocArr[i][8] == myHobbyC) {
+          markFriends(i,1,0);
+          console.log('#'+friendLocArr[i][0]);
+        } else {
+          markFriends(i,0,0);
+        }
+      }
+      for (var i = 0; i < notFriendLocArr.length; i++) {
+        if (notFriendLocArr[i][5] <  distant &&
+            notFriendLocArr[i][7] == sex     &&
+            notFriendLocArr[i][9] == myHobbyC) {
+          markNotFriends(i,1,0);
+          console.log('*'+notFriendLocArr[i][0]);
+        } else {
+          markNotFriends(i,0,0);
+        }
+      }
+    }
+    if (sex == 0 && age != 0 && myHobbyC == 0 && myHometownC != 0) { // 11.  AbCd = 2
+      console.log('========================================');
+      console.log('CONDITION: age, hometown');
+      for (var i = 0; i < friendLocArr.length; i++) {
+        if (friendLocArr[i][5] <  distant &&
+            friendLocArr[i][7] >  ageMin  &&
+            friendLocArr[i][7] <  ageMax  &&
+            friendLocArr[i][9] == myHometownC){
+          markFriends(i,1,0);
+          console.log('#'+friendLocArr[i][0]);
+        } else {
+          markFriends(i,0,0);
+        }
+      }
+      for (var i = 0; i < notFriendLocArr.length; i++) {
+        if (notFriendLocArr[i][5]  <  distant &&
+            notFriendLocArr[i][8]  >  ageMin  &&
+            notFriendLocArr[i][8]  <  ageMax  &&
+            notFriendLocArr[i][10] == myHometownC) {
+          markNotFriends(i,1,0);
+          console.log('*'+notFriendLocArr[i][0]);
+        } else {
+          markNotFriends(i,0,0);
+        }
+      }
+    }
+    if (sex != 0 && age != 0 && myHobbyC != 0 && myHometownC == 0) { // 12. abcD = 3
+      console.log('========================================');
+      console.log('CONDITION: sex, age, hobby');
+     for (var i = 0; i < friendLocArr.length; i++) {
+        if (friendLocArr[i][5] <  distant &&
+            friendLocArr[i][6] == sex     &&
+            friendLocArr[i][7] >  ageMin  &&
+            friendLocArr[i][7] <  ageMax  &&
+            friendLocArr[i][8] == myHobbyC) {
+          markFriends(i,1,0);
+          console.log('#'+friendLocArr[i][0]);
+        } else {
+          markFriends(i,0,0);
+        }
+      }
+      for (var i = 0; i < notFriendLocArr.length; i++) {
+        if (notFriendLocArr[i][5] <  distant &&
+            notFriendLocArr[i][7] == sex     &&
+            notFriendLocArr[i][8] >  ageMin  &&
+            notFriendLocArr[i][8] <  ageMax  &&
+            notFriendLocArr[i][9] == myHobbyC) {
+          markNotFriends(i,1,0);
+          console.log('*'+notFriendLocArr[i][0]);
+        } else {
+          markNotFriends(i,0,0);
+        }
+      } 
+    }
+    if (sex != 0 && age != 0 && myHobbyC == 0 && myHometownC != 0) { // 13. abCd = 3
+      console.log('========================================');
+      console.log('CONDITION: sex, age, hometowns');
+      for (var i = 0; i < friendLocArr.length; i++) {
+        if (friendLocArr[i][5] <  distant &&
+            friendLocArr[i][6] == sex     &&
+            friendLocArr[i][7] >  ageMin  &&
+            friendLocArr[i][7] <  ageMax  &&
+            friendLocArr[i][9] == myHometownC) {
+          markFriends(i,1,0);
+          console.log('#'+friendLocArr[i][0]);
+        } else {
+          markFriends(i,0,0);
+        }
+      }
+      for (var i = 0; i < notFriendLocArr.length; i++) {
+        if (notFriendLocArr[i][5]  <  distant &&
+            notFriendLocArr[i][7]  == sex     &&
+            notFriendLocArr[i][8]  >  ageMin  &&
+            notFriendLocArr[i][8]  <  ageMax  &&
+            notFriendLocArr[i][10] == myHometownC) {
+          markNotFriends(i,1,0);
+          console.log('*'+notFriendLocArr[i][0]);
+        } else {
+          markNotFriends(i,0,0);
+        }
+      }
+    }
+    if (sex != 0 && age == 0 && myHobbyC != 0 && myHometownC != 0) { // 14. aBcd = 3
+      console.log('========================================');
+      console.log('CONDITION: sex, hobby, hometown');
+      for (var i = 0; i < friendLocArr.length; i++) {
+        if (friendLocArr[i][5] <  distant    &&
+            friendLocArr[i][6] == sex        &&
+            friendLocArr[i][8] == myHobbyC   &&
+            friendLocArr[i][9] == myHometownC) {
+          markFriends(i,1,0);
+          console.log('#'+friendLocArr[i][0]);
+        } else {
+          markFriends(i,0,0);
+        }
+      }
+      for (var i = 0; i < notFriendLocArr.length; i++) {
+        if (notFriendLocArr[i][5]  <  distant    &&
+            notFriendLocArr[i][7]  == sex        &&
+            notFriendLocArr[i][9]  == myHobbyC   &&
+            notFriendLocArr[i][10] == myHometownC) {
+          markNotFriends(i,1,0);
+          console.log('*'+notFriendLocArr[i][0]);
+        } else {
+          markNotFriends(i,0,0);
+        }
+      }
+    }
+    if (sex == 0 && age != 0 && myHobbyC != 0 && myHometownC != 0) { // 15. Abcd = 3
+      console.log('========================================');
+      console.log('CONDITION: age, hobby, hometown');
+      for (var i = 0; i < friendLocArr.length; i++) {
+        if (friendLocArr[i][5] <  distant    &&
+            friendLocArr[i][7] >  ageMin     &&
+            friendLocArr[i][7] <  ageMax     &&
+            friendLocArr[i][8] == myHobbyC   &&
+            friendLocArr[i][9] == myHometownC) {
+          markFriends(i,1,0);
+          console.log('#'+friendLocArr[i][0]);
+        } else {
+          markFriends(i,0,0);
+        }
+      }
+      for (var i = 0; i < notFriendLocArr.length; i++) {
+        if (notFriendLocArr[i][5]  <  distant    &&
+            notFriendLocArr[i][8]  >  ageMin     &&
+            notFriendLocArr[i][8]  <  ageMax     &&
+            notFriendLocArr[i][9]  == myHobbyC   &&
+            notFriendLocArr[i][10] == myHometownC) {
+          markNotFriends(i,1,0);
+          console.log('*'+notFriendLocArr[i][0]);
+        } else {
+          markNotFriends(i,0,0);
+        }
+      }
+    }
+    if (sex != 0 && age != 0 && myHobbyC != 0 && myHometownC != 0) { // 16. abcd = 4
+      console.log('========================================');
+      console.log('CONDITION: sex, age, hobby, hometown');
+      for (var i = 0; i < friendLocArr.length; i++) {
+        if (friendLocArr[i][5] <  distant    &&
+            friendLocArr[i][6] == sex        &&
+            friendLocArr[i][7] >  ageMin     &&
+            friendLocArr[i][7] <  ageMax     &&
+            friendLocArr[i][8] == myHobbyC   &&
+            friendLocArr[i][9] == myHometownC) {
+          markFriends(i,1,0);
+          console.log('#'+friendLocArr[i][0]);
+        } else {
+          markFriends(i,0,0);
+        }
+      }
+      for (var i = 0; i < notFriendLocArr.length; i++) {
+        if (notFriendLocArr[i][5]  <  distant    &&
+            notFriendLocArr[i][7]  == sex        &&
+            notFriendLocArr[i][8]  >  ageMin     &&
+            notFriendLocArr[i][8]  <  ageMax     &&
+            notFriendLocArr[i][9]  == myHobbyC   &&
+            notFriendLocArr[i][10] == myHometownC) {
+          markNotFriends(i,1,0);
+          console.log('*'+notFriendLocArr[i][0]);
+        } else {
+          markNotFriends(i,0,0);
+        }
+      }
     }
   }
+
     
-  function renderMarkers2(sex, ageMin, ageMax, hobby, hometown) {  
-    if (hometown) {
-      for (var i = 0; i < friendLocArr.length; i++) {
-        if (friendLocArr[i][8] != hometown) {
-            friendMarkers[i].setVisible(true);
-        }
-      }
-      for (var i = 0; i < notFriendLocArr.length; i++) {
-        if (notFriendLocArr[i][9] != hometown) {
-          notFriendMarkers[i].setVisible(true);
-        }
-      }
-    }
-    if (hobby) {
-      for (var i = 0; i < friendLocArr.length; i++) {
-        if (friendLocArr[i][8] != hobby) {
-            friendMarkers[i].setVisible(true);
-        }
-      }
-      for (var i = 0; i < notFriendLocArr.length; i++) {
-        if (notFriendLocArr[i][9] != hobby) {
-          notFriendMarkers[i].setVisible(true);
-        }
-      }
-    }
-    if (ageMax) {
-      for (var i = 0; i < friendLocArr.length; i++) {
-        if (friendLocArr[i][7] < ageMin ||
-            friendLocArr[i][7] > ageMax) {
-            friendMarkers[i].setVisible(true);
-        }
-      }
-      for (var i = 0; i < notFriendLocArr.length; i++) {
-        if (notFriendLocArr[i][8] < ageMin ||
-            notFriendLocArr[i][8] > ageMax) {
-          notFriendMarkers[i].setVisible(true);
-        }
-      }
-    }
-    if (sex == 0) {} else {
-      for (var i = 0; i < friendLocArr.length; i++) {
-        if (friendLocArr[i][6] != sex) {
-          friendMarkers[i].setVisible(false);
-        }
-      }
-      for (var i = 0; i < notFriendLocArr.length; i++) {
-        if (notFriendLocArr[i][7] != sex) {
-          notFriendMarkers[i].setVisible(false);
-        }
-      }
-    }
-  }
-    
-  // 거리 설정 후 마킹하기전 맵의 마커들을 없애주는 함수
+    // 거리 설정 후 마킹하기전 맵의 마커들을 없애주는 함수
   function clearMarkers() {
     for (var i = 0; i < friendMarkers.length; i++) {
       friendMarkers[i].setMap(null);
@@ -644,77 +969,6 @@
     notFriendMarkers = [];
   }
     
-  function checkArray() {
-    for (var i = 0; i < friendLocArr.length; i++){
-      console.log("#" + i + "/" + friendLocArr[i][0]+"/"+ friendLocArr[i][5]);
-    }
-    for (var i = 0; i < notFriendLocArr.length; i++){
-      console.log("*" + i + "/" + notFriendLocArr[i][0]+"/"+ notFriendLocArr[i][5]);
-    }
-  }
-  
-    
-  
-  
-  // 나이 버튼
-  $(document).on('click', '.btn-age', function() {
-    if (!($('.btn-age').hasClass('active'))) {
-      ageMin = myAge - 5;
-      ageMax = myAge + 5;
-      renderMarkers1(sex, ageMin, ageMax);
-    } else {
-      renderMarkers2(sex, ageMin, ageMax);
-    }
-  });
-  // 취미 버튼
-  $(document).on('click', '.btn-hobby', function() {
-    if (!($('.btn-hobby').hasClass('active'))) {
-      myRealHobby = myHobby;
-      renderMarkers1(sex, ageMin, ageMax, myHobby);
-    } else {
-      renderMarkers2(sex, ageMin, ageMax, myHobby);
-      myRealHobby = null;
-    }
-  });  
-  // 고향 버튼
-  $(document).on('click', '.btn-hometown', function() {
-    if (!($('.btn-hometown').hasClass('active'))) {
-      myRealHometown = myHometown;
-      renderMarkers1(sex, ageMin, ageMax, myHobby, myHometown)
-    } else { 
-      renderMarkers2(sex, ageMin, ageMax, myHobby, myHometown)
-      myRealHometown = null;
-    }
-  });
-
-  // 남녀 모두 버튼   
-  $(document).on('click', '.btn-manwoman', function() {
-    if (!($('.btn-manwoman').hasClass('active'))) {
-      sex = 0;
-      clearMarkers();
-      renderMarkers(distant);
-      friendBoxD(distant);
-    }
-  });
-  // 남자 버튼
-  $(document).on('click', '.btn-man', function() {
-    if (!($('.btn-man').hasClass('active'))) {
-      sex = 1;
-      clearMarkers();
-      renderMarkers1(distant, sex);
-      friendBoxDS(distant, sex);
-    }
-  });
-  // 여자 버튼
-  $(document).on('click', '.btn-woman', function() {
-    if (!($('.btn-woman').hasClass('active'))) {
-      sex = 2;  
-      clearMarkers();
-      renderMarkers1(distant, sex);
-      friendBoxDS(distant, sex);
-    }
-  });
-    
   // 500m 버튼  
   $(document).on('click','.radius-500', function() {
     if (!($('.radius-500').hasClass('active'))) {
@@ -722,7 +976,7 @@
       clearMarkers();
       radiusDistance(27);
       dropMarkers(distant);
-      friendBoxD(distant);
+//      friendBoxListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
     }
   });
   // 1000m 버튼
@@ -732,7 +986,7 @@
       clearMarkers();
       radiusDistance(97);
       dropMarkers(distant);
-      friendBoxD(distant);
+//      friendBoxListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
     }
   });
   // 2000m 버튼  
@@ -742,7 +996,94 @@
       clearMarkers();
       radiusDistance(500);
       dropMarkers(distant);
-      friendBoxD(distant);
+//      friendBoxListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+    }
+  });
+  
+  // 남녀 모두 버튼   
+  $(document).on('click', '.btn-manwoman', function() {
+    if (!($('.btn-manwoman').hasClass('active'))) {
+      sex = 0;
+      clearMarkers();
+      renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+//      friendBoxListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+      console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
+      console.log('========================================');
+    }
+  });
+  // 남자 버튼
+  $(document).on('click', '.btn-man', function() {
+    if (!($('.btn-man').hasClass('active'))) {
+      sex = 1;
+      clearMarkers();
+      renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+//      friendBoxListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+      console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
+      console.log('========================================');
+    }
+  });
+  // 여자 버튼
+  $(document).on('click', '.btn-woman', function() {
+    if (!($('.btn-woman').hasClass('active'))) {
+      sex = 2;  
+      clearMarkers();
+      renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+//      friendBoxListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+      console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
+      console.log('========================================');
+    }
+  });
+    
+  // 나이 버튼
+  $(document).on('click', '.btn-age', function() {
+    if (!($('.btn-age').hasClass('active'))) {
+      age = 1;
+      ageMin = myAge - 5;
+      ageMax = myAge + 5;
+      clearMarkers();
+      renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+//      friendBoxListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+      console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
+      console.log('========================================');
+    } else {
+      age = 0;
+      ageMin = 0;
+      ageMax = 0;
+      clearMarkers();
+      renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+//      friendBoxListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+    }
+  });
+  // 취미 버튼
+  $(document).on('click', '.btn-hobby', function() {
+    if (!($('.btn-hobby').hasClass('active'))) {
+      myHobbyC = myHobby;
+      clearMarkers();
+      renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+//      friendBoxListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+      console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
+      console.log('========================================');
+    } else {
+      myHobbyC = 0;
+      clearMarkers();
+      renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+//      friendBoxListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+    }
+  });  
+  // 고향 버튼
+  $(document).on('click', '.btn-hometown', function() {
+    if (!($('.btn-hometown').hasClass('active'))) {
+      myHometownC = myHometown; 
+      clearMarkers();
+      renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+//      friendBoxListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+      console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
+      console.log('========================================');
+    } else { 
+      myHometownC = 0;
+      clearMarkers();
+      renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+//      friendBoxListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
     }
   });
    

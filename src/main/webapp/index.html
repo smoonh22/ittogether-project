@@ -93,42 +93,42 @@
     var checkRoomArr = [];
     var chatWindowCnt = 1;
      $(document).ready(function() {
-      initChat();
+//      initChat();
     }); 
 
-      setInterval(function() {
-        $.getJSON('http://192.168.168.100:8888/checkStatus.do', {
-          mno: sessionStorage.getItem('mno')
-        }, function(result) {
-          for (var i in result.frdno) { 
-          if (result.frdno[i].frdno == sessionStorage.getItem('mno')) {
-            result.frdno[i].frdno = result.frdno[i].mno;
-          }
-          console.log("--dd" + result.frdno[0].frdno + "-- mno: " + result.frdno[0].mno);
-          if (result.data === 'yes') {
-            $.getJSON('http://192.168.168.100:8888/checkRoom.do', {
-              frdno: result.frdno[i].frdno,
-              mno: sessionStorage.getItem('mno')
-            }, function(result) {
-              for (var i in checkRoomArr) {
-                if (checkRoomArr[i] == result.data.chno) {
-                  result.exist = 'no';
-                  console.log("exist " + result.exist);
-                }
-              }
-              if (result.exist === 'yes') {
-
-                checkRoomArr.push(result.data.chno);
-                chatStart(result.data);
-              }
-            });
-          } else {
-            console.log('활성화된 채팅창 없음');
-          }
-        }
-      });
-        
-      }, 10000);
+//      setInterval(function() {
+//        $.getJSON('http://192.168.168.100:8888/checkStatus.do', {
+//          mno: sessionStorage.getItem('mno')
+//        }, function(result) {
+//          for (var i in result.frdno) { 
+//          if (result.frdno[i].frdno == sessionStorage.getItem('mno')) {
+//            result.frdno[i].frdno = result.frdno[i].mno;
+//          }
+//          console.log("--dd" + result.frdno[0].frdno + "-- mno: " + result.frdno[0].mno);
+//          if (result.data === 'yes') {
+//            $.getJSON('http://192.168.168.100:8888/checkRoom.do', {
+//              frdno: result.frdno[i].frdno,
+//              mno: sessionStorage.getItem('mno')
+//            }, function(result) {
+//              for (var i in checkRoomArr) {
+//                if (checkRoomArr[i] == result.data.chno) {
+//                  result.exist = 'no';
+//                  console.log("exist " + result.exist);
+//                }
+//              }
+//              if (result.exist === 'yes') {
+//
+//                checkRoomArr.push(result.data.chno);
+//                chatStart(result.data);
+//              }
+//            });
+//          } else {
+//            console.log('활성화된 채팅창 없음');
+//          }
+//        }
+//      });
+//        
+//      }, 10000);
 
      function initChat() {
       $.getJSON('http://192.168.168.100:8888/checkStatus.do', {
