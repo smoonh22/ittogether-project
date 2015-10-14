@@ -17,7 +17,12 @@ requirejs.config({
       'ng-file-upload': 'bower_components/ng-file-upload/ng-file-upload',
       'ng-file-upload-shim': 'bower_components/ng-file-upload/ng-file-upload-shim',
       'kendo-ui':'bower_components/kendo-ui/kendo-ui',
-      //컨트롤러
+      'angular-masonry' : 'bower_components/angular-masonry/angular-masonry',
+      'masonry' : 'bower_components/masonry/dist/masonry.pkgd',
+      'imagesloaded' : 'bower_components/imagesloaded/imagesloaded.pkgd',
+      'jquery-bridget' : 'bower_components/jquery-bridget/jquery.bridget',
+
+       //컨트롤러
       'main': 'js/app/main',
       'myFriendList': 'js/app/myFriendList',
       'friendsFeed': 'js/app/friendsFeed',
@@ -51,6 +56,10 @@ requirejs.config({
     'bootstrap-tour': {
       deps:['jquery']
     },
+    'angular-masonry' : {
+      deps:['angular','jquery-bridget','imagesloaded','masonry']
+    }
+    ,
     'main': {
       deps: ['angular-route', 'ng-file-upload', 'friendsFeed', 'bootstrap.min', 'tour','myFriendList','myActivities','common']
     },
@@ -58,7 +67,7 @@ requirejs.config({
       deps: ['angular']
     },
     'myActivities': {
-      deps: ['angular','kendo-ui']
+      deps: ['angular','kendo-ui','angular-masonry','masonry','imagesloaded']
     },
     'myFriendList': {
       deps: ['angular']

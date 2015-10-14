@@ -12,8 +12,8 @@
   if ( typeof define === 'function' && define.amd ) {
     // AMD
     define( [
-      'eventEmitter/EventEmitter',
-      'eventie/eventie'
+      /EventEmitter',
+      '/eventie'
     ], function( EventEmitter, eventie ) {
       return factory( window, EventEmitter, eventie );
     });

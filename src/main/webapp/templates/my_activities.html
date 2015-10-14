@@ -11,54 +11,18 @@
          </div>
       </div>
    </div>
-   <div class='row'>
-      <div ng-controller="activityCtrl as MCtrl">
-         <div ng-repeat-start="myact in MCtrl.activities">
-            <div id="myactfeed" class="col-md-4 timeEffect-color-{{myact.setTimeEffect}}"><br><br><br>
-               <div class="masonry_title">
-                  <div class="panel-heading" id='category-color-{{myact.category}}'></div><br>
-                  <div class='row'>
-                     <div class='col-md-3'>
-                        <img src={{myact.profilePicture}} class="img-circle act-profile-img" /><br>
-                        <br>
-                     </div>
-                     <div class='col-md-9'>
-                        <div id='feed-header'>
-                           <b id="nametag">{{myact.nickname}}</b>님이 새로운 모임을 만드셧습니다.<br>
-                           <br><br>
-                        </div>
-                     </div>
-                     <br>                     
-                     <pre id='pre-content'>{{myact.content}}</pre>
-                     <br>   
-                     <br>
-                  </div>
-                  <div class='row'>
-                     <h5 id="feed-info">
-                        <div class='col-md-3'>
-                           <small class="text-muted"><img
-                              src="images/icons/calendar.png"> </small>{{myact.meetDday}}
-                        </div>
-                        <div class='col-md-3'>
-                           <h5 id="feed-info">
-                              <small class="text-muted"> <img
-                                 src="images/icons/multiple.png">
-                              </small>{{myact.currentCount}}/{{myact.maxHeadCount}}
-                        </div>
-                        <div class='col-md-3' >
-                           <h5 id="feed-info">
-                              <small class="text-muted"><img
-                                 src="images/icons/time.png"></small>{{myact.dday}}
-                        </div>
-                     </h5>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div ng-repeat-end></div>
-      </div>
+
+   <div masonry load-images="false">
+   	<div class='masonry-brick' ng-repeat='act in activities'>
+   		<img class='repeated-img'  ng-src='{{act.profilePicture}}'/>
+       
+    </div>
    </div>
-</div>
+   
 
+          
+      </div>
 
+<detail-modal></detail-modal>
 <act-modal></act-modal>
+</div>

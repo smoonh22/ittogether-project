@@ -31,3 +31,13 @@ max-height : 140px;
    height: 60%;
    margin: 20px;
 }
+
+.act-feed-image {
+	border : 2px solid red;
+	width : 130%;
+	height : 100%;
+	padding : 0;
+}
+.repeated-img{
+	width :300px;
+}

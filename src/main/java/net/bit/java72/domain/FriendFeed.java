@@ -26,35 +26,18 @@ public class FriendFeed implements Serializable {
   protected String hometown;
   protected String Dday;
   protected String meetDday;
-  
-
-
-
-
-
-
-
-
-
-
 
   public String getMeetDday() {
     return meetDday;
   }
 
-
-
   public void setMeetDday(String meetDday) {
     this.meetDday = meetDday;
   }
 
-
-
   public int getFno() {
     return fno;
   }
-
-  
 
   public void setFno(int fno) {
     this.fno = fno;

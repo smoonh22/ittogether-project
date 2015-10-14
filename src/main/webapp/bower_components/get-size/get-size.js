@@ -238,7 +238,7 @@ return getSize;
 // transport
 if ( typeof define === 'function' && define.amd ) {
   // AMD for RequireJS
-  define( [ 'get-style-property/get-style-property' ], defineGetSize );
+  define( [ '/get-style-property' ], defineGetSize );
 } else if ( typeof exports === 'object' ) {
   // CommonJS for Component
   module.exports = defineGetSize( require('desandro-get-style-property') );

@@ -69,7 +69,7 @@ function defineDocReady( eventie ) {
 // transport
 if ( typeof define === 'function' && define.amd ) {
   // AMD
-  define( [ 'eventie/eventie' ], defineDocReady );
+  define( [ '/eventie' ], defineDocReady );
 } else if ( typeof exports === 'object' ) {
   module.exports = defineDocReady( require('eventie') );
 } else {

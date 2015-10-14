@@ -38,6 +38,6 @@
     "commit": "95e78d3f36e19066e89b0ed767ca36bd2f0b0cfb"
   },
   "_source": "git://github.com/desandro/matches-selector.git",
-  "_target": "1.x",
+  "_target": "~1.0.2",
   "_originalSource": "matches-selector"
 }

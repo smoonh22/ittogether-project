@@ -1,5 +1,4 @@
 define(function () {
-  //페이지가 완전히 로드된 뒤에 실행
   var app = angular.module('friendsFeed', []);
 
  
@@ -22,32 +21,35 @@ define(function () {
     }
     }).success(function(result){
         parent.nfeeds = result.data;
-        console.log(result.data);
     })
     
     //디테일 정보
     $scope.detailview =  function (fno){
-      $.ajax('feed/detail.do',{
-        method : 'get',
-        dataType : 'json',
-        data : { 
-              fno : fno,
-              mno : sessionStorage.getItem('mno')
-        },
-        success: function(result){
-          $scope.details = result.detail;
-        if (result.check != null){
+      $http({
+        method: 'POST',
+        url : 'feed/detail.do',
+        params : {
+          fno : fno,
+          mno : sessionStorage.getItem('mno')
+        }
+      }).success(function(data, status, headers, config){
+        $scope.details = data.detail;
+        $(function(){
+          $(".test007").click(function(){
+            $('#detailModal').modal();
+          })
+        });
+        if (data.check != null){
           $('#join-btn').css('display','none');
           $('#out-btn').css('display','');
           $('.modal-footer').css('display','');
-        } else {
-          $('#join-btn').css('display','');
-          $('#out-btn').css('display','none');
-          $('.modal-footer').css('display','none');
-          $('.checkAuthority').css('display','none');
-        }
-        }
-      });
+      } else {
+        $('#join-btn').css('display','');
+        $('#out-btn').css('display','none');
+        $('.modal-footer').css('display','none');
+        $('.checkAuthority').css('display','none');
+      }
+      })
 
       // 댓글 목록불러오기
       $http.get('feed/comment.do',{
@@ -56,7 +58,7 @@ define(function () {
         }
       }).success(function(result){
        parent.comments = result.coment;
-       
+     
         // 삭제 수정 권한 체크
        $scope.checkAuthority = function (Mmno) {
          var mno = sessionStorage.getItem('mno');  
@@ -196,12 +198,11 @@ define(function () {
     
   }]);
 
+  
   app.directive('fdetailModal', function () {
     return {
       restrict: 'E',
       templateUrl: 'templates/modals/fdetail-modal.html'
     };
   }); 
-  
-  
 });

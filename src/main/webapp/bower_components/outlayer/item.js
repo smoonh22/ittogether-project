@@ -8,10 +8,10 @@
   if ( typeof define === 'function' && define.amd ) {
     // AMD
     define( [
-        'eventEmitter/EventEmitter',
-        'get-size/get-size',
-        'get-style-property/get-style-property',
-        'fizzy-ui-utils/utils'
+        '/EventEmitter',
+        '/get-size',
+        '/get-style-property',
+        '/utils'
       ],
       function( EventEmitter, getSize, getStyleProperty, utils ) {
         return factory( window, EventEmitter, getSize, getStyleProperty, utils );

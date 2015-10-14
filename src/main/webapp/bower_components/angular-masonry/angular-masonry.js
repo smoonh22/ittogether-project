@@ -68,7 +68,7 @@
           // please submit a pull request!
           self.scheduleMasonryOnce('layout');
         }
-        if (!self.loadImages) {
+     /*   if (!self.loadImages) {
           _append();
           _layout();
         } else if (self.preserveOrder) {
@@ -79,7 +79,7 @@
             _append();
             _layout();
           });
-        }
+        }*/
       };
       this.removeBrick = function removeBrick(id, element) {
         if (destroyed) {
