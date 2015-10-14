@@ -117,12 +117,12 @@
   var queryString3 = [];
   var queryString4 = [];
   function friendBoxD(distant) {
-    $('.panel').remove();
+    $('.myPanel').remove();
     for (var i = 0; i < notFriendLocArr.length; i++) {
       memberBtn.push('#member'+notFriendLocArr[i][6]);
       if (notFriendLocArr[i][5] < distant) {
           if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-              queryString1.push('<div class="panel panel-info">' +
+              queryString1.push('<div class="panel panel-info myPanel">' +
               '<div class="panel-heading match-heading">' +
               "BestMatch" +
               '</div>' +
@@ -137,7 +137,7 @@
               '</div>');
           }
           if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-              queryString2.push('<div class="panel panel-info">' +
+              queryString2.push('<div class="panel panel-info myPanel">' +
               '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
               '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
               notFriendLocArr[i][0] + '<br>' +
@@ -149,7 +149,7 @@
               '</div>');
           }
           if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-              queryString3.push('<div class="panel panel-info">' +
+              queryString3.push('<div class="panel panel-info myPanel">' +
               '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
               '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
               notFriendLocArr[i][0] + '<br>' +
@@ -161,7 +161,7 @@
               '</div>');
           }
           if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-              queryString4.push('<div class="panel panel-info">' +
+              queryString4.push('<div class="panel panel-info myPanel">' +
               '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
               '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
               notFriendLocArr[i][0] + '<br>' +
@@ -177,12 +177,12 @@
   }
 
   function friendBoxDS(distant, sex) {
-    $('.panel').remove();
+    $('.myPanel').remove();
     for (var i = 0; i < notFriendLocArr.length; i++) {
       if (notFriendLocArr[i][5] < distant) {
         if (notFriendLocArr[i][7] == sex) {
           if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-              queryString1.push('<div class="panel panel-info">' +
+              queryString1.push('<div class="panel panel-info myPanel">' +
               '<div class="panel-heading match-heading">' +
               "BestMatch" +
               '</div>' +
@@ -197,7 +197,7 @@
               '</div>');
           }
           if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-              queryString2.push('<div class="panel panel-info">' +
+              queryString2.push('<div class="panel panel-info myPanel">' +
               '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
               '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
               notFriendLocArr[i][0] + '<br>' +
@@ -209,7 +209,7 @@
               '</div>');
           }
           if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-              queryString3.push('<div class="panel panel-info">' +
+              queryString3.push('<div class="panel panel-info myPanel">' +
               '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
               '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
               notFriendLocArr[i][0] + '<br>' +
