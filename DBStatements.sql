@@ -1,3 +1,36 @@
+* 친구&멤버 인서트문 
+insert into memb_t(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
+values('test01nickname', 'test01@test.com', '1234', 'test01name', '서울시 강남구 test1구', '37.497129', '127.027612', '1', '축구', '서울', '안녕하세요1');
+insert into memb_t(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
+values('test02nickname', 'test02@test.com', '1234', 'test02name', '서울시 강남구 test2구', '37.496708', '127.026865', '1', '축구', '서울', '안녕하세요2');
+insert into memb_t(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
+values('test03nickname', 'test03@test.com', '1234', 'test03name', '서울시 강남구 test3구', '37.498308', '127.026312', '1', '축구', '서울', '안녕하세요3');
+insert into memb_t(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
+values('test04nickname', 'test04@test.com', '1234', 'test04name', '서울시 강남구 test4구', '37.497380', '127.027294', '1', '야구', '부산', '안녕하세요4');
+insert into memb_t(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
+values('test05nickname', 'test05@test.com', '1234', 'test05name', '서울시 강남구 test5구', '37.501042348146726', '127.01761722564697', '2', '야구', '부산', '안녕하세요5');
+insert into memb_t(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
+values('test06nickname', 'test06@test.com', '1234', 'test06name', '서울시 강남구 test6구', '37.49908570947168', '127.02193021774292', '2', '축구', '서울', '안녕하세요6');
+insert into memb_t(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
+values('test07nickname', 'test07@test.com', '1234', 'test07name', '서울시 강남구 test7구', '37.49837070962823', '127.0185399055481', '2', '축구', '서울', '안녕하세요7');
+insert into memb_t(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
+values('test08nickname', 'test08@test.com', '1234', 'test08name', '서울시 강남구 test8구', '37.487917311280015', '127.02768087387085', '2', '축구', '부산', '안녕하세요8');
+insert into memb_t(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
+values('test09nickname', 'test09@test.com', '1234', 'test09name', '서울시 강남구 test9구', '37.50472141350399', '127.1066665649414', '2', '농구', '부산', '안녕하세요9');
+insert into memb_t(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
+values('test10nickname', 'test10@test.com', '1234', 'test10name', '서울시 강남구 test10구', '37.499528324991495', '127.03165054321289', '1', '농구', '광주', '안녕하세요10');
+insert into memb_t(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
+values('test11nickname', 'test11@test.com', '1234', 'test11name', '서울시 강남구 test11구', '37.49986879668296', '127.01948404312134', '1', '농구', '광주', '안녕하세요11');
+insert into memb_t(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
+values('test12nickname', 'test12@test.com', '1234', 'test12name', '서울시 강남구 test12구', '37.50062687260705', '127.01413035392761', '2', '축구', '광주', '안녕하세요12');
+insert into memb_t(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
+values('test13nickname', 'test13@test.com', '1234', 'test13name', '서울시 강남구 test13구', '37.497781920204915', '127.02861696481705', '2', '축구', '서울', '안녕하세요13');
+insert into memb_t(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
+values('test14nickname', 'test14@test.com', '1234', 'test14name', '서울시 강남구 test14구', '37.43828735129878', '127.01654434204102', '1', '야구', '서울', '안녕하세요14');
+insert into memb_t(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
+values('test15nickname', 'test15@test.com', '1234', 'test15name', '서울시 강남구 test15구', '37.49764074039292', '127.02837288379669', '1', '야구', '부산', '안녕하세요15');
+
+
 select t1.chno, t2.nicknm, t2.mphoto from chat_t t1 left outer join memb_t t2 on t1.frdno = t2.mno;
 
 -- 채팅
