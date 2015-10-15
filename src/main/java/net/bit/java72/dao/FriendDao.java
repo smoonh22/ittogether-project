@@ -26,5 +26,5 @@ public interface FriendDao {
 
   int addFRD2(FriendList friendList);
   
-//  List<FriendList> checkFriendAddButton(int mno);
+  FriendList checkFriendAddButton(int mno, int frdmno);
 }

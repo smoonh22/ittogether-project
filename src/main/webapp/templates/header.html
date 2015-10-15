@@ -26,9 +26,9 @@
           </li>
         </ul>
         
-        <ul class="nav navbar-nav navbar-right" ng-controller='myFriendCtrl as mFCtrl'>
+        <ul class="nav navbar-nav navbar-right" >
           
-          <li class="dropdown"><a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> 내 친구들</a>
+          <li class="dropdown" ng-controller='myFriendCtrl as mFCtrl'><a ng-click='friendListTest()' id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> 내 친구들</a>
            <ul class="dropdown-menu" aria-labelledby="dLabel">   
 			<li><ul class="nav nav-tabs" role="tablist">
 			   <li role="presentation" class="active"><a href="#myFriendList" aria-controls="home" role="tab" data-toggle="tab">친구 목록</a></li>

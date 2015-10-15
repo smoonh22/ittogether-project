@@ -18,8 +18,7 @@
     <result column="sex"      property="sex"/>
     <result column="intro"    property="introduction"/>
     <result column="age"      property="age"/>
-    <result column="hobby"       property="hobby"/>
-    
+    <result column="hobby"    property="hobby"/>
   </resultMap>
   
   <select id="exist" 

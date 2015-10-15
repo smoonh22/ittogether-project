@@ -124,15 +124,17 @@ public class FriendController {
     friendService.addFrd2(friendList2);
   }
   
-//  @RequestMapping("/checkButton")
-//  public Object checkFriendAddButton(int mno) {
-//    Map<String,Object> result = new HashMap<String,Object>();
-//    
-//    List<FriendList> friendList = friendService.checkFriendAddButton(mno);
-//    
-//    result.put("data", friendList);
-//    
-//    return result;
-//  }
+  @RequestMapping("/checkRelation")
+  public Object checkFriendAddButton(int mno, int frdmno) {
+    Map<String,Object> result = new HashMap<String,Object>();
+    
+    FriendList friendList = friendService.checkFriendAddButton(mno, frdmno);
+    
+    System.out.println(friendList);
+    
+    result.put("data", friendList);
+    
+    return result;
+  }
   
 }

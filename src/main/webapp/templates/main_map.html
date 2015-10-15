@@ -67,6 +67,8 @@
   var myHobbyC = 0;
   var myRealHometown = 0;
   var myHometownC = 0;
+  var checkState = [];
+  var setFrdno;
   
   (function() {
     $.getJSON(contextRoot + '/member/getMyLoc.do', {
@@ -127,1060 +129,101 @@
         console.log("주변회원" + i + ": " + notFriendLocArr[i][0]+"/"+
                     notFriendLocArr[i][5]+"/"+notFriendLocArr[i][8]);
       }
+      setFrdno = notFriendLocArr[0][6];
       friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
     });
+      
+//  })();
+//  (function() {
+//    for (var i = 0; i < notFriendLocArr.length; i++) {
+//        $.getJSON(contextRoot + '/frd/checkRelation.do', {
+//          mno: sessionStorage.getItem('mno'),
+//          frdmno: sessionStorage.getItem('mno')
+//        }, function(results) {
+//          checkState = result.data.state;
+//          console.log(checkState);
+//        });
+//      }
   })();
-
+  
   var queryString1 = [];
   var queryString2 = [];
   var queryString3 = [];
   var queryString4 = [];
+  var buttonTypes = [];
   
   
-  
-  
-//  function friendBoxListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC) {
-//    $('.myPanel').remove();
-//    console.log('friendBoxListCreater PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
-//    for (var i = 0; i < notFriendLocArr.length; i++) {
-//      if (distant <  && sex == 0 && age == 0 && myHobbyC == 0 && myHometownC == 0) { // 1.  ABCD = 0
-//        friendBoxList(i);
-//      }
-//      if (sex != 0 && age == 0 && myHobbyC == 0 && myHometownC == 0) { // 2.  aBCD = 1
-//        friendBoxList(i);
-//      }
-//      if (sex == 0 && age != 0 && myHobbyC == 0 && myHometownC == 0) { // 3.  AbCD = 1
-//        friendBoxList(i);
-//      }
-//      if (sex == 0 && age == 0 && myHobbyC != 0 && myHometownC == 0) { // 4.  ABcD = 1
-//        friendBoxList(i);
-//      }
-//      if (sex == 0 && age == 0 && myHobbyC == 0 && myHometownC != 0) { // 5.  ABCd = 1
-//        friendBoxList(i);
-//      }
-//      if (sex != 0 && age != 0 && myHobbyC == 0 && myHometownC == 0) { // 6.  abCD = 2
-//        friendBoxList(i);
-//      }
-//      if (sex == 0 && age != 0 && myHobbyC != 0 && myHometownC == 0) { // 7.  AbcD = 2
-//        friendBoxList(i);
-//      }
-//      if (sex == 0 && age == 0 && myHobbyC != 0 && myHometownC != 0) { // 8.  ABcd = 2
-//        friendBoxList(i);
-//      }
-//      if (sex != 0 && age == 0 && myHobbyC == 0 && myHometownC != 0) { // 9.  aBCd = 2
-//        friendBoxList(i);
-//      }
-//      if (sex != 0 && age == 0 && myHobbyC != 0 && myHometownC == 0) { // 10.  aBcD = 2
-//        friendBoxList(i);
-//      }
-//      if (sex == 0 && age != 0 && myHobbyC == 0 && myHometownC != 0) { // 11.  AbCd = 2
-//        friendBoxList(i);
-//      }
-//      if (sex != 0 && age != 0 && myHobbyC != 0 && myHometownC == 0) { // 12. abcD = 3
-//        friendBoxList(i);
-//      }
-//      if (sex != 0 && age != 0 && myHobbyC == 0 && myHometownC != 0) { // 13. abCd = 3
-//        friendBoxList(i);
-//      }
-//      if (sex != 0 && age == 0 && myHobbyC != 0 && myHometownC != 0) { // 14. aBcd = 3
-//        friendBoxList(i);
-//      }
-//      if (sex == 0 && age != 0 && myHobbyC != 0 && myHometownC != 0) { // 15. Abcd = 3
-//        friendBoxList(i);
-//      }
-//      if (sex != 0 && age != 0 && myHobbyC != 0 && myHometownC != 0) { // 16. abcd = 4
-//        friendBoxList(i);
-//      }
+//  function buttonCheck(i) {
+//    if (checkState[i][0] == null) {
+//       buttonTypes[0] = '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">';
 //    }
-//    queryStringSpin();
+//    if (checkState[i][1] == 1) {
+//       return '<input type="button" class="btn btn-info btn-xs addfriend-btn addfriend-btn-adding" mno-data = "' + notFriendLocArr[i][6] +'" value="요청중">';
+//    }
+//    if (checkState[i][2] == 3) { 
+//       return '<input type="button" class="btn btn-info btn-xs addfriend-btn addfriend-btn-accepting" mno-data = "' + notFriendLocArr[i][6] +'" value="수락">';
+//    }
 //  }
-//  
-//  function friendBoxList(i) {
-//      if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-//          queryString1.push('<div class="panel panel-info myPanel">' +
-//          '<div class="panel-heading match-heading">' +
-//          "BestMatch" +
-//          '</div>' +
-//          '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//          '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//          notFriendLocArr[i][0] + '<br>' +
-//          notFriendLocArr[i][5] + 
-//          "m 이내" +
-//          '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//          '<div>취미와 고향이 일치합니다.</div>' +          
-//          '</div>' +
-//          '</div>');
-//      }
-//      if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-//          queryString2.push('<div class="panel panel-info myPanel">' +
-//          '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//          '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//          notFriendLocArr[i][0] + '<br>' +
-//          notFriendLocArr[i][5] + 
-//          "m 이내" +
-//          '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//          '<div>취미가 일치합니다.</div>' +          
-//          '</div>' +
-//          '</div>');
-//      }
-//      if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-//          queryString3.push('<div class="panel panel-info myPanel">' +
-//          '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//          '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//          notFriendLocArr[i][0] + '<br>' +
-//          notFriendLocArr[i][5] + 
-//          "m 이내" +
-//          '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//          '<div>고향이 일치합니다.</div>' +          
-//          '</div>' +
-//          '</div>');
-//      }
-//      if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-//          queryString4.push('<div class="panel panel-info myPanel">' +
-//          '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//          '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//          notFriendLocArr[i][0] + '<br>' +
-//          notFriendLocArr[i][5] + 
-//          "m 이내" +
-//          '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//          '</div>' +
-//          '</div>');
-//      }
-//    }
+
+  function friendList(i) {
+    if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
+      queryString1.push('<div class="panel panel-info myPanel">' +
+      '<div class="panel-heading match-heading">' +
+      "BestMatch" +
+      '</div>' +
+      '<a href=""><div class="panel-body panel-member-desc" id="member' + notFriendLocArr[i][6] +'">' +
+      '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
+      notFriendLocArr[i][0] + '<br>' +
+      notFriendLocArr[i][5] + 
+      "m 이내" +
+      '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
+      '<div>취미와 고향이 일치합니다.</div>' +          
+      '</div>' +
+      '</div>');
+    }
+  if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
+      queryString2.push('<div class="panel panel-info myPanel">' +
+      '<a href=""><div class="panel-body panel-member-desc" id="member' + notFriendLocArr[i][6] + '">' +
+      '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
+      notFriendLocArr[i][0] + '<br>' +
+      notFriendLocArr[i][5] + 
+      "m 이내" +
+      '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
+      '<div>취미가 일치합니다.</div>' +          
+      '</div>' +
+      '</div>');
+  }
+  if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
+      queryString3.push('<div class="panel panel-info myPanel">' +
+      '<a href=""><div class="panel-body panel-member-desc" id="member' + notFriendLocArr[i][6] + '">' +
+      '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
+      notFriendLocArr[i][0] + '<br>' +
+      notFriendLocArr[i][5] + 
+      "m 이내" +
+      '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
+      '<div>고향이 일치합니다.</div>' +          
+      '</div>' +
+      '</div>');
+  }
+  if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
+      queryString4.push('<div class="panel panel-info myPanel">' +
+      '<a href=""><div class="panel-body panel-member-desc" id="member' + notFriendLocArr[i][6] + '">' +
+      '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
+      notFriendLocArr[i][0] + '<br>' +
+      notFriendLocArr[i][5] + 
+      "m 이내" +
+      '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
+      '</div>' +
+      '</div>');
+  }
+}
   
-  
-  
-  
-  
-//  function friendBoxD(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC) {
-//    $('.myPanel').remove();
-//    for (var i = 0; i < notFriendLocArr.length; i++) {
-//      if (sex == 0 && age == 0 && myHobbyC == 0 && myHometownC == 0) { // 1. ABCD = 0
-//        if (notFriendLocArr[i][5] < distant) {
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-//                queryString1.push('<div class="panel panel-info myPanel">' +
-//                '<div class="panel-heading match-heading">' +
-//                "BestMatch" +
-//                '</div>' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미와 고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-//                queryString2.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미가 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-//                queryString3.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-//                queryString4.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '</div>' +
-//                '</div>');
-//            }
-//        }
-//      }
-//      if (sex != 0 && age == 0 && myHobbyC == 0 && myHometownC == 0) { // 2.  aBCD = 1
-//        if (notFriendLocArr[i][5] < distant) {
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-//                queryString1.push('<div class="panel panel-info myPanel">' +
-//                '<div class="panel-heading match-heading">' +
-//                "BestMatch" +
-//                '</div>' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미와 고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-//                queryString2.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미가 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-//                queryString3.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-//                queryString4.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '</div>' +
-//                '</div>');
-//            }
-//        }
-//      }
-//      if (sex == 0 && age != 0 && myHobbyC == 0 && myHometownC == 0) { // 3.  AbCD = 1
-//        if (notFriendLocArr[i][5] < distant) {
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-//                queryString1.push('<div class="panel panel-info myPanel">' +
-//                '<div class="panel-heading match-heading">' +
-//                "BestMatch" +
-//                '</div>' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미와 고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-//                queryString2.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미가 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-//                queryString3.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-//                queryString4.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '</div>' +
-//                '</div>');
-//            }
-//        }
-//      }
-//      if (sex == 0 && age == 0 && myHobbyC != 0 && myHometownC == 0) { // 4.  ABcD = 1
-//        if (notFriendLocArr[i][5] < distant) {
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-//                queryString1.push('<div class="panel panel-info myPanel">' +
-//                '<div class="panel-heading match-heading">' +
-//                "BestMatch" +
-//                '</div>' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미와 고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-//                queryString2.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미가 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-//                queryString3.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-//                queryString4.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '</div>' +
-//                '</div>');
-//            }
-//        }
-//      }
-//      if (sex == 0 && age == 0 && myHobbyC == 0 && myHometownC != 0) { // 5.  ABCd = 1
-//        if (notFriendLocArr[i][5] < distant) {
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-//                queryString1.push('<div class="panel panel-info myPanel">' +
-//                '<div class="panel-heading match-heading">' +
-//                "BestMatch" +
-//                '</div>' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미와 고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-//                queryString2.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미가 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-//                queryString3.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-//                queryString4.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '</div>' +
-//                '</div>');
-//            }
-//        }
-//      }
-//      if (sex != 0 && age != 0 && myHobbyC == 0 && myHometownC == 0) { // 6.  abCD = 2
-//        if (notFriendLocArr[i][5] < distant) {
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-//                queryString1.push('<div class="panel panel-info myPanel">' +
-//                '<div class="panel-heading match-heading">' +
-//                "BestMatch" +
-//                '</div>' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미와 고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-//                queryString2.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미가 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-//                queryString3.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-//                queryString4.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '</div>' +
-//                '</div>');
-//            }
-//        }
-//      }
-//      if (sex == 0 && age != 0 && myHobbyC != 0 && myHometownC == 0) { // 7.  AbcD = 2
-//        if (notFriendLocArr[i][5] < distant) {
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-//                queryString1.push('<div class="panel panel-info myPanel">' +
-//                '<div class="panel-heading match-heading">' +
-//                "BestMatch" +
-//                '</div>' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미와 고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-//                queryString2.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미가 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-//                queryString3.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-//                queryString4.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '</div>' +
-//                '</div>');
-//            }
-//        }
-//      }
-//      if (sex == 0 && age == 0 && myHobbyC != 0 && myHometownC != 0) { // 8.  ABcd = 2
-//        if (notFriendLocArr[i][5] < distant) {
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-//                queryString1.push('<div class="panel panel-info myPanel">' +
-//                '<div class="panel-heading match-heading">' +
-//                "BestMatch" +
-//                '</div>' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미와 고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-//                queryString2.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미가 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-//                queryString3.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-//                queryString4.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '</div>' +
-//                '</div>');
-//            }
-//        }
-//      }
-//      if (sex != 0 && age == 0 && myHobbyC == 0 && myHometownC != 0) { // 9.  aBCd = 2
-//        if (notFriendLocArr[i][5] < distant) {
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-//                queryString1.push('<div class="panel panel-info myPanel">' +
-//                '<div class="panel-heading match-heading">' +
-//                "BestMatch" +
-//                '</div>' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미와 고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-//                queryString2.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미가 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-//                queryString3.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-//                queryString4.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '</div>' +
-//                '</div>');
-//            }
-//        }
-//      }
-//      if (sex != 0 && age == 0 && myHobbyC != 0 && myHometownC == 0) { // 10.  aBcD = 2
-//        if (notFriendLocArr[i][5] < distant) {
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-//                queryString1.push('<div class="panel panel-info myPanel">' +
-//                '<div class="panel-heading match-heading">' +
-//                "BestMatch" +
-//                '</div>' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미와 고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-//                queryString2.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미가 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-//                queryString3.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-//                queryString4.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '</div>' +
-//                '</div>');
-//            }
-//        }
-//      }
-//      if (sex == 0 && age != 0 && myHobbyC == 0 && myHometownC != 0) { // 11.  AbCd = 2
-//        if (notFriendLocArr[i][5] < distant) {
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-//                queryString1.push('<div class="panel panel-info myPanel">' +
-//                '<div class="panel-heading match-heading">' +
-//                "BestMatch" +
-//                '</div>' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미와 고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-//                queryString2.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미가 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-//                queryString3.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-//                queryString4.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '</div>' +
-//                '</div>');
-//            }
-//        }
-//      }
-//      if (sex != 0 && age != 0 && myHobbyC != 0 && myHometownC == 0) { // 12. abcD = 3
-//        if (notFriendLocArr[i][5] < distant) {
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-//                queryString1.push('<div class="panel panel-info myPanel">' +
-//                '<div class="panel-heading match-heading">' +
-//                "BestMatch" +
-//                '</div>' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미와 고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-//                queryString2.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미가 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-//                queryString3.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-//                queryString4.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '</div>' +
-//                '</div>');
-//            }
-//        }
-//      }
-//      if (sex != 0 && age != 0 && myHobbyC == 0 && myHometownC != 0) { // 13. abCd = 3
-//        if (notFriendLocArr[i][5] < distant) {
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-//                queryString1.push('<div class="panel panel-info myPanel">' +
-//                '<div class="panel-heading match-heading">' +
-//                "BestMatch" +
-//                '</div>' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미와 고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-//                queryString2.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미가 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-//                queryString3.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-//                queryString4.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '</div>' +
-//                '</div>');
-//            }
-//        }
-//      }
-//      if (sex != 0 && age == 0 && myHobbyC != 0 && myHometownC != 0) { // 14. aBcd = 3
-//        if (notFriendLocArr[i][5] < distant) {
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-//                queryString1.push('<div class="panel panel-info myPanel">' +
-//                '<div class="panel-heading match-heading">' +
-//                "BestMatch" +
-//                '</div>' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미와 고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-//                queryString2.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미가 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-//                queryString3.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-//                queryString4.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '</div>' +
-//                '</div>');
-//            }
-//        }
-//      }
-//      if (sex == 0 && age != 0 && myHobbyC != 0 && myHometownC != 0) { // 15. Abcd = 3
-//        if (notFriendLocArr[i][5] < distant) {
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-//                queryString1.push('<div class="panel panel-info myPanel">' +
-//                '<div class="panel-heading match-heading">' +
-//                "BestMatch" +
-//                '</div>' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미와 고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-//                queryString2.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미가 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-//                queryString3.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-//                queryString4.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '</div>' +
-//                '</div>');
-//            }
-//        }
-//      }
-//      if (sex != 0 && age != 0 && myHobbyC != 0 && myHometownC != 0) { // 16. abcd = 4
-//        if (notFriendLocArr[i][5] < distant) {
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-//                queryString1.push('<div class="panel panel-info myPanel">' +
-//                '<div class="panel-heading match-heading">' +
-//                "BestMatch" +
-//                '</div>' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미와 고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-//                queryString2.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>취미가 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-//                queryString3.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '<div>고향이 일치합니다.</div>' +          
-//                '</div>' +
-//                '</div>');
-//            }
-//            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-//                queryString4.push('<div class="panel panel-info myPanel">' +
-//                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//                notFriendLocArr[i][0] + '<br>' +
-//                notFriendLocArr[i][5] + 
-//                "m 이내" +
-//                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//                '</div>' +
-//                '</div>');
-//            }
-//        }
-//      }
-//    }
-//    queryStringSpin();
-//  }
-      
-      
-      
-      
   function friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC) {
     $('.myPanel').remove();
     if (sex == 0 && age == 0 && myHobbyC == 0 && myHometownC == 0) { // 1. ABCD = 0
       for (var i = 0; i < notFriendLocArr.length; i++) {
         if (notFriendLocArr[i][5] <  distant) {
-          if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-                queryString1.push('<div class="panel panel-info myPanel">' +
-                '<div class="panel-heading match-heading">' +
-                "BestMatch" +
-                '</div>' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미와 고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-                queryString2.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미가 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-                queryString3.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-                queryString4.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '</div>' +
-                '</div>');
-            }
+          friendList(i);
         }
       }
     }
@@ -1188,56 +231,7 @@
       for (var i = 0; i < notFriendLocArr.length; i++) {
         if (notFriendLocArr[i][5] <  distant &&
             notFriendLocArr[i][7] == sex) {
-          if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-                queryString1.push('<div class="panel panel-info myPanel">' +
-                '<div class="panel-heading match-heading">' +
-                "BestMatch" +
-                '</div>' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미와 고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-                queryString2.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미가 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-                queryString3.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-                queryString4.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '</div>' +
-                '</div>');
-            }
+          friendList(i);
         }
       }
     }
@@ -1246,56 +240,7 @@
         if (notFriendLocArr[i][5] <  distant &&
             notFriendLocArr[i][8] >  ageMin  &&
             notFriendLocArr[i][8] <  ageMax) {
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-                queryString1.push('<div class="panel panel-info myPanel">' +
-                '<div class="panel-heading match-heading">' +
-                "BestMatch" +
-                '</div>' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미와 고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-                queryString2.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미가 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-                queryString3.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-                queryString4.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '</div>' +
-                '</div>');
-            }
+            friendList(i);
         }
       }
     }
@@ -1303,56 +248,7 @@
       for (var i = 0; i < notFriendLocArr.length; i++) {
         if (notFriendLocArr[i][5] <  distant &&
             notFriendLocArr[i][9] == myHobbyC) {
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-                queryString1.push('<div class="panel panel-info myPanel">' +
-                '<div class="panel-heading match-heading">' +
-                "BestMatch" +
-                '</div>' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미와 고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-                queryString2.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미가 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-                queryString3.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-                queryString4.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '</div>' +
-                '</div>');
-            }
+            friendList(i);
         }
       } 
     }
@@ -1360,56 +256,7 @@
       for (var i = 0; i < notFriendLocArr.length; i++) {
         if (notFriendLocArr[i][5]  <  distant    &&
             notFriendLocArr[i][10] == myHometownC) {
-          if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-                queryString1.push('<div class="panel panel-info myPanel">' +
-                '<div class="panel-heading match-heading">' +
-                "BestMatch" +
-                '</div>' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미와 고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-                queryString2.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미가 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-                queryString3.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-                queryString4.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '</div>' +
-                '</div>');
-            }
+            friendList(i);
         }
       }
     }
@@ -1419,56 +266,7 @@
             notFriendLocArr[i][7] == sex     &&
             notFriendLocArr[i][8] >  ageMin  &&
             notFriendLocArr[i][8] <  ageMax) {
-          if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-                queryString1.push('<div class="panel panel-info myPanel">' +
-                '<div class="panel-heading match-heading">' +
-                "BestMatch" +
-                '</div>' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미와 고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-                queryString2.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미가 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-                queryString3.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-                queryString4.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '</div>' +
-                '</div>');
-            }
+            friendList(i);
         }
       }
     }
@@ -1478,56 +276,7 @@
             notFriendLocArr[i][8] >  ageMin  &&
             notFriendLocArr[i][8] <  ageMax  &&
             notFriendLocArr[i][9] == myHobbyC) {
-          if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-                queryString1.push('<div class="panel panel-info myPanel">' +
-                '<div class="panel-heading match-heading">' +
-                "BestMatch" +
-                '</div>' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미와 고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-                queryString2.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미가 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-                queryString3.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-                queryString4.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '</div>' +
-                '</div>');
-            }
+            friendList(i);
         }
       }
     }
@@ -1536,56 +285,7 @@
         if (notFriendLocArr[i][5]  <  distant    &&
             notFriendLocArr[i][9]  == myHobbyC    &&
             notFriendLocArr[i][10] == myHometownC) {
-          if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-                queryString1.push('<div class="panel panel-info myPanel">' +
-                '<div class="panel-heading match-heading">' +
-                "BestMatch" +
-                '</div>' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미와 고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-                queryString2.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미가 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-                queryString3.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-                queryString4.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '</div>' +
-                '</div>');
-            }
+            friendList(i);
         }
       }
     }
@@ -1594,56 +294,7 @@
         if (notFriendLocArr[i][5]  <  distant    &&
             notFriendLocArr[i][7]  == sex        &&
             notFriendLocArr[i][10] == myHometownC) {
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-                queryString1.push('<div class="panel panel-info myPanel">' +
-                '<div class="panel-heading match-heading">' +
-                "BestMatch" +
-                '</div>' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미와 고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-                queryString2.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미가 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-                queryString3.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-                queryString4.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '</div>' +
-                '</div>');
-            }
+            friendList(i);
         }
       }
     }
@@ -1652,56 +303,7 @@
         if (notFriendLocArr[i][5] <  distant &&
             notFriendLocArr[i][7] == sex     &&
             notFriendLocArr[i][9] == myHobbyC) {
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-                queryString1.push('<div class="panel panel-info myPanel">' +
-                '<div class="panel-heading match-heading">' +
-                "BestMatch" +
-                '</div>' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미와 고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-                queryString2.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미가 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-                queryString3.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-                queryString4.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '</div>' +
-                '</div>');
-            }
+            friendList(i);
         }
       }
     }
@@ -1711,56 +313,7 @@
             notFriendLocArr[i][8]  >  ageMin  &&
             notFriendLocArr[i][8]  <  ageMax  &&
             notFriendLocArr[i][10] == myHometownC) {
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-                queryString1.push('<div class="panel panel-info myPanel">' +
-                '<div class="panel-heading match-heading">' +
-                "BestMatch" +
-                '</div>' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미와 고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-                queryString2.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미가 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-                queryString3.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-                queryString4.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '</div>' +
-                '</div>');
-            }
+            friendList(i);
         }
       }
     }
@@ -1771,56 +324,7 @@
             notFriendLocArr[i][8] >  ageMin  &&
             notFriendLocArr[i][8] <  ageMax  &&
             notFriendLocArr[i][9] == myHobbyC) {
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-                queryString1.push('<div class="panel panel-info myPanel">' +
-                '<div class="panel-heading match-heading">' +
-                "BestMatch" +
-                '</div>' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미와 고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-                queryString2.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미가 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-                queryString3.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-                queryString4.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '</div>' +
-                '</div>');
-            }
+            friendList(i);
         }
       } 
     }
@@ -1831,56 +335,7 @@
             notFriendLocArr[i][8]  >  ageMin  &&
             notFriendLocArr[i][8]  <  ageMax  &&
             notFriendLocArr[i][10] == myHometownC) {
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-                queryString1.push('<div class="panel panel-info myPanel">' +
-                '<div class="panel-heading match-heading">' +
-                "BestMatch" +
-                '</div>' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미와 고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-                queryString2.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미가 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-                queryString3.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-                queryString4.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '</div>' +
-                '</div>');
-            }
+            friendList(i);
         }
       }
     }
@@ -1890,56 +345,7 @@
             notFriendLocArr[i][7]  == sex        &&
             notFriendLocArr[i][9]  == myHobbyC   &&
             notFriendLocArr[i][10] == myHometownC) {
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-                queryString1.push('<div class="panel panel-info myPanel">' +
-                '<div class="panel-heading match-heading">' +
-                "BestMatch" +
-                '</div>' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미와 고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-                queryString2.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미가 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-                queryString3.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-                queryString4.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '</div>' +
-                '</div>');
-            }
+            friendList(i);
         }
       }
     }
@@ -1950,56 +356,7 @@
             notFriendLocArr[i][8]  <  ageMax     &&
             notFriendLocArr[i][9]  == myHobbyC   &&
             notFriendLocArr[i][10] == myHometownC) {
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-                queryString1.push('<div class="panel panel-info myPanel">' +
-                '<div class="panel-heading match-heading">' +
-                "BestMatch" +
-                '</div>' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미와 고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-                queryString2.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미가 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-                queryString3.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-                queryString4.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '</div>' +
-                '</div>');
-            }
+            friendList(i);
         }
       }
     }
@@ -2011,125 +368,14 @@
             notFriendLocArr[i][8]  <  ageMax     &&
             notFriendLocArr[i][9]  == myHobbyC   &&
             notFriendLocArr[i][10] == myHometownC) {
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-                queryString1.push('<div class="panel panel-info myPanel">' +
-                '<div class="panel-heading match-heading">' +
-                "BestMatch" +
-                '</div>' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] +'">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미와 고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-                queryString2.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>취미가 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-                queryString3.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '<div>고향이 일치합니다.</div>' +          
-                '</div>' +
-                '</div>');
-            }
-            if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-                queryString4.push('<div class="panel panel-info myPanel">' +
-                '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-                '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-                notFriendLocArr[i][0] + '<br>' +
-                notFriendLocArr[i][5] + 
-                "m 이내" +
-                '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-                '</div>' +
-                '</div>');
-            }
+            friendList(i);
         }
       }
     }
     queryStringSpin();
-  }    
+  }      
       
       
-      
-//  function friendBoxDS(distant, sex) {
-//    $('.myPanel').remove();
-//    for (var i = 0; i < notFriendLocArr.length; i++) {
-//      if (notFriendLocArr[i][5] < distant) {
-//        if (notFriendLocArr[i][7] == sex) {
-//          if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-//              queryString1.push('<div class="panel panel-info myPanel">' +
-//              '<div class="panel-heading match-heading">' +
-//              "BestMatch" +
-//              '</div>' +
-//              '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//              notFriendLocArr[i][0] + '<br>' +
-//              notFriendLocArr[i][5] + 
-//              "m 이내" +
-//              '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//              '<div>취미와 고향이 일치합니다.</div>' +          
-//              '</div>' +
-//              '</div>');
-//          }
-//          if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-//              queryString2.push('<div class="panel panel-info myPanel">' +
-//              '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//              notFriendLocArr[i][0] + '<br>' +
-//              notFriendLocArr[i][5] + 
-//              "m 이내" +
-//              '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//              '<div>취미가 일치합니다.</div>' +          
-//              '</div>' +
-//              '</div>');
-//          }
-//          if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-//              queryString3.push('<div class="panel panel-info myPanel">' +
-//              '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//              notFriendLocArr[i][0] + '<br>' +
-//              notFriendLocArr[i][5] + 
-//              "m 이내" +
-//              '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//              '<div>고향이 일치합니다.</div>' +          
-//              '</div>' +
-//              '</div>');
-//          }
-//          if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-//              queryString4.push('<div class="panel panel-info myPanel">' +
-//              '<a href=""><div class="panel-body" id="member' + notFriendLocArr[i][6] + '">' +
-//              '<img src="' + notFriendLocArr[i][4] +'" class="img-circle match-friendimg"></a>' +
-//              notFriendLocArr[i][0] + '<br>' +
-//              notFriendLocArr[i][5] + 
-//              "m 이내" +
-//              '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
-//              '</div>' +
-//              '</div>');
-//          }
-//        }
-//      }
-//    }
-//    queryStringSpin();
-//  }
-  
   function queryStringSpin() {
     for (var i = 0; i < queryString1.length; i++) {
       $('.panel-member').append(queryString1[i]);
@@ -2157,8 +403,6 @@
   var friendWindow = []; /* 친구들 팝업창 */
   var notFriendWindow = []; /* 회원들 팝업창 */
 
-  
-    
     
   // 구글맵 초기화 함수.
   function initMap() {

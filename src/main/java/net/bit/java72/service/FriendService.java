@@ -28,7 +28,7 @@ public interface FriendService {
 
   int addFrd2(FriendList friendList);
   
-//  List<FriendList> checkFriendAddButton(int mno);
+  FriendList checkFriendAddButton(int mno, int frdmno);
 }
 
 
