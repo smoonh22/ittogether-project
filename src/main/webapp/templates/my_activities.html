@@ -18,34 +18,45 @@
                <div class="masonry_title">
                   <div class="panel-heading" id='category-color-{{myact.category}}'></div><br>
                   <div class='row'>
-                     <div class='col-md-3'>
-                        <img src={{myact.profilePicture}} class="img-circle act-profile-img" /><br>
+                     <div class='col-md-4'>
+                        <img src={{myact.profilePicture}} class="img-circle act-profile-img" id="profile"/><br>
                         <br>
                      </div>
-                     <div class='col-md-9'>
+                     <div class='col-md-8'>
                         <div id='feed-header'>
-                           <b id="nametag">{{myact.nickname}}</b>님이 새로운 모임을 만드셧습니다.<br>
-                           <br><br>
+                           <b id="nametag">{{myact.nickname}}</b>님이 새로운 모임을 만드셧습니다.<br>   
                         </div>
                      </div>
-                     <br>                     
-                     <pre id='pre-content'>{{myact.content}}</pre>
-                     <br>   
                      <br>
+                     <br>
+                     <br>
+                     <br>
+                     <br>
+                             <small class="text-muted"> <img
+                                 src="{{myact.attachFile1}}" id=picture1 src="{{images/default-img.png}}">
+                              </small><br>        
+                             <small class="text-muted"> <img
+                                 src="{{myact.attachFile2}}" id=picture2 src="{{images/default-img.png}}">
+                              </small><br>       
+                             <small class="text-muted"> <img
+                                 src="{{myact.attachFile3}}" id=picture3>
+                              </small>    
+                     <br>                                           
+                     <pre id='pre-content'>{{myact.content}}</pre>
                   </div>
                   <div class='row'>
                      <h5 id="feed-info">
-                        <div class='col-md-3'>
+                        <div class='col-md-5'>
                            <small class="text-muted"><img
                               src="images/icons/calendar.png"> </small>{{myact.meetDday}}
                         </div>
-                        <div class='col-md-3'>
+                        <div class='col-md-2'>
                            <h5 id="feed-info">
                               <small class="text-muted"> <img
                                  src="images/icons/multiple.png">
                               </small>{{myact.currentCount}}/{{myact.maxHeadCount}}
                         </div>
-                        <div class='col-md-3' >
+                        <div class='col-md-5' >
                            <h5 id="feed-info">
                               <small class="text-muted"><img
                                  src="images/icons/time.png"></small>{{myact.dday}}

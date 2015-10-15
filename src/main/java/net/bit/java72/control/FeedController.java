@@ -35,7 +35,7 @@ public class FeedController {
   Map<String,Object> result = new HashMap<String,Object>();
   try {
     List<FriendFeed> test = feedService.list(mno);
-    SimpleDateFormat format = new SimpleDateFormat("MMì›” ddì¼ Eìš”ì¼");
+    SimpleDateFormat format = new SimpleDateFormat("MM¿ù ddÀÏ E¿äÀÏ");
     for(FriendFeed feed : test){
       String meetdate = format.format(feed.getMeetTime());
       feed.setMeetDday(meetdate);
@@ -55,7 +55,7 @@ public class FeedController {
   public Object feedlist(int mno) {  
     Map<String,Object> result = new HashMap<String,Object>();
     List<FriendFeed> test = feedService.myActivityList(mno);
-    SimpleDateFormat format = new SimpleDateFormat("MMì›” ddì¼ Eìš”ì¼");
+    SimpleDateFormat format = new SimpleDateFormat("MM¿ù ddÀÏ E¿äÀÏ");
     for(FriendFeed feed : test){
       String meetdate = format.format(feed.getMeetTime());
       feed.setMeetDday(meetdate);
@@ -91,7 +91,7 @@ public class FeedController {
       
       if(distance <= 1000){
         List<FriendFeed> feeds = feedService.noneFriendFeed(member.getMno());
-        SimpleDateFormat format = new SimpleDateFormat("MMì›” ddì¼ Eìš”ì¼");
+        SimpleDateFormat format = new SimpleDateFormat("MM¿ù ddÀÏ E¿äÀÏ");
         for(FriendFeed test : feeds){
         if( test != null){
           String meetdate = format.format(test.getMeetTime());
@@ -123,13 +123,13 @@ public class FeedController {
     return result;
   }
 
-  //ìµœê·¼ í”¼ë“œ í´ë¦­ì‹œ ë””í…Œì¼ ì •ë³´ 
+  //ÃÖ±Ù ÇÇµå Å¬¸¯½Ã µğÅ×ÀÏ Á¤º¸ 
   @RequestMapping("/detail")
   public Object detail(int fno,int mno) throws Exception {
     Map<String,Object> result = new HashMap<String,Object>();
     FriendFeed friendFeed = feedService.getDetail(fno);
     Feed feed = feedService.checkFeed(fno, mno);
-    SimpleDateFormat format = new SimpleDateFormat("MMì›” ddì¼ Eìš”ì¼");
+    SimpleDateFormat format = new SimpleDateFormat("MM¿ù ddÀÏ E¿äÀÏ");
     String meetdate = format.format(friendFeed.getMeetTime());
     
     friendFeed.setMeetDday(meetdate);
@@ -174,7 +174,7 @@ public class FeedController {
     }
     return result;
   }
-  //ëŒ“ê¸€ ì²˜ë¦¬
+  //´ñ±Û Ã³¸®
   @RequestMapping("/comment")
   public Object comment(int fno) throws Exception {
     Map<String,Object> result = new HashMap<>();
@@ -241,15 +241,15 @@ public class FeedController {
     long calcTime = (currentTime - orderTime)/1000;
    if (calcTime > 0){ 
        if((calcTime/86400) > 0) {
-         return calcTime/86400 +"ì¼ ì „";
+         return calcTime/86400 +"ÀÏ Àü";
        } else if(calcTime/3600 > 0) {
-        return calcTime/3600 + "ì‹œê°„ ì „";
+        return calcTime/3600 + "½Ã°£ Àü";
        } else if(calcTime/60 > 0){
-        return calcTime/60 + "ë¶„ ì „";
+        return calcTime/60 + "ºĞ Àü";
        } else {
-         return "1ë¶„ ì „";
+         return "1ºĞ Àü";
        }
      }
-   return "ê¸°í•œ ì´ˆê³¼";
+   return "±âÇÑ ÃÊ°ú";
     }
   }
