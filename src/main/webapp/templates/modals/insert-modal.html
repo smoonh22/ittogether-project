@@ -18,13 +18,26 @@
 
             </select><br> <br>
             </small> 
-            <textarea id="title" placeholder="제목을 입력하세요" cols="81" rows="1" style="resize:none;"></textarea>
+            <textarea id="title" placeholder="제목을 입력하세요" cols="65" rows="1" style="resize:none;"></textarea>
             <br><br>
-            <textarea id="content" placeholder="내용을 입력하세요" cols="81" rows="5"style="resize:none;"></textarea>
+            <textarea id="content" placeholder="내용을 입력하세요" cols="65" rows="5"style="resize:none;"></textarea>
             <br><br> <small class="text-muted"> <label>인원수</label> <input
                type="number" value="1" min="1" max="10" id="maxHeadCount">
             </small> <br><br> <small class="text-muted"><label>날짜 및
                   시간입력</label> <input id="meetTime"/> </small>
+<br><br>
+<h5>밑에 공란에 사진을 드래그 하세요</h5>
+          <div>
+          <img src="images/default-img.png" ngf-drop="MCtrl.uploadFiles2($files,1)" class="drop-box dtail-default-img1"
+ 		  ngf-drag-over-class="dragover" ngf-multiple="true" 
+ 		  ngf-pattern="'image/*,application/pdf'" id='piicture'>
+          <img src="images/default-img.png" ngf-drop="MCtrl.uploadFiles2($files,2)" class="drop-box dtail-default-img2"
+ 		  ngf-drag-over-class="dragover" ngf-multiple="true" 
+ 		  ngf-pattern="'image/*,application/pdf'" id='piicture1'>
+          <img src="images/default-img.png" ngf-drop="MCtrl.uploadFiles2($files,3)" class="drop-box dtail-default-img3"
+ 		  ngf-drag-over-class="dragover" ngf-multiple="true" 
+ 		  ngf-pattern="'image/*,application/pdf'"  id='piicture2'>
+	      </div>
 
 
             <!-- Footer -->

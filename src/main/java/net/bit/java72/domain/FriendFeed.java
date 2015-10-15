@@ -26,15 +26,44 @@ public class FriendFeed implements Serializable {
   protected String hometown;
   protected String Dday;
   protected String meetDday;
+  protected String attachFile1;
+  protected String attachFile2;
+  protected String attachFile3;
   
 
+  public String getAttachFile1() {
+    return attachFile1;
+  }
 
 
 
+  public void setAttachFile1(String attachFile1) {
+    this.attachFile1 = attachFile1;
+  }
 
 
 
+  public String getAttachFile2() {
+    return attachFile2;
+  }
 
+
+
+  public void setAttachFile2(String attachFile2) {
+    this.attachFile2 = attachFile2;
+  }
+
+
+
+  public String getAttachFile3() {
+    return attachFile3;
+  }
+
+
+
+  public void setAttachFile3(String attachFile3) {
+    this.attachFile3 = attachFile3;
+  }
 
 
 
