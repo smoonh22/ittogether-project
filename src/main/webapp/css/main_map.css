@@ -1,8 +1,26 @@
-.match-heading {
-  margin: 0px;
-  padding: 2px;
-  text-align: center;
+/*
+.hide-scroll-on-mainMap {
+    overflow: hidden;
 }
+*/
+
+/*.viewport-on-mainMap {*/
+/*    overflow: auto;*/
+
+    /* Make sure the inner div is not larger than the container
+     * so that we have room to scroll.
+     */
+/*    max-height: 100%;*/
+
+    /* Pick an arbitrary margin/padding that should be bigger
+     * than the max width of all the scroll bars across
+     * the devices you are targeting.
+     * padding = -margin
+     */
+/*    margin-right: -100px;*/
+/*    padding-right: 100px;*/
+/*}*/
+
 #mainMap {
   width: 100%;
   height: 600px;
@@ -51,7 +69,9 @@
 /*  margin: 10px;*/
 }
 .addfriend-btn {
+  position: absolute;
   float: right;
+  right: 23px;
 }
 .addfriend-btn-adding.nohover:hover {
   cursor: default !important;
@@ -63,9 +83,12 @@
   text-align: center;
 }
 
-
+.myPanel {
+  padding:  0px;
+  margin: 5px;
+}
 .editorial-moim-container{
-   width:35%;
+  width:35%;
   margin-left:60%;
 }
 
@@ -76,13 +99,24 @@
   text-align: center;
 }
 .match-friendimg {
-  float:left;
-  width:50px;
-  height:50px;
-  max-height: 50px;
-  max-width: 50px;
+  float: left;
+  width: 70px;
+  height: 70px;
+  max-height: 70px;
+  max-width: 70px;
+  padding: 5px;
 }
-
+.match-heading {
+  font-size: 1.0em;
+  font-weight: 500;
+  text-align: center;
+  margin: 0px;
+  padding: 1px;
+}
+.panel-member-desc {
+  font-size: 0.85em;
+  padding: 5px;
+}
 
 /* mainMap에서 infoWindow */
 .gm-style-iw {
@@ -144,3 +178,22 @@ textarea {
    resize: none;
 }
 
+
+
+
+.addfriend-modal-title {
+  text-align: center;
+}
+.addfriend-modal-img {
+  width: 120px;
+  height: 120px;
+  max-height: 120px;
+  max-width: 120px;
+/*
+  margin-left: auto;
+  margin-right: auto;
+*/
+}
+.addfriend-modal-body {
+  margin: auto;
+}
