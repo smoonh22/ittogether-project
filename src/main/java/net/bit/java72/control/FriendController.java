@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -124,17 +125,47 @@ public class FriendController {
     friendService.addFrd2(friendList2);
   }
   
-  @RequestMapping("/checkRelation")
-  public Object checkFriendAddButton(int mno, int frdmno) {
+  @RequestMapping("/checkRelationFriends")
+  public Object checkFriendAddButtonF(int mno, int frdmno) {
     Map<String,Object> result = new HashMap<String,Object>();
+    FriendList friendList = new FriendList();
     
-    FriendList friendList = friendService.checkFriendAddButton(mno, frdmno);
-    
-    System.out.println(friendList);
-    
-    result.put("data", friendList);
-    
-    return result;
+    try {
+      System.out.println("mno: " + mno);
+      System.out.println("frdmno: " + frdmno);
+      friendList = friendService.checkFriendAddButton(mno, frdmno);
+      System.out.println("friendList: " + friendList.getState());
+      
+      result.put("data", friendList);
+      return result;
+      
+    } catch (Exception e) {
+      
+      System.out.println("frdmno가 frd_t 테이블에 존재 하지 않습니다.");
+      result.put("data", 0);
+      return result;
+    }
   }
   
+  @RequestMapping("/checkRelationMembers")
+  public Object checkFriendAddButtonM(int mno, int frdmno) {
+    Map<String,Object> result = new HashMap<String,Object>();
+    FriendList friendList = new FriendList();
+    
+    try {
+      System.out.println("mno: " + mno);
+      System.out.println("frdmno: " + frdmno);
+      friendList = friendService.checkFriendAddButton(mno, frdmno);
+      System.out.println("friendList: " + friendList.getState());
+      
+      result.put("data", friendList);
+      return result;
+      
+    } catch (Exception e) {
+      
+      System.out.println("frdmno가 frd_t 테이블에 존재 하지 않습니다.");
+      result.put("data", 0);
+      return result;
+    }
+  }
 }

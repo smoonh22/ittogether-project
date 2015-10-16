@@ -1,7 +1,8 @@
 package net.bit.java72.dao;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 
 import net.bit.java72.domain.FriendList;
 import net.bit.java72.domain.Member;
@@ -26,5 +27,5 @@ public interface FriendDao {
 
   int addFRD2(FriendList friendList);
   
-  FriendList checkFriendAddButton(int mno, int frdmno);
+  FriendList checkFriendAddButton(@Param("mno") int mno, @Param("frdmno") int frdmno);
 }

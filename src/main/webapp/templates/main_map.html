@@ -67,9 +67,14 @@
   var myHobbyC = 0;
   var myRealHometown = 0;
   var myHometownC = 0;
-  var checkState = [];
-  var setFrdno;
+  var buttonTypes = [];
+  var checkStateF = [];
+  var checkStateM = [];
   
+  var queryString1 = [];
+  var queryString2 = [];
+  var queryString3 = [];
+  var queryString4 = [];
   (function() {
     $.getJSON(contextRoot + '/member/getMyLoc.do', {
       mno: sessionStorage.getItem('mno')
@@ -101,7 +106,8 @@
           results.data[i].sex,
           results.data[i].age,
           results.data[i].hobby,
-          results.data[i].hometown
+          results.data[i].hometown,
+          results.data[i].mno
         ];
         friendLocArr.push(tempArr);
         console.log("친구" + i + ": " + friendLocArr[i][0]+"/"+ friendLocArr[i][5]+"/"+ friendLocArr[i][7]);
@@ -129,41 +135,57 @@
         console.log("주변회원" + i + ": " + notFriendLocArr[i][0]+"/"+
                     notFriendLocArr[i][5]+"/"+notFriendLocArr[i][8]);
       }
-      setFrdno = notFriendLocArr[0][6];
-      friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-    });
       
-//  })();
-//  (function() {
-//    for (var i = 0; i < notFriendLocArr.length; i++) {
-//        $.getJSON(contextRoot + '/frd/checkRelation.do', {
+//      for (var i = 0; i < friendLocArr.length; i++) {
+//      (function(i) {
+//        $.getJSON(contextRoot + '/frd/checkRelationFriends.do', {
 //          mno: sessionStorage.getItem('mno'),
-//          frdmno: sessionStorage.getItem('mno')
+//          frdmno: friendLocArr[i][10]
 //        }, function(results) {
-//          checkState = result.data.state;
-//          console.log(checkState);
+////          console.log("frdmno: " + friendLocArr[i][10]);
+//          if (results.data != 0) {
+//            checkStateF[i] = results.data.state;
+//            console.log("checkStateF" + [i] + "(" + sessionStorage.getItem("mno") + "-" + friendLocArr[i][0] +"["+ friendLocArr[i][10]+ "]): " + checkStateF[i]);
+//          } else {
+//            checkStateF[i] = 0;
+//            console.log("checkStateF" + [i] + "(" + sessionStorage.getItem("mno") + "-" + friendLocArr[i][0] +"["+ friendLocArr[i][10]+ "]): " + checkStateF[i]);
+//          }
 //        });
+//      })(i);
 //      }
+        
+      
+      for (var i = 0; i < notFriendLocArr.length; i++) {
+      (function(i) {
+        $.getJSON(contextRoot + '/frd/checkRelationMembers.do', {
+          mno: sessionStorage.getItem('mno'),
+          frdmno: notFriendLocArr[i][6]
+        }, function(results) {
+//          console.log("frdmno: " + notFriendLocArr[i][6]);
+          if (results.data != 0) {
+            checkStateM[i] = results.data.state;
+            console.log("checkStateM" + [i] + "(" + sessionStorage.getItem("mno") + "-" + notFriendLocArr[i][0] +"["+ notFriendLocArr[i][6]+ "]): " + checkStateM[i]);
+          } else {
+            checkStateM[i] = 0;
+            console.log("checkStateM" + [i] + "(" + sessionStorage.getItem("mno") + "-" + notFriendLocArr[i][0] +"["+ notFriendLocArr[i][6]+ "]): " + checkStateM[i]);
+          }
+//          console.log(checkStateM[i]);
+          if (checkStateM[i] == 0) {
+             buttonTypes[i] = '<input type="button" class="btn btn-info btn-xs nohover addfriend-btn addfriend-btn-add" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">';
+          }
+          if (checkStateM[i] == 1) {
+             buttonTypes[i] = '<input type="button" class="btn btn-info btn-xs addfriend-btn addfriend-btn-adding" mno-data = "' + notFriendLocArr[i][6] +'" value="요청중">';
+          }
+          if (checkStateM[i] == 3) { 
+             buttonTypes[i] = '<input type="button" class="btn btn-info btn-xs addfriend-btn addfriend-btn-accepting" mno-data = "' + notFriendLocArr[i][6] +'" value="수락하기">';
+          }
+        friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        });
+      })(i);
+      }
+    })
   })();
   
-  var queryString1 = [];
-  var queryString2 = [];
-  var queryString3 = [];
-  var queryString4 = [];
-  var buttonTypes = [];
-  
-  
-//  function buttonCheck(i) {
-//    if (checkState[i][0] == null) {
-//       buttonTypes[0] = '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">';
-//    }
-//    if (checkState[i][1] == 1) {
-//       return '<input type="button" class="btn btn-info btn-xs addfriend-btn addfriend-btn-adding" mno-data = "' + notFriendLocArr[i][6] +'" value="요청중">';
-//    }
-//    if (checkState[i][2] == 3) { 
-//       return '<input type="button" class="btn btn-info btn-xs addfriend-btn addfriend-btn-accepting" mno-data = "' + notFriendLocArr[i][6] +'" value="수락">';
-//    }
-//  }
 
   function friendList(i) {
     if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
@@ -176,7 +198,7 @@
       notFriendLocArr[i][0] + '<br>' +
       notFriendLocArr[i][5] + 
       "m 이내" +
-      '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
+      buttonTypes[i] +   
       '<div>취미와 고향이 일치합니다.</div>' +          
       '</div>' +
       '</div>');
@@ -188,7 +210,7 @@
       notFriendLocArr[i][0] + '<br>' +
       notFriendLocArr[i][5] + 
       "m 이내" +
-      '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
+      buttonTypes[i] + 
       '<div>취미가 일치합니다.</div>' +          
       '</div>' +
       '</div>');
@@ -200,7 +222,7 @@
       notFriendLocArr[i][0] + '<br>' +
       notFriendLocArr[i][5] + 
       "m 이내" +
-      '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
+      buttonTypes[i] + 
       '<div>고향이 일치합니다.</div>' +          
       '</div>' +
       '</div>');
@@ -212,7 +234,7 @@
       notFriendLocArr[i][0] + '<br>' +
       notFriendLocArr[i][5] + 
       "m 이내" +
-      '<input type="button" class="btn btn-info btn-xs addfriend-btn" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">' +
+      buttonTypes[i] + 
       '</div>' +
       '</div>');
   }
@@ -223,6 +245,7 @@
     if (sex == 0 && age == 0 && myHobbyC == 0 && myHometownC == 0) { // 1. ABCD = 0
       for (var i = 0; i < notFriendLocArr.length; i++) {
         if (notFriendLocArr[i][5] <  distant) {
+//          buttonCheck(i);
           friendList(i);
         }
       }
@@ -231,6 +254,7 @@
       for (var i = 0; i < notFriendLocArr.length; i++) {
         if (notFriendLocArr[i][5] <  distant &&
             notFriendLocArr[i][7] == sex) {
+//          buttonCheck(i);
           friendList(i);
         }
       }
@@ -240,6 +264,7 @@
         if (notFriendLocArr[i][5] <  distant &&
             notFriendLocArr[i][8] >  ageMin  &&
             notFriendLocArr[i][8] <  ageMax) {
+//            buttonCheck(i);
             friendList(i);
         }
       }
@@ -248,6 +273,7 @@
       for (var i = 0; i < notFriendLocArr.length; i++) {
         if (notFriendLocArr[i][5] <  distant &&
             notFriendLocArr[i][9] == myHobbyC) {
+//            buttonCheck(i);
             friendList(i);
         }
       } 
@@ -256,6 +282,7 @@
       for (var i = 0; i < notFriendLocArr.length; i++) {
         if (notFriendLocArr[i][5]  <  distant    &&
             notFriendLocArr[i][10] == myHometownC) {
+//            buttonCheck(i);
             friendList(i);
         }
       }
@@ -266,6 +293,7 @@
             notFriendLocArr[i][7] == sex     &&
             notFriendLocArr[i][8] >  ageMin  &&
             notFriendLocArr[i][8] <  ageMax) {
+//            buttonCheck(i);
             friendList(i);
         }
       }
@@ -276,6 +304,7 @@
             notFriendLocArr[i][8] >  ageMin  &&
             notFriendLocArr[i][8] <  ageMax  &&
             notFriendLocArr[i][9] == myHobbyC) {
+//            buttonCheck(i);
             friendList(i);
         }
       }
@@ -285,6 +314,7 @@
         if (notFriendLocArr[i][5]  <  distant    &&
             notFriendLocArr[i][9]  == myHobbyC    &&
             notFriendLocArr[i][10] == myHometownC) {
+//            buttonCheck(i);
             friendList(i);
         }
       }
@@ -294,6 +324,7 @@
         if (notFriendLocArr[i][5]  <  distant    &&
             notFriendLocArr[i][7]  == sex        &&
             notFriendLocArr[i][10] == myHometownC) {
+//            buttonCheck(i);
             friendList(i);
         }
       }
@@ -303,6 +334,7 @@
         if (notFriendLocArr[i][5] <  distant &&
             notFriendLocArr[i][7] == sex     &&
             notFriendLocArr[i][9] == myHobbyC) {
+//            buttonCheck(i);
             friendList(i);
         }
       }
@@ -313,6 +345,7 @@
             notFriendLocArr[i][8]  >  ageMin  &&
             notFriendLocArr[i][8]  <  ageMax  &&
             notFriendLocArr[i][10] == myHometownC) {
+//            buttonCheck(i);
             friendList(i);
         }
       }
@@ -324,6 +357,7 @@
             notFriendLocArr[i][8] >  ageMin  &&
             notFriendLocArr[i][8] <  ageMax  &&
             notFriendLocArr[i][9] == myHobbyC) {
+//            buttonCheck(i);
             friendList(i);
         }
       } 
@@ -335,6 +369,7 @@
             notFriendLocArr[i][8]  >  ageMin  &&
             notFriendLocArr[i][8]  <  ageMax  &&
             notFriendLocArr[i][10] == myHometownC) {
+//            buttonCheck(i);
             friendList(i);
         }
       }
@@ -345,6 +380,7 @@
             notFriendLocArr[i][7]  == sex        &&
             notFriendLocArr[i][9]  == myHobbyC   &&
             notFriendLocArr[i][10] == myHometownC) {
+//            buttonCheck(i);
             friendList(i);
         }
       }
@@ -356,6 +392,7 @@
             notFriendLocArr[i][8]  <  ageMax     &&
             notFriendLocArr[i][9]  == myHobbyC   &&
             notFriendLocArr[i][10] == myHometownC) {
+//            buttonCheck(i);
             friendList(i);
         }
       }
@@ -368,6 +405,7 @@
             notFriendLocArr[i][8]  <  ageMax     &&
             notFriendLocArr[i][9]  == myHobbyC   &&
             notFriendLocArr[i][10] == myHometownC) {
+//            buttonCheck(i);
             friendList(i);
         }
       }
@@ -571,7 +609,7 @@
           "</div>" +
           "<div class='iw-subTitle'>" +
           "<input type='txt' class='form-control input-xs' value=" + notFriendLocArr[i][3] + ">" +
-        "<input type='button' class='btn btn-info btn-xs btn-block btn-addfriend' value='친구추가' mno-data='" + notFriendLocArr[i][6] + "'>" +
+          "<input type='button' class='btn btn-info btn-xs btn-block btn-addfriend-popup' value='친구추가' mno-data='" + notFriendLocArr[i][6] + "'>" +
           "</div>" +
           "</div>" +
           "</div>"
@@ -1211,25 +1249,8 @@
    
 } // initMap 끝 
   
-  
-  $(document).on('click', '.addfriend-btn', function() {
-      var parent = this;
-    $.ajax(contextRoot + '/frd/insert.do', {
-        method: 'post',
-        dataType: 'json',
-        data: {
-            frdmno: $(parent).attr('mno-data'),
-            mno: sessionStorage.getItem('mno')
-        },
-      success: function(result) {
-        alert('친구 요청을 보냈습니다.');
-        $(this).attr('value', '친구 요청중');
-        $(this).attr('disabled', true);
-        }
-      })
-    });
-  
-  $(document).on('click', '.btn-addfriend', function() {
+  // popup창에서 '친구추가' 버튼
+  $(document).on('click', '.btn-addfriend-popup', function() {
       var parent = this;
     $.ajax(contextRoot + 'frd/insert.do', {
         method: 'post',
@@ -1239,12 +1260,46 @@
             mno: sessionStorage.getItem('mno')
         },
       success: function(result) {
-        alert('친구 요청을 보냈습니다.');
-        $(this).attr('value', '친구 요청중');
-        $(this).attr('disabled', true);
         }
       })
   });
+  // friendbox에서 '친구추가' 버튼
+  $(document).on('click', '.addfriend-btn-add', function() {
+      var parent = this;
+    $.ajax(contextRoot + '/frd/insert.do', {
+        method: 'post',
+        dataType: 'json',
+        data: {
+            frdmno: $(parent).attr('mno-data'),
+            mno: sessionStorage.getItem('mno')
+        },
+      success: function(result) {
+        $(parent).removeClass('.addfriend-btn-add');
+        $('.addfriend-btn-add').addClass('.addfriend-btn-adding');
+        $(parent).val('요청중');
+        }
+      })
+    });
+  // friendbox에서 '요청중' 버튼
+  $(document).on('click', '.addfriend-btn-adding', function(e) {
+    e.preventDefault();
+    });
+  // friendbox에서 '수락하기' 버튼
+  $(document).on('click', '.addfriend-btn-accepting', function() {
+      var parent = this;
+    $.ajax(contextRoot + '/frd/apply.do', {
+        method: 'post',
+        dataType: 'json',
+        data: {
+            frdmno: $(parent).attr('mno-data'),
+            mno: sessionStorage.getItem('mno')
+        },
+      success: function(result) {
+        $(parent).closest('.myPanel').remove();
+        }
+      })
+    });
+  
   
   
 </script>

@@ -53,6 +53,12 @@
 .addfriend-btn {
   float: right;
 }
+.addfriend-btn-adding.nohover:hover {
+  cursor: default !important;
+}
+.addfriend-btn-adding {
+  cursor: default !important;
+}
 .panel-friend-title {
   text-align: center;
 }

@@ -9,7 +9,8 @@
     <result column="STATE"    property="state"/>
     <result column="FRD_DT"   property="friendDate"/>
   </resultMap>
-    <resultMap type="Member" id="MemberMap">
+  
+  <resultMap type="Member" id="MemberMap">
     <id     column="mno"      property="mno" />
     <result column="email"    property="email"/>
     <result column="nicknm"   property="nickname" />
@@ -53,7 +54,7 @@
   	where mno=#{values}
   </select>
    
-  <select id="checkFriendAddButton" parameterType="int" resultMap="FListMap">
+  <select id="checkFriendAddButton" parameterType="map" resultMap="FListMap">
     SELECT * 
     FROM FRD_T
     WHERE MNO=#{mno} and FRDNO=#{frdmno};

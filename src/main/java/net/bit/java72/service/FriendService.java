@@ -1,10 +1,9 @@
 package net.bit.java72.service;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import net.bit.java72.domain.Feed;
-import net.bit.java72.domain.FriendFeed;
+import org.apache.ibatis.annotations.Param;
+
 import net.bit.java72.domain.FriendList;
 import net.bit.java72.domain.Member;
 import net.bit.java72.domain.Search;
@@ -28,7 +27,7 @@ public interface FriendService {
 
   int addFrd2(FriendList friendList);
   
-  FriendList checkFriendAddButton(int mno, int frdmno);
+  FriendList checkFriendAddButton(@Param("mno") int mno, @Param("frdmno") int frdmno);
 }
 
 
