@@ -1,4 +1,4 @@
-
+<link rel='stylesheet' href="css/main_map.css" />
 <div id="mainMap" onmousedown="return false"> 
 </div>
 <!-- infoModal에 있는 구글맵 id가 map이라 mainMap으로 명명-->
@@ -67,15 +67,12 @@
 
 <script>
   // json형식으로 받아온 나의 위치 데이터를 받아옴
-  var myNickname,
-      myIntro,
-      myPhoto,
-      myHobby,
-      myHometown;
-  var memberBtn = [];
+  var myNickname, myIntro, myPhoto, myHobby, myHometown;
+  
   var myLoc = [];
   var friendLocArr = [];
   var notFriendLocArr = [];
+  
   
   var distant = 1000;;  //  거리 설정의 단위 변수 200m, 500m, 1km
   var sex = 0;
@@ -155,9 +152,8 @@
         ];
         notFriendLocArr.push(tempArr);
         console.log("주변회원" + i + ": " + notFriendLocArr[i][0]+"/"+
-                    notFriendLocArr[i][5]+"/"+notFriendLocArr[i][8]);
+                    notFriendLocArr[i][5]+"/"+notFriendLocArr[i][8]);        
       }
-      
 //      for (var i = 0; i < friendLocArr.length; i++) {
 //      (function(i) {
 //        $.getJSON(contextRoot + '/frd/checkRelationFriends.do', {
@@ -174,8 +170,7 @@
 //          }
 //        });
 //      })(i);
-//      }
-        
+//      } 
       
       for (var i = 0; i < notFriendLocArr.length; i++) {
       (function(i) {
@@ -199,12 +194,18 @@
           assignButton(i, frdmno);
           assignButtonBlock(i, frdmno);
           friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+          if (i == notFriendLocArr.length - 1) {
+            if (buttonTypes[notFriendLocArr.length - 1] || buttonTypesB[notFriendLocArr.length - 1]) {
+              initMap();
+              console.log('initMap() 실행');  
+            }
+          }
         });
       })(i);
       }
-    })
-  })();
-
+    })    
+  })(); // 데이터 로딩 함수 끝
+  
   function assignButton(i, frdmno) {
     if (checkStateM[i] == 0) {
        buttonTypes[i] = '<input type="button" class="btn btn-info btn-xs nohover addfriend-btn addfriend-btn-add" mno-data = "' + frdmno +'" value="친구추가">';
@@ -259,7 +260,7 @@
       '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+notFriendLocArr[i][6] +'" class="img-circle match-friendimg"></a>' +
       '<div>' + notFriendLocArr[i][0] + '</div>' +
       '<div class="panel-member-append">' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
-      '<div>고향이 일치치합니다.</div>' +          
+      '<div>고향이 일치합니다.</div>' +          
       '</div>' +
       '</div>');
   }
@@ -453,17 +454,14 @@
     queryString4 = [];
   }
   
-  var friendMarkers = []; /*팝업창 띄울 때의 마커들 */
-  var notFriendMarkers = []; /* 팝업창 띄울 때의 마커들  */
-
-  var map; // 맵객체에 필요
-  var circle; // 주변 동그라미 그릴 변수
-  var friendWindow = []; /* 친구들 팝업창 */
-  var notFriendWindow = []; /* 회원들 팝업창 */
-
     
-  // 구글맵 초기화 함수.
-  function initMap() {
+  
+  function initMap() { // 구글맵 초기화 함수.
+//    var map; // 맵객체에 필요
+    var circle; // 주변 동그라미 그릴 변수
+    var friendMarkers = []; /*팝업창 띄울 때의 마커들 */
+    var notFriendMarkers = []; /* 팝업창 띄울 때의 마커들  */
+    var memberBtn = [];
     var radius = { /* 반경 보여줄 지점 */
       radiusCenter: {
         center: { lat: myLoc[0], lng: myLoc[1] },
@@ -473,7 +471,7 @@
     };
     
     // 구글맵을 보여줌
-    map = new google.maps.Map(document.getElementById('mainMap'), {
+    var map = new google.maps.Map(document.getElementById('mainMap'), {
       zoom: 15,
       /* 처음 화면을 보여주는 위도, 경도 */
       center: { lat: myLoc[0], lng: myLoc[1] },
@@ -486,20 +484,20 @@
 
     markMyLoc(); // 나의 위치 마킹해줌
     distant = 1000;
-    for (var i = 0; i < notFriendLocArr.length; i++) {
-      console.log(notFriendLocArr[i]);
-      if(notFriendLocArr[i][5] <= distant) {
-        markNotFriends(i,1,1); /* 주변 회원 마킹 */
-      } else {
-        markNotFriends(i,0,0);   
-      }
-    }
     for (var i = 0; i < friendLocArr.length; i++) {
-      console.log(friendLocArr[i])
+//      console.log(friendLocArr[i])
       if(friendLocArr[i][5] <= distant) {
         markFriends(i,1,1); /* 친구 마킹 */
       } else {
         markFriends(i,0,0);
+      }
+    }
+    for (var i = 0; i < notFriendLocArr.length; i++) {
+//      console.log(notFriendLocArr[i]);
+      if(notFriendLocArr[i][5] <= distant) {
+        markNotFriends(i,1,1); /* 주변 회원 마킹 */
+      } else {
+        markNotFriends(i,0,0);   
       }
     }
     markCircle(); /* 반경 렌더링 */
@@ -534,6 +532,7 @@
 
   function markFriends(i, mapAdj, dropAdj) {
       var friendLoc = friendLocArr[i];
+      var friendWindow = []; /* 친구들 팝업창 */
       if (mapAdj == 0 && dropAdj == 0) {
           friendMarkers.push(new google.maps.Marker({
             title: friendLoc[0],
@@ -559,12 +558,12 @@
           }));
       }
       friendMarkers[i].addListener('click', function() {
-        if (friendMarkers[i].getAnimation() !== null) {
-            friendMarkers[i].setAnimation(null);
-            friendWindow[i].close(map, friendMarkers[i]);
-        } else {
+        if (friendMarkers[i].getAnimation() == null) {
             friendMarkers[i].setAnimation(google.maps.Animation.BOUNCE);
             friendWindow[i].open(map, friendMarkers[i]);
+        } else {
+            friendMarkers[i].setAnimation(null);
+            friendWindow[i].close(map, friendMarkers[i]);
         }
       });
       friendWindow[i] = new google.maps.InfoWindow({ /* 팝업창 생성 */
@@ -586,7 +585,8 @@
     }
         
   function markNotFriends(i, mapAdj, dropAdj) {
-      var notFriendLoc = notFriendLocArr[i];      
+      var notFriendLoc = notFriendLocArr[i];   
+      var notFriendWindow = []; /* 회원들 팝업창 */
       if (mapAdj == 0 && dropAdj == 0) {
           notFriendMarkers.push(new google.maps.Marker({
             title: notFriendLoc[0],
@@ -611,15 +611,6 @@
             icon: 'images/icons/pin.png'
         }));
       }
-      notFriendMarkers[i].addListener('click', function() {
-        if (notFriendMarkers[i].getAnimation() !== null) {
-            notFriendMarkers[i].setAnimation(null);
-            notFriendWindow[i].close(map, notFriendMarkers[i]);
-        } else {
-            notFriendWindow[i].open(map, notFriendMarkers[i]);
-            notFriendMarkers[i].setAnimation(google.maps.Animation.BOUNCE);
-        }
-      });
       notFriendWindow[i] = new google.maps.InfoWindow({ /* 팝업창 생성 */
         content: "<div id='iw-container'>" +
           "<div class='iw-title'>" + notFriendLocArr[i][0] + "</div>" +
@@ -636,20 +627,33 @@
           "</div>" +
           "</div>"
       });
+        notFriendMarkers[i].addListener('click', function() {
+          if (notFriendMarkers[i].getAnimation() == null) {
+            notFriendWindow[i].open(map, notFriendMarkers[i]);
+            notFriendMarkers[i].setAnimation(google.maps.Animation.BOUNCE);
+        } else {
+            notFriendMarkers[i].setAnimation(null);
+            notFriendWindow[i].close(map, notFriendMarkers[i]);
+        }
+        });
+      
       google.maps.event.addListener(notFriendWindow[i], 'domready', function() {
         infoWindowsCSS();// 팝업창 css 설정해줌
       });
       memberBtn.push('#member' + notFriendLocArr[i][6]);
       $(document).off('click', memberBtn[i]);
+      $(document).off('dbclick', memberBtn[i]);
       $(document).on('click', memberBtn[i], function(e) {  
         e.preventDefault();
         console.log(notFriendMarkers[i]);
-        if (notFriendMarkers[i].getAnimation() !== null) {
-            notFriendMarkers[i].setAnimation(null);
-            notFriendWindow[i].close(map, notFriendMarkers[i]);
-        } else {
+        console.log(notFriendWindow[i]);
+        console.log(memberBtn[i]);
+        if (notFriendMarkers[i].getAnimation() == null) {
             notFriendWindow[i].open(map, notFriendMarkers[i]);
             notFriendMarkers[i].setAnimation(google.maps.Animation.BOUNCE);
+        } else {
+            notFriendMarkers[i].setAnimation(null);
+            notFriendWindow[i].close(map, notFriendMarkers[i]);
         }
       });
     }
@@ -1370,5 +1374,5 @@
   } // initMap 끝 
   
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&callback=initMap" async defer></script>
-<link rel='stylesheet' href="css/main_map.css" />
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4"></script>-->
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&callback=initMap" async defer></script>-->
