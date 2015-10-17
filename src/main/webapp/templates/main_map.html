@@ -609,7 +609,7 @@
           "<div class='iw-subTitle'>" +
           "<img src='images/defaultProfilePicture.png' class='img-circle iw-img'>" +
           "</div>" +
-          "<div class='iw-subTitle'>" +
+          "<div class='iw-subTitle iw-subTitle2'>" +
           "<input type='txt' class='form-control input-xs' value=" + notFriendLocArr[i][3] + ">" +
           "<input type='button' class='btn btn-info btn-xs btn-block btn-addfriend-popup' value='친구추가' mno-data='" + notFriendLocArr[i][6] + "'>" +
           "</div>" +
@@ -1248,7 +1248,7 @@
   // popup창에서 '친구추가' 버튼
   $(document).on('click', '.btn-addfriend-popup', function() {
       var parent = this;
-    $.ajax(contextRoot + 'frd/insert.do', {
+    $.ajax(contextRoot + '/frd/insert.do', {
         method: 'post',
         dataType: 'json',
         data: {
@@ -1256,8 +1256,31 @@
             mno: sessionStorage.getItem('mno')
         },
       success: function(result) {
+        var frdmno = $(parent).attr('mno-data')
+        $(parent).hide();
+        checkStateM[frdmno] = 1;
+        console.log("checkStateM[" + frdmno + "]: " + checkStateM[frdmno]);
+        $(parent).closest('.iw-subTitle2').append('<input type="button" class="btn btn-primary btn-xs btn-block btn-addfriend-popup addfriend-btn-adding" mno-data = "' + notFriendLocArr[frdmno][6] +'" value="요청중">');
+        assignButton(frdmno);
         }
       })
+    
+    for (var i = 0; i < notFriendLocArr.length; i++) {
+      (function(i) {
+        $.getJSON(contextRoot + '/frd/checkRelationMembers.do', {
+          mno: sessionStorage.getItem('mno'),
+          frdmno: notFriendLocArr[i][6]
+        }, function(results) {
+          if (results.data != 0) {
+            checkStateM[i] = results.data.state;
+          } else {
+            checkStateM[i] = 0;
+          }
+          assignButton(i);
+        });
+      })(i);
+      }
+    friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
   });
   // friendbox에서 '친구추가' 버튼
   $(document).on('click', '.addfriend-btn-add', function() {
@@ -1270,13 +1293,12 @@
             mno: sessionStorage.getItem('mno')
         },
       success: function(result) {
-        $(parent).hide();
         var frdmno = $(parent).attr('mno-data')
-        $(parent).closest('.panel-member-append').append('<input type="button" class="btn btn-primary btn-xs addfriend-btn addfriend-btn-adding" mno-data = "' + notFriendLocArr[frdmno][6] +'" value="요청중">');
+        $(parent).hide();
         checkStateM[frdmno] = 1;
         console.log("checkStateM[" + frdmno + "]: " + checkStateM[frdmno]);
+        $(parent).closest('.panel-member-append').append('<input type="button" class="btn btn-primary btn-xs addfriend-btn addfriend-btn-adding" mno-data = "' + notFriendLocArr[frdmno][6] +'" value="요청중">');
         assignButton(frdmno);
-        console.log(buttonTypes[frdmno]);
        }
       })
     

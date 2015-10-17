@@ -109,8 +109,8 @@ public class FriendController {
   
   @RequestMapping("/insert")
   public void addFrd(int frdmno, int mno) {
-    System.out.println(frdmno);
-    System.out.println(mno);
+    System.out.print("[["+mno+"가 ");
+    System.out.println(frdmno + "에게 친구 신청]]");
     
     FriendList friendList = new FriendList();
     FriendList friendList2 = new FriendList();
@@ -141,7 +141,7 @@ public class FriendController {
       
     } catch (Exception e) {
       
-      System.out.println("frdmno가 frd_t 테이블에 존재 하지 않습니다.");
+      System.out.println("frdmno"+"("+frdmno+")가 frd_t 테이블에 존재 하지 않습니다.");
       result.put("data", 0);
       return result;
     }
@@ -163,7 +163,7 @@ public class FriendController {
       
     } catch (Exception e) {
       
-      System.out.println("frdmno가 frd_t 테이블에 존재 하지 않습니다.");
+      System.out.println("frdmno"+"("+frdmno+")가 frd_t 테이블에 존재 하지 않습니다.");
       result.put("data", 0);
       return result;
     }
