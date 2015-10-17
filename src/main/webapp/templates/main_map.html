@@ -1,4 +1,4 @@
-<link rel='stylesheet' href="css/main_map.css" />
+
 <div id="mainMap" onmousedown="return false"> 
 </div>
 <!-- infoModal에 있는 구글맵 id가 map이라 mainMap으로 명명-->
@@ -87,8 +87,10 @@
   var myRealHometown = 0;
   var myHometownC = 0;
   var buttonTypes = [];
+  var buttonTypesB = [];
   var checkStateF = [];
   var checkStateM = [];
+  var checkStateMB = [];
   
   var queryString1 = [];
   var queryString2 = [];
@@ -181,16 +183,21 @@
           mno: sessionStorage.getItem('mno'),
           frdmno: notFriendLocArr[i][6]
         }, function(results) {
+          var mno = sessionStorage.getItem('mno');
+          var frdmno = notFriendLocArr[i][6];
 //          console.log("frdmno: " + notFriendLocArr[i][6]);
           if (results.data != 0) {
             checkStateM[i] = results.data.state;
-            console.log("checkStateM" + [i] + "(" + sessionStorage.getItem("mno") + "-" + notFriendLocArr[i][0] +"["+ notFriendLocArr[i][6]+ "]): " + checkStateM[i]);
+            checkStateMB[i] = results.data.state;
+            console.log("checkStateM" + notFriendLocArr[i][6] + "(" + sessionStorage.getItem("mno") + "-" + notFriendLocArr[i][0] +"["+ notFriendLocArr[i][6]+ "]): " + checkStateM[i]);
           } else {
             checkStateM[i] = 0;
-            console.log("checkStateM" + [i] + "(" + sessionStorage.getItem("mno") + "-" + notFriendLocArr[i][0] +"["+ notFriendLocArr[i][6]+ "]): " + checkStateM[i]);
+            checkStateMB[i] = 0;
+            console.log("checkStateM" + notFriendLocArr[i][6] + "(" + sessionStorage.getItem("mno") + "-" + notFriendLocArr[i][0] +"["+ notFriendLocArr[i][6]+ "]): " + checkStateM[i]);
           }
 //          console.log(checkStateM[i]);
-          assignButton(i);
+          assignButton(i, frdmno);
+          assignButtonBlock(i, frdmno);
           friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
         });
       })(i);
@@ -198,18 +205,29 @@
     })
   })();
 
-  function assignButton(i) {
+  function assignButton(i, frdmno) {
     if (checkStateM[i] == 0) {
-       buttonTypes[i] = '<input type="button" class="btn btn-info btn-xs nohover addfriend-btn addfriend-btn-add" mno-data = "' + notFriendLocArr[i][6] +'" value="친구추가">';
+       buttonTypes[i] = '<input type="button" class="btn btn-info btn-xs nohover addfriend-btn addfriend-btn-add" mno-data = "' + frdmno +'" value="친구추가">';
     }
     if (checkStateM[i] == 1) {
-       buttonTypes[i] = '<input type="button" class="btn btn-primary btn-xs addfriend-btn addfriend-btn-adding" mno-data = "' + notFriendLocArr[i][6] +'" value="요청중">';
+       buttonTypes[i] = '<input type="button" class="btn btn-primary btn-xs addfriend-btn addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">';
     }
     if (checkStateM[i] == 3) { 
-       buttonTypes[i] = '<a data-toggle="modal" href="#addfriendModal"><input type="button" class="btn btn-success btn-xs addfriend-btn addfriend-btn-accepting" mno-data = "' + notFriendLocArr[i][6] +'" value="수락하기"></a>';
+       buttonTypes[i] = '<a data-toggle="modal" href="#addfriendModal"><input type="button" class="btn btn-success btn-xs addfriend-btn addfriend-btn-accepting" mno-data = "' + frdmno +'" value="수락하기"></a>';
     }
   }
   
+  function assignButtonBlock(i, frdmno) {
+    if (checkStateMB[i] == 0) {
+       buttonTypesB[i] = '<input type="button" class="btn btn-info btn-xs nohover addfriend-btn-block addfriend-btn-add" mno-data = "' + frdmno +'" value="친구추가">';
+    }
+    if (checkStateMB[i] == 1) {
+       buttonTypesB[i] = '<input type="button" class="btn btn-primary btn-xs addfriend-btn-block  addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">';
+    }
+    if (checkStateMB[i] == 3) { 
+       buttonTypesB[i] = '<a data-toggle="modal" href="#addfriendModal"><input type="button" class="btn btn-success btn-xs addfriend-btn-block addfriend-btn-accepting" mno-data = "' + frdmno +'" value="수락하기"></a>';
+    }
+  }
 
   function friendList(i) {
     if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
@@ -609,9 +627,11 @@
           "<div class='iw-subTitle'>" +
           "<img src='images/defaultProfilePicture.png' class='img-circle iw-img'>" +
           "</div>" +
-          "<div class='iw-subTitle iw-subTitle2'>" +
+          "<div class='iw-subTitle'>" +
           "<input type='txt' class='form-control input-xs' value=" + notFriendLocArr[i][3] + ">" +
-          "<input type='button' class='btn btn-info btn-xs btn-block btn-addfriend-popup' value='친구추가' mno-data='" + notFriendLocArr[i][6] + "'>" +
+          "<div class='iw-subTitle2'>" + 
+          buttonTypesB[i] + 
+          "</div>" +
           "</div>" +
           "</div>" +
           "</div>"
@@ -1243,7 +1263,7 @@
     }
   });
    
-} // initMap 끝 
+
   
   // popup창에서 '친구추가' 버튼
   $(document).on('click', '.btn-addfriend-popup', function() {
@@ -1260,8 +1280,9 @@
         $(parent).hide();
         checkStateM[frdmno] = 1;
         console.log("checkStateM[" + frdmno + "]: " + checkStateM[frdmno]);
-        $(parent).closest('.iw-subTitle2').append('<input type="button" class="btn btn-primary btn-xs btn-block btn-addfriend-popup addfriend-btn-adding" mno-data = "' + notFriendLocArr[frdmno][6] +'" value="요청중">');
+        $(parent).closest('.iw-subTitle2').append('<input type="button" class="btn btn-primary btn-xs btn-block btn-addfriend-popup addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">');
         assignButton(frdmno);
+        assignButtonBlock(i, frdmno);
         }
       })
     
@@ -1277,6 +1298,7 @@
             checkStateM[i] = 0;
           }
           assignButton(i);
+          assignButtonBlock(i, frdmno);
         });
       })(i);
       }
@@ -1293,31 +1315,35 @@
             mno: sessionStorage.getItem('mno')
         },
       success: function(result) {
+        var mno = sessionStorage.getItem('mno');
         var frdmno = $(parent).attr('mno-data')
         $(parent).hide();
         checkStateM[frdmno] = 1;
+        checkStateMB[frdmno] = 1;
         console.log("checkStateM[" + frdmno + "]: " + checkStateM[frdmno]);
-        $(parent).closest('.panel-member-append').append('<input type="button" class="btn btn-primary btn-xs addfriend-btn addfriend-btn-adding" mno-data = "' + notFriendLocArr[frdmno][6] +'" value="요청중">');
-        assignButton(frdmno);
+        $(parent).closest('.panel-member-append').append('<input type="button" class="btn btn-primary btn-xs addfriend-btn addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">');
+        for (var i = 0; i < notFriendLocArr.length; i++) {
+          (function(i) {
+            $.getJSON(contextRoot + '/frd/checkRelationMembers.do', {
+              mno: sessionStorage.getItem('mno'),
+              frdmno: notFriendLocArr[i][6]
+            }, function(results) {
+              if (results.data != 0) {
+                checkStateM[i] = results.data.state;
+                checkStateMB[i] = results.data.state;
+              } else {
+                checkStateM[i] = 0;
+                checkStateMB[i] = 0;
+              }
+              assignButton(i, frdmno);
+              assignButtonBlock(i, frdmno);
+              clearMarkers();
+              renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+            });
+          })(i);
+        }
        }
       })
-    
-    for (var i = 0; i < notFriendLocArr.length; i++) {
-      (function(i) {
-        $.getJSON(contextRoot + '/frd/checkRelationMembers.do', {
-          mno: sessionStorage.getItem('mno'),
-          frdmno: notFriendLocArr[i][6]
-        }, function(results) {
-          if (results.data != 0) {
-            checkStateM[i] = results.data.state;
-          } else {
-            checkStateM[i] = 0;
-          }
-          assignButton(i);
-        });
-      })(i);
-      }
-    
   });
   // friendbox에서 '요청중' 버튼
   $(document).on('click', '.addfriend-btn-adding', function(e) {
@@ -1341,7 +1367,8 @@
       })
     });
   
-  
+  } // initMap 끝 
   
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&callback=initMap" async defer></script>
+<link rel='stylesheet' href="css/main_map.css" />

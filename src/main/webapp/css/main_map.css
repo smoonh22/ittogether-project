@@ -64,6 +64,7 @@
   right: 15px;
   table-layout: fixed;
   overflow: scroll;
+  overflow-x: hidden;
 }
 #friend-table {
 /*  margin: 10px;*/
@@ -93,7 +94,7 @@
 }
 
 .friendBalloon {
-  border : 1px;
+  border : 0px;
 }
 .photo-in-Ballon {
   text-align: center;
@@ -129,7 +130,6 @@
     border-radius: 10px 10px 10px 10px;
 }
 #iw-container {
-    margin-bottom: 0px;
     width: 200px ;
 } 
 #iw-container .iw-title {
@@ -167,6 +167,13 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
+  padding: 5px;
+}
+.iw-subTitle2 {
+  text-align: center;
+  margin: auto;
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
 .iw-img {
   width: 80px;
@@ -175,10 +182,12 @@
   max-width: 80px;
 }
 textarea {
-   resize: none;
+  resize: none;
 }
-
-
+.addfriend-btn-block  {
+  text-align: center;
+  width: 178px;
+}
 
 
 .addfriend-modal-title {

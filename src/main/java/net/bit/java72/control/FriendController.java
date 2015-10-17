@@ -141,7 +141,7 @@ public class FriendController {
       
     } catch (Exception e) {
       
-      System.out.println("frdmno"+"("+frdmno+")가 frd_t 테이블에 존재 하지 않습니다.");
+      System.out.println("frdmno"+"("+frdmno+")이 frd_t 테이블에 존재 하지 않습니다.");
       result.put("data", 0);
       return result;
     }
@@ -163,7 +163,7 @@ public class FriendController {
       
     } catch (Exception e) {
       
-      System.out.println("frdmno"+"("+frdmno+")가 frd_t 테이블에 존재 하지 않습니다.");
+      System.out.println("frdmno"+"("+frdmno+")이 frd_t 테이블에 존재 하지 않습니다.");
       result.put("data", 0);
       return result;
     }
