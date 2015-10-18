@@ -101,10 +101,10 @@
 }
 .match-friendimg {
   float: left;
-  width: 70px;
-  height: 70px;
-  max-height: 70px;
-  max-width: 70px;
+  width: 60px;
+  height: 60px;
+  max-height: 60px;
+  max-width: 60px;
   padding: 5px;
 }
 .match-heading {
