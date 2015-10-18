@@ -74,7 +74,12 @@
   var checkStateF  = [];  var checkStateM  = [];  var checkStateMB = [];
   var queryString1 = [];  var queryString2 = [];  var queryString3 = [];  var queryString4 = [];
   
-  
+    
+(function() {
+  getMyFriendsInfo();
+  getMyMembers();
+})(); // 데이터 로딩 함수 끝
+
   function getMyInfo() {
     $.getJSON(contextRoot + '/member/getMyLoc.do', {
       mno: sessionStorage.getItem('mno')
@@ -89,6 +94,8 @@
       myAge = results.data[0].age;
       myHobby = results.data[0].hobby;
       myHometown = results.data[0].hometown;
+      console.log('initMap() 실행');  
+      initMap();
     });
   }
   
@@ -117,41 +124,7 @@
     });
   }
   
-  
-function checkRelationMembers(i) {
-        $.getJSON(contextRoot + '/frd/checkRelationMembers.do', {
-          mno: sessionStorage.getItem('mno'),
-          frdmno: notFriendLocArr[i][6]
-        }, function(results) {
-          var mno = sessionStorage.getItem('mno');
-          var frdmno = notFriendLocArr[i][6];
-//          console.log("frdmno: " + notFriendLocArr[i][6]);
-          if (results.data != 0) {
-            checkStateM[i] = results.data.state;
-            checkStateMB[i] = results.data.state;
-            console.log("checkStateM" + notFriendLocArr[i][6] + "(" + sessionStorage.getItem("mno") + "-" + notFriendLocArr[i][0] +"["+ notFriendLocArr[i][6]+ "]): " + checkStateM[i]);
-          } else {
-            checkStateM[i] = 0;
-            checkStateMB[i] = 0;
-            console.log("checkStateM" + notFriendLocArr[i][6] + "(" + sessionStorage.getItem("mno") + "-" + notFriendLocArr[i][0] +"["+ notFriendLocArr[i][6]+ "]): " + checkStateM[i]);
-          }
-//          console.log(checkStateM[i]);
-          assignButton(i, frdmno);
-          assignButtonBlock(i, frdmno);
-          friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-          if (i == notFriendLocArr.length - 1) {
-            if (buttonTypes[notFriendLocArr.length - 1] || buttonTypesB[notFriendLocArr.length - 1]) {
-              initMap();
-              console.log('initMap() 실행');  
-            }
-          }
-        });
-}
-  
-(function() {
-    getMyInfo();
-    getMyFriendsInfo();
-      
+  function getMyMembers() {
     $.getJSON(contextRoot + '/member/getMembers.do', {
       mno: sessionStorage.getItem('mno')
     }, function(results) {
@@ -173,13 +146,38 @@ function checkRelationMembers(i) {
         console.log("주변회원" + i + ": " + notFriendLocArr[i][0]+"/"+
                     notFriendLocArr[i][5]+"/"+notFriendLocArr[i][8]);        
       }
-      
-      for (var i = 0; i < notFriendLocArr.length; i++) {
+      for (var i = 0; i < notFriendLocArr.length; i++){
         checkRelationMembers(i);
       }
-    })    
-  })(); // 데이터 로딩 함수 끝
+    })
+  }
   
+  function checkRelationMembers(i) {
+    $.getJSON(contextRoot + '/frd/checkRelationMembers.do', {
+      mno: sessionStorage.getItem('mno'),
+      frdmno: notFriendLocArr[i][6]
+    }, function(results) {
+      var mno = sessionStorage.getItem('mno');
+      var frdmno = notFriendLocArr[i][6];
+//          console.log("frdmno: " + notFriendLocArr[i][6]);
+      if (results.data != 0) {
+        checkStateM[i] = results.data.state;
+        checkStateMB[i] = results.data.state;
+        console.log("checkStateM" + notFriendLocArr[i][6] + "(" + sessionStorage.getItem("mno") + "-" + notFriendLocArr[i][0] +"["+ notFriendLocArr[i][6]+ "]): " + checkStateM[i]);
+      } else {
+        checkStateM[i] = 0;
+        checkStateMB[i] = 0;
+        console.log("checkStateM" + notFriendLocArr[i][6] + "(" + sessionStorage.getItem("mno") + "-" + notFriendLocArr[i][0] +"["+ notFriendLocArr[i][6]+ "]): " + checkStateM[i]);
+      }
+//          console.log(checkStateM[i]);
+      assignButton(i, frdmno);
+      assignButtonBlock(i, frdmno);
+      friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+      if (i == notFriendLocArr.length - 1) {
+        getMyInfo();
+      }
+      });
+  }
 
   
   function assignButton(i, frdmno) {
