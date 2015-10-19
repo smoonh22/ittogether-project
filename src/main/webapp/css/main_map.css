@@ -170,10 +170,11 @@
   padding: 5px;
 }
 .iw-subTitle2 {
+  font-size: 0.85em;
   text-align: center;
   margin: auto;
-  padding-top: 3px;
-  padding-bottom: 3px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 .iw-img {
   width: 80px;
@@ -190,19 +191,24 @@ textarea {
 }
 
 
+/*
 .addfriend-modal-title {
   text-align: center;
 }
+*/
 .addfriend-modal-img {
   width: 120px;
   height: 120px;
   max-height: 120px;
   max-width: 120px;
+  margin: auto;
+  display: block;
 /*
   margin-left: auto;
   margin-right: auto;
 */
 }
-.addfriend-modal-body {
+.addfriend-modal-body img{
   margin: auto;
+  display: block;
 }

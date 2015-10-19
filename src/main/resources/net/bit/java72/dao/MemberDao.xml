@@ -121,7 +121,9 @@
   
   <!-- 비 친구들 뿌려줌 -->
   <select id="getNoneFriendMarks" parameterType="int" resultMap="MemberMap">
-	  SELECT * FROM memb_t where mno = #{value}
+	  SELECT * 
+	  FROM memb_t 
+	  WHERE mno = #{value}
   </select>
   
 </mapper>

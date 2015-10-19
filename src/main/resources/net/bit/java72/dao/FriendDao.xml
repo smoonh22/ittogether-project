@@ -57,7 +57,9 @@
   <select id="checkFriendAddButton" parameterType="map" resultMap="FListMap">
     SELECT * 
     FROM FRD_T
-    WHERE MNO=#{mno} and FRDNO=#{frdmno};
+    WHERE MNO=#{mno} and FRDNO=#{frdmno}
+    ORDER BY mno
+    
   </select>
    
    <!-- 친구아닌사람 검색에서 친구 검색으로 수정 -->

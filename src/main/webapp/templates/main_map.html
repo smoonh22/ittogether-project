@@ -46,20 +46,27 @@
   </div>
 </div>
 
-<div id="addfriendModal" class="modal fade ">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-header">
-        <h4 class="modal-title addfriend-modal-title">친구 추가 완료!</h4>
+<!-- modal start -->
+<div id="addfriendModal" class="modal fade">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header panel-heading">
+        <h5 class="modal-title addfriend-modal-title"></h5>
       </div>
-      <div class="modal-content">
-        <div class="modal-body addfriend-modal-body">
-          
+      <div class="modal-body addfriend-modal-body">
+        <div class="addfriend-modal-body2">
         </div>
-        <!-- /.modal-content -->
       </div>
-      <!-- /.modal-dialog -->
+<!--
+      <div class="modal-footer">
+      </div>
+-->
+      <!-- /.modal-content -->
     </div>
-  </div><!-- modal 끝 -->
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+</div>
 
 <script>
   // json형식으로 받아온 나의 위치 데이터를 받아옴
@@ -74,10 +81,11 @@
   var checkStateF  = [];  var checkStateM  = [];  var checkStateMB = [];
   var queryString1 = [];  var queryString2 = [];  var queryString3 = [];  var queryString4 = [];
   
-    
+  var picSrc;
+  var nameVal;
 (function() {
   getMyFriendsInfo();
-  getMyMembers();
+  getMyMembers(1);
 })(); // 데이터 로딩 함수 끝
 
   function getMyInfo() {
@@ -99,7 +107,7 @@
     });
   }
   
-  function getMyFriendsInfo() {
+  function getMyFriendsInfo(mySwitchForModal, picSrcm, nameVal) {
     $.getJSON(contextRoot + '/member/getFriends.do', {
       frdno: sessionStorage.getItem('mno'),
       mno: sessionStorage.getItem('mno')
@@ -119,12 +127,34 @@
           results.data[i].mno                 //10
         ];
         friendLocArr.push(tempArr);
-        console.log("친구" + i + ": " + friendLocArr[i][0]+"/"+ friendLocArr[i][5]+"/"+ friendLocArr[i][7]);
+        console.log("친구" + i + ": " + friendLocArr[i][0]+"/"+ friendLocArr[i][5]+"/"+ friendLocArr[i][10]);
+      }
+      if (mySwitchForModal == 1) {
+//        var varPic = friendLocArr.length - 1 ;
+//        console.log(varPic);
+        
+//        var picSrc = $('.match-friendimg').attr('src');
+        console.log('append();');
+        
+        $('.modal-title').text(nameVal+'님과 친구가 되었습니다.');
+        $('.addfriend-modal-body2').remove();
+        $('.addfriend-modal-body').append('<div class="addfriend-modal-body2"><img class="img-circle addfriend-modal-img" src="'+picSrc+'"></div>');
       }
     });
   }
   
-  function getMyMembers() {
+  function getAttr(elm, attr) {
+    if (elm.getAttribute(attr) !== null) {
+        return elm.getAttribute(attr);
+    } else {
+        switch (attr) {
+        case "class": return elm.getAttribute("className"); break;
+        default: return elm.getAttribute(attr);
+        }
+    }
+}
+  
+  function getMyMembers(mySwitch) {
     $.getJSON(contextRoot + '/member/getMembers.do', {
       mno: sessionStorage.getItem('mno')
     }, function(results) {
@@ -144,15 +174,15 @@
         ];
         notFriendLocArr.push(tempArr);
         console.log("주변회원" + i + ": " + notFriendLocArr[i][0]+"/"+
-                    notFriendLocArr[i][5]+"/"+notFriendLocArr[i][8]);        
+                    notFriendLocArr[i][5]+"/"+notFriendLocArr[i][6]);        
       }
-      for (var i = 0; i < notFriendLocArr.length; i++){
-        checkRelationMembers(i);
+        for (var i = 0; i < notFriendLocArr.length; i++){
+          checkRelationMembers(i, mySwitch); 
       }
     })
   }
   
-  function checkRelationMembers(i) {
+  function checkRelationMembers(i, mySwitch) {
     $.getJSON(contextRoot + '/frd/checkRelationMembers.do', {
       mno: sessionStorage.getItem('mno'),
       frdmno: notFriendLocArr[i][6]
@@ -173,12 +203,11 @@
       assignButton(i, frdmno);
       assignButtonBlock(i, frdmno);
       friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-      if (i == notFriendLocArr.length - 1) {
+      if ((mySwitch == 1) && (i == notFriendLocArr.length - 1)) {
         getMyInfo();
       }
       });
   }
-
   
   function assignButton(i, frdmno) {
     if (checkStateM[i] == 0) {
@@ -211,8 +240,8 @@
       "BestMatch" +
       '</div>' +
       '<div class="panel-body panel-member-desc">' +
-      '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+notFriendLocArr[i][6] +'" class="img-circle match-friendimg"></a>' +
-      '<div>' + notFriendLocArr[i][0] + '</div>' +
+      '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i +'" class="img-circle match-friendimg"></a>' +
+      '<div class="panel-member-name">' + notFriendLocArr[i][0] + '</div>' +
       '<div class="panel-member-append">' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
       '<div>취미와 고향이 일치합니다.</div>' +          
       '</div>' +
@@ -221,8 +250,8 @@
   if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
       queryString2.push('<div class="panel panel-info myPanel">' +
       '<div class="panel-body panel-member-desc">' +
-      '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+notFriendLocArr[i][6] +'" class="img-circle match-friendimg"></a>' +
-      '<div>' + notFriendLocArr[i][0] + '</div>' +
+      '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i+'" class="img-circle match-friendimg"></a>' +
+      '<div class="panel-member-name">' + notFriendLocArr[i][0] + '</div>' +
       '<div class="panel-member-append">' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
       '<div>취미가 일치합니다.</div>' +          
       '</div>' +
@@ -231,8 +260,8 @@
   if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
       queryString3.push('<div class="panel panel-info myPanel">' +
       '<div class="panel-body panel-member-desc">' +
-      '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+notFriendLocArr[i][6] +'" class="img-circle match-friendimg"></a>' +
-      '<div>' + notFriendLocArr[i][0] + '</div>' +
+      '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i +'" class="img-circle match-friendimg"></a>' +
+      '<div class="panel-member-name">' + notFriendLocArr[i][0] + '</div>' +
       '<div class="panel-member-append">' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
       '<div>고향이 일치합니다.</div>' +          
       '</div>' +
@@ -241,8 +270,8 @@
   if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
       queryString4.push('<div class="panel panel-info myPanel">' +
       '<div class="panel-body panel-member-desc">' +
-      '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+notFriendLocArr[i][6] +'" class="img-circle match-friendimg"></a>' +
-      '<div>' + notFriendLocArr[i][0] + '</div>' +
+      '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i +'" class="img-circle match-friendimg"></a>' +
+      '<div class="panel-member-name">' + notFriendLocArr[i][0] + '</div>' +
       '<div class="panel-member-append">' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
       '<div></div>' +          
       '</div>' +
@@ -602,6 +631,9 @@
           "<div class='iw-subTitle'>" +
           "<input type='txt' class='form-control input-xs' value=" + notFriendLocArr[i][3] + ">" +
           "<div class='iw-subTitle2'>" + 
+          "<div>나이: "+notFriendLocArr[i][8]+"</div>" +
+          "<div>취미: "+notFriendLocArr[i][9]+"</div>" +
+          "<div>고향: "+notFriendLocArr[i][10]+"</div>" +
           buttonTypesB[i] + 
           "</div>" +
           "</div>" +
@@ -634,7 +666,7 @@
         infoWindowsCSS();// 팝업창 css 설정해줌
       });
       
-      memberBtn.push('#member' + notFriendLocArr[i][6]);
+      memberBtn.push('#member' + i);
       $(document).off('click', memberBtn[i]);
 //      $(document).off('dbclick', memberBtn[i]);
       $(document).on('click', memberBtn[i], function(e) {  
@@ -734,7 +766,7 @@
       for (var i = 0; i < friendLocArr.length; i++) {
         if (friendLocArr[i][5] <  distant) {
           markFriends(i,1,0);
-          console.log('#'+friendLocArr[i][0]);
+          console.log('#친구'+ i +": "+friendLocArr[i][0]);
         } else {
           markFriends(i,0,0);
         }
@@ -742,7 +774,7 @@
       for (var i = 0; i < notFriendLocArr.length; i++) {
         if (notFriendLocArr[i][5] <  distant) {
           markNotFriends(i,1,0);
-          console.log('*'+notFriendLocArr[i][0]);
+          console.log('*멤버'+ i+": " +notFriendLocArr[i][0]);
         } else {
           markNotFriends(i,0,0);
         }
@@ -755,7 +787,7 @@
         if (friendLocArr[i][5] <  distant &&
             friendLocArr[i][6] == sex) {
           markFriends(i,1,0);
-          console.log('#'+friendLocArr[i][0]);
+          console.log('#친구'+ i +": "+friendLocArr[i][0]);
         } else {
           markFriends(i,0,0);
         }
@@ -764,7 +796,7 @@
         if (notFriendLocArr[i][5] <  distant &&
             notFriendLocArr[i][7] == sex) {
           markNotFriends(i,1,0);
-          console.log('*'+notFriendLocArr[i][0]);
+          console.log('*멤버'+ i +": "+notFriendLocArr[i][0]);
         } else {
           markNotFriends(i,0,0);
         }
@@ -778,7 +810,7 @@
             friendLocArr[i][7] >  ageMin  &&
             friendLocArr[i][7] <  ageMax){
           markFriends(i,1,0);
-          console.log('#'+friendLocArr[i][0]);
+          console.log('#친구'+ i +": "+friendLocArr[i][0]);
         } else {
           markFriends(i,0,0);
         }
@@ -788,7 +820,7 @@
             notFriendLocArr[i][8] >  ageMin  &&
             notFriendLocArr[i][8] <  ageMax) {
           markNotFriends(i,1,0);
-          console.log('*'+notFriendLocArr[i][0]);
+          console.log('*멤버'+ i +": "+notFriendLocArr[i][0]);
         } else {
           markNotFriends(i,0,0);
         }
@@ -801,7 +833,7 @@
         if (friendLocArr[i][5] <  distant &&
             friendLocArr[i][8] == myHobbyC) {
           markFriends(i,1,0);
-          console.log('#'+friendLocArr[i][0]);
+          console.log('#친구'+ i +": "+friendLocArr[i][0]);
         } else {
           markFriends(i,0,0);
         }
@@ -810,7 +842,7 @@
         if (notFriendLocArr[i][5] <  distant &&
             notFriendLocArr[i][9] == myHobbyC) {
           markNotFriends(i,1,0);
-          console.log('*'+notFriendLocArr[i][0]);
+          console.log('*멤버'+ i +": "+notFriendLocArr[i][0]);
         } else {
           markNotFriends(i,0,0);
         }
@@ -823,7 +855,7 @@
         if (friendLocArr[i][5] <  distant    &&
             friendLocArr[i][9] == myHometownC) {
           markFriends(i,1,0);
-          console.log('#'+friendLocArr[i][0]);
+          console.log('#친구'+ i +": "+friendLocArr[i][0]);
         } else {
           markFriends(i,0,0);
         }
@@ -832,7 +864,7 @@
         if (notFriendLocArr[i][5]  <  distant    &&
             notFriendLocArr[i][10] == myHometownC) {
           markNotFriends(i,1,0);
-          console.log('*'+notFriendLocArr[i][0]);
+          console.log('*멤버'+ i +": "+notFriendLocArr[i][0]);
         } else {
           markNotFriends(i,0,0);
         }
@@ -847,7 +879,7 @@
             friendLocArr[i][7] >  ageMin  &&
             friendLocArr[i][7] <  ageMax) {
           markFriends(i,1,0);
-          console.log('#'+friendLocArr[i][0]);
+          console.log('#친구'+ i +": "+friendLocArr[i][0]);
         } else {
           markFriends(i,0,0);
         }
@@ -858,7 +890,7 @@
             notFriendLocArr[i][8] >  ageMin  &&
             notFriendLocArr[i][8] <  ageMax) {
           markNotFriends(i,1,0);
-          console.log('*'+notFriendLocArr[i][0]);
+          console.log('*멤버'+ i +": "+notFriendLocArr[i][0]);
         } else {
           markNotFriends(i,0,0);
         }
@@ -873,7 +905,7 @@
             friendLocArr[i][7] <  ageMax  &&
             friendLocArr[i][8] == myHobbyC){
           markFriends(i,1,0);
-          console.log('#'+friendLocArr[i][0]);
+          console.log('#친구'+ i +": "+friendLocArr[i][0]);
         } else {
           markFriends(i,0,0);
         }
@@ -884,7 +916,7 @@
             notFriendLocArr[i][8] <  ageMax  &&
             notFriendLocArr[i][9] == myHobbyC) {
           markNotFriends(i,1,0);
-          console.log('*'+notFriendLocArr[i][0]);
+          console.log('*멤버'+ i +": "+notFriendLocArr[i][0]);
         } else {
           markNotFriends(i,0,0);
         }
@@ -898,7 +930,7 @@
             friendLocArr[i][8] == myHobbyC    &&
             friendLocArr[i][9] == myHometownC) {
           markFriends(i,1,0);
-          console.log('#'+friendLocArr[i][0]);
+          console.log('#친구'+ i +": "+friendLocArr[i][0]);
         } else {
           markFriends(i,0,0);
         }
@@ -908,7 +940,7 @@
             notFriendLocArr[i][9]  == myHobbyC    &&
             notFriendLocArr[i][10] == myHometownC) {
           markNotFriends(i,1,0);
-          console.log('*'+notFriendLocArr[i][0]);
+          console.log('*멤버'+ i +": "+notFriendLocArr[i][0]);
         } else {
           markNotFriends(i,0,0);
         }
@@ -922,7 +954,7 @@
             friendLocArr[i][6] == sex     &&
             friendLocArr[i][9] == myHometownC) {
           markFriends(i,1,0);
-          console.log('#'+friendLocArr[i][0]);
+          console.log('#친구'+ i +": "+friendLocArr[i][0]);
         } else {
           markFriends(i,0,0);
         }
@@ -932,7 +964,7 @@
             notFriendLocArr[i][7]  == sex        &&
             notFriendLocArr[i][10] == myHometownC) {
           markNotFriends(i,1,0);
-          console.log('*'+notFriendLocArr[i][0]);
+          console.log('*멤버'+ i +": "+notFriendLocArr[i][0]);
         } else {
           markNotFriends(i,0,0);
         }
@@ -946,7 +978,7 @@
             friendLocArr[i][6] == sex     &&
             friendLocArr[i][8] == myHobbyC) {
           markFriends(i,1,0);
-          console.log('#'+friendLocArr[i][0]);
+          console.log('#친구'+ i +": "+friendLocArr[i][0]);
         } else {
           markFriends(i,0,0);
         }
@@ -956,7 +988,7 @@
             notFriendLocArr[i][7] == sex     &&
             notFriendLocArr[i][9] == myHobbyC) {
           markNotFriends(i,1,0);
-          console.log('*'+notFriendLocArr[i][0]);
+          console.log('*멤버'+ i +": "+notFriendLocArr[i][0]);
         } else {
           markNotFriends(i,0,0);
         }
@@ -971,7 +1003,7 @@
             friendLocArr[i][7] <  ageMax  &&
             friendLocArr[i][9] == myHometownC){
           markFriends(i,1,0);
-          console.log('#'+friendLocArr[i][0]);
+          console.log('#친구'+ i +": "+friendLocArr[i][0]);
         } else {
           markFriends(i,0,0);
         }
@@ -982,7 +1014,7 @@
             notFriendLocArr[i][8]  <  ageMax  &&
             notFriendLocArr[i][10] == myHometownC) {
           markNotFriends(i,1,0);
-          console.log('*'+notFriendLocArr[i][0]);
+          console.log('*멤버'+ i +": "+notFriendLocArr[i][0]);
         } else {
           markNotFriends(i,0,0);
         }
@@ -998,7 +1030,7 @@
             friendLocArr[i][7] <  ageMax  &&
             friendLocArr[i][8] == myHobbyC) {
           markFriends(i,1,0);
-          console.log('#'+friendLocArr[i][0]);
+          console.log('#친구'+ i +": "+friendLocArr[i][0]);
         } else {
           markFriends(i,0,0);
         }
@@ -1010,7 +1042,7 @@
             notFriendLocArr[i][8] <  ageMax  &&
             notFriendLocArr[i][9] == myHobbyC) {
           markNotFriends(i,1,0);
-          console.log('*'+notFriendLocArr[i][0]);
+          console.log('*멤버'+ i +": "+notFriendLocArr[i][0]);
         } else {
           markNotFriends(i,0,0);
         }
@@ -1026,7 +1058,7 @@
             friendLocArr[i][7] <  ageMax  &&
             friendLocArr[i][9] == myHometownC) {
           markFriends(i,1,0);
-          console.log('#'+friendLocArr[i][0]);
+          console.log('#친구'+ i +": "+friendLocArr[i][0]);
         } else {
           markFriends(i,0,0);
         }
@@ -1038,7 +1070,7 @@
             notFriendLocArr[i][8]  <  ageMax  &&
             notFriendLocArr[i][10] == myHometownC) {
           markNotFriends(i,1,0);
-          console.log('*'+notFriendLocArr[i][0]);
+          console.log('*멤버'+ i +": "+notFriendLocArr[i][0]);
         } else {
           markNotFriends(i,0,0);
         }
@@ -1053,7 +1085,7 @@
             friendLocArr[i][8] == myHobbyC   &&
             friendLocArr[i][9] == myHometownC) {
           markFriends(i,1,0);
-          console.log('#'+friendLocArr[i][0]);
+          console.log('#친구'+ i +": "+friendLocArr[i][0]);
         } else {
           markFriends(i,0,0);
         }
@@ -1064,7 +1096,7 @@
             notFriendLocArr[i][9]  == myHobbyC   &&
             notFriendLocArr[i][10] == myHometownC) {
           markNotFriends(i,1,0);
-          console.log('*'+notFriendLocArr[i][0]);
+          console.log('*멤버'+ i +": "+notFriendLocArr[i][0]);
         } else {
           markNotFriends(i,0,0);
         }
@@ -1080,7 +1112,7 @@
             friendLocArr[i][8] == myHobbyC   &&
             friendLocArr[i][9] == myHometownC) {
           markFriends(i,1,0);
-          console.log('#'+friendLocArr[i][0]);
+          console.log('#친구'+ i +": "+friendLocArr[i][0]);
         } else {
           markFriends(i,0,0);
         }
@@ -1092,7 +1124,7 @@
             notFriendLocArr[i][9]  == myHobbyC   &&
             notFriendLocArr[i][10] == myHometownC) {
           markNotFriends(i,1,0);
-          console.log('*'+notFriendLocArr[i][0]);
+          console.log('*멤버'+ i +": "+notFriendLocArr[i][0]);
         } else {
           markNotFriends(i,0,0);
         }
@@ -1109,7 +1141,7 @@
             friendLocArr[i][8] == myHobbyC   &&
             friendLocArr[i][9] == myHometownC) {
           markFriends(i,1,0);
-          console.log('#'+friendLocArr[i][0]);
+          console.log('#친구'+ i +": "+friendLocArr[i][0]);
         } else {
           markFriends(i,0,0);
         }
@@ -1122,7 +1154,7 @@
             notFriendLocArr[i][9]  == myHobbyC   &&
             notFriendLocArr[i][10] == myHometownC) {
           markNotFriends(i,1,0);
-          console.log('*'+notFriendLocArr[i][0]);
+          console.log('*멤버'+ i +": "+notFriendLocArr[i][0]);
         } else {
           markNotFriends(i,0,0);
         }
@@ -1312,7 +1344,7 @@
   });
   // friendbox에서 '친구추가' 버튼
   $(document).on('click', '.addfriend-btn-add', function() {
-      var parent = this;
+    var parent = this;
     $.ajax(contextRoot + '/frd/insert.do', {
         method: 'post',
         dataType: 'json',
@@ -1342,14 +1374,15 @@
                 checkStateM[i] = 0;
                 checkStateMB[i] = 0;
               }
-              assignButton(i, frdmno);
-              assignButtonBlock(i, frdmno);
-              
+              assignButton(i, notFriendLocArr[i][6]);
+              assignButtonBlock(i, notFriendLocArr[i][6]);
+              if (i == (notFriendLocArr.length - 1)) {
+                clearMarkers();
+                renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+              }
             });
           })(i);
         }
-        clearMarkers();
-        renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
        }
       })
   });
@@ -1370,84 +1403,32 @@
       success: function() {
         var mno = sessionStorage.getItem('mno');
         var frdmno = $(parent).attr('mno-data');
+        picSrc = $(parent).closest('.panel-member-desc').find('.match-friendimg').attr('src');
+        nameVal = $(parent).closest('.panel-member-desc').find('.panel-member-name').text();
+        console.log('nameVal: ' + nameVal);
         $(parent).closest('.myPanel').remove();
         checkStateM[frdmno] = 2;
         checkStateMB[frdmno] = 2;
         
+        friendLocArr = [];
+        notFriendLocArr = [];
         
-        $.getJSON(contextRoot + '/member/getFriends.do', {
-          frdno: sessionStorage.getItem('mno'),
-          mno: sessionStorage.getItem('mno')
-        }, function(results) {
-          for (var i = 0; i < results.data.length; i++) {
-            var tempArr = [
-              results.data[i].nickname,           // 0
-              Number(results.data[i].latitude),   // 1
-              Number(results.data[i].longitude),  // 2
-              results.data[i].introduction,       // 3
-              results.data[i].profilePicture,     // 4
-              results.distance[i],                // 5
-              results.data[i].sex,                // 6
-              results.data[i].age,                // 7
-              results.data[i].hobby,              // 8
-              results.data[i].hometown,           // 9
-              results.data[i].mno                 //10
-            ];
-            friendLocArr.push(tempArr);
-            console.log("친구" + i + ": " + friendLocArr[i][0]+"/"+ friendLocArr[i][5]+"/"+ friendLocArr[i][7]);
-          }
-        });
+        getMyFriendsInfo(1, picSrc, nameVal);
+        getMyMembers();
         
-        $.getJSON(contextRoot + '/member/getMembers.do', {
-          mno: sessionStorage.getItem('mno')
-        }, function(results) {
-          for (var i = 0; i < results.data.length; i++) {
-            var tempArr = [
-              results.data[i].nickname,          // 0
-              Number(results.data[i].latitude),  // 1
-              Number(results.data[i].longitude), // 2
-              results.data[i].introduction,      // 3
-              results.data[i].profilePicture,    // 4
-              results.distance[i],               // 5
-              Number(results.data[i].mno),       // 6
-              results.data[i].sex,               // 7
-              results.data[i].age,               // 8
-              results.data[i].hobby,             // 9
-              results.data[i].hometown           //10
-            ];
-            notFriendLocArr.push(tempArr);
-            console.log("주변회원" + i + ": " + notFriendLocArr[i][0]+"/"+
-                        notFriendLocArr[i][5]+"/"+notFriendLocArr[i][8]);        
-          }
-          for (var i = 0; i < notFriendLocArr.length; i++) {
-          (function(i) {
-            $.getJSON(contextRoot + '/frd/checkRelationMembers.do', {
-              mno: sessionStorage.getItem('mno'),
-              frdmno: notFriendLocArr[i][6]
-            }, function(results) {
-              if (results.data != 0) {
-                checkStateM[i] = results.data.state;
-                checkStateMB[i] = results.data.state;
-              } else {
-                checkStateM[i] = 0;
-                checkStateMB[i] = 0;
-              }
-              assignButton(i, frdmno);
-              assignButtonBlock(i, frdmno);      
-            });
-          })(i);
-        }
-        clearMarkers();
-        renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-        });
-
-        $('.addfriend-modal-body').append('<div><img class="img-circle addfriend-modal-img" src="'+notFriendLocArr[frdmno][4]+'"></div>');
+        $(document).on('click', '#addfriendModal', function() {
+          console.log('clearMarkers();');
+          clearMarkers();
+          console.log('renderMarkers();');
+          renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        });    
         
-        console.log('checkArray();');
-        checkArray();
+        
+        
         } // callback 함수 끝
       })
     });
+    
     
   } // initMap 끝 
   
