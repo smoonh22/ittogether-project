@@ -229,7 +229,7 @@
        buttonTypesB[i] = '<input type="button" class="btn btn-primary btn-xs addfriend-btn-block  addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">';
     }
     if (checkStateMB[i] == 3) { 
-       buttonTypesB[i] = '<a data-toggle="modal" href="#addfriendModal"><input type="button" class="btn btn-success btn-xs addfriend-btn-block addfriend-btn-accepting" mno-data = "' + frdmno +'" value="수락하기"></a>';
+       buttonTypesB[i] = '<a data-toggle="modal" href="#addfriendModal"><input type="button" class="btn btn-success btn-xs addfriend-btn-block btn-addfriend-popup-accepting" mno-data = "' + frdmno +'" value="수락하기"></a>';
     }
   }
 
@@ -629,7 +629,7 @@
       notFriendWindow[i] = new google.maps.InfoWindow({ /* 팝업창 생성 */
         content: "<div id='iw-container'>" +
           "<div class='iw-title thisismember'>" + notFriendLocArr[i][0] + "</div>" +
-          "<div class='iw-content'>" +
+          "<div class='iw-content classForSrc'>" +
           "<div class='iw-subTitle'>" +
           "<img src=" + notFriendLocArr[i][4] + " class='img-circle iw-img'>" +
           "</div>" +
@@ -1363,9 +1363,44 @@
         
       }
       });
-    
-    
   });
+  // popup에서 '수락하기' 버튼
+  $(document).on('click', '.btn-addfriend-popup-accepting', function() {
+      var parent = this;
+    $.ajax(contextRoot + '/frd/apply.do', {
+        method: 'post',
+        dataType: 'json',
+        data: {
+            frdmno: $(parent).attr('mno-data'),
+            mno: sessionStorage.getItem('mno')
+        },
+      success: function() {
+        var mno = sessionStorage.getItem('mno');
+        var frdmno = $(parent).attr('mno-data');
+        picSrc = $(parent).closest('.classForSrc').find('img').attr('src');
+        nameVal = $(parent).closest('#iw-container').find('.thisismember').text();
+        console.log('nameVal: ' + nameVal);
+        
+        $(parent).closest('.myPanel').remove();
+        checkStateM[frdmno] = 2;
+        checkStateMB[frdmno] = 2;
+        
+        friendLocArr = [];
+        notFriendLocArr = [];
+        
+        getMyFriendsInfo(1, picSrc, nameVal);
+        getMyMembers();
+        
+        $(document).on('click', '#addfriendModal', function() {
+          console.log('clearMarkers();');
+          clearMarkers();
+          console.log('renderMarkers();');
+          renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        });    
+        } // callback 함수 끝
+      })
+    });
+    
   // friendbox에서 '친구추가' 버튼
   $(document).on('click', '.addfriend-btn-add', function() {
     var parent = this;
@@ -1430,6 +1465,7 @@
         picSrc = $(parent).closest('.panel-member-desc').find('.match-friendimg').attr('src');
         nameVal = $(parent).closest('.panel-member-desc').find('.panel-member-name').text();
         console.log('nameVal: ' + nameVal);
+        
         $(parent).closest('.myPanel').remove();
         checkStateM[frdmno] = 2;
         checkStateMB[frdmno] = 2;
