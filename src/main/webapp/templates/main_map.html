@@ -223,7 +223,7 @@
   
   function assignButtonBlock(i, frdmno) {
     if (checkStateMB[i] == 0) {
-       buttonTypesB[i] = '<input type="button" class="btn btn-info btn-xs nohover addfriend-btn-block addfriend-btn-add" mno-data = "' + frdmno +'" value="친구추가">';
+       buttonTypesB[i] = '<input type="button" class="btn btn-info btn-xs nohover addfriend-btn-block btn-addfriend-popup" mno-data = "' + frdmno +'" value="친구추가">';
     }
     if (checkStateMB[i] == 1) {
        buttonTypesB[i] = '<input type="button" class="btn btn-primary btn-xs addfriend-btn-block  addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">';
@@ -573,13 +573,18 @@
       });
       friendWindow[i] = new google.maps.InfoWindow({ /* 팝업창 생성 */
         content: "<div id='iw-container'>" +
-          "<div class='iw-title'>" + friendLocArr[i][0] + "</div>" +
+          "<div class='iw-title thisisfriend'>" + friendLocArr[i][0] + "</div>" +
           "<div class='iw-content'>" +
           "<div class='iw-subTitle'>" +
           "<img src=" + friendLocArr[i][4] + " class='img-circle iw-img'>" +
           "</div>" +
           "<div class='iw-subTitle'>" +
           "<input type='txt' class='form-control input-xs' value=" + friendLocArr[i][3] + ">" +
+          "<div class='iw-subTitle2'>" + 
+          "<div>나이: "+friendLocArr[i][7]+"</div>" +
+          "<div>취미: "+friendLocArr[i][8]+"</div>" +
+          "<div>고향: "+friendLocArr[i][9]+"</div>" +
+          "</div>" +
           "</div>" +
           "</div>" +
           "</div>"
@@ -623,7 +628,7 @@
       }
       notFriendWindow[i] = new google.maps.InfoWindow({ /* 팝업창 생성 */
         content: "<div id='iw-container'>" +
-          "<div class='iw-title'>" + notFriendLocArr[i][0] + "</div>" +
+          "<div class='iw-title thisismember'>" + notFriendLocArr[i][0] + "</div>" +
           "<div class='iw-content'>" +
           "<div class='iw-subTitle'>" +
           "<img src=" + notFriendLocArr[i][4] + " class='img-circle iw-img'>" +
@@ -663,7 +668,7 @@
         });
       
       google.maps.event.addListener(notFriendWindow[i], 'domready', function() {
-        infoWindowsCSS();// 팝업창 css 설정해줌
+        infoWindowsCSS(i);// 팝업창 css 설정해줌
       });
       
       memberBtn.push('#member' + i);
@@ -685,7 +690,7 @@
       
     }
   //info 윈도우 CSS 정의
-  function infoWindowsCSS() {
+  function infoWindowsCSS(i) {
       var iwOuter = $('.gm-style-iw');
       var iwBackground = iwOuter.prev();
       iwBackground.children(':nth-child(2)').css({
@@ -711,6 +716,14 @@
           opacity: '1'
         });
       });
+//      iwCloseBtn.on('click', function() {
+//        console.log($(this).parent().find('.thisisfriend'));
+//        if ($(this).parent().find('.thisisfriend').length) {
+//          friendMarkers[i].setAnimation(null);
+//        } else {
+//          notFriendMarkers[i].setAnimation(null);
+//        }
+//      }); 나중에 함!
     }
     
   function markCircle() {
@@ -1317,30 +1330,41 @@
         var frdmno = $(parent).attr('mno-data');
         $(parent).hide();
         checkStateM[frdmno] = 1;
+        checkStateMB[frdmno] = 1;
         console.log("checkStateM[" + frdmno + "]: " + checkStateM[frdmno]);
-        $(parent).closest('.iw-subTitle2').append('<input type="button" class="btn btn-primary btn-xs btn-block btn-addfriend-popup addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">');
-        assignButton(frdmno);
-        assignButtonBlock(i, frdmno);
+        $(parent).closest('.iw-subTitle2').append('<input type="button" class="btn btn-primary btn-xs btn-block addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">');
+        
+        for (var i = 0; i < notFriendLocArr.length; i++) {
+          (function(i) {
+            $.getJSON(contextRoot + '/frd/checkRelationMembers.do', {
+              mno: sessionStorage.getItem('mno'),
+              frdmno: notFriendLocArr[i][6]
+            }, function(results) {
+              if (results.data != 0) {
+                checkStateM[i] = results.data.state;
+                checkStateMB[i] = results.data.state;
+              } else {
+                checkStateM[i] = 0;
+                checkStateMB[i] = 0;
+              }
+              console.log('assignButton();');
+              assignButton(i, notFriendLocArr[i][6]);
+              assignButtonBlock(i, notFriendLocArr[i][6]);
+              console.log('friendListCreater();');
+              friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+              console.log(notFriendLocArr.length);
+              if (i == (notFriendLocArr.length - 1)) {
+                clearMarkers();
+                renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+              }
+            });
+          })(i);
         }
-      })
-    
-    for (var i = 0; i < notFriendLocArr.length; i++) {
-      (function(i) {
-        $.getJSON(contextRoot + '/frd/checkRelationMembers.do', {
-          mno: sessionStorage.getItem('mno'),
-          frdmno: notFriendLocArr[i][6]
-        }, function(results) {
-          if (results.data != 0) {
-            checkStateM[i] = results.data.state;
-          } else {
-            checkStateM[i] = 0;
-          }
-          assignButton(i);
-          assignButtonBlock(i, frdmno);
-        });
-      })(i);
+        
       }
-    friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+      });
+    
+    
   });
   // friendbox에서 '친구추가' 버튼
   $(document).on('click', '.addfriend-btn-add', function() {
