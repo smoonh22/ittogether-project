@@ -23,6 +23,9 @@
   <link rel='stylesheet' href="bower_components/blueimp-file-upload/css/jquery.fileupload-ui.css" />
   <link rel='stylesheet' href="css/info-modal.css" />
   <link rel='stylesheet' href="css/chatting.css" />
+  <link rel='stylesheet' href="css/component.css" /> 
+ <!-- <link rel='stylesheet' href="css/masonry.css" />  masonry css --> 
+  
 </head>
 
 <body>
@@ -84,11 +87,20 @@
 
 
 
+  
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script> 
+    <script src="js/lib/socket.io/node_modules/socket.io-client/socket.io.js"></script>
+    <script src="js/lib/modernizr.custom.js"></script>
+     <script src='js/lib/handlebars-v4.0.2.js'></script>
+	<script src="js/lib/masonry.pkgd.min.js"></script>
+ 	<script src="js/lib/imagesloaded.js"></script>
+	<script src="js/lib/AnimOnScroll.js"></script>
+	<script src="js/lib/modernizr.custom.js"></script> 
+ 	<script src="js/lib/classie.js"></script>
 
-
-  <script src="js/lib/socket.io/node_modules/socket.io-client/socket.io.js"></script>
-  <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
   <script>
+
+
     //처음 시작할 때 현재 진행중인 채팅이 있는지 확인
     var checkRoomArr = [];
     var chatWindowCnt = 1;
@@ -309,6 +321,7 @@
 
 
   <script data-main='app.js' src='bower_components/requirejs/require.js'></script>
+
 
 </body>
 

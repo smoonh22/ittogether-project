@@ -1,0 +1,39 @@
+<ul class='grid effect-1' id='grid'>
+
+  
+
+</ul>
+	 <script type="text/javascript" src="js/app/masonry.js"></script>
+
+
+<script id="masonry-template" type="text/x-handlebars-template">
+{{#each activity}}
+<li class="myactfeed grid-item">
+<div class="row table-hover">
+  <div class="col-md-5"><img src="{{profilePicture}}"  class="img-circle act-profile-img myprofile"/></div>
+  <div class="col-md-7"><p class= "my_act_title table-hover" >{{title}}</p>
+  	<img src="facebook.png"  class="img-circle act-profile-img myact_participant"/>
+  	<img src="facebook.png"  class="img-circle act-profile-img myact_participant"/>
+  	<img src="facebook.png"  class="img-circle act-profile-img myact_participant"/>
+  	<img src="facebook.png"  class="img-circle act-profile-img myact_participant"/>
+  </div>
+</div>
+<div class='row'>
+    <div class="col-md-6 table-hover my_act_meet_day"></div>
+    <div class="col-md-6 table-hover my_act_make_day"></div>
+</div>
+<div class='row>
+  <div class="col-md-12">
+  	<pre class="myact_content table-hover">
+		ㅇㄹㄴㄹㄴㅇㄹㄴㅇㄹㄴㅇㄹㅇㄴㅇㄹ
+  	</pre>
+  </div>
+</div>
+<div class='row'>
+    <div class="col-md-4"><img src="facebook.png"  class="myact_ad_photo"/></div>
+    <div class="col-md-4"><img src="facebook.png"  class="myact_ad_photo"/></div>
+    <div class="col-md-4"><img src="facebook.png"  class="myact_ad_photo"/></div>
+</div>
+</li>
+{{/each}}
+</script>

@@ -1,43 +1,40 @@
 @CHARSET "UTF-8";
+ .myactfeed {
+} 
 
-.act-profile-img{
-width:100%;
-height:100%;
-max-width : 140px;
-max-height : 140px;
-
+.myprofile{
+margin-top: 10%;
+margin-left: 10%;
+border-radius: 70%;
+width: 65px;
+height: 65px;
 }
-
-#nametag {
-	font-size: 140%;
+/*
+.my_act_title{
+margin-left: 20%;
+margin-top: 10%;
+margin-bottom: 15%;
 }
-
-#feed-header{
-	padding : 10% 0 0 0;
+.myact_participant{
+width: 20%;
+height: 20%;
+margin-left: 3%;
 }
-#myactfeed{
- margin-top : 10%;
- box-shadow: 5px 5px 2px #888888;
- padding:0;
-
+.myact_content{
+margin-left: 2%;
+margin-top: 5%;
 }
-
-.masonry_title{
-	width : 100%;
-	margin : 0px auto;
+.myact_ad_photo{
+margin-left: 5%;
+max-height: 80px;
+max-width: 110px;
+width: 95%;
+height: 95%;
 }
-#pre-content {
-   width: 80%;
-   height: 60%;
-   margin: 20px;
+.my_act_meet_day{
+margin-top: 5%;
 }
-
-.act-feed-image {
-	border : 2px solid red;
-	width : 130%;
-	height : 100%;
-	padding : 0;
+.my_act_make_day{
+margin-top: 5%;
 }
-.repeated-img{
-	width :300px;
-}
+ */

@@ -39,6 +39,9 @@ define(function () {
             $('#detailModal').modal();
           })
         });
+        
+        
+        
         if (data.check != null){
           $('#join-btn').css('display','none');
           $('#out-btn').css('display','');

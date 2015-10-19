@@ -17,7 +17,6 @@
   "dependencies": {
     "angular": "~1.4.6",
     "angular-google-maps": "~2.2.1",
-    "angular-masonry": "~0.12.0",
     "angular-route": "~1.4.6",
     "blueimp-file-upload": "jquery-file-upload#~9.11.2",
     "bootstrap": "~3.3.5",

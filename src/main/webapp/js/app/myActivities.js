@@ -9,6 +9,7 @@
         });
         
   }]);
+      
       app.directive('detailModal', function () {
         return {
           restrict: 'E',
