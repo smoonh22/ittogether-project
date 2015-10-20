@@ -28,12 +28,17 @@
         
         <ul class="nav navbar-nav navbar-right" >
           
-          <li class="dropdown" ng-controller='myFriendCtrl as mFCtrl'><a ng-click='friendListTest()' id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> 내 친구들</a>
+          <li class="dropdown" ng-controller='myFriendCtrl as mFCtrl'>
+            <a ng-click='friendListTest()' id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> 내 친구들</a>
            <ul class="dropdown-menu" aria-labelledby="dLabel">   
 			<li><ul class="nav nav-tabs nav-tabs-header" role="tablist">
 			   <li role="presentation" class="active"><a href="#myFriendList" class='nav-myMenu' aria-controls="home" role="tab" data-toggle="tab">친구 목록</a></li>
-   			   <li role="presentation"><a href="#myApplyList" aria-controls="fflist" class='nav-myMenu' role="tab" data-toggle="tab">친구 요청</a></li>
-		       <li role="presentation"><a href="#findFriend" aria-controls="aflist" class='nav-myMenu' role="tab" data-toggle="tab">친구 검색</a></li>
+   			   <li role="presentation">
+                 <a href="#myApplyList" aria-controls="fflist" class='nav-myMenu' role="tab" data-toggle="tab">친구 요청</a>
+              </li>
+		       <li role="presentation">
+                 <a href="#findFriend" aria-controls="aflist" class='nav-myMenu' role="tab" data-toggle="tab">친구 검색</a>
+              </li>
   			</ul></li>
 
   <!-- Tab panes -->
@@ -47,7 +52,7 @@
                     <button class='searchBtn btn btn-info btn-sm' ng-click='search(searchQuery)'>검색</button>
                  </div>
                  <div class="panel-body nav-friendList-body" >
-                       <div class='row'  ng-repeat-start="findList in mFCtrl.searchLists">
+                       <div class='row nav-friendList'  ng-repeat-start="findList in mFCtrl.searchLists">
                       <div class='col-md-2' >
                          <img class="img-circle header-image" src="{{findList.profilePicture}}"/>
                       </div>
@@ -85,7 +90,7 @@
                       <div class='col-md-2' >
                          <img class="img-circle header-image" src="{{frdList.profilePicture}}"/>
                       </div>
-                      <div class='col-md-7'>
+                      <div class='col-md-6'>
                          <table>
                             <tr>   
                                <td class="nav-friend-desc">이름 : {{frdList.name}}</td>
@@ -115,12 +120,12 @@
                     <h3 class="panel-title">요청 목록</h3>
                   </div>
 -->
-                  <div class="panel-body  nav-friendList-body2" ng-repeat="applyList in applyLists">
-                    <div class='row nav-friendList'>
+                  <div class="panel-body  nav-friendList-body">
+                    <div class='row nav-friendList' ng-repeat="applyList in applyLists">
                       <div class='col-md-2'>
                         <img class="img-circle header-image" src="{{applyList.profilePicture}}" />
                       </div>
-                      <div class='col-md-7'>
+                      <div class='col-md-6'>
                         <table>
                           <tr>
                             <td class="nav-friend-desc">이름 : {{applyList.name}}</td>
@@ -138,12 +143,13 @@
                       </div>
                     </div>
                   </div>
-                  <div class="panel-body nav-friendList-body2" ng-repeat="applyList2 in applyList2s">
-                    <div class='row nav-friendList'>
+                  
+                  <div class="panel-body nav-friendList-body">
+                    <div class='row nav-friendList' ng-repeat="applyList2 in applyList2s">
                       <div class='col-md-2'>
                         <img class="img-circle header-image" src="{{applyList2.profilePicture}}" />
                       </div>
-                      <div class='col-md-7'>
+                      <div class='col-md-6'>
                         <table>
                           <tr>
                             <td class="nav-friend-desc">이름 : {{applyList2.name}}</td>
@@ -157,7 +163,7 @@
                         </table>
                       </div>
                       <div class='col-md-2'>
-                         <br><input type="button" class="btn btn-default btn-xs addfriend-btn addfriend-btn-adding" value="요청중">
+                         <input type="button" class="btn btn-default btn-xs addfriend-btn addfriend-btn-adding" value="요청중">
                       </div>
                     </div>
                   </div>
