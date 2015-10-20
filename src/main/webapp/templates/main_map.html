@@ -36,8 +36,8 @@
 
 <div id="friend-box" class="hide-scroll-on-mainMap" onmousedown="return false">
   <div class="viewport-on-mainMap">
-    <div class="panel panel-info">
-      <div class="panel-heading">
+    <div class="panel">
+      <div class="panel-heading map-friend-panel">
         <h3 class="panel-title panel-friend-title">친구 추천</h3>
       </div>
       <div class="panel-body panel-member">
@@ -222,8 +222,8 @@
 
   function friendList(i) {
     if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
-      queryString1.push('<div class="panel panel-info myPanel">' +
-      '<div class="panel-heading match-heading">' +
+      queryString1.push('<div class="panel myPanel">' +
+      '<div class="panel-heading match-heading myPanel-head">' +
       "BestMatch" +
       '</div>' +
       '<div class="panel-body panel-member-desc">' +
@@ -235,7 +235,7 @@
       '</div>');
     }
   if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-      queryString2.push('<div class="panel panel-info myPanel">' +
+      queryString2.push('<div class="panel myPanel">' +
       '<div class="panel-body panel-member-desc">' +
       '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i+'" class="img-circle match-friendimg"></a>' +
       '<div class="panel-member-name"><img class="panel-icon-align" src="images/icons/manIcon.png">&nbsp;' + notFriendLocArr[i][0] + '</div>' +
@@ -245,7 +245,7 @@
       '</div>');
   }
   if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
-      queryString3.push('<div class="panel panel-info myPanel">' +
+      queryString3.push('<div class="panel myPanel">' +
       '<div class="panel-body panel-member-desc">' +
       '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i +'" class="img-circle match-friendimg"></a>' +
       '<div class="panel-member-name"><img class="panel-icon-align" src="images/icons/manIcon.png">&nbsp;' + notFriendLocArr[i][0] + '</div>' +
@@ -255,7 +255,7 @@
       '</div>');
   }
   if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
-      queryString4.push('<div class="panel panel-info myPanel">' +
+      queryString4.push('<div class="panel myPanel">' +
       '<div class="panel-body panel-member-desc">' +
       '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i +'" class="img-circle match-friendimg"></a>' +
       '<div class="panel-member-name"><img class="panel-icon-align" src="images/icons/manIcon.png">&nbsp;' + notFriendLocArr[i][0] + '</div>' +

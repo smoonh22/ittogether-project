@@ -27,6 +27,11 @@
 }
 .delfrdbtn {
   margin: 2%;
+  background-color: #48b5e9;
+  color: white;
+}
+.delfrdbtn:hover {
+  background-color: rgb(101, 168, 235);
 }
 .nav-friend-desc {
   font-size: 0.9em;

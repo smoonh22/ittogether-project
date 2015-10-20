@@ -77,42 +77,42 @@ box-sizing: border-box;
     animation: titleAnimation 36s linear infinite 0s; 
 }
 .cb-slideshow li:nth-child(1) span { 
-    background-image: url(../images/login/bg2.jpg) 
+    background-image: url(../images/login/bg6.jpg);
 }
 .cb-slideshow li:nth-child(2) span { 
-    background-image: url(../images/login/bg1.jpg);
+    background-image: url(../images/login/bg2.jpg);
     -webkit-animation-delay: 6s;
     animation-delay: 6s; 
 }
 .cb-slideshow li:nth-child(3) span { 
-    background-image: url(../images/login/bg3.jpg);
+    background-image: url(../images/login/bg1.jpg);
     -webkit-animation-delay: 12s;
     animation-delay: 12s; 
 }
 .cb-slideshow li:nth-child(4) span { 
-    background-image: url(../images/login/bg4.jpg);
+    background-image: url(../images/login/bg8.jpg);
     -webkit-animation-delay: 18s;
     animation-delay: 18s; 
 }
 .cb-slideshow li:nth-child(5) span { 
-    background-image: url(../images/login/bg5.jpg);
+    background-image: url(../images/login/bg4.jpg);
     -webkit-animation-delay: 24s;
     animation-delay: 24s; 
 }
 .cb-slideshow li:nth-child(6) span { 
-    background-image: url(../images/login/bg6.jpg);
+    background-image: url(../images/login/bg5.jpg);
     -webkit-animation-delay: 30s;
     animation-delay: 30s; 
 }
 .cb-slideshow li:nth-child(7) span { 
     background-image: url(../images/login/bg7.jpg);
-    -webkit-animation-delay: 30s;
-    animation-delay: 30s; 
+    -webkit-animation-delay: 36s;
+    animation-delay: 36s; 
 }
 .cb-slideshow li:nth-child(8) span { 
-    background-image: url(../images/login/bg8.jpg);
-    -webkit-animation-delay: 30s;
-    animation-delay: 30s; 
+    background-image: url(../images/login/bg6.jpg);
+    -webkit-animation-delay: 42s;
+    animation-delay: 42s; 
 }
 /* Animation for the slideshow images */
 @-webkit-keyframes imageAnimation { 
@@ -154,7 +154,6 @@ box-sizing: border-box;
 .no-cssanimations .cb-slideshow li span{
 	opacity: 1;
 }
-
 header {
 	position:fixed;
 	top:50;
@@ -163,15 +162,9 @@ header {
 	color: #ffffff;
   text-align: center;
 }
-header h1 {
-  margin-top:6%;
-  font-family: LotteMartHappy;
-  font-size: 12rem;
-}
-header p {
-  font-family: Daum;
-  font-size: 4rem;
-}
+
+
+
 footer {
 	height: 70px;
   width: 100%;
@@ -191,6 +184,17 @@ article {
   margin:0;
 background-color: rgba(20, 21, 30, 0.20);
 }
+.login-title {
+  margin-top:4%;
+  font-family: LotteMartHappy;
+  font-size: 11rem;
+}
+.login-comment {
+  font-family: Daum;
+  font-size: 4rem;
+  margin-top: -2%;
+}
+
 .login {
 margin: 12% auto;
 width: 400px;
@@ -205,10 +209,6 @@ height: 400px;
 }
 
 
-.app-title {
-text-align: center;
-color: #000000;
-}
 
 .login-form {
 text-align: center;

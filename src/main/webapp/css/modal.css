@@ -41,3 +41,8 @@ body p {
   background: #4FB8D9;
   padding: 28px;
 }
+
+.detailModal-head {
+	background-color: #48b5e9;
+  color: white;
+}
