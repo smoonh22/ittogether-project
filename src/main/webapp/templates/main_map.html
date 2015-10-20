@@ -50,7 +50,7 @@
 <div id="addfriendModal" class="modal fade">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
-      <div class="modal-header panel-heading">
+      <div class="modal-header modal-header-bgcolor">
         <h5 class="modal-title addfriend-modal-title"></h5>
       </div>
       <div class="modal-body addfriend-modal-body">
@@ -81,8 +81,7 @@
   var checkStateF  = [];  var checkStateM  = [];  var checkStateMB = [];
   var queryString1 = [];  var queryString2 = [];  var queryString3 = [];  var queryString4 = [];
   
-  var picSrc;
-  var nameVal;
+  var picSrc;  var nameVal;
 (function() {
   getMyFriendsInfo();
   getMyMembers(1);
@@ -124,16 +123,13 @@
           results.data[i].age,                // 7
           results.data[i].hobby,              // 8
           results.data[i].hometown,           // 9
-          results.data[i].mno                 //10
+          results.data[i].mno,                //10
+          results.data[i].name                //11
         ];
         friendLocArr.push(tempArr);
         console.log("친구" + i + ": " + friendLocArr[i][0]+"/"+ friendLocArr[i][5]+"/"+ friendLocArr[i][10]);
       }
       if (mySwitchForModal == 1) {
-//        var varPic = friendLocArr.length - 1 ;
-//        console.log(varPic);
-        
-//        var picSrc = $('.match-friendimg').attr('src');
         console.log('append();');
         
         $('.modal-title').text(nameVal+'님과 친구가 되었습니다.');
@@ -143,16 +139,6 @@
     });
   }
   
-  function getAttr(elm, attr) {
-    if (elm.getAttribute(attr) !== null) {
-        return elm.getAttribute(attr);
-    } else {
-        switch (attr) {
-        case "class": return elm.getAttribute("className"); break;
-        default: return elm.getAttribute(attr);
-        }
-    }
-}
   
   function getMyMembers(mySwitch) {
     $.getJSON(contextRoot + '/member/getMembers.do', {
@@ -170,7 +156,8 @@
           results.data[i].sex,
           results.data[i].age,
           results.data[i].hobby,
-          results.data[i].hometown
+          results.data[i].hometown,
+          results.data[i].name
         ];
         notFriendLocArr.push(tempArr);
         console.log("주변회원" + i + ": " + notFriendLocArr[i][0]+"/"+
@@ -214,7 +201,7 @@
        buttonTypes[i] = '<input type="button" class="btn btn-info btn-xs nohover addfriend-btn addfriend-btn-add" mno-data = "' + frdmno +'" value="친구추가">';
     }
     if (checkStateM[i] == 1) {
-       buttonTypes[i] = '<input type="button" class="btn btn-primary btn-xs addfriend-btn addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">';
+       buttonTypes[i] = '<input type="button" class="btn btn-default btn-xs addfriend-btn addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">';
     }
     if (checkStateM[i] == 3) { 
        buttonTypes[i] = '<a data-toggle="modal" href="#addfriendModal"><input type="button" class="btn btn-success btn-xs addfriend-btn addfriend-btn-accepting" mno-data = "' + frdmno +'" value="수락하기"></a>';
@@ -226,7 +213,7 @@
        buttonTypesB[i] = '<input type="button" class="btn btn-info btn-xs nohover addfriend-btn-block btn-addfriend-popup" mno-data = "' + frdmno +'" value="친구추가">';
     }
     if (checkStateMB[i] == 1) {
-       buttonTypesB[i] = '<input type="button" class="btn btn-primary btn-xs addfriend-btn-block  addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">';
+       buttonTypesB[i] = '<input type="button" class="btn btn-default btn-xs addfriend-btn-block  addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">';
     }
     if (checkStateMB[i] == 3) { 
        buttonTypesB[i] = '<a data-toggle="modal" href="#addfriendModal"><input type="button" class="btn btn-success btn-xs addfriend-btn-block btn-addfriend-popup-accepting" mno-data = "' + frdmno +'" value="수락하기"></a>';
@@ -241,9 +228,9 @@
       '</div>' +
       '<div class="panel-body panel-member-desc">' +
       '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i +'" class="img-circle match-friendimg"></a>' +
-      '<div class="panel-member-name">' + notFriendLocArr[i][0] + '</div>' +
-      '<div class="panel-member-append">' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
-      '<div>취미와 고향이 일치합니다.</div>' +          
+      '<div class="panel-member-name"><img class="panel-icon-align" src="images/icons/manIcon.png">&nbsp;' + notFriendLocArr[i][0] + '</div>' +
+      '<div class="panel-member-append"><img class="panel-icon-align" src="images/icons/ruler.png">&nbsp;' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
+      '<div class="panel-member-same"><img class="panel-icon-align" src="images/icons/same.png">&nbsp;취미와 고향이 일치합니다.</div>' +          
       '</div>' +
       '</div>');
     }
@@ -251,9 +238,9 @@
       queryString2.push('<div class="panel panel-info myPanel">' +
       '<div class="panel-body panel-member-desc">' +
       '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i+'" class="img-circle match-friendimg"></a>' +
-      '<div class="panel-member-name">' + notFriendLocArr[i][0] + '</div>' +
-      '<div class="panel-member-append">' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
-      '<div>취미가 일치합니다.</div>' +          
+      '<div class="panel-member-name"><img class="panel-icon-align" src="images/icons/manIcon.png">&nbsp;' + notFriendLocArr[i][0] + '</div>' +
+      '<div class="panel-member-append"><img class="panel-icon-align" src="images/icons/ruler.png">&nbsp;' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
+      '<div class="panel-member-same"><img class="panel-icon-align" src="images/icons/same.png">&nbsp;취미가 일치합니다.</div>' +          
       '</div>' +
       '</div>');
   }
@@ -261,9 +248,9 @@
       queryString3.push('<div class="panel panel-info myPanel">' +
       '<div class="panel-body panel-member-desc">' +
       '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i +'" class="img-circle match-friendimg"></a>' +
-      '<div class="panel-member-name">' + notFriendLocArr[i][0] + '</div>' +
-      '<div class="panel-member-append">' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
-      '<div>고향이 일치합니다.</div>' +          
+      '<div class="panel-member-name"><img class="panel-icon-align" src="images/icons/manIcon.png">&nbsp;' + notFriendLocArr[i][0] + '</div>' +
+      '<div class="panel-member-append"><img class="panel-icon-align" src="images/icons/ruler.png">&nbsp;' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
+      '<div class="panel-member-same"><img class="panel-icon-align" src="images/icons/same.png">&nbsp;고향이 일치합니다.</div>' +          
       '</div>' +
       '</div>');
   }
@@ -271,8 +258,8 @@
       queryString4.push('<div class="panel panel-info myPanel">' +
       '<div class="panel-body panel-member-desc">' +
       '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i +'" class="img-circle match-friendimg"></a>' +
-      '<div class="panel-member-name">' + notFriendLocArr[i][0] + '</div>' +
-      '<div class="panel-member-append">' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
+      '<div class="panel-member-name"><img class="panel-icon-align" src="images/icons/manIcon.png">&nbsp;' + notFriendLocArr[i][0] + '</div>' +
+      '<div class="panel-member-append"><img class="panel-icon-align" src="images/icons/ruler.png">&nbsp;' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
       '<div></div>' +          
       '</div>' +
       '</div>');
@@ -508,11 +495,8 @@
       marker = new google.maps.Marker({
         position: { lat: myLoc[0], lng: myLoc[1] },
         map: map,
-        icon: 'images/icons/myHome.png'
-      });
-      
-      marker.addListener('click', function() {
-        myWindow.open(map, marker);
+        icon: 'images/icons/myHome.png',
+        animation: google.maps.Animation.DROP
       });
       myWindow = new google.maps.InfoWindow({ /* 팝업창 생성 */
       content: "<div id='iw-container'>" +
@@ -526,13 +510,20 @@
         "</div>" +
         "</div>" +
         "</div>"
-    });
+      });
+      marker.addListener('click', function() {
+        if (marker.getAnimation() == null) {
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+            myWindow.open(map, marker);
+        } else {
+            marker.setAnimation(null);
+            myWindow.close(map, marker);
+        }
+      });
+      
     google.maps.event.addListener(myWindow, 'domready', function() {
       infoWindowsCSS(); // 팝업창 css 설정해줌
     });
-//    $(document).on('click', '#mainMap', function() {
-//         myWindow.close(map, marker);
-//    });
     }
 
   function markFriends(i, mapAdj, dropAdj) {
@@ -578,16 +569,42 @@
           "<div class='iw-subTitle'>" +
           "<img src=" + friendLocArr[i][4] + " class='img-circle iw-img'>" +
           "</div>" +
+          "<div class='iw-subTitle2'>" + 
+          "<table class='iw-myTable'>" +
+            "<tr>" +
+              "<td class='iw-desc'><img class='iw-desc-img' src='images/icons/manIcon.png'>&nbsp;이름: "+friendLocArr[i][11]+"</td>" +
+              "<td class='iw-desc'><img class='iw-desc-img' src='images/icons/age.png'>&nbsp;나이: "+friendLocArr[i][8]+"</td>" +
+            "</tr>" +
+            "<tr>" +
+              "<td class='iw-desc'><img class='iw-desc-img' src='images/icons/hobby.png'>&nbsp;취미: "+friendLocArr[i][10]+"</td>" +
+              "<td class='iw-desc'><img class='iw-desc-img' src='images/icons/hometown.png'>&nbsp;고향: "+friendLocArr[i][9]+"</td>" +
+            "</tr>" +
+          "</table>" +
           "<div class='iw-subTitle'>" +
           "<input type='txt' class='form-control input-xs' value=" + friendLocArr[i][3] + ">" +
-          "<div class='iw-subTitle2'>" + 
-          "<div>나이: "+friendLocArr[i][7]+"</div>" +
-          "<div>취미: "+friendLocArr[i][8]+"</div>" +
-          "<div>고향: "+friendLocArr[i][9]+"</div>" +
           "</div>" +
           "</div>" +
           "</div>" +
           "</div>"
+        
+//        
+//        "<div class='iw-title thisisfriend'>" + friendLocArr[i][0] + "</div>" +
+//          "<div class='iw-content'>" +
+//          "<div class='iw-subTitle'>" +
+//          "<img src=" + friendLocArr[i][4] + " class='img-circle iw-img'>" +
+//          "</div>" +
+//          "<div class='iw-subTitle2'>" + 
+//          "<div class='iw-notfriend-desc'><img src='images/icons/manIcon.png'>&nbsp;이름: "+friendLocArr[i][11]+"</div>" +
+//          "<div class='iw-notfriend-desc'><img src='images/icons/age.png'>&nbsp;나이: "+friendLocArr[i][8]+"</div>" +
+//          "<div class='iw-notfriend-desc'><img src='images/icons/hobby.png'>&nbsp;취미: "+friendLocArr[i][9]+"</div>" +
+//          "<div class='iw-notfriend-desc'><img src='images/icons/hometown.png'>&nbsp;고향: "+friendLocArr[i][10]+"</div></div>" +
+//          "<div class='iw-subTitle'>" +
+//          "<input type='txt' class='form-control input-xs' value=" + friendLocArr[i][3] + ">" +
+//          "</div>" +
+//          "</div>" +
+//          "</div>" +
+//          "</div>"
+        
       });
       google.maps.event.addListener(friendWindow[i], 'domready', function() {
         infoWindowsCSS();// 팝업창 css 설정해줌
@@ -633,12 +650,19 @@
           "<div class='iw-subTitle'>" +
           "<img src=" + notFriendLocArr[i][4] + " class='img-circle iw-img'>" +
           "</div>" +
+          "<div class='iw-subTitle2'>" + 
+          "<table class='iw-myTable'>" +
+            "<tr>" +
+              "<td class='iw-desc'><img class='iw-desc-img' src='images/icons/manIcon.png'>&nbsp;이름: "+notFriendLocArr[i][11]+"</td>" +
+              "<td class='iw-desc'><img class='iw-desc-img' src='images/icons/age.png'>&nbsp;나이: "+notFriendLocArr[i][8]+"</td>" +
+            "</tr>" +
+            "<tr>" +
+              "<td class='iw-desc'><img class='iw-desc-img' src='images/icons/hobby.png'>&nbsp;취미: "+notFriendLocArr[i][9]+"</td>" +
+              "<td class='iw-desc'><img class='iw-desc-img' src='images/icons/hometown.png'>&nbsp;고향: "+notFriendLocArr[i][10]+"</td>" +
+            "</tr>" +
+          "</table>" +
           "<div class='iw-subTitle'>" +
           "<input type='txt' class='form-control input-xs' value=" + notFriendLocArr[i][3] + ">" +
-          "<div class='iw-subTitle2'>" + 
-          "<div>나이: "+notFriendLocArr[i][8]+"</div>" +
-          "<div>취미: "+notFriendLocArr[i][9]+"</div>" +
-          "<div>고향: "+notFriendLocArr[i][10]+"</div>" +
           buttonTypesB[i] + 
           "</div>" +
           "</div>" +
@@ -705,7 +729,7 @@
       });
       var iwCloseBtn = iwOuter.next();
       iwCloseBtn.css({
-        opacity: '1',
+        opacity: '0',
         right: '28px',
         top: '16px',
         border: '0px solid #48b5e9',
@@ -713,7 +737,14 @@
       });
       iwCloseBtn.mouseout(function() {
         $(this).css({
-          opacity: '1'
+          opacity: '0',
+          'z-index': '-1'
+        });
+      });
+      iwCloseBtn.mouseover(function() {
+        $(this).css({
+          opacity: '0',
+          'z-index': '-1'
         });
       });
 //      iwCloseBtn.on('click', function() {
@@ -1332,7 +1363,7 @@
         checkStateM[frdmno] = 1;
         checkStateMB[frdmno] = 1;
         console.log("checkStateM[" + frdmno + "]: " + checkStateM[frdmno]);
-        $(parent).closest('.iw-subTitle2').append('<input type="button" class="btn btn-primary btn-xs btn-block addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">');
+        $(parent).closest('.iw-subTitle2').append('<input type="button" class="btn btn-default btn-xs btn-block addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">');
         
         for (var i = 0; i < notFriendLocArr.length; i++) {
           (function(i) {
@@ -1418,7 +1449,7 @@
         checkStateM[frdmno] = 1;
         checkStateMB[frdmno] = 1;
         console.log("checkStateM[" + frdmno + "]: " + checkStateM[frdmno]);
-        $(parent).closest('.panel-member-append').append('<input type="button" class="btn btn-primary btn-xs addfriend-btn addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">');
+        $(parent).closest('.panel-member-append').append('<input type="button" class="btn btn-default btn-xs addfriend-btn addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">');
         
         for (var i = 0; i < notFriendLocArr.length; i++) {
           (function(i) {
@@ -1482,8 +1513,6 @@
           console.log('renderMarkers();');
           renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
         });    
-        
-        
         
         } // callback 함수 끝
       })

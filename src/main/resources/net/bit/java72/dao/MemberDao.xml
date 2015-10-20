@@ -111,18 +111,18 @@
       t1.age,
       t1.hobby,
       t1.hometwn
-    FROM memb_t t1 JOIN frd_t t2 using(mno)
+    FROM MEMB_T t1 JOIN frd_t t2 using(mno)
     WHERE frdno=#{frdno} and state=2;
   </select>
   
   <select id="getFriendMarks" parameterType="int" resultMap="MemberMap">
-    SELECT * FROM memb_t where mno = #{value}
+    SELECT * FROM MEMB_T where mno = #{value}
   </select>
   
   <!-- 비 친구들 뿌려줌 -->
   <select id="getNoneFriendMarks" parameterType="int" resultMap="MemberMap">
 	  SELECT * 
-	  FROM memb_t 
+	  FROM MEMB_T 
 	  WHERE mno = #{value}
   </select>
   

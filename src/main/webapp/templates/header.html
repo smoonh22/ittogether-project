@@ -30,37 +30,37 @@
           
           <li class="dropdown" ng-controller='myFriendCtrl as mFCtrl'><a ng-click='friendListTest()' id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> 내 친구들</a>
            <ul class="dropdown-menu" aria-labelledby="dLabel">   
-			<li><ul class="nav nav-tabs" role="tablist">
-			   <li role="presentation" class="active"><a href="#myFriendList" aria-controls="home" role="tab" data-toggle="tab">친구 목록</a></li>
-   			   <li role="presentation"><a href="#myApplyList" aria-controls="fflist" role="tab" data-toggle="tab">친구 요청</a></li>
-		       <li role="presentation"><a href="#findFriend" aria-controls="aflist" role="tab" data-toggle="tab">친구 검색</a></li>
+			<li><ul class="nav nav-tabs nav-tabs-header" role="tablist">
+			   <li role="presentation" class="active"><a href="#myFriendList" class='nav-myMenu' aria-controls="home" role="tab" data-toggle="tab">친구 목록</a></li>
+   			   <li role="presentation"><a href="#myApplyList" aria-controls="fflist" class='nav-myMenu' role="tab" data-toggle="tab">친구 요청</a></li>
+		       <li role="presentation"><a href="#findFriend" aria-controls="aflist" class='nav-myMenu' role="tab" data-toggle="tab">친구 검색</a></li>
   			</ul></li>
 
   <!-- Tab panes -->
   	<li><div class="tab-content">
      <div role="tabpanel" class="tab-pane" id="findFriend">
-                <div class="panel panel-success friendsearch-panel">
-                 <div class="panel-heading">
-                   <h3 class="panel-title friendsearch-title">친구 검색</h3>
-                  <input type="text" ng-model='searchQuery'>
-                  <button class='searchBtn btn btn-success btn-xs' ng-click='search(searchQuery)'>검색</button>
+                <div class="panel panel-info friendsearch-panel">
+                 <div class="panel-heading nav-friendList">
+                    <div class="form-group form-group-sm col-sm-8">
+                      <input type="text" class="form-control search-friend" ng-model='searchQuery'>
+                    </div>
+                    <button class='searchBtn btn btn-info btn-sm' ng-click='search(searchQuery)'>검색</button>
                  </div>
-                 <div class="panel-body" >
+                 <div class="panel-body nav-friendList-body" >
                        <div class='row'  ng-repeat-start="findList in mFCtrl.searchLists">
-                      <div class='col-md-4' >
+                      <div class='col-md-2' >
                          <img class="img-circle header-image" src="{{findList.profilePicture}}"/>
                       </div>
-                      <div class='col-md-5'>
+                      <div class='col-md-7'>
                         <table>
-                          <br>
                           <tr>
-                            <td>이름 : {{findList.name}}</td>
+                            <td class="nav-friend-desc">이름 : {{findList.name}}</td>
                           </tr>
                           <tr>
-                            <td>주소 : {{findList.address}}</td>
+                            <td class="nav-friend-desc">주소 : {{findList.address}}</td>
                           </tr>
                           <tr>
-                            <td>이메일 : {{findList.email}}</td>
+                            <td class="nav-friend-desc">이메일 : {{findList.email}}</td>
                           </tr>
                         </table>
                       </div>
@@ -75,30 +75,30 @@
     </div>
     <div role="tabpanel" class="tab-pane active" id="myFriendList">
         <div class="panel panel-info friendlist-panel">
+<!--
                  <div class="panel-heading">
                    <h3 class="panel-title">친구 목록</h3>
                  </div>
-                 <div class="panel-body" >
-                       <div class='row'  ng-repeat="frdList in frdLists">
-                      <div class='col-md-4' >
+-->
+                 <div class="panel-body nav-friendList-body" >
+                       <div class='row nav-friendList'  ng-repeat="frdList in frdLists">
+                      <div class='col-md-2' >
                          <img class="img-circle header-image" src="{{frdList.profilePicture}}"/>
                       </div>
-                      <div class='col-md-6'>
+                      <div class='col-md-7'>
                          <table>
-                         <br>
                             <tr>   
-                               <td>이름 : {{frdList.name}}</td>
+                               <td class="nav-friend-desc">이름 : {{frdList.name}}</td>
                             </tr>
                             <tr>
-                               <td>주소 : {{frdList.address}}</td>
+                               <td class="nav-friend-desc">주소 : {{frdList.address}}</td>
                             </tr>
                             <tr>
-                               <td>이메일 : {{frdList.email}}</td>
+                               <td class="nav-friend-desc">이메일 : {{frdList.email}}</td>
                             </tr>
                          </table>
                       </div>
                       <div class='col-md-2' >
-                      <br><br>
                       <button ng-click='delfrd(frdList.mno)' class='delfrdbtn btn btn-info btn-xs'>삭제</button>
                       <button href='#' ng-click="startChatting(frdList.mno);" class='delfrdbtn btn btn-info btn-xs'>채팅</button>
                       <div ng-show='resetBtn(frdList.mno)'><button class='delfrdbtn btn btn-default'>취소</button>
@@ -110,57 +110,54 @@
     </div>
               <div role="tabpanel" class="tab-pane" id="myApplyList">
                 <div class="panel panel-primary friendrequest-panel">
+<!--
                   <div class="panel-heading">
                     <h3 class="panel-title">요청 목록</h3>
                   </div>
-                  <div class="panel-body" ng-repeat="applyList in applyLists">
-                    <div class='row'>
-                      <div class='col-md-4'>
+-->
+                  <div class="panel-body  nav-friendList-body2" ng-repeat="applyList in applyLists">
+                    <div class='row nav-friendList'>
+                      <div class='col-md-2'>
                         <img class="img-circle header-image" src="{{applyList.profilePicture}}" />
                       </div>
-                      <div class='col-md-6'>
+                      <div class='col-md-7'>
                         <table>
-                          <br>
                           <tr>
-                            <td>이름 : {{applyList.name}}</td>
+                            <td class="nav-friend-desc">이름 : {{applyList.name}}</td>
                           </tr>
                           <tr>
-                            <td>주소 : {{applyList.address}}</td>
+                            <td class="nav-friend-desc">주소 : {{applyList.address}}</td>
                           </tr>
                           <tr>
-                            <td>이메일 : {{applyList.email}}</td>
+                            <td class="nav-friend-desc">이메일 : {{applyList.email}}</td>
                           </tr>
                         </table>
                       </div>
                       <div class='col-md-2'>
-                        <br>
-                        <br>
-                        <button ng-click="applyfrd(applyList.mno)" class="btn btn-primary btn-xs">수락</button>
+                        <button ng-click="applyfrd(applyList.mno)" class="btn btn-success btn-xs">수락하기</button>
                       </div>
                     </div>
                   </div>
-                  <div class="panel-body" ng-repeat="applyList2 in applyList2s">
-                    <div class='row'>
-                      <div class='col-md-4'>
+                  <div class="panel-body nav-friendList-body2" ng-repeat="applyList2 in applyList2s">
+                    <div class='row nav-friendList'>
+                      <div class='col-md-2'>
                         <img class="img-circle header-image" src="{{applyList2.profilePicture}}" />
                       </div>
-                      <div class='col-md-6'>
+                      <div class='col-md-7'>
                         <table>
-                          <br>
                           <tr>
-                            <td>이름 : {{applyList2.name}}</td>
+                            <td class="nav-friend-desc">이름 : {{applyList2.name}}</td>
                           </tr>
                           <tr>
-                            <td>주소 : {{applyList2.address}}</td>
+                            <td class="nav-friend-desc">주소 : {{applyList2.address}}</td>
                           </tr>
                           <tr>
-                            <td>이메일 : {{applyList2.email}}</td>
+                            <td class="nav-friend-desc">이메일 : {{applyList2.email}}</td>
                           </tr>
                         </table>
                       </div>
                       <div class='col-md-2'>
-                        <br>
-                        <br> 요청중...
+                         <br><input type="button" class="btn btn-default btn-xs addfriend-btn addfriend-btn-adding" value="요청중">
                       </div>
                     </div>
                   </div>
