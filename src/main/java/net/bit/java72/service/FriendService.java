@@ -1,10 +1,7 @@
 package net.bit.java72.service;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import net.bit.java72.domain.Feed;
-import net.bit.java72.domain.FriendFeed;
 import net.bit.java72.domain.FriendList;
 import net.bit.java72.domain.Member;
 import net.bit.java72.domain.Search;

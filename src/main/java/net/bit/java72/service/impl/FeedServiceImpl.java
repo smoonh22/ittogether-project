@@ -86,6 +86,10 @@ public class FeedServiceImpl implements FeedService {
   public int deleteComment(int cno) {
     return feedDao.deleteComment(cno);
   }
+  @Override
+  public List<FriendFeed> myActivityListFrd(int fno) {
+    return feedDao.myActivityListFrd(fno);
+  }
   
 }
 

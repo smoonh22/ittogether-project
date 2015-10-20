@@ -1,6 +1,5 @@
 package net.bit.java72.service;
 
-import java.util.HashMap;
 import java.util.List;
 
 import net.bit.java72.domain.Comment;
@@ -23,7 +22,7 @@ public interface FeedService {
   int insertComment(Comment commnet);
   int updateComment(Comment comment);
   int deleteComment(int cno);
-  
+  List<FriendFeed> myActivityListFrd(int fno);
 }
 
 

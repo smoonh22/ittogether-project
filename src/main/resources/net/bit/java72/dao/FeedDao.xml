@@ -87,9 +87,9 @@
    t2.CONTNT,
    t2.cre_dt,
    t2.TITLE,
-  t2.attachFile1,
-  t2.attachFile2,
-  t2.attachFile3
+   t2.attachFile1,
+   t2.attachFile2,
+   t2.attachFile3
    from memb_t t1 left outer join feed_t t2
    on t1.mno=t2.mno
    where t2.categry is not null and t1.mno=#{values} and t2.meet_time > now()
@@ -118,11 +118,21 @@
   t2.TITLE,
   t2.attachFile1,
   t2.attachFile2,
-  t2.attachFile3
+  t2.attachFile3 
   from memb_t t1 inner join feed_t t2 on t1.mno=t2.mno
   where t2.meet_time > now() and t2.mno = #{values}  
   or t2.fno IN (select t3.fno from JOINEDFRD_T t3 inner join feed_t t4 on t3.fno=t4.fno where t3.mno=#{values} and t4.meet_Time > now()) 
   ORDER by t2.cre_dt desc
+  </select>
+ 
+  <select id="myActivityListFrd" resultMap="FriendFeedMap" parameterType="int">
+  select
+  t1.mno,
+  t1.MPHOTO,
+  t2.mno,
+  t2.fno
+  from memb_t t1 inner join joinedfrd_t t2 
+   on t2.fno= #{value} and t1.mno = t2.mno
   </select>
  
  <select id="getDetail" resultMap="FriendFeedMap" parameterType="int">
@@ -192,20 +202,3 @@
   delete from comment_t where cno=#{values}
   </delete>
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

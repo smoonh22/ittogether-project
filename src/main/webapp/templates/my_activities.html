@@ -12,64 +12,45 @@
       </div>
    </div>
    <div class='row'>
-      <div ng-controller="activityCtrl as MCtrl">
-         <div ng-repeat-start="myact in MCtrl.activities">
-            <div id="myactfeed" class="col-md-4 timeEffect-color-{{myact.setTimeEffect}}"><br><br><br>
+         <div ng-repeat-start="myact in activities">
+            <div id="myactfeed" class="col-md-4"><br><br><br>
                <div class="masonry_title">
                   <div class="panel-heading" id='category-color-{{myact.category}}'></div><br>
                   <div class='row'>
-                     <div class='col-md-4'>
+                     <div class='col-md-3'>
                         <img src={{myact.profilePicture}} class="img-circle act-profile-img" id="profile"/><br>
                         <br>
                      </div>
-                     <div class='col-md-8'>
+                     <div class='col-md-9'>
                         <div id='feed-header'>
-                           <b id="nametag">{{myact.nickname}}</b>님이 새로운 모임을 만드셧습니다.<br>   
+                           <p class="myact-title">{{myact.title}}</p>
+                       <img ng-repeat ='act in myact.joinfrd' src='{{act.profilePicture}}' class="img-circle act-Mphoto-img"/>       
                         </div>
+                     </div><br><br><br><br><br>
+                     <div class='row'>
+                     <div class="col-md-1"></div>
+                     <div class="col-md-5 table-hover my_act_meet_day"> 
+                     <small class="text-muted"><img src="images/icons/calendar.png"></small>{{myact.meetDday}}</div>
+                <div class="col-md-6 table-hover my_act_make_day">                              
+                <small class="text-muted"><img src="images/icons/time.png"></small>{{myact.dday}}</div>
+                     </div>
+                     <div class='row'>
+                       <div class="col-md-12">
+                    <pre class="myact_content table-hover">{{myact.content}}
+                    </pre></div>                     
                      </div>
                      <br>
-                     <br>
-                     <br>
-                     <br>
-                     <br>
-                             <small class="text-muted"> <img
-                                 src="{{myact.attachFile1}}" id="picture1">
-                              </small><br>        
-                             <small class="text-muted"> <img
-                                 src="{{myact.attachFile2}}" id="picture2">
-                              </small><br>       
-                             <small class="text-muted"> <img
-                                 src="{{myact.attachFile3}}" id="picture3">
-                              </small>    
-                     <br>                                           
-                     <pre id='pre-content'>{{myact.content}}</pre>
-                  </div>
-                  <div class='row'>
-                     <h5 id="feed-info">
-                        <div class='col-md-5'>
-                           <small class="text-muted"><img
-                              src="images/icons/calendar.png"> </small>{{myact.meetDday}}
-                        </div>
-                        <div class='col-md-2'>
-                           <h5 id="feed-info">
-                              <small class="text-muted"> <img
-                                 src="images/icons/multiple.png">
-                              </small>{{myact.currentCount}}/{{myact.maxHeadCount}}
-                        </div>
-                        <div class='col-md-5' >
-                           <h5 id="feed-info">
-                              <small class="text-muted"><img
-                                 src="images/icons/time.png"></small>{{myact.dday}}
-                        </div>
-                     </h5>
+               <div class='row'>
+               <div class="col-md-4"><img src="{{myact.attachFile1}}"  class="picture1"/></div>
+                <div class="col-md-4"><img src="{{myact.attachFile2}}"  class="picture2"/></div>
+                <div class="col-md-4"><img src="{{myact.attachFile3}}"  class="picture3"/></div>
+               </div>
+
                   </div>
                </div>
             </div>
          </div>
          <div ng-repeat-end></div>
-      </div>
    </div>
-</div>
-
-
 <act-modal></act-modal>
+</div>

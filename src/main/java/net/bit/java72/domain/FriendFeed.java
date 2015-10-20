@@ -2,6 +2,7 @@ package net.bit.java72.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class FriendFeed implements Serializable {
 
@@ -29,25 +30,26 @@ public class FriendFeed implements Serializable {
   protected String attachFile1;
   protected String attachFile2;
   protected String attachFile3;
-  
+  protected String profilePicture;
+  protected List<FriendFeed> joinfrd;
 
+
+  public List<FriendFeed> getJoinfrd() {
+    return joinfrd;
+  }
+  public void setJoinfrd(List<FriendFeed> joinfrd) {
+    this.joinfrd = joinfrd;
+  }
   public String getAttachFile1() {
     return attachFile1;
   }
-
-
-
   public void setAttachFile1(String attachFile1) {
     this.attachFile1 = attachFile1;
   }
 
-
-
   public String getAttachFile2() {
     return attachFile2;
   }
-
-
 
   public void setAttachFile2(String attachFile2) {
     this.attachFile2 = attachFile2;
@@ -249,13 +251,4 @@ public class FriendFeed implements Serializable {
   public void setDday(String dday) {
     this.Dday = dday;
   }
-
-  protected String profilePicture;
-
-
-
-
-
-
-
 }
