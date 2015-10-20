@@ -788,7 +788,7 @@ if (typeof jQuery === 'undefined') {
 
       if (!$parent.hasClass('open')) return
 
-      if (e && e.type == 'click' && /input|textarea/i.test(e.target.tagName) && $.contains($parent[0], e.target)) return
+      if (e && e.type == 'click' /*&& /input|textarea/i.test(e.target.tagName)*/ && $.contains($parent[0], e.target)) return
 
       $parent.trigger(e = $.Event('hide.bs.dropdown', relatedTarget))
 
@@ -900,7 +900,7 @@ if (typeof jQuery === 'undefined') {
   // ===================================
 
   $(document)
- /*   .on('click.bs.dropdown.data-api', clearMenus)*/
+    .on('click.bs.dropdown.data-api', clearMenus)
     .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
     .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
     .on('keydown.bs.dropdown.data-api', toggle, Dropdown.prototype.keydown)

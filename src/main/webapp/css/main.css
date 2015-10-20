@@ -209,63 +209,15 @@ hr {
 #map-canvas img {
     max-width: none !important;
 }
-.gm-style-iw {
-    width: 250px !important; /* 건들면 화면 깨짐!! 기본값 350 */
-    top: 15px !important; /* 건들면 화면 깨짐!! */
-    left: 25px !important; /* 건들면 화면 깨짐 */
-    background-color: #fff;
-    box-shadow: 12px 15px 10px rgba(78, 78, 78, 0.7);
-    border: 1px solid rgba(72, 181, 233, 0.6);
-    border-radius: 10px 10px 10px 10px;
-}
-#iw-container {
-    margin-bottom: 0px;
-    width: 250px ;
-} 
-#iw-container .iw-title {
-    text-align: center;
-    font-family: 'Open Sans Condensed', sans-serif;
-    font-size: 22px;
-    font-weight: 400;
-    padding: 6px;
-    background-color: #48b5e9;
-    color: white;
-    margin: 0px;
-    border-radius: 2px 2px 0 0;
-}
-#iw-container .iw-content {
-    font-size: 13px;
-    line-height: 18px;
-    font-weight: 400;
-    margin-right: 0px;
-    padding: 0px 0px 0px 0px;
-    max-height: 600px; /* 창 전체 맥스 길이*/
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-/*
-.iw-content img {
-    float: ;  사진 위치 조정 
-    margin: 10px 0px 10px 0px; 
-}
-*/
-.iw-subTitle {
-    font-size: 16px;
-    padding: 0px 0;
-}
-.iw-subTitle img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
 
 
-detailModal에서 친구 활동 디테일 관련
+
+/* detailModal에서 친구 활동 디테일 관련*/
 .detail-user-info {
- position: absolute;
- float: left;
+/*  position: absolute;*/
+/*  float: left;*/
   margin-left: 10px;
- margin-top: 50px;
+/*  margin-top: 50px;*/
 }
 #detail-profilePicture {
   width: 100px;
@@ -276,11 +228,11 @@ detailModal에서 친구 활동 디테일 관련
   position: static;
   float: right;
   width: 420px;
- left: 400px;
+/*  left: 400px;*/
 }
 .detail-content {
   background-color: #F2F4F5;
- width: 400px;
+/*  width: 400px;*/
   height: 115px;
   padding: 10px;
 }
@@ -292,7 +244,7 @@ detailModal에서 친구 활동 디테일 관련
 }
 .dtail-default-img1 {
   position: static;
- float: left;
+/*  float: left;*/
   width: 180px;
   padding: 5px;
   margin-left: auto;
@@ -307,10 +259,10 @@ detailModal에서 친구 활동 디테일 관련
 }
 .dtail-default-img3 {
   position: static;
- float: right;
+/*  float: right;*/
   width: 180px;
   padding: 5px;
- padding-right: 18px;
+/*  padding-right: 18px;*/
   margin-right: auto;
 }
 .detail-title {
@@ -376,12 +328,3 @@ textarea {
 }
 .commentInputArea{
 	width : 470px;
-}
-.editorial-moim-container{
-   width:35%;
-  margin-left:60%;
-}
-.myact_content{
-margin-left: 2%;
-margin-top: 5%;
-}

@@ -27,7 +27,17 @@ body p {
 #detailModal {
   margin-top: 20%;
 }
-#boredModal {
+
+#addfriendModal{
   margin-top: 15%;
 }
 
+/*boredModal 관련*/
+#boredModal {
+  margin-top: 15%;
+}
+.boredTable {
+  border: 1px solid white;
+  background: #4FB8D9;
+  padding: 28px;
+}

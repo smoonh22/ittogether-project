@@ -142,7 +142,7 @@ public class MemberController {
         
         System.out.println("*회원" + member.getMno() + "의 거리: " + distance + "m");
         
-        if(distance <= 2000){
+        if (distance <= 2000){
            distances.add(distance);
            
           List<Member> members = memberService.getNoneFriendMarks(member.getMno());

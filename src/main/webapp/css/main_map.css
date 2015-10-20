@@ -1,39 +1,40 @@
-.match-heading {
-  margin: 0px;
-  padding: 2px;
-  text-align: center;
-}
 #mainMap {
   width: 100%;
   height: 600px;
 }
+textarea {
+  resize: none;
+}
+
 #finder-box {
   border: 0px solid black;
   top: 80px;
   position: absolute;
-/*  height: 3%;*/
   width: 140px;
   padding: 10px;
 }
-
-.radius-control {
-/*  position: absolute;*/
-/*  width: 120px;*/
+/*반경 설정해주는 버튼 500m, 1km, 2km*/
+.radius-control { 
   width: 100%;
   left: 10px;
   top: 20px;
 }
+/*모두, 남자, 여자 버튼*/
 .radius-control1 {
   width: 40px;      
 }
+/*나이, 취미, 고향 버튼*/
 .radius-control2 {
   width: 40px;
 }
+/*버튼 색깔 눌렸을 때 바꿔줌*/
 .btn-group .active {
   background-color: #2296C1;  
   color: #FFF;
 }
+/*finderBox 끝*/
 
+/*친구 추천 박스 */
 #friend-box {
   background-color: rgba(255, 255, 255, 0.93);
   border-radius: 0.6em;
@@ -41,63 +42,94 @@
   top: 100px;
   height: 500px;
   width: 300px;
-/*  padding: 10px;*/
   position: absolute;
   right: 15px;
   table-layout: fixed;
   overflow: scroll;
+  overflow-x: hidden;
 }
-#friend-table {
-/*  margin: 10px;*/
-}
+/*친구 추천 박스의 친구 추가 버튼*/
 .addfriend-btn {
+  position: absolute;
   float: right;
+  right: 23px;
+}
+.addfriend-btn-adding.nohover {
+  background-color: #229611;  
+}
+.addfriend-btn-adding.nohover:hover {
+  cursor: default !important;
+}
+.addfriend-btn-adding {
+  cursor: default !important;
 }
 .panel-friend-title {
   text-align: center;
 }
-
-
-.editorial-moim-container{
-   width:35%;
-  margin-left:60%;
-}
-
-.friendBalloon {
-  border : 1px;
-}
-.photo-in-Ballon {
-  text-align: center;
+.myPanel {
+  padding:  0px;
+  margin: 5px;
 }
 .match-friendimg {
-  float:left;
-  width:50px;
-  height:50px;
-  max-height: 50px;
-  max-width: 50px;
+  float: left;
+  width: 60px;
+  height: 60px;
+  max-height: 60px;
+  max-width: 60px;
+  padding: 5px;
 }
-
+.match-heading {
+  font-size: 1.0em;
+  font-weight: 500;
+  text-align: center;
+  margin: 0px;
+  padding: 1px;
+}
+.panel-member-desc {
+  font-size: 0.85em;
+  padding: 5px;
+}
+.panel-member-name {
+  font-size: 1.1em;
+  font-weight: 500;
+  color: #47BEE8;
+}
+.panel-member-append{
+  font-size: 0.90em;
+  font-weight: 400;
+  color: black;
+  padding: 2px;
+}
+.panel-member-same{
+  font-size: 0.90em;
+  font-weight: 400;
+  color: black;
+  padding: 2px;
+}
+.panel-icon-align {
+  vertical-align: text-bottom;
+}
+/*friendBox 끝*/
 
 /* mainMap에서 infoWindow */
 .gm-style-iw {
-    width: 200px !important; /* 건들면 화면 깨짐!!*/
+    width: 220px !important; /* 건들면 화면 깨짐!!*/
     top: 15px !important; /* 건들면 화면 깨짐!! */
     left: 25px !important; /* 건들면 화면 깨짐 */
     background-color: #fff;
-    box-shadow: 12px 15px 10px rgba(78, 78, 78, 0.7);
-    border: 1px solid rgba(72, 181, 233, 0.6);
+    box-shadow: 5px 5px 5px rgba(78, 78, 78, 0.7);
+    border: 0px solid rgba(255, 255, 255, 1);
     border-radius: 10px 10px 10px 10px;
 }
 #iw-container {
-    margin-bottom: 0px;
-    width: 200px ;
+    width: 220px ;
 } 
 #iw-container .iw-title {
     text-align: center;
     font-family: 'Open Sans Condensed', sans-serif;
-    font-size: 22px;
-    font-weight: 400;
-    padding: 3px;
+    font-size: 1.3em;
+    font-weight: 500;
+    padding: 5px;
     background-color: #48b5e9;
     color: white;
     margin: 0px;
@@ -113,12 +145,6 @@
     overflow-y: auto;
     overflow-x: hidden;
 }
-/*
-.iw-content  {
-    float: ;  사진 위치 조정 
-    margin: 10px 0px 10px 0px; 
-}
-*/
 .iw-subTitle {
   font-size: 16px;
   padding: 0px 0;
@@ -127,14 +153,62 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
+  padding: 5px;
+}
+.iw-subTitle2 {
+  font-size: 0.85em;
+  text-align: center;
+/*  margin: auto;*/
+  display: block;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 .iw-img {
-  width: 80px;
-  height: 80px;
-  max-height: 80px;
-  max-width: 80px;
+  width: 120px;
+  height: 120px;
+  max-height: 120px;
+  max-width: 120px;
 }
-textarea {
-   resize: none;
+/*친구추가, 요청중, 수락하기 버튼*/
+.addfriend-btn-block  {
+  text-align: center;
+  width: 200px;
+  height: 25px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 3px;
 }
+.iw-desc{
+  text-align: left;
+  font-weight: 500;
+  font-size: 1.2em;
+  padding: 2px;
+}
+.iw-myTable {
+  width: 100%;
+}
+.iw-desc-img {
+  vertical-align: text-bottom;
+}
+/* infowindow 끝*/
 
+
+/*친구 수락시 뜨는 모달*/
+.addfriend-modal-img {
+  width: 110px;
+  height: 110px;
+  max-height: 110px;
+  max-width: 110px;
+  margin: auto;
+  display: block;
+}
+.addfriend-modal-body img{
+  margin: auto;
+  display: block;
+}
+.modal-header-bgcolor {
+  background-color: #0DB0F3;
+  color: white;
+  font-weight: 400;
+  border-radius: 0.3em 0.3em 0em 0em;
+}
