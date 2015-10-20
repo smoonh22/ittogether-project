@@ -125,6 +125,16 @@
   ORDER by t2.cre_dt desc
   </select>
  
+  <select id="myActivityListFrd" resultMap="FriendFeedMap" parameterType="int">
+  select
+  t1.mno,
+  t1.MPHOTO,
+  t2.mno,
+  t2.fno
+  from memb_t t1 inner join joinedfrd_t t2 
+   on t2.fno= #{value} and t1.mno = t2.mno
+  </select>
+ 
  <select id="getDetail" resultMap="FriendFeedMap" parameterType="int">
   select 
    t1.nicknm,
@@ -192,20 +202,3 @@
   delete from COMMENT_T where cno=#{values}
   </delete>
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

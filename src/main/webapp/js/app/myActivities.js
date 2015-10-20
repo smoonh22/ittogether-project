@@ -5,7 +5,6 @@
       app.controller('activityCtrl', ['$http','$scope', function ($http,$scope) {
         var parent_scope = this;
         $http.get('feed/myActivity.do',{params : {mno: sessionStorage.getItem('mno') }}).success(function (result) {
-          parent_scope.activities = result.activity;
           $scope.activities = result.activity;
         });
         

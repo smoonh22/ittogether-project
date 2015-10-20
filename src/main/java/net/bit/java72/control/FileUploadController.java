@@ -51,42 +51,7 @@ public class FileUploadController {
       result.put("data", files);
       return result;
   }
-  
-//  @RequestMapping("/upload2")
-//  public Object upload2(
-//      String data1,
-//      String data2,
-//      @RequestParam(required=false) MultipartFile[] file,
-//      HttpServletRequest request) throws Exception {
-//         
-//      String filename = null;
-//      File newPath = null;
-//      ArrayList<FileItem> files = new ArrayList<FileItem>();
-//      
-//      for (MultipartFile f : file) {
-//        filename = MultipartUtils.getFilename(
-//            f.getOriginalFilename());
-//        newPath = new File(
-//            servletContext.getRealPath("/files") 
-//            + "/" + filename);
-//        f.transferTo(newPath);
-//        
-//        files.add(
-//          new FileItem()
-//            .setName(filename)
-//            .setOriginName(f.getOriginalFilename())
-//            .setSize(f.getSize())
-//            .setUrl(request.getContextPath()
-//                + "/files/" + filename));
-//      }
-//      
-//      Map<String,Object> result = 
-//          new HashMap<String,Object>();
-//      result.put("data", files);
-//      result.put("data1", data1);
-//      result.put("data2", data2);
-//      return result;
-//  }
+
   
  
 }

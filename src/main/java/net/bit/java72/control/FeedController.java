@@ -60,6 +60,7 @@ public class FeedController {
       String meetdate = format.format(feed.getMeetTime());
       feed.setMeetDday(meetdate);
       feed.setDday(CalcTime(feed.getCreateDate()));
+      feed.setJoinfrd(feedService.myActivityListFrd(feed.getFno()));
     }
     
     result.put("activity", test);
@@ -79,8 +80,7 @@ public class FeedController {
     double lon = Double.parseDouble(myInfo.getLongitude());
     
     List<Member> distanceList = memberService.getlatlon(mno);
-    
-    
+       
     List<FriendFeed> frdList = new ArrayList<>();
     
     for(Member member : distanceList){
@@ -123,7 +123,7 @@ public class FeedController {
     return result;
   }
 
-  //최근 피드 클릭시 디테일 정보 
+//최근 피드 클릭시 디테일 정보 
   @RequestMapping("/detail")
   public Object detail(int fno,int mno) throws Exception {
     Map<String,Object> result = new HashMap<String,Object>();
@@ -174,7 +174,7 @@ public class FeedController {
     }
     return result;
   }
-  //댓글 처리
+//댓글 처리
   @RequestMapping("/comment")
   public Object comment(int fno) throws Exception {
     Map<String,Object> result = new HashMap<>();
@@ -232,24 +232,24 @@ public class FeedController {
    }
   
   
-  public String CalcTime(Date meetTime){
-    Calendar calendar = Calendar.getInstance();
-    calendar.setTime(meetTime);
-    long orderTime = calendar.getTimeInMillis();
-    long currentTime = System.currentTimeMillis();
-    
-    long calcTime = (currentTime - orderTime)/1000;
-   if (calcTime > 0){ 
-       if((calcTime/86400) > 0) {
-         return calcTime/86400 +"일 전";
-       } else if(calcTime/3600 > 0) {
-        return calcTime/3600 + "시간 전";
-       } else if(calcTime/60 > 0){
-        return calcTime/60 + "분 전";
-       } else {
-         return "1분 전";
-       }
+   public String CalcTime(Date meetTime){
+     Calendar calendar = Calendar.getInstance();
+     calendar.setTime(meetTime);
+     long orderTime = calendar.getTimeInMillis();
+     long currentTime = System.currentTimeMillis();
+     
+     long calcTime = (currentTime - orderTime)/1000;
+    if (calcTime > 0){ 
+        if((calcTime/86400) > 0) {
+          return calcTime/86400 +"일 전";
+        } else if(calcTime/3600 > 0) {
+         return calcTime/3600 + "시간 전";
+        } else if(calcTime/60 > 0){
+         return calcTime/60 + "분 전";
+        } else {
+          return "1분 전";
+        }
+      }
+    return "기한 초과";
      }
-   return "기한 초과";
-    }
-  }
+   }

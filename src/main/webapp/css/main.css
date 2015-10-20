@@ -1,34 +1,26 @@
 
-html,
-body {
-  width: 100%;
-  height: 100%;
-  font-size: 100%;
-  background-color: rgba(199, 219, 239, 0.29);
-  /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
-}
+html { font-size: 62.5%; } 
+body { font-size: 1rem;background-color: rgba(199, 219, 239, 0.29);} 
 
-/* header nav css 시작 */
-nav {
-  opacity: 0.9;
-}
-.navbar-nav, .navbar-brand{
-	margin-top:10px;
-}
+@media (max-width: 300px) { 
+    html { font-size: 70%;
+    background-color: rgba(199, 219, 239, 0.29); } 
+} 
 
-.user-prof {
-	margin-top:-15px;
-	height:60px;
-	background-color: white;
-  color: dodgerblue;
-}
-#header-user-img {
-  width:50px;
-  height: 50px;
+@media (min-width: 500px) { 
+    html { font-size: 80%; } 
+} 
+
+@media (min-width: 700px) { 
+    html { font-size: 80%; } 
+} 
+
+@media (min-width: 1200px) { 
+    html { font-size: 100%; 
+    background-color: rgba(199, 219, 239, 0.29);} 
 }
 
 
-/* header nav css 끝 */
 
 #left-feed-title {
   padding-top: 3rem;
@@ -268,14 +260,12 @@ hr {
 }
 
 
-
-
-/* detailModal에서 친구 활동 디테일 관련*/
+detailModal에서 친구 활동 디테일 관련
 .detail-user-info {
-/*  position: absolute;*/
-/*  float: left;*/
+ position: absolute;
+ float: left;
   margin-left: 10px;
-/*  margin-top: 50px;*/
+ margin-top: 50px;
 }
 #detail-profilePicture {
   width: 100px;
@@ -286,11 +276,11 @@ hr {
   position: static;
   float: right;
   width: 420px;
-/*  left: 400px;*/
+ left: 400px;
 }
 .detail-content {
   background-color: #F2F4F5;
-/*  width: 400px;*/
+ width: 400px;
   height: 115px;
   padding: 10px;
 }
@@ -302,7 +292,7 @@ hr {
 }
 .dtail-default-img1 {
   position: static;
-/*  float: left;*/
+ float: left;
   width: 180px;
   padding: 5px;
   margin-left: auto;
@@ -317,10 +307,10 @@ hr {
 }
 .dtail-default-img3 {
   position: static;
-/*  float: right;*/
+ float: right;
   width: 180px;
   padding: 5px;
-/*  padding-right: 18px;*/
+ padding-right: 18px;
   margin-right: auto;
 }
 .detail-title {
@@ -386,4 +376,12 @@ textarea {
 }
 .commentInputArea{
 	width : 470px;
+}
+.editorial-moim-container{
+   width:35%;
+  margin-left:60%;
+}
+.myact_content{
+margin-left: 2%;
+margin-top: 5%;
 }

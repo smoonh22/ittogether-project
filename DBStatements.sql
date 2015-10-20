@@ -1,3 +1,8 @@
+FEED_T 파일 칼럼 추가
+ALTER TABLE FEED_T ADD COLUMN attachFile1 VARCHAR(255);
+ALTER TABLE FEED_T ADD COLUMN attachFile2 VARCHAR(255);
+ALTER TABLE FEED_T ADD COLUMN attachFile3 VARCHAR(255);
+
 * 친구&멤버 인서트문 
 insert into memb_t(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
 values('test01nickname', 'test01@test.com', '1234', 'test01name', '서울시 강남구 test1구', '37.497129', '127.027612', '1', '축구', '서울', '안녕하세요1');

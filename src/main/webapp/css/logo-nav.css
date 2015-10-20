@@ -8,7 +8,7 @@
   background-color: #ffffff;
 }
 .navbar-fixed-top .nav {
-    padding: 2px 0;
+    padding:9px 0;
   
 }
 
@@ -24,7 +24,28 @@
     }
 
     .navbar-fixed-top .navbar-brand {
-        padding: 2px 0;
+        padding: 9px 0;
     }
 }
 
+/* header nav css 시작 */
+nav {
+  opacity: 0.9;
+}
+ .navbar-nav, .navbar-brand{
+  margin-top:10px;
+} 
+
+.user-prof {
+  margin-top:-15px;
+  height:60px;
+  background-color: white;
+  color: dodgerblue;
+}
+#header-user-img {
+  width:45px;
+  height: 45px;
+}
+
+
+/* header nav css 끝 */

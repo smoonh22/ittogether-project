@@ -22,4 +22,5 @@ public interface FeedDao {
   int insertComment(Comment commnet);
   int updateComment(Comment comment);
   int deleteComment(int cno);
+  List<FriendFeed> myActivityListFrd(int fno);
 }

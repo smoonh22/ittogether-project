@@ -20,11 +20,18 @@ public class Feed implements Serializable {
   protected String attachFile1;
   protected String attachFile2;
   protected String attachFile3;
+  protected String profilePicture;
+  
   
 
-  
-  
-  
+  public String getProfilePicture() {
+    return profilePicture;
+  }
+
+  public void setProfilePicture(String profilePicture) {
+    this.profilePicture = profilePicture;
+  }
+
   public String getAttachFile1() {
     return attachFile1;
   }
