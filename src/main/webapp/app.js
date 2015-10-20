@@ -9,9 +9,9 @@
 requirejs.config({
     paths: {
       //라이브러리
-      'jquery': 'bower_components/jquery/dist/jquery',
-      'angular': 'bower_components/angular/angular',
-      'bootstrap.min': 'bower_components/bootstrap/dist/js/bootstrap',
+      'jquery': 'bower_components/jquery/dist/jquery.min',
+      'angular': 'bower_components/angular/angular.min',
+      'bootstrap.min': 'bower_components/bootstrap/dist/js/bootstrap.min',
       'bootstrap-tour': 'bower_components/bootstrap-tour/build/js/bootstrap-tour',
       'angular-route': 'bower_components/angular-route/angular-route',
       'ng-file-upload': 'bower_components/ng-file-upload/ng-file-upload',

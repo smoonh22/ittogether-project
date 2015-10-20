@@ -24,13 +24,13 @@
   <select id="exist" 
           parameterType="map" resultMap="MemberMap">
     SELECT mno, nicknm, mphoto
-    FROM memb_t
+    FROM MEMB_T
     WHERE email=#{email} and pwd=#{password}
   </select>
   
   <select id='getlatlon' parameterType='int' resultMap="MemberMap">
   	SELECT mno, lat, lon 
-  	FROM memb_t
+  	FROM MEMB_T
   	WHERE mno NOT IN (select frdno from frd_t where mno=#{values} and state = 2) and mno !=#{values}
   </select>
   
@@ -40,14 +40,14 @@
   </insert>
   
   <select id="getOne" resultMap="MemberMap" parameterType="int">
-   SELECT * FROM memb_t where mno=#{values}
+   SELECT * FROM MEMB_T where mno=#{values}
   </select>
   
   <select id="countEmail" 
       parameterType="string" 
       resultType="int">
     SELECT count(*)
-    FROM memb_t
+    FROM MEMB_T
     WHERE email = #{value}
   </select>
   
@@ -55,19 +55,19 @@
       parameterType="string" 
       resultType="int">
     SELECT count(*)
-    FROM memb_t
+    FROM MEMB_T
     WHERE nicknm = #{value}
   </select>
   
   <select id="getUserInfo" 
           parameterType="string" resultMap="MemberMap">
     SELECT * 
-    FROM memb_t
+    FROM MEMB_T
     WHERE nicknm = #{value}
   </select>
   
   <update id="update" parameterType="Member">
-    UPDATE memb_t SET 
+    UPDATE MEMB_T SET 
       nicknm=#{nickname},
       name=#{name},
       pwd=#{password},
@@ -86,14 +86,14 @@
   </update>
   
   <select id="getNickName" parameterType="string" resultMap="MemberMap">
-  SELECT mno, nicknm FROM memb_t WHERE email=#{email}
+  SELECT mno, nicknm FROM MEMB_T WHERE email=#{email}
   </select>
   
   
   <!-- 메인지도 내위치 -->
   <select id="getMyLoc" parameterType="int" resultMap="MemberMap">
   SELECT *
-  FROM memb_t 
+  FROM MEMB_T 
   WHERE mno=#{mno};
   </select>
   
@@ -111,17 +111,17 @@
       t1.age,
       t1.hobby,
       t1.hometwn
-    FROM memb_t t1 JOIN frd_t t2 using(mno)
+    FROM MEMB_T t1 JOIN FRD_T t2 using(mno)
     WHERE frdno=#{frdno} and state=2;
   </select>
   
   <select id="getFriendMarks" parameterType="int" resultMap="MemberMap">
-    SELECT * FROM memb_t where mno = #{value}
+    SELECT * FROM MEMB_T where mno = #{value}
   </select>
   
   <!-- 비 친구들 뿌려줌 -->
   <select id="getNoneFriendMarks" parameterType="int" resultMap="MemberMap">
-	  SELECT * FROM memb_t where mno = #{value}
+	  SELECT * FROM MEMB_T where mno = #{value}
   </select>
   
 </mapper>

@@ -4,6 +4,7 @@ body {
   width: 100%;
   height: 100%;
   font-size: 100%;
+  background-color: rgba(199, 219, 239, 0.29);
   /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
 }
 

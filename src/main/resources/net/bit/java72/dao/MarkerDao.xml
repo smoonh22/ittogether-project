@@ -15,7 +15,7 @@
   </resultMap>
   
   <select id="markMyMarker" resultMap="MarkerMap">
-    select * from marker_t
+    select * from MARKER_T
     where mno = 1;
   </select>
   

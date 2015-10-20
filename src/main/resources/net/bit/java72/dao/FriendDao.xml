@@ -49,7 +49,7 @@
   	
   <select id="getFRD" parameterType="int">
   	SELECT * 
-  	FROM memb_t
+  	FROM MEMB_T
   	where mno=#{values}
   </select>
    
@@ -62,7 +62,7 @@
    <!-- 친구아닌사람 검색에서 친구 검색으로 수정 -->
   <select id="unFriendList" parameterType="Search" resultMap="MemberMap">
   	SELECT * 
-  	FROM memb_t
+  	FROM MEMB_T
   	WHERE mno IN (select frdno from frd_t where mno=#{mno} and state=2) and mno !=#{mno}
   	<include refid='search'></include>
   </select>
@@ -78,7 +78,7 @@
   </insert>
   
   <update id="acceptFRD" parameterType="FriendList">
-  UPDATE frd_t set state=2 where mno=#{mno} and frdno=#{frdmno} 
+  UPDATE FRD_T set state=2 where mno=#{mno} and frdno=#{frdmno} 
   </update>
   
   <delete id="deleteFRD" parameterType="FriendList">

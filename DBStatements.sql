@@ -274,7 +274,11 @@ CREATE TABLE MEMB_T (
   HOMETWN varchar(100) NULL     COMMENT '출신지', -- 출신지
   SEX     INTEGER      NULL     COMMENT '성별', -- 성별
   MPHOTO  VARCHAR(100) NULL     COMMENT '사진경로', -- 사진경로
-  CRE_DT  DATETIME     NULL     COMMENT '가입일' -- 가입일
+  CRE_DT  DATETIME     NULL     COMMENT '가입일',
+  AGE INT,
+  HOBBY VARCHAR(200),
+  INTRO VARCHAR(200)
+  -- 가입일
 )
 COMMENT 'MEMB_T';
 
@@ -468,13 +472,5 @@ ALTER TABLE FPHOTO_T
       FNO -- 글번호
     );
 
--- HOBBY_T
-ALTER TABLE HOBBY_T
-  ADD CONSTRAINT FK_MEMB_T_TO_HOBBY_T -- MEMB_T -> HOBBY_T
-    FOREIGN KEY (
-      MNO -- 회원번호
-    )
-    REFERENCES MEMB_T ( -- MEMB_T
-      MNO -- 회원번호
-    );
+
 

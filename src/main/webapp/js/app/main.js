@@ -4,7 +4,7 @@ define(function () {
   var app = angular.module('main', ['ngRoute', 'ngFileUpload', 'friendsFeed', 'myFriendList','myActivities']);
   app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/home', {
-      templateUrl: 'templates/changeToMap.html',
+      templateUrl: 'templates/main_body.html',
       controller: 'toggleToMapCtrl'
     });
 //    $routeProvider.when('/main_map', {
@@ -12,9 +12,6 @@ define(function () {
 //    });
     $routeProvider.when('/activity', {
       templateUrl: 'templates/my_activities.html'
-    });
-    $routeProvider.when('/myMap', {
-      templateUrl: 'templates/myMap.html'
     });
     $routeProvider.otherwise({
       redirectTo: '/home'
@@ -104,7 +101,7 @@ define(function () {
   //  메인 화면에서 지도로 토글 시키는 컨트롤러
   app.controller('toggleToMapCtrl', ['$http', '$scope', function($http, $scope) {
       var parent_scope = $scope;
-      $scope.subview = 'main_html';
+      $scope.subview = 'before_html';
       $scope.toggleMap = function() {
           parent_scope.subview= 'map_html';
           

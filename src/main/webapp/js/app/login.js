@@ -1,3 +1,4 @@
+//  window.contextRoot = 'http://54.64.21.8:8080/ittogether';
   window.contextRoot = '/ittogether';
 
 function login() {
@@ -11,11 +12,11 @@ function login() {
         sessionStorage.setItem('nickname', result.nickname);
         sessionStorage.setItem('mno', result.mno);
         sessionStorage.setItem('profile-pic', result.profilePic);
-        window.location = "index.html";
+        window.location = "main.html";
       } else {
         alert('이메일 또는 비밀번호가 맞지 않습니다.');
       }
-    });
+    }); 
 };
 
 

@@ -2,314 +2,162 @@
 <html>
 
 <head>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Czompatible" content="IE=edge">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <title>1인가구를 위한 SNS - itTogether</title>
-    <link rel='stylesheet' href="bower_components/bootstrap/dist/css/bootstrap.css" />
-  <link rel='stylesheet' href="bower_components/bootstrap-tour/build/css/bootstrap-tour.css">
-  <link rel='stylesheet' href="bower_components/bootstrap/dist/css/bootstrap-theme.css" />
-  <link rel='stylesheet' href="css/logo-nav.css" />
+  <title>Login Form</title>
+  <link rel='stylesheet' href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel='stylesheet' href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
+  <link rel="stylesheet" href="css/login.css" />
   <link rel='stylesheet' href="css/modal.css" />
-  <link rel='stylesheet' href="css/myActivities.css" />
-  <link rel='stylesheet' href="css/main.css" />
-  <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.common.min.css"> 
-  <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.rtl.min.css"> 
-  <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.default.min.css">
-  <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.mobile.all.min.css">
   <link rel='stylesheet' href="bower_components/font-awesome/css/font-awesome.css" />
+  <link rel='stylesheet' href="bower_components/bootstrap-social/bootstrap-social.css" />
   <link rel='stylesheet' href="bower_components/blueimp-file-upload/css/jquery.fileupload.css" />
   <link rel='stylesheet' href="bower_components/blueimp-file-upload/css/jquery.fileupload-ui.css" />
-  <link rel='stylesheet' href="css/info-modal.css" />
-  <link rel='stylesheet' href="css/chatting.css" />
 </head>
-
 <body>
-  <!-- 네비게이션 directive-->
-  <show-nav></show-nav>
+    <ul class="cb-slideshow">
+            <li><span>Image 01</span></li>
+            <li><span>Image 02</span></li>
+            <li><span>Image 03</span></li>
+            <li><span>Image 04</span></li>
+            <li><span>Image 05</span></li>
+            <li><span>Image 06</span></li>
+            <li><span>Image 07</span></li>
+            <li><span>Image 08</span></li>
+        </ul>
+<header>
+<h1>HOIT</h1> 
+<p>Hang out in town</p>
+</header>
+<article class="cb-slideshow">
+  <div class="login">
+    <div class="login-screen">
+      <!-- <div class="app-title">
+      </div> -->
+      <div class="login-form">
+        <div id="input-group">
+          <div class="control-group">
+            <input type="text" class="login-field" value="" placeholder="email" id="login-email">
+            <label class="login-field-icon fui-user" for="login-name"></label>
+          </div>
 
-  <div ng-view></div>
-  <!-- 개인정보 모달 창  -->
-  <info-modal></info-modal>
+          <div class="control-group">
+            <input type="password" class="login-field" value="" placeholder="password" id="login-pass">
+            <label class="login-field-icon fui-lock" for="login-pass"></label>
+          </div>
+        </div>
+        <div id="login-btn-group">
+          <a class="btn-login btn-primary btn-large btn-block" href="#" onclick="login();">로그인</a>
 
-  <!--  심심해 모달창  -->
-  <bored-modal></bored-modal>
-
-   <div class="chat-panel">
-   <div class="panel-info panel1">
-   <div class="panel-heading" role="tab" id="headingOne">
-      <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-        </a>
-           <button type="button" class="close chat-close1" aria-hidden="true">&times;</button> 
-      </h4>
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-      <div class="panel-body chat-body">
-        <div id="messages1"> </div>
+          <a class="btn-login btn btn-block btn-social btn-lg btn-facebook" id="facebook-btn"><i class="fa fa-facebook"></i>페이스북으로 로그인</a>
+          <a data-toggle="modal" role="button" class="btn-signup btn-primary btn-large btn-block login-link" id="abc" href="#signupModal">회원가입</a>
+          <!--      <a id="kakao-login-btn"></a>-->
+        </div>
       </div>
     </div>
-     </div>
-     <div class="panel-info panel2">
-    <div class="panel-heading" role="tab" id="headingTwo">
-      <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        </a>
-        <button type="button" class="close chat-close2" aria-hidden="true">&times;</button> 
-      </h4>
-    </div>
-    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-      <div class="panel-body chat-body">
-        <div id="messages2"> </div>
+  </div>
+</article>
+
+  <!-- modal start -->
+  <div id="signupModal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">회원가입</h4>
+        </div>
+        <div class="modal-body">
+          <form role="form">
+            <div class="profile-info-div">
+              <img id="profile-img" src="" />
+            </div>
+            <!--            파일 업록드   -->
+            <div class="form-group my-new">
+              <label class="col-sm-2 control-label">사진</label>
+              <div class="col-sm-10">
+                <span class="btn btn-success fileinput-button">
+        <i class="glyphicon glyphicon-plus"></i>
+        <span>파일 찾기</span>
+                <input id="fileupload" type="file" name="file" data-url="file/upload.do" multiple>
+                <!-- 업로드한 후에 서버에서 보내준 파일명을 저장.
+             회원 정보를 등록할 때 함께 보냄.
+         -->
+                </span>
+              </div>
+            </div>
+            <!--            끝 -->
+            <div class="basic-info-div">
+              <label>이름</label>
+              <input class="form-control signup-input" id="name">
+              <br>
+              <label>닉네임</label><span id="check-nickname"></span>
+              <input class="form-control signup-input" id="nickname">
+              <br>
+              <label>이메일</label><span id="check-email"></span>
+              <input class="form-control signup-input" id="email">
+              <br>
+              <label>비밀번호</label>
+              <input type="password" class="form-control signup-input" placeholder="비밀번호" id="password">
+              <br>
+            </div>
+            <div class="form-group">
+              <label>집 주소(주소 입력 후 핀 조정으로 상세하게 지도에 위치 설정을 해주세요)</label>
+              <input id="pac-input" class="controls" type="text" placeholder="지역을 입력하세요">
+              <div id="map"></div>
+              <div>
+                <input type="text" hidden="true" id="latitude">
+                <input type="text" hidden="true" id="longitude">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="signup-button">가입하기</button>
+        </div>
+        <!-- /.modal-content -->
       </div>
+      <!-- /.modal-dialog -->
     </div>
-     </div>
-    <div class="panel-info panel3">
-    <div class="panel-heading" role="tab" id="headingThree">
-      <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-        </a>
-        <button type="button" class="close chat-close3" aria-hidden="true">&times;</button> 
-      </h4>
-    </div>
-    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-      <div class="panel-body chat-body">
-        <div id="messages3"> </div>
-      </div>
-    </div>
-     </div>
-  </div> 
-
-
-
-
-
-
-  <script src="js/lib/socket.io/node_modules/socket.io-client/socket.io.js"></script>
-  <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-  <script>
-    //처음 시작할 때 현재 진행중인 채팅이 있는지 확인
-    var checkRoomArr = [];
-    var chatWindowCnt = 1;
-     $(document).ready(function() {
-//      initChat();
-    }); 
-
-      setInterval(function() {
-        $.getJSON('http://192.168.1.9:8889/checkStatus.do', {
-          mno: sessionStorage.getItem('mno')
-        }, function(result) {
-          for (var i in result.frdno) { 
-          if (result.frdno[i].frdno == sessionStorage.getItem('mno')) {
-            result.frdno[i].frdno = result.frdno[i].mno;
-          }
-          console.log("--dd" + result.frdno[0].frdno + "-- mno: " + result.frdno[0].mno);
-          if (result.data === 'yes') {
-            $.getJSON('http://192.168.1.9:8889/checkRoom.do', {
-              frdno: result.frdno[i].frdno,
-              mno: sessionStorage.getItem('mno')
-            }, function(result) {
-              for (var i in checkRoomArr) {
-                if (checkRoomArr[i] == result.data.chno) {
-                  result.exist = 'no';
-                  console.log("exist " + result.exist);
-                }
-              }
-              if (result.exist === 'yes') {
-
-                checkRoomArr.push(result.data.chno);
-                chatStart(result.data);
-              }
-            });
-          } else {
-            console.log('활성화된 채팅창 없음');
-          }
-        }
-      });
-        
-      }, 10000);
-
-     function initChat() {
-      $.getJSON('http://192.168.1.9:8889/checkStatus.do', {
-        mno: sessionStorage.getItem('mno')
-      }, function(result) {
-        for (var i in result.frdno) { 
-        if (result.frdno[i].frdno == sessionStorage.getItem('mno')) {
-          result.frdno[i].frdno = result.frdno[i].mno;
-        }
-        console.log("--dd" + result.frdno[0].frdno + "-- mno: " + result.frdno[0].mno);
-        if (result.data === 'yes') {
-          $.getJSON('http://192.168.1.9:8889/checkRoom.do', {
-            frdno: result.frdno[i].frdno,
-            mno: sessionStorage.getItem('mno')
-          }, function(result) {
-            for (var i in checkRoomArr) {
-              if (checkRoomArr[i] == result.data.chno) {
-                result.exist = 'no';
-                console.log("exist " + result.exist);
-              }
-            }
-            if (result.exist === 'yes') {
-
-              checkRoomArr.push(result.data.chno);
-              chatStart(result.data);
-            }
-          });
-        } else {
-          console.log('활성화된 채팅창 없음');
-        }
-      }
-    });
-    }; 
-    function startChatting(frdno, mno) {
-      $.getJSON('http://192.168.1.9:8889/checkRoom.do', {
-        frdno: frdno,
-        mno: mno,
-      }, function(result) {
-        if (result.exist === 'yes') {
-           if ( result.data.status == 1) {
-             $.getJSON('http://192.168.1.9:8889/updateStatus.do', {
-                roomId: result.data.chno
-             }, function(result){
-                console.log('status -> 2');
-             });
-           }
-          chatStart(result.data);
-        } else if (result.exist === 'no') {
-          chatStart(result.newData[0]);
-        }
-      });
-
-
-    };
-
-
-    //사용자가 친구목록에서 채팅하기 눌렀을 때     
-    function chatStart(data) {
-      var socket = io.connect('http://192.168.1.9:8889');
-      var roomId = data.chno;
-      var msg = '';
-      socket.emit('join:room', {
-        roomId: roomId
-      });
-      
-      $('.chat-close'+chatWindowCnt).attr('roomno', data.chno);
-      
-      if( chatWindowCnt < 4) {
-          
-      
-      $.getJSON('http://192.168.1.9:8889/selectChatContent.do',{
-        chno: data.chno
-      }, function(result) {
-        $('#messages'+chatWindowCnt).append('<div id="messages'+data.chno+'" style="margin:0;width:95%;height:90%;overflow:auto;"></div>');
-        console.log(result);
-        if(result.result==='yes'){
-        for(var i in result.data) {
-            $('#messages'+data.chno).append(result.data[i].content);
-        }
-        }
-        console.log('chatWindowCnt : ' + chatWindowCnt);
-        var parent = '.panel' + chatWindowCnt + ' a';
-        $(parent).text(data.nicknm);
-        $('#messages'+chatWindowCnt).append('<form class="chat-form' + data.chno + '" style="position: fixed;bottom: 1px;width: 300px;"><input class="send-text' + 
-            data.chno + '" autocomplete="off" /><button>전송</button></form>');        
-      $('.panel' + chatWindowCnt).show();
-      
-      chatWindowCnt++;
-      console.log(chatWindowCnt);
-      $('.chat-form'+data.chno).submit(function() {
-        socket.emit('send:message', {
-          roomId: roomId,
-          message: '<img src="'+ sessionStorage.getItem('profile-pic') + '" style="width:40px;height=40px;" class="img-circle"> ' +sessionStorage.getItem('nickname') + ': ' + $('.send-text'+data.chno).val()
-        });
-        $('.send-text'+data.chno).val('');
-      });
-
-        
-
-      });
-      } else {
-        var originalroom =$('.chat-close3').attr('roomNo');
-        socket.emit('leave:room', {
-          roomId: $('.chat-close3').attr('roomNo')
-        });
-        $('.panel3 a').text('');
-        $('#messages'+ originalroom).text('');
-        chatWindowCnt =3;
-        console.log(chatWindowCnt + " chat : ");
-        chatStart(data);
-      }
-      
-      
-
-
-      socket.on('send:message' + data.chno, function(msg) {
-        $('#messages' + data.chno).append(' '+ msg + "<br>");
-        $('#messages'+data.chno).scrollTop($('#messages'+data.chno)[0].scrollHeight);
-        $('#messages'+data.chno).parents('.collapse').addClass('in');
+  </div>
+  <!-- /.modal -->
+  
  
-         $.getJSON('http://192.168.1.9:8889/updateStatus.do', {
-          roomId: data.chno
-        }, function(result) {
-          console.log('스테이터스 2로 변경');
-        }); 
+  <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&libraries=places&callback=initAutocomplete" async defer></script>
+  
+  <script src="bower_components/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
 
-         $.getJSON('http://192.168.1.9:8889/insertChatContent.do', {
-          content: ' ' + msg + '<br>',
-          chno: data.chno
-        }, function(result) {
-        });
-        });
-      
-      $('.chat-close1').on('click', function() {
-        console.log($('.chat-close1').attr('roomno') + "roomNO <-");
-        $.getJSON('http://192.168.1.9:8889/changeStatus.do',{
-          roomId: $('.chat-close1').attr('roomno')
-        }, function(result) {
-          console.log('변경 성공');
-        })
-        socket.emit('leave:room', {
-          roomId: $('.chat-close1').attr('roomno')
-        });
-        $('.panel1').css('display','none');
-        
-      /*   for (var i in checkRoomArr) {
-           if(checkRoomArr[i] ==  roomData) {
-             checkRoomArr.slice(i,1);
-           }
-        } */
-   });
-      $('.chat-close2').on('click', function() {
-        $.getJSON('http://192.168.1.9:8889/changeStatus.do',{
-          roomId: Number($('.chat-close2').attr('roomno'))
-        }, function(result) {
-          console.log('변경 성공');
-        })
-        socket.emit('leave:room', {
-          roomId: $('.chat-close2').attr('roomno')
-        });
-        $('.panel2').css('display','none');
-   });
-      $('.chat-close3').on('click', function() {
-        $.getJSON('http://192.168.1.9:8889/changeStatus.do',{
-          roomId: $('.chat-close3').attr('roomno')
-        }, function(result) {
-          console.log('변경 성공');
-        })
-        socket.emit('leave:room', {
-          roomId: Number($('.chat-close3').attr('roomno'))
-        });
-        $('.panel3').css('display','none');
-   });
-    };
+  <script src="bower_components/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+  <!-- The basic File Upload plugin -->
+  <script src="bower_components/blueimp-file-upload/js/jquery.fileupload.js"></script>
 
-      
+  
+  <script type="text/javascript">
+$(function () {
+    $('#fileupload').fileupload({
+        dataType: 'json',
+        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+        disableImageResize: false,
+        imageMaxWidth: 200,
+        imageMaxHeight: 200,
+        imageCrop: false,
+        done: function (e, data) {
+            $.each(data.result.data, function (index, file) {
+                $('#profile-img').attr('src', file.url);
+            });
+        }
+    });
+});
+  
   </script>
+  <!-- The main application script -->
+  <script type="text/javascript" src="js/app/login.js"></script>
+  <script type="text/javascript" src="js/app/facebook.js"></script>
+  
+<footer>
 
-
-  <script data-main='app.js' src='bower_components/requirejs/require.js'></script>
-
+</footer>
 </body>
 
 </html>

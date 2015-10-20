@@ -67,7 +67,7 @@
    t2.attachFile1,
    t2.attachFile2,
    t2.attachFile3
-   from memb_t t1 left outer join feed_t t2 
+   from MEMB_T t1 left outer join FEED_T t2 
    on t1.mno=t2.mno
    where t2.categry is not null and t2.meet_time > now() and t1.mno IN (select frdno from frd_t where mno=#{values} and state=2)
    ORDER by t2.cre_dt desc;
@@ -90,14 +90,14 @@
   t2.attachFile1,
   t2.attachFile2,
   t2.attachFile3
-   from memb_t t1 left outer join feed_t t2
+   from MEMB_T t1 left outer join FEED_T t2
    on t1.mno=t2.mno
    where t2.categry is not null and t1.mno=#{values} and t2.meet_time > now()
   </select>
   
   <insert id="insert" parameterType="Feed">
   INSERT INTO 
-  feed_t(mno,categry,contnt,cre_dt,title,max_headcnt,meet_time,attachFile1,attachFile2,attachFile3)
+  FEED_T(mno,categry,contnt,cre_dt,title,max_headcnt,meet_time,attachFile1,attachFile2,attachFile3)
   VALUES (#{mno},#{category},#{content},now(),#{title},#{maxHeadCount},#{meetTime},#{attachFile1},#{attachFile2},#{attachFile3})
   </insert>
   
@@ -119,7 +119,7 @@
   t2.attachFile1,
   t2.attachFile2,
   t2.attachFile3
-  from memb_t t1 inner join feed_t t2 on t1.mno=t2.mno
+  from MEMB_T t1 inner join FEED_T t2 on t1.mno=t2.mno
   where t2.meet_time > now() and t2.mno = #{values}  
   or t2.fno IN (select t3.fno from JOINEDFRD_T t3 inner join feed_t t4 on t3.fno=t4.fno where t3.mno=#{values} and t4.meet_Time > now()) 
   ORDER by t2.cre_dt desc
@@ -141,30 +141,30 @@
    t2.attachFile1,
    t2.attachFile2,
    t2.attachFile3
-   from memb_t t1 inner join feed_t t2 
+   from MEMB_T t1 inner join FEED_T t2 
    on t2.fno= #{value} and t1.mno = t2.mno
   </select>
   
    <insert id="friendJoinActivity" parameterType="map">
-      insert into joinedfrd_t(mno, fno) values(#{mno}, #{fno})
+      insert into JOINEDFRD_T(mno, fno) values(#{mno}, #{fno})
   </insert>
   
    <delete id="friendOutActivity" parameterType="map">
-      delete from joinedfrd_t where fno=#{fno} and mno=#{mno}
+      delete from JOINEDFRD_T where fno=#{fno} and mno=#{mno}
    </delete>
 
    <update id="friendIn" parameterType="int">
-   	 update feed_t set current_cnt=current_cnt+1 where fno=#{fno}
+   	 update FEED_T set current_cnt=current_cnt+1 where fno=#{fno}
    </update>
    
    <update id="friendOut" parameterType="int">
-     update feed_t set current_cnt=current_cnt-1 where fno=#{fno}
+     update FEED_T set current_cnt=current_cnt-1 where fno=#{fno}
    </update>
     
 
   <select id="checkFeed" parameterType="map" resultMap="FeedMap">
   	select *
-  	FROM joinedFrd_t where fno=#{fno} and mno=#{mno}
+  	FROM JOINEDFRD_T where fno=#{fno} and mno=#{mno}
   </select>
   
   <select id="getComment" parameterType="int" resultMap="CommentMap">
@@ -176,20 +176,20 @@
    	t2.fno,
    	t2.cno,
    	t2.contnt
-   from memb_t t1 inner join comment_t t2
+   from MEMB_T t1 inner join COMMENT_T t2
    on t1.mno = t2.mno where fno = #{values} 
   </select>
   
   <insert id="insertComment" parameterType="Comment">
-  insert into comment_t(fno, mno, contnt, cre_dt) values(#{fno},#{mno},#{content},now())  
+  insert into COMMENT_T(fno, mno, contnt, cre_dt) values(#{fno},#{mno},#{content},now())  
   </insert>
   
   <update id="updateComment" parameterType="Comment">
-  update comment_t set contnt=#{content} where cno=#{cno}
+  update COMMENT_T set contnt=#{content} where cno=#{cno}
   </update>
   
   <delete id='deleteComment' parameterType='int'>
-  delete from comment_t where cno=#{values}
+  delete from COMMENT_T where cno=#{values}
   </delete>
 </mapper>
 
