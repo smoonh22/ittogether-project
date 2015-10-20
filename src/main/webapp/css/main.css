@@ -50,8 +50,9 @@ body {
 	background-color: #48b5e9;
   color: white;
 }
-.btn-custom {
+.btn-custom:hover {
 	background-color: rgb(101, 168, 235);
+color: white;
 }
 .main-background-div {
 	width: 100%;
@@ -304,6 +305,7 @@ hr {
 
 .map-btn:hover {
 	background-color: rgb(101, 168, 235);
+	 color: white;
 }
 
 /* 개인 정보 창*/
