@@ -9,7 +9,7 @@
       <label class="btn btn-info btn-xs radius-500">
         <input type="radio" name="options" id="option500" value="500">500m</label>
       <label class="btn btn-info btn-xs radius-1000 active">
-        <input type="radio" name="options" id="option1000" value="1000" checked>&nbsp;1km&nbsp;</label>     
+        <input type="radio" name="options" id="option1000" value="1000" checked>&nbsp;1km</label>     
       <label class="btn btn-info btn-xs radius-2000">
         <input type="radio" name="options" id="option2000" value="2000">2km</label>
     </div>
@@ -25,11 +25,11 @@
   </div>
   <br>
   <div class="btn-group" data-toggle="buttons">
-    <label class="btn btn-info btn-sm btn-age radius-control2 btn-selected ">
+    <label class="btn btn-info btn-sm btn-age radius-control2 btn-selected">
       <input type="checkbox" autocomplete="off">나이</label>
     <label class="btn btn-info btn-sm btn-hobby radius-control2">
       <input type="checkbox" autocomplete="off">취미</label>
-    <label class="btn btn-info btn-sm btn-hometown radius-control2">
+    <label class="btn btn-info btn-sm btn-hometown btnHometown radius-control2">
       <input type="checkbox" autocomplete="off">고향</label>
   </div>
 </div>
@@ -40,10 +40,12 @@
       <div class="panel-heading map-friend-panel">
         <h3 class="panel-title panel-friend-title">친구 추천</h3>
       </div>
-      <div class="panel-body panel-member">
+      <div class="panel-body-for-scroll">
+        <div class="panel-body panel-member">
       </div>
     </div>
   </div>
+</div>
 </div>
 
 <!-- modal start -->
@@ -55,6 +57,30 @@
       </div>
       <div class="modal-body addfriend-modal-body">
         <div class="addfriend-modal-body2">
+        </div>
+      </div>
+<!--
+      <div class="modal-footer">
+      </div>
+-->
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+</div>
+
+<!-- modal start -->
+<div id="untouchButtonModal" class="modal fade">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header modal-header-bgcolor">
+        <h3 class="modal-title addfriend-modal-title untouch-modal-title">알림!</h3>
+      </div>
+      <div class="modal-body addfriend-modal-body">
+        <div class="untouch-modal-body">
+          <div>파인더를 이용하시려면 </div>
+          <div>회원님의 정보를 입력해주세요</div>
         </div>
       </div>
 <!--
@@ -1260,92 +1286,124 @@
   
   // 남녀 모두 버튼   
   $(document).on('click', '.btn-manwoman', function() {
-    if (!($('.btn-manwoman').hasClass('active'))) {
-      sex = 0;
-      clearMarkers();
-      renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-      friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-      console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
-      console.log('========================================');
+    if ($('#age').val() && $('#hobby').val() && $('#hometown').val()) {
+      if (!($('.btn-manwoman').hasClass('active'))) {
+        sex = 0;
+        clearMarkers();
+        renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
+        console.log('========================================');  
+      }
+    } else {
+      $('#untouchButtonModal').modal();
     }
   });
   // 남자 버튼
   $(document).on('click', '.btn-man', function() {
-    if (!($('.btn-man').hasClass('active'))) {
+    console.log($('#hobby').val());
+    if ($('#age').val() && $('#hobby').val() && $('#hometown').val()) {
+      if (!($('.btn-man').hasClass('active'))) {
       sex = 1;
       clearMarkers();
       renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
       friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
       console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
       console.log('========================================');
+      }
+    } else {
+      $('#untouchButtonModal').modal();
     }
   });
   // 여자 버튼
   $(document).on('click', '.btn-woman', function() {
-    if (!($('.btn-woman').hasClass('active'))) {
-      sex = 2;  
-      clearMarkers();
-      renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-      friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-      console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
-      console.log('========================================');
+    if ($('#age').val() && $('#hobby').val() && $('#hometown').val()) {
+      if (!($('.btn-woman').hasClass('active'))) {
+        sex = 2;  
+        clearMarkers();
+        renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
+        console.log('========================================');  
+      }
+    } else {
+      $('#untouchButtonModal').modal();
     }
   });
     
   // 나이 버튼
   $(document).on('click', '.btn-age', function() {
-    if (!($('.btn-age').hasClass('active'))) {
-      age = 1;
-      ageMin = myAge - 5;
-      ageMax = myAge + 5;
-      clearMarkers();
-      renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-      friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-      console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
-      console.log('========================================');
+    if ($('#age').val() && $('#hobby').val() && $('#hometown').val()) {
+      if (!($('.btn-age').hasClass('active'))) {
+        age = 1;
+        ageMin = myAge - 5;
+        ageMax = myAge + 5;
+        clearMarkers();
+        renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
+        console.log('========================================');
+      } else {
+        age = 0;
+        ageMin = 0;
+        ageMax = 0;
+        clearMarkers();
+        renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+      }
     } else {
-      age = 0;
-      ageMin = 0;
-      ageMax = 0;
-      clearMarkers();
-      renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-      friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+      $('#untouchButtonModal').modal();
     }
+      
   });
   // 취미 버튼
   $(document).on('click', '.btn-hobby', function() {
-    if (!($('.btn-hobby').hasClass('active'))) {
-      myHobbyC = myHobby;
-      clearMarkers();
-      renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-      friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-      console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
-      console.log('========================================');
+    if ($('#age').val() && $('#hobby').val() && $('#hometown').val()) {
+      if (!($('.btn-hobby').hasClass('active'))) {
+        myHobbyC = myHobby;
+        clearMarkers();
+        renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
+        console.log('========================================');
+      } else {
+        myHobbyC = 0;
+        clearMarkers();
+        renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+      }  
     } else {
-      myHobbyC = 0;
-      clearMarkers();
-      renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-      friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+       $('#untouchButtonModal').modal();
     }
+    
   });  
+    
+
+    
+    
+    
   // 고향 버튼
-  $(document).on('click', '.btn-hometown', function() {
-    if (!($('.btn-hometown').hasClass('active'))) {
-      myHometownC = myHometown; 
-      clearMarkers();
-      renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-      friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);   
-      console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
-      console.log('========================================');
-    } else { 
-      myHometownC = 0;
-      clearMarkers();
-      renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-      friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+  $(document).on('click', '.btnHometown', function() {
+    if ($('#age').val() && $('#hobby').val() && $('#hometown').val()) {
+      if (!($('.btn-hometown').hasClass('active'))) {
+        myHometownC = myHometown; 
+        clearMarkers();
+        renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);   
+        console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
+        console.log('========================================');
+      } else { 
+        myHometownC = 0;
+        clearMarkers();
+        renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+      }  
+    } else {
+        $('#untouchButtonModal').modal();
     }
   });
-   
-
+    
+    
   
   // popup창에서  '친구추가' 버튼
   $(document).on('click', '.btn-addfriend-popup', function() {
