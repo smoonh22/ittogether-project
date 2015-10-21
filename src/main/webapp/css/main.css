@@ -78,7 +78,7 @@ color: white;
   display:inline-block;
   width: 96%;
   margin: 2%;
-  height: 5rem;
+  height: 3rem;
   text-align: center;
   font-size: 2.5rem;
   color: rgba(0, 4, 4, 0.79);
@@ -89,7 +89,7 @@ color: white;
   display:inline-block;
   width: 96%;
   margin: 2%;
-  height: 5rem;
+  height: 3rem;
   text-align: center;
   font-size: 2.5rem;
   color: rgba(0, 4, 4, 0.79);
@@ -97,22 +97,24 @@ color: white;
 }
 #left-section {
 	display: inline-block;
-  float:right;
   background-color: rgba(141, 196, 251, 0.2);
   width: 100%;
-  padding: 6% 2%;
   height: 100%;
+  padding: 5% 2%;
+  margin: 1%;
+  margin-bottom: 2%;
   border-radius: 15px;
   box-shadow: 0.1px 0px 2px 1px rgba(115,118,128,0.5);
 }
 
 #right-section {
 	display: inline-block;
-	float:right;
   background-color: rgba(141, 196, 251, 0.2);
   width: 100%;
-  padding: 6% 2%;
   height: 100%;
+  padding: 5% 2%;
+  margin: 1%;
+  margin-bottom: 2%;
   border-radius: 15px;
  box-shadow: 0.1px 0px 2px 1px rgba(115,118,128,0.5);
 }
@@ -124,6 +126,7 @@ color: white;
 	width: 100%;
   border-radius: 10px;
   margin-bottom:1%;
+  margin-top: 1%;
 }
 
 #right-feed {
@@ -131,12 +134,13 @@ color: white;
   width: 100%;
   border-radius: 10px;
   margin-bottom:1%;
+  margin-top: 1%;
 }
 
 .feed-row {
 	width: 100%;
-	padding-right: 5rem;
-	padding-left: 5rem;
+	padding-right: 3.5rem;
+	padding-left: 3.5rem;
 }
 
 .friend-panel {
