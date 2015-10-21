@@ -199,7 +199,7 @@
 				<li class="user-prof"><a data-toggle="modal" href="#infoModal"><img
 						class="img-circle" id="header-user-img" src=""> <span
 						id="userid"></span></a></li>
-				<li><a href="index.html" class="logout">로그아웃</a></li>
+				<li><a href="index.html" class="user-logout">로그아웃</a></li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
@@ -208,16 +208,19 @@
 </nav>
 
 <script type="text/javascript">
+  (function() {
+    if (sessionStorage.getItem('nickname') == null) {
+      location.href="index.html";
+    }
+  })();
   $('#userid').text(" " + sessionStorage.getItem('nickname') + " 님 ");
   $('#header-user-img').attr('src', sessionStorage.getItem('profile-pic'));
   $('#startTour').click(function(event) {
     tour.start();
   });
 
-  $('.logout').on('click', function() {
-    sessionStoarage.setItem('nickname', '');
-    sessionStoarage.setItem('mno', '');
-    sessionStoarage.setItem('profile-pic', '');
+  $('.user-logout').on('click', function() {
+    sessionStorage.clear();
 
   });
 </script>

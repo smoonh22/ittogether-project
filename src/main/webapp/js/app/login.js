@@ -34,8 +34,8 @@ $('#signup-button').click(function (event) {
         password: $('#password').val(),
         name: $('#name').val(),
         address: $('#pac-input').val(),
-        latitude: $('#latitude').val(),
-        longitude: $('#longitude').val(),
+        latitude: $('.signup-lat').val(),
+        longitude: $('.signup-lon').val(),
         profilePicture: $('#profile-img').attr('src')
       },
       success: function (result) {
@@ -137,32 +137,25 @@ function initAutocomplete() { /* 초기화 함수*/
       marker.setMap(null);
     });
     markers = [];
-
     // For each place, get the icon, name and location.
     var bounds = new google.maps.LatLngBounds();
     places.forEach(function (place) {
-
       // Create a marker for each place.
       markers.push(new google.maps.Marker({
         map: map,
         title: place.name,
         position: place.geometry.location
       }));
-
       if (place.geometry.viewport) {
         // Only geocodes have viewport.
         bounds.union(place.geometry.viewport);
       } else {
         bounds.extend(place.geometry.location);
       }
+      addMarker(place.geometry.location, map);
     });
-
     map.fitBounds(bounds);
     map.setZoom(18);
-    $("#latitude").val(markers[0].position.H); /* 위도 경도 */
-    $("#longitude").val(markers[0].position.L);
-    console.log(markers[0].position.H);
-    console.log(markers[0].position.L);
 
     google.maps.event.addListener(map, 'click', function (event) {
       addMarker(event.latLng, map); /* 마커 찍어주는 함수 */
@@ -170,10 +163,8 @@ function initAutocomplete() { /* 초기화 함수*/
 
     function addMarker(location, map) {
       markers[0].setPosition(location);
-      $("#latitude").val(markers[0].position.H); /* 위도 경도 */
-      $("#longitude").val(markers[0].position.L);
-      console.log(markers[0].position.H);
-      console.log(markers[0].position.L);
+      $(".signup-lat").val(location.lat()); /* 위도 경도 */
+      $(".signup-lon").val(location.lng());
     }
   });
 

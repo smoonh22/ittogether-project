@@ -357,12 +357,12 @@ html, body {
 .profile-info-div {
   position: absolute;
   float: left;
-  width: 150px;
+  width: 140px;
   margin-top:30px;
 }
 #profile-img {
-  width:150px;
-  height:180px;
+  width:140px;
+  height:140px;
 }
 
 .basic-info-div {

@@ -39,6 +39,7 @@ define(function () {
             data: {file: file}
         }).success(function (data, status, headers, config) {
             $('#profile-img').attr('src', data.data[0].url);
+            
         }).error(function (data, status, headers, config) {
             console.log('error status: ' + status);
         })
@@ -69,8 +70,10 @@ define(function () {
                },
               success: function(result){
                  if (result.data == 'success') {
+                   sessionStorage.setItem('nickname', $('#nickname').val());
+                   $('#userid').text(" " + sessionStorage.getItem('nickname') + " 님 ");
+                   $('#header-user-img').attr('src', $('#profile-img').attr('src'));
                    $('#infoModal').modal('toggle');
-                   console.log('성공적으로 변경되었습니다');
                  }
               }
            });
