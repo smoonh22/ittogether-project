@@ -17,6 +17,7 @@ requirejs.config({
       'ng-file-upload': 'bower_components/ng-file-upload/ng-file-upload',
       'ng-file-upload-shim': 'bower_components/ng-file-upload/ng-file-upload-shim',
       'kendo-ui':'bower_components/kendo-ui/kendo-ui',
+      'gridalicious' : 'bower_components/gridalicious/jquery.grid-a-licious',
       //컨트롤러
       'main': 'js/app/main',
       'myFriendList': 'js/app/myFriendList',
@@ -32,6 +33,9 @@ requirejs.config({
     'angular': {
       deps: ['jquery'],
       exports: 'angular'
+    },
+    'gridalicious' : {
+      deps: ['jquery']
     },
     'ng-file-upload': {
       deps: ['angular']
@@ -52,7 +56,7 @@ requirejs.config({
       deps:['jquery']
     },
     'main': {
-      deps: ['angular-route', 'ng-file-upload', 'friendsFeed', 'bootstrap.min', 'tour','myFriendList','myActivities','common']
+      deps: ['angular-route', 'ng-file-upload', 'friendsFeed', 'bootstrap.min', 'tour','myFriendList','myActivities','common','gridalicious']
     },
     'friendsFeed': {
       deps: ['angular']

@@ -4,11 +4,54 @@
 
       app.controller('activityCtrl', ['$http','$scope', function ($http,$scope) {
         var parent_scope = this;
-        $http.get('feed/myActivity.do',{params : {mno: sessionStorage.getItem('mno') }}).success(function (result) {
+      $http.get('feed/myActivity.do',{params : {mno: sessionStorage.getItem('mno') }}).success(function (result) {
           $scope.activities = result.activity;
         });
-        
+       
+         $scope.$on('onRepeatLast', function(scope, element, attrs) {
+           $("#activity-container").gridalicious({
+               selector: ".item",
+               animate: true,
+               width: 400,
+               animationOptions: {
+                   queue: true,
+                   speed: 300,
+                   duration: 700,
+                   effect: 'fadeInOnAppear',
+               }
+           });
+       });
+       
+         
+         
+       $scope.sizeUp = function (index,sizeDown){
+         console.log("하하하하");
+         if(sizeDown == true){
+          $scope.myActHide = function(){
+            return false; 
+          }
+         } else {
+         $scope.myActHide = function(no){
+          if (index == no) {
+            return true;
+          } else {
+            return false;
+          }
+         }
+         }
+       }
+
+  
   }]);
+      app.directive('onLastRepeat', function() {
+        return function(scope, element, attrs) {
+            if (scope.$last)
+                setTimeout(function() {
+                    scope.$emit('onRepeatLast', element, attrs);
+                }, 1);
+        };
+    });
+      
       app.directive('detailModal', function () {
         return {
           restrict: 'E',
@@ -77,5 +120,7 @@
           templateUrl: 'templates/modals/insert-modal.html'
         };
       }]); 
+      
+      
       
 });
