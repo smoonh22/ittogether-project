@@ -9,7 +9,7 @@
       <label class="btn btn-info btn-xs radius-500">
         <input type="radio" name="options" id="option500" value="500">500m</label>
       <label class="btn btn-info btn-xs radius-1000 active">
-        <input type="radio" name="options" id="option1000" value="1000" checked>&nbsp;1km&nbsp;</label>     
+        <input type="radio" name="options" id="option1000" value="1000" checked>&nbsp;1km</label>     
       <label class="btn btn-info btn-xs radius-2000">
         <input type="radio" name="options" id="option2000" value="2000">2km</label>
     </div>
@@ -581,39 +581,18 @@
             "</tr>" +
           "</table>" +
           "<div class='iw-subTitle'>" +
-          "<input type='txt' class='form-control input-xs' value=" + friendLocArr[i][3] + ">" +
+          "<textarea class='form-control' rows='2'>" + friendLocArr[i][3] +"</textarea>" + 
           "</div>" +
           "</div>" +
           "</div>" +
           "</div>"
         
 //        
-//        "<div class='iw-title thisisfriend'>" + friendLocArr[i][0] + "</div>" +
-//          "<div class='iw-content'>" +
-//          "<div class='iw-subTitle'>" +
-//          "<img src=" + friendLocArr[i][4] + " class='img-circle iw-img'>" +
-//          "</div>" +
-//          "<div class='iw-subTitle2'>" + 
-//          "<div class='iw-notfriend-desc'><img src='images/icons/manIcon.png'>&nbsp;이름: "+friendLocArr[i][11]+"</div>" +
-//          "<div class='iw-notfriend-desc'><img src='images/icons/age.png'>&nbsp;나이: "+friendLocArr[i][8]+"</div>" +
-//          "<div class='iw-notfriend-desc'><img src='images/icons/hobby.png'>&nbsp;취미: "+friendLocArr[i][9]+"</div>" +
-//          "<div class='iw-notfriend-desc'><img src='images/icons/hometown.png'>&nbsp;고향: "+friendLocArr[i][10]+"</div></div>" +
-//          "<div class='iw-subTitle'>" +
-//          "<input type='txt' class='form-control input-xs' value=" + friendLocArr[i][3] + ">" +
-//          "</div>" +
-//          "</div>" +
-//          "</div>" +
-//          "</div>"
         
       });
       google.maps.event.addListener(friendWindow[i], 'domready', function() {
         infoWindowsCSS();// 팝업창 css 설정해줌
       });
-//    $(document).on('click', '#mainMap', function(e) {
-//       e.stopPropagation();
-//       friendMarkers[i].setAnimation(null);
-//       friendWindow[i].close(map, friendMarkers[i]);
-//      });
     }
         
   function markNotFriends(i, mapAdj, dropAdj) {
@@ -662,24 +641,13 @@
             "</tr>" +
           "</table>" +
           "<div class='iw-subTitle'>" +
-          "<input type='txt' class='form-control input-xs' value=" + notFriendLocArr[i][3] + ">" +
+          "<textarea class='form-control' rows='2'>" + notFriendLocArr[i][3] +"</textarea>" + 
           buttonTypesB[i] + 
           "</div>" +
           "</div>" +
           "</div>" +
           "</div>"
       });
-//    $(document).on('click', '#mainMap', function(e) {
-//         e.stopPropagation();
-//        if (notFriendMarkers[i].getAnimation() == null) {
-//            notFriendWindow[i].open(map, notFriendMarkers[i]);
-//            notFriendMarkers[i].setAnimation(google.maps.Animation.BOUNCE);
-//        } else {
-//            notFriendMarkers[i].setAnimation(null);
-//            notFriendWindow[i].close(map, notFriendMarkers[i]);
-//        }
-//      console.log('#mainMap click');
-//      });
         notFriendMarkers[i].addListener('click', function() {
           if (notFriendMarkers[i].getAnimation() == null) {
             notFriendWindow[i].open(map, notFriendMarkers[i]);
@@ -747,14 +715,6 @@
           'z-index': '-1'
         });
       });
-//      iwCloseBtn.on('click', function() {
-//        console.log($(this).parent().find('.thisisfriend'));
-//        if ($(this).parent().find('.thisisfriend').length) {
-//          friendMarkers[i].setAnimation(null);
-//        } else {
-//          notFriendMarkers[i].setAnimation(null);
-//        }
-//      }); 나중에 함!
     }
     
   function markCircle() {

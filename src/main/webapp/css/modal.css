@@ -37,12 +37,33 @@ body p {
   margin-top: 15%;
 }
 .boredTable {
-  border: 1px solid white;
-  background: #4FB8D9;
-  padding: 28px;
+  border: 0px solid #4FB8D9;
+/*  background: #4FB8D9;*/
+  padding: 7px;
 }
 
 .detailModal-head {
-	background-color: #48b5e9;
+  background-color: #48b5e9;
   color: white;
+}
+.boredIcon {
+/*  width: 32px;*/
+/*  height: 32px;*/
+  text-align: center;
+  padding: 5px;
+/*  max-width: 110%;*/
+/*  max-height: 65%;*/
+}
+.boredDesc {
+  font-size: 0.8em;
+  padding: 5px;
+}
+.boredTable-body {
+  text-align: center;
+}
+.modal-header.modal-header-bgcolor {
+  background-color: #21A7E5;
+  font: 1.2em;
+  color: white;
+  border-radius: 5px 5px 0px 0px;
 }
