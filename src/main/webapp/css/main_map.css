@@ -10,6 +10,7 @@ textarea {
   resize: none;
 }
 
+/*////////////////finderBox 시작/////////////*/
 #finder-box {
   border: 0px solid black;
   top: 80px;
@@ -37,16 +38,13 @@ textarea {
   background-color: #2296C1;  
   color: #FFF;
 }
-/*finderBox 끝*/
+/*////////////////finderBox 끝/////////////*/
 
-/*친구 추천 박스 */
+/*////////////////friendBox 시작/////////////*/
 #friend-box {
   position: absolute;
-  height: 50%;
-/*  width: 24%;*/
+  height: 495px;
   width: 250px;
-/*  min-width: 250px;*/
-/*  max-width: 350px;*/
   right: 15px;
   border-radius: 0.6em;
   background-color: rgba(255, 255, 255, 0.93);
@@ -95,13 +93,11 @@ textarea {
 .myPanel {
   padding:  0px;
   margin: 3px 0 0 0;
-  
 }
 .myPanel-head {
   background-color: rgba(179, 210, 249, 0.79);
   color: rgba(227, 55, 11, 0.79);
   border: 1px solid #5bc0de;
-  
 }
 .match-friendimg {
   float: left;
@@ -143,7 +139,7 @@ textarea {
 .panel-icon-align {
   vertical-align: text-bottom;
 }
-.myPanel-none {
+.myPanel-none { /* 조건 검색 후 해당 결과 없을때*/
   font-size: 0.9rem;
   color: darkgray;
   text-align: center;
@@ -152,9 +148,10 @@ textarea {
   position: absolute;
   left: 34px;
 }
-/*friendBox 끝*/
+/*////////////////friendBox 끝/////////////*/
 
-/* mainMap에서 infoWindow */
+/*/////////mainMap에서 infoWindow 시작///////*/
+/*  */
 .gm-style-iw {
     width: 220px !important; /* 건들면 화면 깨짐!!*/
     top: 15px !important; /* 건들면 화면 깨짐!! */
@@ -233,7 +230,7 @@ textarea {
 .iw-desc-img {
   vertical-align: text-bottom;
 }
-/* infowindow 끝*/
+/*/////////mainMap에서 infoWindow 끝///////*/
 
 
 /*친구 수락시 뜨는 모달*/
