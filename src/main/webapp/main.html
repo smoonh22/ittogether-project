@@ -97,7 +97,7 @@
     }); 
 
       setInterval(function() {
-        $.getJSON('http://192.168.1.9:8889/checkStatus.do', {
+        $.getJSON('http://54.64.21.8:8889/checkStatus.do', {
           mno: sessionStorage.getItem('mno')
         }, function(result) {
           for (var i in result.frdno) { 
@@ -106,7 +106,7 @@
           }
           console.log("--dd" + result.frdno[0].frdno + "-- mno: " + result.frdno[0].mno);
           if (result.data === 'yes') {
-            $.getJSON('http://192.168.1.9:8889/checkRoom.do', {
+            $.getJSON('http://54.64.21.8:8889/checkRoom.do', {
               frdno: result.frdno[i].frdno,
               mno: sessionStorage.getItem('mno')
             }, function(result) {
@@ -129,9 +129,8 @@
       });
         
       }, 10000);
-
      function initChat() {
-      $.getJSON('http://192.168.1.9:8889/checkStatus.do', {
+      $.getJSON('http://54.64.21.8:8889/checkStatus.do', {
         mno: sessionStorage.getItem('mno')
       }, function(result) {
         for (var i in result.frdno) { 
@@ -140,7 +139,7 @@
         }
         console.log("--dd" + result.frdno[0].frdno + "-- mno: " + result.frdno[0].mno);
         if (result.data === 'yes') {
-          $.getJSON('http://192.168.1.9:8889/checkRoom.do', {
+          $.getJSON('http://54.64.21.8:8889/checkRoom.do', {
             frdno: result.frdno[i].frdno,
             mno: sessionStorage.getItem('mno')
           }, function(result) {
@@ -163,13 +162,13 @@
     });
     }; 
     function startChatting(frdno, mno) {
-      $.getJSON('http://192.168.1.9:8889/checkRoom.do', {
+      $.getJSON('http://54.64.21.8:8889/checkRoom.do', {
         frdno: frdno,
         mno: mno,
       }, function(result) {
         if (result.exist === 'yes') {
            if ( result.data.status == 1) {
-             $.getJSON('http://192.168.1.9:8889/updateStatus.do', {
+             $.getJSON('http://54.64.21.8:8889/updateStatus.do', {
                 roomId: result.data.chno
              }, function(result){
                 console.log('status -> 2');
@@ -187,7 +186,7 @@
 
     //사용자가 친구목록에서 채팅하기 눌렀을 때     
     function chatStart(data) {
-      var socket = io.connect('http://192.168.1.9:8889');
+      var socket = io.connect('http://54.64.21.8:8889');
       var roomId = data.chno;
       var msg = '';
       socket.emit('join:room', {
@@ -199,7 +198,7 @@
       if( chatWindowCnt < 4) {
           
       
-      $.getJSON('http://192.168.1.9:8889/selectChatContent.do',{
+      $.getJSON('http://54.64.21.8:8889/selectChatContent.do',{
         chno: data.chno
       }, function(result) {
         $('#messages'+chatWindowCnt).append('<div id="messages'+data.chno+'" style="margin:0;width:95%;height:90%;overflow:auto;"></div>');
@@ -249,13 +248,13 @@
         $('#messages'+data.chno).scrollTop($('#messages'+data.chno)[0].scrollHeight);
         $('#messages'+data.chno).parents('.collapse').addClass('in');
  
-         $.getJSON('http://192.168.1.9:8889/updateStatus.do', {
+         $.getJSON('http://54.64.21.8:8889/updateStatus.do', {
           roomId: data.chno
         }, function(result) {
           console.log('스테이터스 2로 변경');
         }); 
 
-         $.getJSON('http://192.168.1.9:8889/insertChatContent.do', {
+         $.getJSON('http://54.64.21.8:8889/insertChatContent.do', {
           content: ' ' + msg + '<br>',
           chno: data.chno
         }, function(result) {
@@ -264,7 +263,7 @@
       
       $('.chat-close1').on('click', function() {
         console.log($('.chat-close1').attr('roomno') + "roomNO <-");
-        $.getJSON('http://192.168.1.9:8889/changeStatus.do',{
+        $.getJSON('http://54.64.21.8:8889/changeStatus.do',{
           roomId: $('.chat-close1').attr('roomno')
         }, function(result) {
           console.log('변경 성공');
@@ -281,7 +280,7 @@
         } */
    });
       $('.chat-close2').on('click', function() {
-        $.getJSON('http://192.168.1.9:8889/changeStatus.do',{
+        $.getJSON('http://54.64.21.8:8889/changeStatus.do',{
           roomId: Number($('.chat-close2').attr('roomno'))
         }, function(result) {
           console.log('변경 성공');
@@ -292,7 +291,7 @@
         $('.panel2').css('display','none');
    });
       $('.chat-close3').on('click', function() {
-        $.getJSON('http://192.168.1.9:8889/changeStatus.do',{
+        $.getJSON('http://54.64.21.8:8889/changeStatus.do',{
           roomId: $('.chat-close3').attr('roomno')
         }, function(result) {
           console.log('변경 성공');

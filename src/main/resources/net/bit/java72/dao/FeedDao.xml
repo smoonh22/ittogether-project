@@ -131,7 +131,7 @@
   t1.MPHOTO,
   t2.mno,
   t2.fno
-  from memb_t t1 inner join joinedfrd_t t2 
+  from MEMB_T t1 inner join JOINEDFRD_T t2 
    on t2.fno= #{value} and t1.mno = t2.mno
   </select>
  
