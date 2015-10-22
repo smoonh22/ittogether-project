@@ -47,12 +47,20 @@ body {
 }
 
 .btn-custom {
-	background-color: #48b5e9;
+  background-color: #48b5e9;
   color: white;
 }
 .btn-custom:hover {
-	background-color: rgb(101, 168, 235);
-color: white;
+  background-color: rgb(101, 168, 235);
+  color: white;
+}
+.btn-custom-white {
+  background-color: rgb(245, 245, 235);
+  color: black;
+}
+.btn-custom-white:hover {
+  background-color: rgb(245, 245, 235);
+  color: black;
 }
 .main-background-div {
 	width: 100%;

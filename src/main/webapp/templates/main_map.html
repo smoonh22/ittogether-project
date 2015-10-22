@@ -80,7 +80,7 @@
       <div class="modal-body addfriend-modal-body">
         <div class="untouch-modal-body">
           <div>파인더를 이용하시려면 </div>
-          <div>회원님의 정보를 입력해주세요</div>
+          <div>회원님의 정보를 모두 입력해주세요</div>
         </div>
       </div>
 <!--
@@ -224,10 +224,10 @@
   
   function assignButton(i, frdmno) {
     if (checkStateM[i] == 0) {
-       buttonTypes[i] = '<input type="button" class="btn btn-info btn-xs nohover addfriend-btn addfriend-btn-add" mno-data = "' + frdmno +'" value="친구추가">';
+       buttonTypes[i] = '<input type="button" class="btn btn-custom btn-xs nohover addfriend-btn addfriend-btn-add" mno-data = "' + frdmno +'" value="친구추가">';
     }
     if (checkStateM[i] == 1) {
-       buttonTypes[i] = '<input type="button" class="btn btn-default btn-xs addfriend-btn addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">';
+       buttonTypes[i] = '<input type="button" class="btn btn-custom-white btn-xs addfriend-btn addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">';
     }
     if (checkStateM[i] == 3) { 
        buttonTypes[i] = '<a data-toggle="modal" href="#addfriendModal"><input type="button" class="btn btn-success btn-xs addfriend-btn addfriend-btn-accepting" mno-data = "' + frdmno +'" value="수락하기"></a>';
@@ -236,10 +236,10 @@
   
   function assignButtonBlock(i, frdmno) {
     if (checkStateMB[i] == 0) {
-       buttonTypesB[i] = '<input type="button" class="btn btn-info btn-xs nohover addfriend-btn-block btn-addfriend-popup" mno-data = "' + frdmno +'" value="친구추가">';
+       buttonTypesB[i] = '<input type="button" class="btn btn-custom btn-xs nohover addfriend-btn-block btn-addfriend-popup" mno-data = "' + frdmno +'" value="친구추가">';
     }
     if (checkStateMB[i] == 1) {
-       buttonTypesB[i] = '<input type="button" class="btn btn-default btn-xs addfriend-btn-block  addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">';
+       buttonTypesB[i] = '<input type="button" class="btn btn-custom-white btn-xs addfriend-btn-block  addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">';
     }
     if (checkStateMB[i] == 3) { 
        buttonTypesB[i] = '<a data-toggle="modal" href="#addfriendModal"><input type="button" class="btn btn-success btn-xs addfriend-btn-block btn-addfriend-popup-accepting" mno-data = "' + frdmno +'" value="수락하기"></a>';
@@ -247,7 +247,8 @@
   }
 
   function friendList(i) {
-    if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
+    if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown &&
+        notFriendLocArr[i][9] != ""      && notFriendLocArr[i][10] != ""){
       queryString1.push('<div class="panel myPanel">' +
       '<div class="panel-heading match-heading myPanel-head">' +
       "BestMatch" +
@@ -260,26 +261,84 @@
       '</div>' +
       '</div>');
     }
-  if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-      queryString2.push('<div class="panel myPanel">' +
-      '<div class="panel-body panel-member-desc">' +
-      '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i+'" class="img-circle match-friendimg"></a>' +
-      '<div class="panel-member-name"><img class="panel-icon-align" src="images/icons/manIcon.png">&nbsp;' + notFriendLocArr[i][0] + '</div>' +
-      '<div class="panel-member-append"><img class="panel-icon-align" src="images/icons/ruler.png">&nbsp;' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
-      '<div class="panel-member-same"><img class="panel-icon-align" src="images/icons/same.png">&nbsp;취미가 일치합니다.</div>' +          
-      '</div>' +
-      '</div>');
-  }
-  if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
+  if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown &&
+      notFriendLocArr[i][9] == ""      && notFriendLocArr[i][10] != ""){
       queryString3.push('<div class="panel myPanel">' +
       '<div class="panel-body panel-member-desc">' +
       '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i +'" class="img-circle match-friendimg"></a>' +
       '<div class="panel-member-name"><img class="panel-icon-align" src="images/icons/manIcon.png">&nbsp;' + notFriendLocArr[i][0] + '</div>' +
       '<div class="panel-member-append"><img class="panel-icon-align" src="images/icons/ruler.png">&nbsp;' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
-      '<div class="panel-member-same"><img class="panel-icon-align" src="images/icons/same.png">&nbsp;고향이 일치합니다.</div>' +          
+      '<div class="panel-member-same"><img class="panel-icon-align" src="images/icons/same.png">&nbsp;고향이 일치합니다.</div>' +
       '</div>' +
       '</div>');
   }
+  if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown &&
+      notFriendLocArr[i][9] != ""      && notFriendLocArr[i][10] == ""){
+      queryString2.push('<div class="panel myPanel">' +
+      '<div class="panel-body panel-member-desc">' +
+      '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i+'" class="img-circle match-friendimg"></a>' +
+      '<div class="panel-member-name"><img class="panel-icon-align" src="images/icons/manIcon.png">&nbsp;' + notFriendLocArr[i][0] + '</div>' +
+      '<div class="panel-member-append"><img class="panel-icon-align" src="images/icons/ruler.png">&nbsp;' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
+      '<div class="panel-member-same"><img class="panel-icon-align" src="images/icons/same.png">&nbsp;취미가 일치합니다.</div>' +  
+      '</div>' +
+      '</div>');
+  }
+  if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown&&
+      notFriendLocArr[i][9] == ""      && notFriendLocArr[i][10] == ""){
+      queryString4.push('<div class="panel myPanel">' +
+      '<div class="panel-body panel-member-desc">' +
+      '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i +'" class="img-circle match-friendimg"></a>' +
+      '<div class="panel-member-name"><img class="panel-icon-align" src="images/icons/manIcon.png">&nbsp;' + notFriendLocArr[i][0] + '</div>' +
+      '<div class="panel-member-append"><img class="panel-icon-align" src="images/icons/ruler.png">&nbsp;' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
+      '<div></div>' +          
+      '</div>' +
+      '</div>');
+  }
+  if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown
+                                       && notFriendLocArr[i][10] == ""){
+      queryString4.push('<div class="panel myPanel">' +
+      '<div class="panel-body panel-member-desc">' +
+      '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i +'" class="img-circle match-friendimg"></a>' +
+      '<div class="panel-member-name"><img class="panel-icon-align" src="images/icons/manIcon.png">&nbsp;' + notFriendLocArr[i][0] + '</div>' +
+      '<div class="panel-member-append"><img class="panel-icon-align" src="images/icons/ruler.png">&nbsp;' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
+      '<div></div>' +          
+      '</div>' +
+      '</div>');
+  }
+  if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown
+                                       && notFriendLocArr[i][10] != ""){
+      queryString3.push('<div class="panel myPanel">' +
+      '<div class="panel-body panel-member-desc">' +
+      '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i +'" class="img-circle match-friendimg"></a>' +
+      '<div class="panel-member-name"><img class="panel-icon-align" src="images/icons/manIcon.png">&nbsp;' + notFriendLocArr[i][0] + '</div>' +
+      '<div class="panel-member-append"><img class="panel-icon-align" src="images/icons/ruler.png">&nbsp;' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
+      '<div class="panel-member-same"><img class="panel-icon-align" src="images/icons/same.png">&nbsp;고향이 일치합니다.</div>' + 
+      '</div>' +
+      '</div>');
+  }
+  if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown && 
+      notFriendLocArr[i][9] == ""){
+      queryString4.push('<div class="panel myPanel">' +
+      '<div class="panel-body panel-member-desc">' +
+      '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i +'" class="img-circle match-friendimg"></a>' +
+      '<div class="panel-member-name"><img class="panel-icon-align" src="images/icons/manIcon.png">&nbsp;' + notFriendLocArr[i][0] + '</div>' +
+      '<div class="panel-member-append"><img class="panel-icon-align" src="images/icons/ruler.png">&nbsp;' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
+      '<div></div>' +          
+      '</div>' +
+      '</div>');
+  }
+  if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown && 
+      notFriendLocArr[i][9] != ""){
+      queryString2.push('<div class="panel myPanel">' +
+      '<div class="panel-body panel-member-desc">' +
+      '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i+'" class="img-circle match-friendimg"></a>' +
+      '<div class="panel-member-name"><img class="panel-icon-align" src="images/icons/manIcon.png">&nbsp;' + notFriendLocArr[i][0] + '</div>' +
+      '<div class="panel-member-append"><img class="panel-icon-align" src="images/icons/ruler.png">&nbsp;' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
+      '<div class="panel-member-same"><img class="panel-icon-align" src="images/icons/same.png">&nbsp;취미가 일치합니다.</div>' +    
+      '</div>' +
+      '</div>');
+  }
+  
   if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
       queryString4.push('<div class="panel myPanel">' +
       '<div class="panel-body panel-member-desc">' +
@@ -1507,7 +1566,7 @@
         checkStateM[frdmno] = 1;
         checkStateMB[frdmno] = 1;
         console.log("checkStateM[" + frdmno + "]: " + checkStateM[frdmno]);
-        $(parent).closest('.panel-member-append').append('<input type="button" class="btn btn-default btn-xs addfriend-btn addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">');
+        $(parent).closest('.panel-member-append').append('<input type="button" class="btn btn-custom-white btn-xs addfriend-btn addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">');
         
         for (var i = 0; i < notFriendLocArr.length; i++) {
           (function(i) {
