@@ -40,7 +40,6 @@ public class FeedController {
       String meetdate = format.format(feed.getMeetTime());
       feed.setMeetDday(meetdate);
       feed.setDday(CalcTime(feed.getCreateDate()));
-      feed.setJoinfrd(feedService.listFrd(feed.getFno()));
     }
     result.put("data",test);
     
@@ -72,7 +71,6 @@ public class FeedController {
   
   @RequestMapping("/noneFriendFeed")
   public Object nonelist(int mno) {
-    System.out.println(mno + "hhhhh");
   Map<String,Object> result = new HashMap<String,Object>();
   try {
     
@@ -85,12 +83,13 @@ public class FeedController {
     List<FriendFeed> frdList = new ArrayList<>();
     
     for(Member member : distanceList){
+      System.out.println(member);
       double lat2 = Double.parseDouble(member.getLatitude());
       double lon2 = Double.parseDouble(member.getLongitude());
       
       double distance = CalculateDistance.getDistance(lat,lon,lat2,lon2);
       
-      if(distance <= 1000){
+      if(distance <= 2000){
         List<FriendFeed> feeds = feedService.noneFriendFeed(member.getMno());
         SimpleDateFormat format = new SimpleDateFormat("MM월 dd일 E요일");
         for(FriendFeed test : feeds){
@@ -98,7 +97,6 @@ public class FeedController {
           String meetdate = format.format(test.getMeetTime());
           test.setMeetDday(meetdate);
           test.setDday(CalcTime(test.getCreateDate()));
-          test.setJoinfrd(feedService.nlistFrd(test.getFno()));
           frdList.add(test);
         }
         }
@@ -106,7 +104,7 @@ public class FeedController {
     }  
     
     result.put("data", frdList);
-  } catch (Exception e) {}
+  } catch (Exception e) {e.printStackTrace();}
   
   return result;  
   }

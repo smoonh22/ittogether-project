@@ -31,7 +31,7 @@
   <select id='getlatlon' parameterType='int' resultMap="MemberMap">
   	SELECT mno, lat, lon 
   	FROM MEMB_T
-  	WHERE mno NOT IN (select frdno from frd_t where mno=#{values} and state = 2) and mno !=#{values}
+  	WHERE mno NOT IN (select frdno from FRD_T where mno=#{values} and state = 2) and mno !=#{values}
   </select>
   
   <insert id="signUp" parameterType="Member">
