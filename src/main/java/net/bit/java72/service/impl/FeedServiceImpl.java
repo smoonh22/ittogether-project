@@ -90,6 +90,13 @@ public class FeedServiceImpl implements FeedService {
   public List<FriendFeed> myActivityListFrd(int fno) {
     return feedDao.myActivityListFrd(fno);
   }
+  public List<FriendFeed> listFrd(int fno) {
+    return feedDao.listFrd(fno);
+  }
+  @Override
+  public List<FriendFeed> nlistFrd(int fno) {
+    return feedDao.nlistFrd(fno);
+  }
   
 }
 

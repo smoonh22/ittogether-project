@@ -9,43 +9,42 @@
   <div class="leftside-div">
   <div id='left-section'>
     <div id="left-feed-title">친구들의 활동</div>
-			</div>
       <div id="left-feed" ng-repeat="feed in ffCtrl.feeds">
           <div class='feed-row'>
               <div class="friend-panel">
                 <div class="panel-heading category-panel" id='category-color-{{feed.category}}'></div>
                   <div class="panel-body">
-								<div class="prof-img-div">
-									 <img
-										src='{{feed.profilePicture}}' id='friend-profileImg'
-										class="img-circle">
-									</div>
-           <a href="#detailModal" data-toggle="modal" ng-click="detailview(feed.fno)" class="detail-view"> 
-					   <div class="content-panel">
-								<p id="user-name">{{feed.name}}</p>
-								<h5 id="feed-info">
-									<small class="text-muted"><img
-										src="images/icons/calendar.png">{{feed.meetDday}}</small> <small
-										class="text-muted"><img
-										src="images/icons/multiple.png">
-										{{feed.currentCount}}/{{feed.maxHeadCount}} </small> <small
-										class="text-muted"><img src="images/icons/time.png">
-										{{feed.dday}}</small>
-								</h5>
-								<hr>
-								<div id="feed-content">{{feed.title}}</div>
-							</div>
-		         
-		         </a> 
-							</div>
-					</div>
-				</div>
-				</div>
-		</div>
-		<div class="rightside-div">
-	<div id='right-section'>
-      <div id="right-feed-title">주변 회원들의 활동</div>
+                <div class="prof-img-div">
+                   <img src='{{feed.profilePicture}}' id='friend-profileImg'
+                    class="img-circle">
+                  </div>
+                  <a href="#detailModal" data-toggle="modal" ng-click="detailview(feed.fno)" class="detail-view"> 
+             <div class="content-panel">        
+                <p id="user-name">{{feed.name}} <img ng-repeat ='fe in feed.joinfrd' src='{{fe.profilePicture}}' class="img-circle feed-Mphoto-img"/>
+                </p>
+                <h5 id="feed-info">
+                  <small class="text-muted"><img
+                    src="images/icons/calendar.png">{{feed.meetDday}}</small> <small
+                    class="text-muted feed_Count"><img
+                    src="images/icons/multiple.png">
+                    {{feed.currentCount}}/{{feed.maxHeadCount}} </small> <small
+                    class="text-muted feed_Dday"><img src="images/icons/time.png">
+                    {{feed.dday}}</small>
+                </h5>
+                <hr>
+                <div id="feed-content">{{feed.title}}</div>
+              </div>
+             
+             </a> 
+              </div>
+          </div>
+        </div>
+        </div>
       </div>
+    </div>
+    <div class="rightside-div">
+  <div id='right-section'>
+      <div id="right-feed-title">주변 회원들의 활동</div>
       <div id='right-feed' ng-repeat="nfeed in ffCtrl.nfeeds">
         <div class='feed-row'>
               <div class="nonefriend-panel">
@@ -58,14 +57,19 @@
                   </div>
            <a href="#detailModal" data-toggle="modal" ng-click="detailview(nfeed.fno)" class="detail-view"> 
              <div class="content-panel ">
-                <p id="user-name">{{nfeed.name}}</p>
+                <p id="user-name">{{nfeed.name}} <img ng-repeat ='nfe in nfeed.joinfrd' src='{{nfe.profilePicture}}' class="img-circle feed-nphoto-img"/>
+                </p>
                 <h5 id="feed-info">
                   <small class="text-muted"><img
-                    src="images/icons/calendar.png">{{nfeed.meetDday}}</small> <small
-                    class="text-muted"><img
+                    src="images/icons/calendar.png">{{nfeed.meetDday}}</small> 
+                    
+                    <small
+                    class="text-muted nfeed_Count"><img
                     src="images/icons/multiple.png">
-                    {{nfeed.currentCount}}/{{nfeed.maxHeadCount}} </small> <small
-                    class="text-muted"><img src="images/icons/time.png">
+                    {{nfeed.currentCount}}/{{nfeed.maxHeadCount}} </small>
+                    
+                     <small
+                    class="text-muted nfeed_Dday"><img src="images/icons/time.png">
                     {{nfeed.dday}}</small>
                 </h5>
                 <hr>
@@ -76,6 +80,7 @@
           </div>
         </div>
         </div>
+      </div>
       </div>
 <fdetail-modal></fdetail-modal>
       </div>

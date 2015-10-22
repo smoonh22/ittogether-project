@@ -16,6 +16,7 @@ src:url(//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix) f
 }
 html {
 	font-size: 62.5%;
+	overflow-x: hidden;
 }
 
 body {
@@ -47,12 +48,28 @@ body {
 }
 
 .btn-custom {
-	background-color: #48b5e9;
+  background-color: #48b5e9;
   color: white;
 }
 .btn-custom:hover {
-	background-color: rgb(101, 168, 235);
-color: white;
+  background-color: rgb(101, 168, 235);
+  color: white;
+}
+.btn-custom-white {
+  background-color: #E4F7FC;
+  color: #525252;
+}
+.btn-custom-white:hover {
+  background-color: #E4F7FC;
+  color: #525252 ;
+}
+.btn-custom-green {
+  background-color: #5BCD63;
+  color: white;
+}
+.btn-custom-green:hover {
+  background-color: #5BCD63;
+  color: white;
 }
 .main-background-div {
 	width: 100%;
@@ -188,16 +205,18 @@ box-shadow: 0.1px 1px 2px 1px rgba(115,118,128,0.5);
 
 #friend-profileImg {
 	display: inline-block;
-	width: 120px;
-	height: 120px;
+	width: 80px;
+	height: 80px;
 	margin: 0px;
+	margin-top: 5%;
 }
 
 #nonefriend-profileImg {
-	display: inline-block;
-	width: 120px;
-  height: 120px;
-	margin: 0px;
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  margin: 0px;
+  margin-top: 5%;
 }
 
 #category-color-1 {
@@ -221,7 +240,7 @@ hr {
 }
 
 #feed-content {
-	font-size: 60%;
+	font-size: 45%;
 	text-align: left;
 }
 
@@ -249,7 +268,9 @@ hr {
 #user-name {
 	margin: 0px;
 	text-align: left;
-	font-size: 80%;
+	font-size: 60%;
+	font-style: oblique;
+	font-weight: 15%;
 }
 
 #feed-info {
@@ -411,11 +432,6 @@ hr {
 	background-color: #00DCA4;
 	color: white;
 }
-
-.detail-user-name {
-	left: 10px;
-}
-
 textarea {
 	resize: none;
 }
@@ -430,7 +446,9 @@ textarea {
 }
 
 .detailImg {
-	width: 100%;
+	max-height: 60px;
+	max-width: 60px;
+	width: 90%;
 	height: 70%;
 	padding-bottom: 5px;
 }
@@ -452,8 +470,81 @@ textarea {
 
 .comment-updatebtn {
 	height: 20px;
+	font-size: 75%;
 }
 
 .commentInputArea {
 	width: 470px;
+}
+.editorial-moim-container{
+   width:35%;
+  margin-left:60%;
+}
+.feed-Mphoto-img{
+width: 95%;
+height: 95%;
+margin-left: 3%;
+max-height: 28px;
+max-width: 30px;
+}
+.feed-nphoto-img{
+width: 95%;
+height: 95%;
+margin-left: 3%;
+max-height: 28px;
+max-width: 30px;
+}
+.chatTime{
+  font-size: 10%;
+}
+.detail-nick{
+  margin-left: 6%;
+}
+#detail-mTime{
+	margin-right: 3%;
+}
+#detail-headCnt{
+	margin-right: 3%;
+}
+#detail-profilePicture{
+  margin-top: 5%;
+}
+.detail-user-name{
+  margin-top: 2%;
+  margin-left: 7%;
+  font-size: 85%;
+  font-weight: bold;
+}
+
+.comment-insrtbtn{
+  background-color: #48b5e9;
+  color: white;
+  font-size: 15px;
+  width: 95%;
+  height: 100%;
+  margin-bottom: 25%;
+}
+.checkAuthority{
+	margin-right: 5%;
+}
+.comment_content{
+	font-size: 80%;
+}
+.commentBtn{
+	font-size: 75%;
+}
+.feed_Dday{
+	margin-left: 5%;
+}
+.feed_Count{
+	margin-left: 5%;
+}
+.nfeed_Dday{
+	margin-left: 5%;
+}
+.nfeed_Count{
+	margin-left: 5%;
+}
+.detail_cont{
+	font-size: 85%;
 }

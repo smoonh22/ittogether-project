@@ -25,11 +25,11 @@
   </div>
   <br>
   <div class="btn-group" data-toggle="buttons">
-    <label class="btn btn-info btn-sm btn-age radius-control2 btn-selected ">
+    <label class="btn btn-info btn-sm btn-age radius-control2 btn-selected">
       <input type="checkbox" autocomplete="off">나이</label>
     <label class="btn btn-info btn-sm btn-hobby radius-control2">
       <input type="checkbox" autocomplete="off">취미</label>
-    <label class="btn btn-info btn-sm btn-hometown radius-control2">
+    <label class="btn btn-info btn-sm btn-hometown btnHometown radius-control2">
       <input type="checkbox" autocomplete="off">고향</label>
   </div>
 </div>
@@ -40,10 +40,12 @@
       <div class="panel-heading map-friend-panel">
         <h3 class="panel-title panel-friend-title">친구 추천</h3>
       </div>
-      <div class="panel-body panel-member">
+      <div class="panel-body-for-scroll">
+        <div class="panel-body panel-member">
       </div>
     </div>
   </div>
+</div>
 </div>
 
 <!-- modal start -->
@@ -55,6 +57,30 @@
       </div>
       <div class="modal-body addfriend-modal-body">
         <div class="addfriend-modal-body2">
+        </div>
+      </div>
+<!--
+      <div class="modal-footer">
+      </div>
+-->
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+</div>
+
+<!-- modal start -->
+<div id="untouchButtonModal" class="modal fade">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header modal-header-bgcolor">
+        <h3 class="modal-title addfriend-modal-title untouch-modal-title">알림!</h3>
+      </div>
+      <div class="modal-body addfriend-modal-body">
+        <div class="untouch-modal-body">
+          <div>파인더를 이용하시려면 </div>
+          <div>회원님의 정보를 모두 입력해주세요</div>
         </div>
       </div>
 <!--
@@ -198,30 +224,31 @@
   
   function assignButton(i, frdmno) {
     if (checkStateM[i] == 0) {
-       buttonTypes[i] = '<input type="button" class="btn btn-info btn-xs nohover addfriend-btn addfriend-btn-add" mno-data = "' + frdmno +'" value="친구추가">';
+       buttonTypes[i] = '<input type="button" class="btn btn-custom btn-xs nohover addfriend-btn addfriend-btn-add" mno-data = "' + frdmno +'" value="친구추가">';
     }
     if (checkStateM[i] == 1) {
-       buttonTypes[i] = '<input type="button" class="btn btn-default btn-xs addfriend-btn addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">';
+       buttonTypes[i] = '<input type="button" class="btn btn-custom-white btn-xs addfriend-btn addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">';
     }
     if (checkStateM[i] == 3) { 
-       buttonTypes[i] = '<a data-toggle="modal" href="#addfriendModal"><input type="button" class="btn btn-success btn-xs addfriend-btn addfriend-btn-accepting" mno-data = "' + frdmno +'" value="수락하기"></a>';
+       buttonTypes[i] = '<a data-toggle="modal" href="#addfriendModal"><input type="button" class="btn btn-custom-green btn-xs addfriend-btn addfriend-btn-accepting" mno-data = "' + frdmno +'" value="수락하기"></a>';
     }
   }
   
   function assignButtonBlock(i, frdmno) {
     if (checkStateMB[i] == 0) {
-       buttonTypesB[i] = '<input type="button" class="btn btn-info btn-xs nohover addfriend-btn-block btn-addfriend-popup" mno-data = "' + frdmno +'" value="친구추가">';
+       buttonTypesB[i] = '<input type="button" class="btn btn-custom btn-xs nohover addfriend-btn-block btn-addfriend-popup" mno-data = "' + frdmno +'" value="친구추가">';
     }
     if (checkStateMB[i] == 1) {
-       buttonTypesB[i] = '<input type="button" class="btn btn-default btn-xs addfriend-btn-block  addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">';
+       buttonTypesB[i] = '<input type="button" class="btn btn-custom-white btn-xs addfriend-btn-block  addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">';
     }
     if (checkStateMB[i] == 3) { 
-       buttonTypesB[i] = '<a data-toggle="modal" href="#addfriendModal"><input type="button" class="btn btn-success btn-xs addfriend-btn-block btn-addfriend-popup-accepting" mno-data = "' + frdmno +'" value="수락하기"></a>';
+       buttonTypesB[i] = '<a data-toggle="modal" href="#addfriendModal"><input type="button" class="btn btn-custom-green btn-xs addfriend-btn-block btn-addfriend-popup-accepting" mno-data = "' + frdmno +'" value="수락하기"></a>';
     }
   }
 
   function friendList(i) {
-    if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown){
+    if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown &&
+        notFriendLocArr[i][9] != ""      && notFriendLocArr[i][10] != ""){
       queryString1.push('<div class="panel myPanel">' +
       '<div class="panel-heading match-heading myPanel-head">' +
       "BestMatch" +
@@ -234,26 +261,84 @@
       '</div>' +
       '</div>');
     }
-  if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown){
-      queryString2.push('<div class="panel myPanel">' +
-      '<div class="panel-body panel-member-desc">' +
-      '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i+'" class="img-circle match-friendimg"></a>' +
-      '<div class="panel-member-name"><img class="panel-icon-align" src="images/icons/manIcon.png">&nbsp;' + notFriendLocArr[i][0] + '</div>' +
-      '<div class="panel-member-append"><img class="panel-icon-align" src="images/icons/ruler.png">&nbsp;' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
-      '<div class="panel-member-same"><img class="panel-icon-align" src="images/icons/same.png">&nbsp;취미가 일치합니다.</div>' +          
-      '</div>' +
-      '</div>');
-  }
-  if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown) {
+  if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown &&
+      notFriendLocArr[i][9] == ""      && notFriendLocArr[i][10] != ""){
       queryString3.push('<div class="panel myPanel">' +
       '<div class="panel-body panel-member-desc">' +
       '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i +'" class="img-circle match-friendimg"></a>' +
       '<div class="panel-member-name"><img class="panel-icon-align" src="images/icons/manIcon.png">&nbsp;' + notFriendLocArr[i][0] + '</div>' +
       '<div class="panel-member-append"><img class="panel-icon-align" src="images/icons/ruler.png">&nbsp;' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
-      '<div class="panel-member-same"><img class="panel-icon-align" src="images/icons/same.png">&nbsp;고향이 일치합니다.</div>' +          
+      '<div class="panel-member-same"><img class="panel-icon-align" src="images/icons/same.png">&nbsp;고향이 일치합니다.</div>' +
       '</div>' +
       '</div>');
   }
+  if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown &&
+      notFriendLocArr[i][9] != ""      && notFriendLocArr[i][10] == ""){
+      queryString2.push('<div class="panel myPanel">' +
+      '<div class="panel-body panel-member-desc">' +
+      '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i+'" class="img-circle match-friendimg"></a>' +
+      '<div class="panel-member-name"><img class="panel-icon-align" src="images/icons/manIcon.png">&nbsp;' + notFriendLocArr[i][0] + '</div>' +
+      '<div class="panel-member-append"><img class="panel-icon-align" src="images/icons/ruler.png">&nbsp;' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
+      '<div class="panel-member-same"><img class="panel-icon-align" src="images/icons/same.png">&nbsp;취미가 일치합니다.</div>' +  
+      '</div>' +
+      '</div>');
+  }
+  if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] == myHometown&&
+      notFriendLocArr[i][9] == ""      && notFriendLocArr[i][10] == ""){
+      queryString4.push('<div class="panel myPanel">' +
+      '<div class="panel-body panel-member-desc">' +
+      '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i +'" class="img-circle match-friendimg"></a>' +
+      '<div class="panel-member-name"><img class="panel-icon-align" src="images/icons/manIcon.png">&nbsp;' + notFriendLocArr[i][0] + '</div>' +
+      '<div class="panel-member-append"><img class="panel-icon-align" src="images/icons/ruler.png">&nbsp;' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
+      '<div></div>' +          
+      '</div>' +
+      '</div>');
+  }
+  if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown
+                                       && notFriendLocArr[i][10] == ""){
+      queryString4.push('<div class="panel myPanel">' +
+      '<div class="panel-body panel-member-desc">' +
+      '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i +'" class="img-circle match-friendimg"></a>' +
+      '<div class="panel-member-name"><img class="panel-icon-align" src="images/icons/manIcon.png">&nbsp;' + notFriendLocArr[i][0] + '</div>' +
+      '<div class="panel-member-append"><img class="panel-icon-align" src="images/icons/ruler.png">&nbsp;' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
+      '<div></div>' +          
+      '</div>' +
+      '</div>');
+  }
+  if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] == myHometown
+                                       && notFriendLocArr[i][10] != ""){
+      queryString3.push('<div class="panel myPanel">' +
+      '<div class="panel-body panel-member-desc">' +
+      '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i +'" class="img-circle match-friendimg"></a>' +
+      '<div class="panel-member-name"><img class="panel-icon-align" src="images/icons/manIcon.png">&nbsp;' + notFriendLocArr[i][0] + '</div>' +
+      '<div class="panel-member-append"><img class="panel-icon-align" src="images/icons/ruler.png">&nbsp;' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
+      '<div class="panel-member-same"><img class="panel-icon-align" src="images/icons/same.png">&nbsp;고향이 일치합니다.</div>' + 
+      '</div>' +
+      '</div>');
+  }
+  if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown && 
+      notFriendLocArr[i][9] == ""){
+      queryString4.push('<div class="panel myPanel">' +
+      '<div class="panel-body panel-member-desc">' +
+      '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i +'" class="img-circle match-friendimg"></a>' +
+      '<div class="panel-member-name"><img class="panel-icon-align" src="images/icons/manIcon.png">&nbsp;' + notFriendLocArr[i][0] + '</div>' +
+      '<div class="panel-member-append"><img class="panel-icon-align" src="images/icons/ruler.png">&nbsp;' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
+      '<div></div>' +          
+      '</div>' +
+      '</div>');
+  }
+  if (notFriendLocArr[i][9] == myHobby && notFriendLocArr[i][10] != myHometown && 
+      notFriendLocArr[i][9] != ""){
+      queryString2.push('<div class="panel myPanel">' +
+      '<div class="panel-body panel-member-desc">' +
+      '<a href=""><img src="' + notFriendLocArr[i][4] +'"id="member'+i+'" class="img-circle match-friendimg"></a>' +
+      '<div class="panel-member-name"><img class="panel-icon-align" src="images/icons/manIcon.png">&nbsp;' + notFriendLocArr[i][0] + '</div>' +
+      '<div class="panel-member-append"><img class="panel-icon-align" src="images/icons/ruler.png">&nbsp;' + notFriendLocArr[i][5] + "m 이내" + buttonTypes[i] + '</div>' +
+      '<div class="panel-member-same"><img class="panel-icon-align" src="images/icons/same.png">&nbsp;취미가 일치합니다.</div>' +    
+      '</div>' +
+      '</div>');
+  }
+  
   if (notFriendLocArr[i][9] != myHobby && notFriendLocArr[i][10] != myHometown) {
       queryString4.push('<div class="panel myPanel">' +
       '<div class="panel-body panel-member-desc">' +
@@ -1260,92 +1345,124 @@
   
   // 남녀 모두 버튼   
   $(document).on('click', '.btn-manwoman', function() {
-    if (!($('.btn-manwoman').hasClass('active'))) {
-      sex = 0;
-      clearMarkers();
-      renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-      friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-      console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
-      console.log('========================================');
+    if ($('#age').val() && $('#hobby').val() && $('#hometown').val()) {
+      if (!($('.btn-manwoman').hasClass('active'))) {
+        sex = 0;
+        clearMarkers();
+        renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
+        console.log('========================================');  
+      }
+    } else {
+      $('#untouchButtonModal').modal();
     }
   });
   // 남자 버튼
   $(document).on('click', '.btn-man', function() {
-    if (!($('.btn-man').hasClass('active'))) {
+    console.log($('#hobby').val());
+    if ($('#age').val() && $('#hobby').val() && $('#hometown').val()) {
+      if (!($('.btn-man').hasClass('active'))) {
       sex = 1;
       clearMarkers();
       renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
       friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
       console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
       console.log('========================================');
+      }
+    } else {
+      $('#untouchButtonModal').modal();
     }
   });
   // 여자 버튼
   $(document).on('click', '.btn-woman', function() {
-    if (!($('.btn-woman').hasClass('active'))) {
-      sex = 2;  
-      clearMarkers();
-      renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-      friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-      console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
-      console.log('========================================');
+    if ($('#age').val() && $('#hobby').val() && $('#hometown').val()) {
+      if (!($('.btn-woman').hasClass('active'))) {
+        sex = 2;  
+        clearMarkers();
+        renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
+        console.log('========================================');  
+      }
+    } else {
+      $('#untouchButtonModal').modal();
     }
   });
     
   // 나이 버튼
   $(document).on('click', '.btn-age', function() {
-    if (!($('.btn-age').hasClass('active'))) {
-      age = 1;
-      ageMin = myAge - 5;
-      ageMax = myAge + 5;
-      clearMarkers();
-      renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-      friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-      console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
-      console.log('========================================');
+    if ($('#age').val() && $('#hobby').val() && $('#hometown').val()) {
+      if (!($('.btn-age').hasClass('active'))) {
+        age = 1;
+        ageMin = myAge - 5;
+        ageMax = myAge + 5;
+        clearMarkers();
+        renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
+        console.log('========================================');
+      } else {
+        age = 0;
+        ageMin = 0;
+        ageMax = 0;
+        clearMarkers();
+        renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+      }
     } else {
-      age = 0;
-      ageMin = 0;
-      ageMax = 0;
-      clearMarkers();
-      renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-      friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+      $('#untouchButtonModal').modal();
     }
+      
   });
   // 취미 버튼
   $(document).on('click', '.btn-hobby', function() {
-    if (!($('.btn-hobby').hasClass('active'))) {
-      myHobbyC = myHobby;
-      clearMarkers();
-      renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-      friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-      console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
-      console.log('========================================');
+    if ($('#age').val() && $('#hobby').val() && $('#hometown').val()) {
+      if (!($('.btn-hobby').hasClass('active'))) {
+        myHobbyC = myHobby;
+        clearMarkers();
+        renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
+        console.log('========================================');
+      } else {
+        myHobbyC = 0;
+        clearMarkers();
+        renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+      }  
     } else {
-      myHobbyC = 0;
-      clearMarkers();
-      renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-      friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+       $('#untouchButtonModal').modal();
     }
+    
   });  
+    
+
+    
+    
+    
   // 고향 버튼
-  $(document).on('click', '.btn-hometown', function() {
-    if (!($('.btn-hometown').hasClass('active'))) {
-      myHometownC = myHometown; 
-      clearMarkers();
-      renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-      friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);   
-      console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
-      console.log('========================================');
-    } else { 
-      myHometownC = 0;
-      clearMarkers();
-      renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
-      friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+  $(document).on('click', '.btnHometown', function() {
+    if ($('#age').val() && $('#hobby').val() && $('#hometown').val()) {
+      if (!($('.btn-hometown').hasClass('active'))) {
+        myHometownC = myHometown; 
+        clearMarkers();
+        renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);   
+        console.log('PARAMETER: distant(' + distant + ')/sex(' + sex + ')/age(' + age + ')/ageMin(' + ageMin + ')/ageMax(' + ageMax + ')/myHobbyC(' + myHobbyC + ')/myHometownC(' + myHometownC + ')');
+        console.log('========================================');
+      } else { 
+        myHometownC = 0;
+        clearMarkers();
+        renderMarkers(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+        friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
+      }  
+    } else {
+        $('#untouchButtonModal').modal();
     }
   });
-   
-
+    
+    
   
   // popup창에서  '친구추가' 버튼
   $(document).on('click', '.btn-addfriend-popup', function() {
@@ -1449,7 +1566,7 @@
         checkStateM[frdmno] = 1;
         checkStateMB[frdmno] = 1;
         console.log("checkStateM[" + frdmno + "]: " + checkStateM[frdmno]);
-        $(parent).closest('.panel-member-append').append('<input type="button" class="btn btn-default btn-xs addfriend-btn addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">');
+        $(parent).closest('.panel-member-append').append('<input type="button" class="btn btn-custom-white btn-xs addfriend-btn addfriend-btn-adding" mno-data = "' + frdmno +'" value="요청중">');
         
         for (var i = 0; i < notFriendLocArr.length; i++) {
           (function(i) {

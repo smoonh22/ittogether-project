@@ -37,18 +37,18 @@
   </resultMap>
  
   <resultMap type="FriendList" id="FriendListMap">
-	<id     column="fno"      property="fno" />
-	<id     column="mno"      property="mno" />
+  <id     column="fno"      property="fno" />
+  <id     column="mno"      property="mno" />
   </resultMap>
   
   <resultMap type="Comment" id="CommentMap">
-  	 <id     	 column="fno"        property="fno"/>
-  	 <id         column="mno"        property="mno"/>
-  	 <id    	 column="cno"        property="cno"/>
-  	 <result     column="contnt"     property="content"/>
-  	 <result     column="pwd"        property="password"/>
-  	 <result     column="nicknm"     property="nickname" />
-  	 <result	 column="mphoto"     property="profilePicture"/>
+     <id       column="fno"        property="fno"/>
+     <id         column="mno"        property="mno"/>
+     <id       column="cno"        property="cno"/>
+     <result     column="contnt"     property="content"/>
+     <result     column="pwd"        property="password"/>
+     <result     column="nicknm"     property="nickname" />
+     <result   column="mphoto"     property="profilePicture"/>
   </resultMap>
  <!--  모임약속시간 이 현재시간보다 나중이어야 출력하는걸로 수정 -->
   <select id="list" resultMap="FriendFeedMap" parameterType="int">
@@ -71,13 +71,23 @@
    on t1.mno=t2.mno
    where t2.categry is not null and t2.meet_time > now() and t1.mno IN (select frdno from frd_t where mno=#{values} and state=2)
    ORDER by t2.cre_dt desc;
-  </select>	
+  </select> 
+  
+  <select id="listFrd" resultMap="FriendFeedMap" parameterType="int">
+  select
+  t1.mno,
+  t1.MPHOTO,
+  t2.mno,
+  t2.fno
+  from memb_t t1 inner join joinedfrd_t t2 
+   on t2.fno= #{value} and t1.mno = t2.mno
+  </select>
   
   <!--  모임약속시간 이 현재시간보다 나중이어야 출력하는걸로 수정 -->
   <select id="noneFriendFeed" resultMap="FriendFeedMap" parameterType="int">
   select 
    t1.nicknm,
-   t1.NAME,	
+   t1.NAME, 
    t1.MPHOTO,
    t2.fno,
    t2.CATEGRY,
@@ -93,6 +103,16 @@
    from MEMB_T t1 left outer join FEED_T t2
    on t1.mno=t2.mno
    where t2.categry is not null and t1.mno=#{values} and t2.meet_time > now()
+  </select>
+  
+  <select id="nlistFrd" resultMap="FriendFeedMap" parameterType="int">
+  select
+  t1.mno,
+  t1.MPHOTO,
+  t2.mno,
+  t2.fno
+  from memb_t t1 inner join joinedfrd_t t2 
+   on t2.fno= #{value} and t1.mno = t2.mno
   </select>
   
   <insert id="insert" parameterType="Feed">
@@ -164,7 +184,7 @@
    </delete>
 
    <update id="friendIn" parameterType="int">
-   	 update FEED_T set current_cnt=current_cnt+1 where fno=#{fno}
+     update FEED_T set current_cnt=current_cnt+1 where fno=#{fno}
    </update>
    
    <update id="friendOut" parameterType="int">
@@ -173,19 +193,19 @@
     
 
   <select id="checkFeed" parameterType="map" resultMap="FeedMap">
-  	select *
-  	FROM JOINEDFRD_T where fno=#{fno} and mno=#{mno}
+    select *
+    FROM JOINEDFRD_T where fno=#{fno} and mno=#{mno}
   </select>
   
   <select id="getComment" parameterType="int" resultMap="CommentMap">
    select
-   	t1.mno,
-   	t1.nicknm,
-   	t1.name,
-   	t1.mphoto,
-   	t2.fno,
-   	t2.cno,
-   	t2.contnt
+    t1.mno,
+    t1.nicknm,
+    t1.name,
+    t1.mphoto,
+    t2.fno,
+    t2.cno,
+    t2.contnt
    from MEMB_T t1 inner join COMMENT_T t2
    on t1.mno = t2.mno where fno = #{values} 
   </select>

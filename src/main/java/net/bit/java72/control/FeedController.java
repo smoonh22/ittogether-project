@@ -40,6 +40,7 @@ public class FeedController {
       String meetdate = format.format(feed.getMeetTime());
       feed.setMeetDday(meetdate);
       feed.setDday(CalcTime(feed.getCreateDate()));
+      feed.setJoinfrd(feedService.listFrd(feed.getFno()));
     }
     result.put("data",test);
     
@@ -97,6 +98,7 @@ public class FeedController {
           String meetdate = format.format(test.getMeetTime());
           test.setMeetDday(meetdate);
           test.setDday(CalcTime(test.getCreateDate()));
+          test.setJoinfrd(feedService.nlistFrd(test.getFno()));
           frdList.add(test);
         }
         }
