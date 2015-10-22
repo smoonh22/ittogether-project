@@ -194,7 +194,7 @@
                     'zoom': '1',
                     'filter': 'alpha(opacity=0)',
                     'opacity': '0'
-                }).find('img, object, embed, iframe').css({
+                }).find('object, embed, iframe').css({
                     'width': width,
                     'height': 'auto',
                     'display': 'block',

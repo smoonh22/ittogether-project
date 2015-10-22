@@ -2,17 +2,23 @@
 
       var app = angular.module('myActivities', []);
 
-      app.controller('activityCtrl', ['$http','$scope', function ($http,$scope) {
+      app.controller('activityCtrl', ['$http','$scope','$window', function ($http,$scope,$window) {
         var parent_scope = this;
-      $http.get('feed/myActivity.do',{params : {mno: sessionStorage.getItem('mno') }}).success(function (result) {
+        var w = angular.element($window);
+    
+        w.bind('resize', function(){
+          
+        })
+        
+      $scope.mainAct = function() {$http.get('feed/myActivity.do',{params : {mno: sessionStorage.getItem('mno') }}).success(function (result) {
           $scope.activities = result.activity;
-        });
-       
+        })
+        };
          $scope.$on('onRepeatLast', function(scope, element, attrs) {
            $("#activity-container").gridalicious({
                selector: ".item",
                animate: true,
-               width: 400,
+               width: 330,
                animationOptions: {
                    queue: true,
                    speed: 300,
@@ -21,29 +27,126 @@
                }
            });
        });
-       
+         $scope.mainAct(); 
          
          
-       $scope.sizeUp = function (index,sizeDown){
-         console.log("하하하하");
+         
+         $scope.getComment = function(fno){$http.get('feed/comment.do',{
+           params : {
+             fno : fno
+           }
+         }).success(function(result){
+          $scope.comments = result.coment;
+        
+           // 삭제 수정 권한 체크
+          $scope.checkAuthority = function (Mmno) {
+            var mno = sessionStorage.getItem('mno');  
+            if(Mmno == mno){
+              return true;
+            } else {
+              return false;
+            }
+          }
+         })
+         };  
+         
+       $scope.sizeUp = function (index,sizeDown,fno){
+         var item = fno;
+         // 댓글 목록불러오기
+        $scope.getComment(item);
+        
          if(sizeDown == true){
           $scope.myActHide = function(){
             return false; 
           }
          } else {
-         $scope.myActHide = function(no){
-          if (index == no) {
-            return true;
-          } else {
-            return false;
-          }
-         }
+           $scope.myActHide = function(no){
+            if (index == no) {
+              return true;
+            } else {
+              return false;
+            }
+           }
          }
        }
+       // 댓글 삭제 버튼
+       $scope.deleteCmt = function (cno,fno) {
+         $.ajax('feed/comentdelete.do',{
+           method : 'get',
+           dataType : 'json',
+           data : {
+                   cno : cno
+                  },
+           success : function(result) {
+             
+             return $scope.getComment(fno);
+           }
+        });
 
+       }
+     
+       // 수정 버튼 누를떄 event
+       $scope.openUpdateArea = function (index) {
+         
+         $scope.commentArea = function (cno) {
+           if(index == cno) {
+             return true;
+           }
+         }
+         
+         $scope.updateArea = function (cno) {
+           if (index == cno){
+             return true;
+           }
+           
+         }
+       }
+       // 수정 버튼 후 등록버튼
+       $scope.updateCmt = function (index,cno,fno,rewriteComment) {
+         
+         $scope.commentArea = function (cno) {
+           if(index == cno) {
+             return false;
+           }
+         }
+         
+         $scope.updateArea = function (cno) {
+           if (index == cno){
+             return false;
+           }
+         }
+           
+         $.ajax('feed/comentupdate.do',{
+           method : 'get',
+           dataType : 'json',
+           data : {
+                   cno : cno ,
+                   content : rewriteComment
+                  },
+             success : function(result) {
+             return $scope.detailview(fno);
+           }
+        });
+      }
+       // 수정버튼 후 취소 버튼
+       $scope.cancelBtn = function (index,cno) {
+         $scope.commentArea = function (cno) {
+           if(index == cno) {
+             return false;
+           }
+         }
+         
+         $scope.updateArea = function (cno) {
+           if (index == cno){
+             return false;
+           }
+         }
+       }
+       
+       
   
   }]);
-      app.directive('onLastRepeat', function() {
+      app.directive('onLastRepeat', function($window) {
         return function(scope, element, attrs) {
             if (scope.$last)
                 setTimeout(function() {
@@ -120,7 +223,5 @@
           templateUrl: 'templates/modals/insert-modal.html'
         };
       }]); 
-      
-      
       
 });
