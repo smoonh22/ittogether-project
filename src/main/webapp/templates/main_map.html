@@ -132,29 +132,29 @@
     });
   }
   
-  function getMyFriendsInfo(mySwitchForModal, picSrcm, nameVal) {
+  function getMyFriendsInfo(mySwitchForModal, picSrc, nameVal) {
     $.getJSON(contextRoot + '/member/getFriends.do', {
       frdno: sessionStorage.getItem('mno'),
       mno: sessionStorage.getItem('mno')
     }, function(results) {
-      for (var i = 0; i < results.data.length; i++) {
-        var tempArr = [
-          results.data[i].nickname,           // 0
-          Number(results.data[i].latitude),   // 1
-          Number(results.data[i].longitude),  // 2
-          results.data[i].introduction,       // 3
-          results.data[i].profilePicture,     // 4
-          results.distance[i],                // 5
-          results.data[i].sex,                // 6
-          results.data[i].age,                // 7
-          results.data[i].hobby,              // 8
-          results.data[i].hometown,           // 9
-          results.data[i].mno,                //10
-          results.data[i].name                //11
-        ];
-        friendLocArr.push(tempArr);
-        console.log("친구" + i + ": " + friendLocArr[i][0]+"/"+ friendLocArr[i][5]+"/"+ friendLocArr[i][10]);
-      }
+        for (var i = 0; i < results.data.length; i++) {
+          var tempArr = [
+            results.data[i].nickname,           // 0
+            Number(results.data[i].latitude),   // 1
+            Number(results.data[i].longitude),  // 2
+            results.data[i].introduction,       // 3
+            results.data[i].profilePicture,     // 4
+            results.distance[i],                // 5
+            results.data[i].sex,                // 6
+            results.data[i].age,                // 7
+            results.data[i].hobby,              // 8
+            results.data[i].hometown,           // 9
+            results.data[i].mno,                //10
+            results.data[i].name                //11
+          ];
+          friendLocArr.push(tempArr);
+          console.log("친구" + i + ": " + friendLocArr[i][0]+"/"+ friendLocArr[i][5]+"/"+ friendLocArr[i][10]);
+        }
       if (mySwitchForModal == 1) {
         console.log('append();');
         
@@ -170,28 +170,30 @@
     $.getJSON(contextRoot + '/member/getMembers.do', {
       mno: sessionStorage.getItem('mno')
     }, function(results) {
-      for (var i = 0; i < results.data.length; i++) {
-        var tempArr = [
-          results.data[i].nickname,
-          Number(results.data[i].latitude),
-          Number(results.data[i].longitude),
-          results.data[i].introduction,
-          results.data[i].profilePicture,
-          results.distance[i],
-          Number(results.data[i].mno),
-          results.data[i].sex,
-          results.data[i].age,
-          results.data[i].hobby,
-          results.data[i].hometown,
-          results.data[i].name
-        ];
-        notFriendLocArr.push(tempArr);
-        console.log("주변회원" + i + ": " + notFriendLocArr[i][0]+"/"+
-                    notFriendLocArr[i][5]+"/"+notFriendLocArr[i][6]);        
-      }
-        for (var i = 0; i < notFriendLocArr.length; i++){
+        for (var i = 0; i < results.data.length; i++) {
+          var tempArr = [
+            results.data[i].nickname,
+            Number(results.data[i].latitude),
+            Number(results.data[i].longitude),
+            results.data[i].introduction,
+            results.data[i].profilePicture,
+            results.distance[i],
+            Number(results.data[i].mno),
+            results.data[i].sex,
+            results.data[i].age,
+            results.data[i].hobby,
+            results.data[i].hometown,
+            results.data[i].name
+          ];
+          notFriendLocArr.push(tempArr);
+          console.log("주변회원" + i + ": " + notFriendLocArr[i][0]+"/"+
+                      notFriendLocArr[i][5]+"/"+notFriendLocArr[i][6]);        
+        }
+         for (var i = 0; i < notFriendLocArr.length; i++){
           checkRelationMembers(i, mySwitch); 
-      }
+        } else {
+          getMyInfo();
+        }
     })
   }
   
@@ -511,12 +513,9 @@
     }
     queryStringSpin();
     if ($('.myPanel').length > 0) {
-//      console.log('myPanel이 있네');
     } else {
-//      console.log('myPanel이 없네');
       $('.myPanel-none').remove();
       $('.panel-member').append(queryString5);
-//      queryString5 = null;
     }
   }      
       
