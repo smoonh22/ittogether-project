@@ -1,54 +1,55 @@
 <div class="modal fade" id="layerpop">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <!-- header -->
-         <div class="modal-header">
-            <!-- 닫기(x) 버튼 -->
-            <button type="button" class="close" data-dismiss="modal">×</button>
-            <!-- header title -->
-            <h4 class="modal-title">새 활동 만들기</h4>
-         </div>
-         <!-- body -->
-         <div class="modal-body">
-            <small class="text-muted"> <select name="carlist"
-               form="carform" id="category">
-                  <option value="1">모임</option>
-                  <option value="2">나눔</option>
-                  <option value="3">요청</option>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!-- header -->
+			<div class="modal-header">
+				<!-- 닫기(x) 버튼 -->
+				<button type="button" class="close" data-dismiss="modal">×</button>
+				<!-- header title -->
+				<h4 class="modal-title">새 활동 만들기</h4>
+			</div>
+			<!-- body -->
+			<div class="modal-body">
+				<select name="carlist" form="carform" class="insertCategory">
+					<option value="1" class="Goodmeeting">모임</option>
+					<option value="2" class="Gooddivide">나눔</option>
+					<option value="3" class="Goodinvite">요청</option>
+				</select> <input type="text" id="title" placeholder="제목을 입력하세요(10자 내외)"
+					class="insertTitle" maxlength="10" />
+				<textarea id="content" placeholder="내용을 입력하세요" rows="5"
+					style="resize: none;" class="insertContent"></textarea>
+				<small class="text-muted"> <label>인원수</label> <input
+					type="number" value="1" min="1" max="10" id="maxHeadCount">
+					명
+				</small> <small class="text-muted insert_meet"><label>날짜 및
+						시간입력</label> <input id="meetTime" /> </small>
+				<h5 class="insert-photo">밑에 공란에 사진을 드래그 하세요</h5>
+				<div>
+					<img src="images/default-img.png"
+						ngf-drop="MCtrl.uploadFiles2($files,1)"
+						class="drop-box dtail-default-img1" ngf-drag-over-class="dragover"
+						ngf-multiple="true" ngf-pattern="'image/*,application/pdf'"
+						id='piicture'> <img src="images/default-img.png"
+						ngf-drop="MCtrl.uploadFiles2($files,2)"
+						class="drop-box dtail-default-img2" ngf-drag-over-class="dragover"
+						ngf-multiple="true" ngf-pattern="'image/*,application/pdf'"
+						id='piicture1'> <img src="images/default-img.png"
+						ngf-drop="MCtrl.uploadFiles2($files,3)"
+						class="drop-box dtail-default-img3" ngf-drag-over-class="dragover"
+						ngf-multiple="true" ngf-pattern="'image/*,application/pdf'"
+						id='piicture2'>
+				</div>
 
-            </select><br> <br>
-            </small> 
-            <textarea id="title" placeholder="제목을 입력하세요" cols="65" rows="1" style="resize:none;"></textarea>
-            <br><br>
-            <textarea id="content" placeholder="내용을 입력하세요" cols="65" rows="5"style="resize:none;"></textarea>
-            <br><br> <small class="text-muted"> <label>인원수</label> <input
-               type="number" value="1" min="1" max="10" id="maxHeadCount">
-            </small> <br><br> <small class="text-muted"><label>날짜 및
-                  시간입력</label> <input id="meetTime"/> </small>
-<br><br>
-<h5>밑에 공란에 사진을 드래그 하세요</h5>
-          <div>
-          <img src="images/default-img.png" ngf-drop="MCtrl.uploadFiles2($files,1)" class="drop-box dtail-default-img1"
- 		  ngf-drag-over-class="dragover" ngf-multiple="true" 
- 		  ngf-pattern="'image/*,application/pdf'" id='piicture'>
-          <img src="images/default-img.png" ngf-drop="MCtrl.uploadFiles2($files,2)" class="drop-box dtail-default-img2"
- 		  ngf-drag-over-class="dragover" ngf-multiple="true" 
- 		  ngf-pattern="'image/*,application/pdf'" id='piicture1'>
-          <img src="images/default-img.png" ngf-drop="MCtrl.uploadFiles2($files,3)" class="drop-box dtail-default-img3"
- 		  ngf-drag-over-class="dragover" ngf-multiple="true" 
- 		  ngf-pattern="'image/*,application/pdf'"  id='piicture2'>
-	      </div>
 
+				<!-- Footer -->
+				<div class="modal-footer">
 
-            <!-- Footer -->
-            <div class="modal-footer">
+					<button type="button" id="btn" class="btn btn-custom"
+						ng-click="btnClick()">새 활동 만들기</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal">닫기</button>
 
-               <button type="button" id="btn" class="btn btn-custom"
-                  ng-click="btnClick()">새 활동 만들기</button>
-               <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-
-            </div>
-         </div>
-      </div>
-   </div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

@@ -22,7 +22,8 @@
 									</div>
            <a href="#detailModal" data-toggle="modal" ng-click="detailview(feed.fno)" class="detail-view"> 
 					   <div class="content-panel">
-								<p id="user-name">{{feed.name}}</p>
+								<p id="user-name">{{feed.name}}<img ng-repeat ='fe in feed.joinfrd' src='{{fe.profilePicture}}' class="img-circle feed-Mphoto-img"/>
+								</p>
 								<h5 id="feed-info">
 									<small class="text-muted"><img
 										src="images/icons/calendar.png">{{feed.meetDday}}</small> <small
@@ -58,7 +59,8 @@
                   </div>
            <a href="#detailModal" data-toggle="modal" ng-click="detailview(nfeed.fno)" class="detail-view"> 
              <div class="content-panel ">
-                <p id="user-name">{{nfeed.name}}</p>
+                <p id="user-name">{{nfeed.name}}<img ng-repeat ='nfe in nfeed.joinfrd' src='{{nfe.profilePicture}}' class="img-circle feed-nphoto-img"/>
+                </p>
                 <h5 id="feed-info">
                   <small class="text-muted"><img
                     src="images/icons/calendar.png">{{nfeed.meetDday}}</small> <small

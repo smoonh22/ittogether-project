@@ -1,6 +1,6 @@
 .map-friend-panel{
   background-color: #48b5e9;
-	color: white;
+  color: white;
 }
 #mainMap {
   width: 100%;
@@ -41,23 +41,44 @@ textarea {
 
 /*친구 추천 박스 */
 #friend-box {
-  background-color: rgba(255, 255, 255, 0.93);
-  border-radius: 0.6em;
-  box-shadow: 2px 2px 15px grey;
-  top: 100px;
-  height: 500px;
-  width: 300px;
   position: absolute;
+  height: 50%;
+/*  width: 24%;*/
+  width: 250px;
+/*  min-width: 250px;*/
+/*  max-width: 350px;*/
   right: 15px;
+  border-radius: 0.6em;
+  background-color: rgba(255, 255, 255, 0.93);
+  box-shadow: 2px 2px 15px grey;
+  top: 125px;
   table-layout: fixed;
-  overflow: scroll;
+  overflow: hidden;
   overflow-x: hidden;
+}
+.panel-body-for-scroll {
+  position: relative;
+  width: 300px;
+  height: 460px;
+  border: 0px solid black;
+  overflow: hidden;
+}
+.panel-body-for-scroll > .panel-body{
+  padding: 7px;
+}
+.panel-member {
+   height: 455px;   
+   width: 400px;
+   overflow-y: scroll
+}
+.viewport-on-mainMap > .panel {
+    border: 0px solid transparent;
 }
 /*친구 추천 박스의 친구 추가 버튼*/
 .addfriend-btn {
-  position: absolute;
+  position: relative;
   float: right;
-  right: 23px;
+  right: 5%;
 }
 .addfriend-btn-adding.nohover {
   background-color: #229611;  
@@ -77,10 +98,10 @@ textarea {
   
 }
 .myPanel-head {
-	background-color: rgba(179, 210, 249, 0.79);
+  background-color: rgba(179, 210, 249, 0.79);
   color: rgba(227, 55, 11, 0.79);
   border: 1px solid #5bc0de;
-	
+  
 }
 .match-friendimg {
   float: left;
@@ -91,29 +112,30 @@ textarea {
   padding: 5px;
 }
 .match-heading {
-  font-size: 1.0em;
+  width: 235px;
+  font-size: 1.0rem;
   font-weight: 500;
   text-align: center;
   margin: 0px;
   padding: 1px;
 }
 .panel-member-desc {
-  font-size: 0.85em;
+  font-size: 0.95rem;
   padding: 5px;
 }
 .panel-member-name {
-  font-size: 1.1em;
-  font-weight: 500;
+  font-size: 1.1rem;
+  font-weight: 700;
   color: #47BEE8;
 }
 .panel-member-append{
-  font-size: 0.90em;
+  font-size: 0.8rem;
   font-weight: 400;
   color: black;
   padding: 2px;
 }
 .panel-member-same{
-  font-size: 0.90em;
+  font-size: 0.80rem;
   font-weight: 400;
   color: black;
   padding: 2px;
@@ -139,7 +161,7 @@ textarea {
 #iw-container .iw-title {
     text-align: center;
     font-family: 'Open Sans Condensed', sans-serif;
-    font-size: 1.3em;
+    font-size: 1.3rem;
     font-weight: 500;
     padding: 5px;
     background-color: #48b5e9;

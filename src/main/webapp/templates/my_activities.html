@@ -1,4 +1,5 @@
-<div id='moim-Img' ng-controller="activityCtrl as MCtrl">
+<div ng-controller="activityCtrl as MCtrl" resize>
+<div id='moim-Img' >
    <div class="span6 col-sm-6  editorial-moim-container">
       <div class="editorial-cell">
          <h1 class="editorial-title">내 모든 활동들을 볼수 있습니다</h1>
@@ -6,51 +7,77 @@
             보세요</p>
          <br>
          <div id="map-link-div">
-            <div class="btn btn-ms btn-block map-btn btn-custom"
+            <div class="btn  btn-ms map-btn"
                data-target="#layerpop" data-toggle="modal">새 활동 만들기</div>
          </div>
       </div>
    </div>
-   <div class='row'>
-         <div ng-repeat-start="myact in activities">
-            <div id="myactfeed" class="col-md-4"><br><br><br>
-               <div class="masonry_title">
-                  <div class="panel-heading" id='category-color-{{myact.category}}'></div><br>
-                  <div class='row'>
-                     <div class='col-md-3'>
-                        <img src={{myact.profilePicture}} class="img-circle act-profile-img" id="profile"/><br>
-                        <br>
-                     </div>
-                     <div class='col-md-9'>
-                        <div id='feed-header'>
-                           <p class="myact-title">{{myact.title}}</p>
-                       <img ng-repeat ='act in myact.joinfrd' src='{{act.profilePicture}}' class="img-circle act-Mphoto-img"/>       
-                        </div>
-                     </div><br><br><br><br><br>
-                     <div class='row'>
-                     <div class="col-md-1"></div>
-                     <div class="col-md-5 table-hover my_act_meet_day"> 
-                     <small class="text-muted"><img src="images/icons/calendar.png"></small>{{myact.meetDday}}</div>
-                <div class="col-md-6 table-hover my_act_make_day">                              
-                <small class="text-muted"><img src="images/icons/time.png"></small>{{myact.dday}}</div>
-                     </div>
-                     <div class='row'>
-                       <div class="col-md-12">
-                    <pre class="myact_content table-hover">{{myact.content}}
-                    </pre></div>                     
-                     </div>
-                     <br>
-               <div class='row'>
-               <div class="col-md-4"><img src="{{myact.attachFile1}}"  class="picture1"/></div>
-                <div class="col-md-4"><img src="{{myact.attachFile2}}"  class="picture2"/></div>
-                <div class="col-md-4"><img src="{{myact.attachFile3}}"  class="picture3"/></div>
-               </div>
-
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div ng-repeat-end></div>
-   </div>
+</div>   
+		<div id='activity-container'>
+		<div ng-repeat="myact in activities" class='myActList' on-last-repeat> 
+		   	<div class='act-feed-content item'>
+				<div class='moim-section' role='button' ng-click='sizeUp($index,myActHide($index,myact),myact.fno)'>
+					<div class='act-feed-header'>
+						<div class='act-feed-prof-img'>
+							<img class='moim-profile-img img-thumbnail' src='{{myact.profilePicture}}'>
+						</div>
+						<div class='act-feed-title'>
+							<br>
+							<div>
+							<b class='moim-title-font'>{{myact.title}}</b>
+		                    <br>
+		                    {{myact.meetDday}}
+		                    </div>
+		                    <br>
+		                    <div class='act-create-time'>
+		                   	{{myact.dday}}
+		                   	</div>
+						</div>
+					</div>
+					<div>
+					</div>	
+				</div>
+				<div class='act-joinfrd-section'>
+					<div class='joined-frd-none' ng-if='myact.joinfrd[0] == null'>
+					<small class='text-joinfrd-none'>참여한 사람이 없습니다.</small>
+					</div>
+					<div  ng-if='myact.joinfrd[0] != null'>
+					<small class='text-joinfrd-none'>참여한 사람</small><br>
+					 <img class='img-circle joined-frd-picture' ng-repeat-start='pic in myact.joinfrd' src='{{pic.profilePicture}}'>
+					 <br ng-repeat-end ng-if='$index==4'>
+					</div>
+				</div>
+				<div class='moim-hide-section'>	
+					<pre>{{myact.content}}</pre>
+				</div>
+				<div ng-show='myActHide($index)'>
+					<div>
+         				<img src="{{myact.attachFile1}}" class="act-feed-img">
+         				<img src="{{myact.attachFile2}}" class="act-feed-img">
+         				<img src="{{myact.attachFile3}}" class="act-feed-img">
+     			 	</div>
+     			 	<div class='act-comment-section'>
+     			 	    <div ng-repeat="comment in comments">
+				        	<div class='row commentFeed'>
+        	  					<div class='col-md-2'><img src='{{comment.profilePicture}}' class='detailImg img-circle'/></div>
+        	  					<div class='col-md-8'>
+			        	  			<table class='commentTable'>
+			        	  				<tr><td><b>{{comment.nickname}}</b></td></tr>
+			        	  				<tr><td rowspan="5"><div ng-hide='commentArea(comment.cno)' id='commentarea{{comment.cno}}'>{{comment.content}}</div>
+			        	  				<div ng-show='updateArea(comment.cno)'><textarea ng-model='rewriteComment' class='commentInputArea'>{{comment.content}}</textarea>
+			        	  				<button ng-click='updateCmt($index,comment.cno,comment.fno,rewriteComment)' class='comment-updatebtn'>등록</button><button ng-click='cancelBtn($index,comment.cno)' class='comment-updatebtn'>취소</button></div></td></tr>
+			        	  			</table>
+			        	  	</div>
+			        	  		<div ng-show='checkAuthority(comment.mno)' class='checkAuthority'>
+			        	  			<span ng-click='openUpdateArea(comment.cno,rewriteComment)' class='commentBtn' role='button'>수정</span>|<span class='commentBtn' ng-click=deleteCmt(comment.cno,comment.fno); role='button'>삭제</span>
+			        	  		</div>
+			        		</div>
+						</div>
+     			 	</div>
+     			</div>
+     		</div>	
+        </div>
+        </div>
 <act-modal></act-modal>
 </div>
+
