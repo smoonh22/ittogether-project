@@ -78,7 +78,7 @@ textarea {
 .addfriend-btn {
   position: relative;
   float: right;
-  right: 5%;
+  right: 38%;
 }
 .addfriend-btn-adding.nohover {
   background-color: #229611;  
@@ -215,7 +215,7 @@ textarea {
 .iw-desc{
   text-align: left;
   font-weight: 500;
-  font-size: 1.2em;
+  font-size: 1em;
   padding: 2px;
 }
 .iw-myTable {

@@ -6,6 +6,18 @@
       </div>
         <div class="modal-body boredTable-body">
           <table class="boredTable">
+            <tr>
+              <td colspan="3">
+              <div class="btn-group btn-bored-meettime" data-toggle="buttons">
+                <label class="btn btn-custom btn-xs">
+                  <input type="radio" name="options" id="after30m" class="boredTimeButton" value="30">30분 후</label>
+                <label class="btn btn-custom btn-xs active">
+                  <input type="radio" name="options" id="rightNow" class="boredTimeButton" value="0">지금</label>     
+                <label class="btn btn-custom btn-xs">
+                  <input type="radio" name="options" id="after60m" class="boredTimeButton" value="60">60분 후</label>
+              </div>
+              </td>
+            </tr>
             <tr class="boredTable">
               <td class="boredTable"><a href=""><img src="images/icons/soccer.png" class="boredIcon" id="bored1"></a><div class="boredDesc">축구</div></td>
               <td class="boredTable"><a href=""><img src="images/icons/basketball.png" class="boredIcon" id="bored2"></a><div class="boredDesc">농구</div></td>   
@@ -19,10 +31,10 @@
             <tr class="boredTable">
               <td class="boredTable"><a href=""><img src="images/icons/cooking.png" class="boredIcon" id="bored7"></a><div class="boredDesc">요리</div></td>
               <td class="boredTable"><a href=""><img src="images/icons/shopping.png" class="boredIcon" id="bored8"></a><div class="boredDesc">쇼핑</div></td>   
-              <td class="boredTable"><a href=""><img src="images/icons/random.png" class="boredIcon" id="bored9"></a><div class="boredDesc">Random</div></td>
+              <td class="boredTable"><a href=""><img src="images/icons/random.png" class="boredIcon" id="bored9"></a><div class="boredDesc">아무거나</div></td>
             </tr>
           </table>
-          <span><input id="meetTimeBored" hidden="false"/></span>
+          
         </div>
         <!-- /.modal-content -->
       </div>
@@ -30,37 +42,34 @@
     </div>
     </div>
 
-<!-- modal start -->
-<div id="boredCompletedModal" class="modal fade">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header modal-header-bgcolor">
-        <h3 class="modal-title addfriend-modal-title untouch-modal-title">알림!</h3>
-      </div>
-      <div class="modal-body addfriend-modal-body">
-        <div class="untouch-modal-body">
-          <div>등록 완료! </div>
-        </div>
-      </div>
-<!--
-      <div class="modal-footer">
-      </div>
--->
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
-  <!-- /.modal -->
-</div>
 
 <script>
-
-    $("#meetTimeBored").kendoTimePicker({
-      format: "yyyy/MM/dd hh:mm tt",
-      parseFormats: ["MMMM yyyy", "HH:mm"]
-     });
+  var boredMeetTimeAppointment;
+  var myRadioValue;
+  
+  var boredRightNow = new Date();                                         
+  
+  var boredAfter30m = new Date(boredRightNow);
+  boredAfter30m.setMinutes(boredRightNow.getMinutes() + 30);
+  
+  var boredAfter60m = new Date(boredRightNow);
+  boredAfter60m.setHours(boredRightNow.getHours() + 1);
+  
+  function radioValueCheck(radioValue) {
+    if (radioValue == 0) {
+      boredMeetTimeAppointment = boredRightNow; 
+      console.log('boredRightNow');
+    } else if (radioValue == 30) {
+      boredMeetTimeAppointment = boredAfter30m; 
+      console.log('boredAfter30m');
+    } else if (radioValue == 60) {
+      boredMeetTimeAppointment = boredAfter60m; 
+      console.log('boredAfter60m');
+    }
+  }
   
     $(document).on('click', '#bored1', function() {
+      radioValueCheck($('.active').find('.boredTimeButton').val());
       $.ajax('feed/insertUser.do',
         {
          method: 'POST',
@@ -71,11 +80,10 @@
             title: '[심심해]축구해요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
-            meetTime: $('#meetTimeBored').val()
+            meetTime: boredMeetTimeAppointment
          },
         success: function(result){
            if (result.data == 'success') {
-//             alert('등록되었습니다');
              $('#boredModal').modal('toggle');
              window.location.reload();
            }
@@ -84,6 +92,7 @@
     });
   
     $(document).on('click', '#bored2', function() {
+      radioValueCheck($('.active').find('.boredTimeButton').val());
       $.ajax('feed/insertUser.do',
         {
          method: 'POST',
@@ -94,11 +103,10 @@
             title: '[심심해]농구해요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
-            meetTime: $('#meetTimeBored').val()
+            meetTime: boredMeetTimeAppointment
          },
         success: function(result){
            if (result.data == 'success') {
-//             alert('등록되었습니다');
              $('#boredModal').modal('toggle');
              window.location.reload();
            }
@@ -107,6 +115,7 @@
     });
   
     $(document).on('click', '#bored3', function() {
+      radioValueCheck($('.active').find('.boredTimeButton').val());
       $.ajax('feed/insertUser.do',
         {
          method: 'POST',
@@ -117,11 +126,10 @@
             title: '[심심해]배드민턴 쳐요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
-            meetTime: $('#meetTimeBored').val()
+            meetTime: boredMeetTimeAppointment
          },
         success: function(result){
            if (result.data == 'success') {
-//             alert('등록되었습니다');
              $('#boredModal').modal('toggle');
              window.location.reload();
            }
@@ -130,6 +138,7 @@
     });
   
     $(document).on('click', '#bored4', function() {
+      radioValueCheck($('.active').find('.boredTimeButton').val());
       $.ajax('feed/insertUser.do',
         {
          method: 'POST',
@@ -140,11 +149,10 @@
             title: '[심심해]커피 한잔 해요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
-            meetTime: $('#meetTimeBored').val()
+            meetTime: boredMeetTimeAppointment
          },
         success: function(result){
            if (result.data == 'success') {
-//             alert('등록되었습니다');
              $('#boredModal').modal('toggle');
              window.location.reload();
            }
@@ -153,6 +161,7 @@
     });
   
     $(document).on('click', '#bored5', function() {
+      radioValueCheck($('.active').find('.boredTimeButton').val());
       $.ajax('feed/insertUser.do',
         {
          method: 'POST',
@@ -163,11 +172,10 @@
             title: '[심심해]같이 맥주 한잔 해요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
-            meetTime: $('#meetTimeBored').val()
+            meetTime: boredMeetTimeAppointment
          },
         success: function(result){
            if (result.data == 'success') {
-//             alert('등록되었습니다');
              $('#boredModal').modal('toggle');
              window.location.reload();
            }
@@ -176,6 +184,7 @@
     });
   
     $(document).on('click', '#bored6', function() {
+      radioValueCheck($('.active').find('.boredTimeButton').val());
       $.ajax('feed/insertUser.do',
         {
          method: 'POST',
@@ -186,11 +195,10 @@
             title: '[심심해]같이 밥 한끼 해요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
-            meetTime: $('#meetTimeBored').val()
+            meetTime: boredMeetTimeAppointment
          },
         success: function(result){
            if (result.data == 'success') {
-//             alert('등록되었습니다');
              $('#boredModal').modal('toggle');
              window.location.reload();
            }
@@ -199,6 +207,7 @@
     });
   
     $(document).on('click', '#bored7', function() {
+      radioValueCheck($('.active').find('.boredTimeButton').val());
       $.ajax('feed/insertUser.do',
         {
          method: 'POST',
@@ -209,11 +218,10 @@
             title: '[심심해]같이 요리 해먹어요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
-            meetTime: $('#meetTimeBored').val()
+            meetTime: boredMeetTimeAppointment
          },
         success: function(result){
            if (result.data == 'success') {
-//             alert('등록되었습니다');
              $('#boredModal').modal('toggle');
              window.location.reload();
            }
@@ -222,6 +230,7 @@
     });
 
     $(document).on('click', '#bored8', function() {
+      radioValueCheck($('.active').find('.boredTimeButton').val());
       $.ajax('feed/insertUser.do',
         {
          method: 'POST',
@@ -232,11 +241,10 @@
             title: '[심심해]같이 쇼핑 해요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
-            meetTime: $('#meetTimeBored').val()
+            meetTime: boredMeetTimeAppointment
          },
         success: function(result){
            if (result.data == 'success') {
-//             alert('등록되었습니다');
              $('#boredModal').modal('toggle');
              window.location.reload();
            }
@@ -244,6 +252,7 @@
      });
     });
     $(document).on('click', '#bored9', function() {
+      radioValueCheck($('.active').find('.boredTimeButton').val());
       $.ajax('feed/insertUser.do',
         {
          method: 'POST',
@@ -254,11 +263,10 @@
             title: '[심심해]같이 암거나 해요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
-            meetTime: $('#meetTimeBored').val()
+            meetTime: boredMeetTimeAppointment
          },
         success: function(result){
            if (result.data == 'success') {
-//             alert('등록되었습니다');
              $('#boredModal').modal('toggle');
              window.location.reload();
            }

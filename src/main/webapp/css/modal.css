@@ -47,7 +47,10 @@ body p {
 /*  background: #4FB8D9;*/
   padding: 7px;
 }
-
+.btn-bored-meettime .active {
+  background-color: #378FC2;  
+  color: #FFF;
+}
 .detailModal-head {
   background-color: #48b5e9;
   color: white;
@@ -72,4 +75,8 @@ body p {
   font: 1.2em;
   color: white;
   border-radius: 5px 5px 0px 0px;
+}
+.btn-bored-meettime {
+  margin: auto;
+/*  width: 200px;*/
 }
