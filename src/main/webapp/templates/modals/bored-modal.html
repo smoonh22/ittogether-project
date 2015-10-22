@@ -22,7 +22,7 @@
               <td class="boredTable"><a href=""><img src="images/icons/random.png" class="boredIcon" id="bored9"></a><div class="boredDesc">Random</div></td>
             </tr>
           </table>
-          
+          <span><input id="meetTimeBored" hidden="false"/></span>
         </div>
         <!-- /.modal-content -->
       </div>
@@ -30,8 +30,35 @@
     </div>
     </div>
 
+<!-- modal start -->
+<div id="boredCompletedModal" class="modal fade">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header modal-header-bgcolor">
+        <h3 class="modal-title addfriend-modal-title untouch-modal-title">알림!</h3>
+      </div>
+      <div class="modal-body addfriend-modal-body">
+        <div class="untouch-modal-body">
+          <div>등록 완료! </div>
+        </div>
+      </div>
+<!--
+      <div class="modal-footer">
+      </div>
+-->
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+</div>
 
 <script>
+
+    $("#meetTimeBored").kendoTimePicker({
+      format: "yyyy/MM/dd hh:mm tt",
+      parseFormats: ["MMMM yyyy", "HH:mm"]
+     });
   
     $(document).on('click', '#bored1', function() {
       $.ajax('feed/insertUser.do',
@@ -41,20 +68,21 @@
          data: {
             mno: sessionStorage.getItem('mno'),
             category : '1',
-            title: '축구해요',
-            content: 'from boredModal',
+            title: '[심심해]축구해요',
+            content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
-            meetTime: $('meetTime').val()
+            meetTime: $('#meetTimeBored').val()
          },
         success: function(result){
            if (result.data == 'success') {
-             alert('등록되었습니다');
+//             alert('등록되었습니다');
              $('#boredModal').modal('toggle');
              window.location.reload();
            }
         }
      });
-    });    
+    });
+  
     $(document).on('click', '#bored2', function() {
       $.ajax('feed/insertUser.do',
         {
@@ -63,20 +91,21 @@
          data: {
             mno: sessionStorage.getItem('mno'),
             category : '1',
-            title: '농구해요',
-            content: 'from boredModal',
+            title: '[심심해]농구해요',
+            content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
-            meetTime: $('meetTime').val()
+            meetTime: $('#meetTimeBored').val()
          },
         success: function(result){
            if (result.data == 'success') {
-             alert('등록되었습니다');
+//             alert('등록되었습니다');
              $('#boredModal').modal('toggle');
              window.location.reload();
            }
         }
      });
-    });    
+    });
+  
     $(document).on('click', '#bored3', function() {
       $.ajax('feed/insertUser.do',
         {
@@ -85,20 +114,21 @@
          data: {
             mno: sessionStorage.getItem('mno'),
             category : '1',
-            title: '배드민턴 쳐요',
-            content: 'from boredModal',
+            title: '[심심해]배드민턴 쳐요',
+            content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
-            meetTime: $('meetTime').val()
+            meetTime: $('#meetTimeBored').val()
          },
         success: function(result){
            if (result.data == 'success') {
-             alert('등록되었습니다');
+//             alert('등록되었습니다');
              $('#boredModal').modal('toggle');
              window.location.reload();
            }
         }
      });
-    });    
+    });
+  
     $(document).on('click', '#bored4', function() {
       $.ajax('feed/insertUser.do',
         {
@@ -107,20 +137,21 @@
          data: {
             mno: sessionStorage.getItem('mno'),
             category : '1',
-            title: '커피한잔 해요',
-            content: 'from boredModal',
+            title: '[심심해]커피 한잔 해요',
+            content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
-            meetTime: $('meetTime').val()
+            meetTime: $('#meetTimeBored').val()
          },
         success: function(result){
            if (result.data == 'success') {
-             alert('등록되었습니다');
+//             alert('등록되었습니다');
              $('#boredModal').modal('toggle');
              window.location.reload();
            }
         }
      });
-    });    
+    });
+  
     $(document).on('click', '#bored5', function() {
       $.ajax('feed/insertUser.do',
         {
@@ -129,20 +160,21 @@
          data: {
             mno: sessionStorage.getItem('mno'),
             category : '1',
-            title: '맥주 한잔 해요',
-            content: 'from boredModal',
+            title: '[심심해]같이 맥주 한잔 해요',
+            content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
-            meetTime: $('meetTime').val()
+            meetTime: $('#meetTimeBored').val()
          },
         success: function(result){
            if (result.data == 'success') {
-             alert('등록되었습니다');
+//             alert('등록되었습니다');
              $('#boredModal').modal('toggle');
              window.location.reload();
            }
         }
      });
-    });    
+    });
+  
     $(document).on('click', '#bored6', function() {
       $.ajax('feed/insertUser.do',
         {
@@ -151,20 +183,21 @@
          data: {
             mno: sessionStorage.getItem('mno'),
             category : '1',
-            title: '요리 같이 만들어 먹어요',
-            content: 'from boredModal',
+            title: '[심심해]같이 밥 한끼 해요',
+            content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
-            meetTime: $('meetTime').val()
+            meetTime: $('#meetTimeBored').val()
          },
         success: function(result){
            if (result.data == 'success') {
-             alert('등록되었습니다');
+//             alert('등록되었습니다');
              $('#boredModal').modal('toggle');
              window.location.reload();
            }
         }
      });
-    });    
+    });
+  
     $(document).on('click', '#bored7', function() {
       $.ajax('feed/insertUser.do',
         {
@@ -173,20 +206,21 @@
          data: {
             mno: sessionStorage.getItem('mno'),
             category : '1',
-            title: '같이 밥먹어요',
-            content: 'from boredModal',
+            title: '[심심해]같이 요리 해먹어요',
+            content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
-            meetTime: $('meetTime').val()
+            meetTime: $('#meetTimeBored').val()
          },
         success: function(result){
            if (result.data == 'success') {
-             alert('등록되었습니다');
+//             alert('등록되었습니다');
              $('#boredModal').modal('toggle');
              window.location.reload();
            }
         }
      });
-    });    
+    });
+
     $(document).on('click', '#bored8', function() {
       $.ajax('feed/insertUser.do',
         {
@@ -195,19 +229,41 @@
          data: {
             mno: sessionStorage.getItem('mno'),
             category : '1',
-            title: '같이 장봐요',
-            content: 'from boredModal',
+            title: '[심심해]같이 쇼핑 해요',
+            content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
-            meetTime: $('meetTime').val()
+            meetTime: $('#meetTimeBored').val()
          },
         success: function(result){
            if (result.data == 'success') {
-             alert('등록되었습니다');
+//             alert('등록되었습니다');
              $('#boredModal').modal('toggle');
              window.location.reload();
            }
         }
      });
-    });    
-
+    });
+  
+    $(document).on('click', '#bored9', function() {
+      $.ajax('feed/insertUser.do',
+        {
+         method: 'POST',
+         dataType: 'json',
+         data: {
+            mno: sessionStorage.getItem('mno'),
+            category : '1',
+            title: '[심심해]같이 암거나 해요',
+            content: '심심해 버튼을 통해 생성된 글입니다.',
+            maxHeadCount: '00',
+            meetTime: $('#meetTimeBored').val()
+         },
+        success: function(result){
+           if (result.data == 'success') {
+//             alert('등록되었습니다');
+             $('#boredModal').modal('toggle');
+             window.location.reload();
+           }
+        }
+     });
+    });
 </script>
