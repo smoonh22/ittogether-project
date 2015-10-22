@@ -230,6 +230,10 @@ box-shadow: 0.1px 1px 2px 1px rgba(115,118,128,0.5);
 	height: 1px;
 	background-color: #07E1B2;
 }
+#category-color-4 { /*심심해 창 띠 색깔*/
+	height: 1px;
+	background-color: #4AC94B;
+}
 
 hr {
 	margin: 0.6rem 0.8rem;

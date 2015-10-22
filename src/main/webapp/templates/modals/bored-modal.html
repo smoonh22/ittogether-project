@@ -47,7 +47,10 @@
   var boredMeetTimeAppointment;
   var myRadioValue;
   
-  var boredRightNow = new Date();                                         
+  var now = new Date();
+  
+  var boredRightNow = new Date(now);                                         
+  boredRightNow.setMinutes(boredRightNow.getMinutes() + 10);
   
   var boredAfter30m = new Date(boredRightNow);
   boredAfter30m.setMinutes(boredRightNow.getMinutes() + 30);
@@ -76,7 +79,7 @@
          dataType: 'json',
          data: {
             mno: sessionStorage.getItem('mno'),
-            category : '1',
+            category : '4',
             title: '[심심해]축구해요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
@@ -99,7 +102,7 @@
          dataType: 'json',
          data: {
             mno: sessionStorage.getItem('mno'),
-            category : '1',
+            category : '4',
             title: '[심심해]농구해요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
@@ -122,7 +125,7 @@
          dataType: 'json',
          data: {
             mno: sessionStorage.getItem('mno'),
-            category : '1',
+            category : '4',
             title: '[심심해]배드민턴 쳐요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
@@ -145,7 +148,7 @@
          dataType: 'json',
          data: {
             mno: sessionStorage.getItem('mno'),
-            category : '1',
+            category : '4',
             title: '[심심해]커피 한잔 해요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
@@ -168,7 +171,7 @@
          dataType: 'json',
          data: {
             mno: sessionStorage.getItem('mno'),
-            category : '1',
+            category : '4',
             title: '[심심해]같이 맥주 한잔 해요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
@@ -191,7 +194,7 @@
          dataType: 'json',
          data: {
             mno: sessionStorage.getItem('mno'),
-            category : '1',
+            category : '4',
             title: '[심심해]같이 밥 한끼 해요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
@@ -214,7 +217,7 @@
          dataType: 'json',
          data: {
             mno: sessionStorage.getItem('mno'),
-            category : '1',
+            category : '4',
             title: '[심심해]같이 요리 해먹어요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
@@ -237,7 +240,7 @@
          dataType: 'json',
          data: {
             mno: sessionStorage.getItem('mno'),
-            category : '1',
+            category : '4',
             title: '[심심해]같이 쇼핑 해요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
@@ -259,7 +262,7 @@
          dataType: 'json',
          data: {
             mno: sessionStorage.getItem('mno'),
-            category : '1',
+            category : '4',
             title: '[심심해]같이 암거나 해요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',

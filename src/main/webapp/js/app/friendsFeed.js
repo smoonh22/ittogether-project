@@ -20,7 +20,7 @@ define(function () {
        mno: sessionStorage.getItem('mno')
     }
     }).success(function(result){
-      console.log(result.data);
+//      console.log(result.data);
         parent.nfeeds = result.data;
     })
     

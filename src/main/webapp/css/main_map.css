@@ -16,11 +16,11 @@ textarea {
   position: absolute;
   width: 140px;
   padding: 10px;
-  overflow: auto;
+  overflow: hidden;
 }
 /*반경 설정해주는 버튼 500m, 1km, 2km*/
 .radius-control { 
-  width: 100%;
+  width: 110%;
   left: 10px;
   top: 20px;
 }
@@ -142,6 +142,15 @@ textarea {
 }
 .panel-icon-align {
   vertical-align: text-bottom;
+}
+.myPanel-none {
+  font-size: 0.9rem;
+  color: darkgray;
+  text-align: center;
+  margin-top: 118px;
+  float: left;
+  position: absolute;
+  left: 34px;
 }
 /*friendBox 끝*/
 
