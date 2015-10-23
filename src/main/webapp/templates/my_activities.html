@@ -15,11 +15,11 @@
 </div>   
 		<div id='activity-container'>
 		<div ng-repeat="myact in activities" class='myActList' on-last-repeat> 
-		   	<div class='act-feed-content item'>
+		   	<div class='my-{{myact.opacity}} act-feed-content item backgroud-color-{{myact.category}}'>
 				<div class='moim-section' role='button' ng-click='sizeUp($index,myActHide($index,myact),myact.fno)'>
 					<div class='act-feed-header'>
 						<div class='act-feed-prof-img'>
-							<img class='moim-profile-img img-thumbnail' src='{{myact.profilePicture}}'>
+							<img class='moim-profile-img img-circle' src='{{myact.profilePicture}}'>
 						</div>
 						<div class='act-feed-title'>
 							<br>
@@ -37,7 +37,7 @@
 					<div>
 					</div>	
 				</div>
-				<div class='act-joinfrd-section'>
+			 	<div class='act-joinfrd-section'>
 					<div class='joined-frd-none' ng-if='myact.joinfrd[0] == null'>
 					<small class='text-joinfrd-none'>참여한 사람이 없습니다.</small>
 					</div>
@@ -48,16 +48,15 @@
 					</div>
 				</div>
 				<div class='moim-hide-section'>	
-					<pre>{{myact.content}}</pre>
-				</div>
-				<div ng-show='myActHide($index)'>
 					<div>
          				<img src="{{myact.attachFile1}}" class="act-feed-img">
          				<img src="{{myact.attachFile2}}" class="act-feed-img">
          				<img src="{{myact.attachFile3}}" class="act-feed-img">
      			 	</div>
-     			 	<div class='act-comment-section'>
-     			 	    <div ng-repeat="comment in comments">
+				</div>
+				<div ng-show='myActHide($index)'>
+				<pre class='act-content'>{{myact.content}}</pre>
+						    <div ng-repeat="comment in comments">
 				        	<div class='row commentFeed'>
         	  					<div class='col-md-2'><img src='{{comment.profilePicture}}' class='detailImg img-circle'/></div>
         	  					<div class='col-md-8'>
@@ -68,9 +67,7 @@
 			        	  				<button ng-click='updateCmt($index,comment.cno,comment.fno,rewriteComment)' class='comment-updatebtn'>등록</button><button ng-click='cancelBtn($index,comment.cno)' class='comment-updatebtn'>취소</button></div></td></tr>
 			        	  			</table>
 			        	  	</div>
-			        	  		<div ng-show='checkAuthority(comment.mno)' class='checkAuthority'>
-			        	  			<span ng-click='openUpdateArea(comment.cno,rewriteComment)' class='commentBtn' role='button'>수정</span>|<span class='commentBtn' ng-click=deleteCmt(comment.cno,comment.fno); role='button'>삭제</span>
-			        	  		</div>
+			        	  	
 			        		</div>
 						</div>
      			 	</div>

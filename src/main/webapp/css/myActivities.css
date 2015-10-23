@@ -4,17 +4,33 @@
 	float : left;
 	width : 33%;
 	}
-	 
+	.backgroud-color-1 {
+	background-color: #99ffcc;
+	}
+	.backgroud-color-2 {
+	background-color: #ffff99;
+	
+	}
+	.backgroud-color-3 {
+	background-color: #ccccff;
+	}
+	.act-content {
+	background-color: white;
+	clear:left;
+	}
+	.my-act-opacity {
+	border: 3px solid black;
+	}
 	.act-feed-content {
 	display:inline-block;
-	text-align : left;
-	background-color: #E8E8E8;	
+	text-align : left;	
     border-radius : 8px;
     margin-top : 1%;
     height: 98%;
     width: 99%;
 	}
 	.act-feed-img {
+	max-height: 101px;
 	width : 31%;
 	float : left;
 	margin : 1%;

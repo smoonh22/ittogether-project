@@ -59,6 +59,9 @@ public class FeedController {
     for(FriendFeed feed : test){
       String meetdate = format.format(feed.getMeetTime());
       feed.setMeetDday(meetdate);
+      if(!CalcTime(feed.getMeetTime()).equals("yoyo")){
+        feed.setOpacity("act-opacity");
+      }
       feed.setDday(CalcTime(feed.getCreateDate()));
       feed.setJoinfrd(feedService.myActivityListFrd(feed.getFno()));
     }
@@ -249,7 +252,9 @@ public class FeedController {
         } else {
           return "1분 전";
         }
+      } else if (calcTime < 0){
+        return "yoyo";
       }
-    return "기한 초과";
+    return "기한초과지롱(나올일없지롱)";
      }
    }

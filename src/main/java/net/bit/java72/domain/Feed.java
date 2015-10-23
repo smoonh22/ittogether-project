@@ -23,6 +23,8 @@ public class Feed implements Serializable {
   protected String profilePicture;
   
   
+  
+  
 
   public String getProfilePicture() {
     return profilePicture;

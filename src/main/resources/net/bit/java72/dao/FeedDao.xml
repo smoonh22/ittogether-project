@@ -140,8 +140,8 @@
   t2.attachFile2,
   t2.attachFile3
   from MEMB_T t1 inner join FEED_T t2 on t1.mno=t2.mno
-  where t2.meet_time > now() and t2.mno = #{values}  
-  or t2.fno IN (select t3.fno from JOINEDFRD_T t3 inner join feed_t t4 on t3.fno=t4.fno where t3.mno=#{values} and t4.meet_Time > now()) 
+  where t2.mno = #{values}  
+  or t2.fno IN (select t3.fno from JOINEDFRD_T t3 inner join feed_t t4 on t3.fno=t4.fno where t3.mno=#{values}) 
   ORDER by t2.cre_dt desc
   </select>
  
