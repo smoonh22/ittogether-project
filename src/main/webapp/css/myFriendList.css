@@ -1,7 +1,11 @@
-@media screen and (min-width: 480px) {
-  
+@media screen and (min-width: 992px) {
+  .dropdown-menu {
+    width : 250%;
+  }
 }
-  
+div {
+  border: 1px red;
+}
 .dropdown-menu {
   width : 350%;
 }
