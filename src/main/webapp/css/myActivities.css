@@ -140,3 +140,22 @@ margin-bottom: 5%;
   width: 97%; 
   font-size: 80%; 
 }
+
+.backgroud-color-1 {
+   background-color: #99ffcc;
+   }
+   .backgroud-color-2 {
+   background-color: #ffff99;
+   
+   }
+   .backgroud-color-3 {
+   background-color: #ccccff;
+   }
+   .act-content {
+   background-color: white;
+   clear:left;
+   }
+   .my-act-opacity {
+   border: 3px solid black;
+   opacity : 0.5;
+   }
