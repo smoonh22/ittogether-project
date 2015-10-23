@@ -137,7 +137,7 @@ textarea {
   padding: 2px;
 }
 .panel-icon-align {
-  vertical-align: text-bottom;
+/*  vertical-align: text-bottom;*/
 }
 .myPanel-none { /* 조건 검색 후 해당 결과 없을때*/
   font-size: 0.9rem;

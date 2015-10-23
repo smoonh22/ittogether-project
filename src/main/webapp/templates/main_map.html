@@ -451,15 +451,13 @@
         '</div>' +
         '</div>');
       }
-      
   }
-    queryString5 = '<div class="myPanel-none"><div>조건에 일치하는 회원이 없습니다.</div><div>조건을 바꿔서 검색해보세요</div></div>';
-
+    queryString5 = '<div class="myPanel-none"><div>조건에 일치하는 회원이 없습니다.</div><div>조건을 바꿔서 검색해보세요.</div></div>';
 }
   
   function friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC) {
+//    $('.myPanel-none').remove();
     $('.myPanel').remove();
-    $('.myPanel-none').remove();
     if (sex == 0 && age == 0 && myHobbyC == 0 && myHometownC == 0) { // 1. ABCD = 0
       for (var i = 0; i < notFriendLocArr.length; i++) {
         if (notFriendLocArr[i][5] <  distant) {
@@ -516,7 +514,6 @@
             notFriendLocArr[i][8] >  ageMin  &&
             notFriendLocArr[i][8] <  ageMax  &&
             notFriendLocArr[i][9] == myHobbyC) {
-//            buttonCheck(i);
             friendList(i);
         }
       }
@@ -614,14 +611,14 @@
       }
     }
     queryStringSpin();
-    if ($('.myPanel').length > 0) {
-//      console.log('myPanel이 있네');
-    } else {
-//      console.log('myPanel이 없네');
-      $('.myPanel-none').remove();
-      $('.panel-member').append(queryString5);
-//      queryString5 = null;
-    }
+//    if ($('.myPanel').length > 0) {
+////      console.log('myPanel이 있네');
+//    } else {
+////      console.log('myPanel이 없네');
+//      $('.myPanel-none').remove();
+//      $('.panel-member').append(queryString5);
+//      queryString5 = null; 
+//    }
   }      
       
   function queryStringSpin() {
@@ -629,7 +626,7 @@
       $('.panel-member').append(queryString1[i]);
     }
     for (var i = 0; i < queryString2.length; i++) {
-      $('.panel-member').append(queryString2[i]);
+      $('.panel-member').append(queryString2[i]);2
     }
     for (var i = 0; i < queryString3.length; i++) {
       $('.panel-member').append(queryString3[i]);
