@@ -71,7 +71,7 @@
 }
 
 .panel-body.nav-friendList-body2 {
-  padding: 2px 5px 0px 15px;
+ /*  padding: 2px 5px 0px 15px; */
 }
 .panel-heading.nav-friendList {
   height: 54px;
@@ -82,17 +82,21 @@
 .searhBtn { 
 margin-top: 0px;
 }
-.form-group.col-sm-8 {
-  padding-right: 5px;
-  padding-left: 5px;
-  margin-top: 0px;
-  border: 1px solid red;
-}
 .panel-search-padding {
   padding: 10px;
 }
 
 .addfriend-btn-adding {
-	margin-top: 5%;
-	margin-right: 2%;
+	 position: relative;
+  float: right;
+  right: 1%;
+  margin: 2%;
+}
+.accept-friend-btn {
+	 position: relative;
+  float: right;
+  right: 1%;
+  margin: 2%;
+  background-color: #48b5e9;
+  color: white; 
 }

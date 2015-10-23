@@ -74,6 +74,27 @@ define(function () {
                    $('#userid').text(" " + sessionStorage.getItem('nickname') + " 님 ");
                    $('#header-user-img').attr('src', $('#profile-img').attr('src'));
                    $('#infoModal').modal('toggle');
+                   
+                   getMyInfo();
+                   function getMyInfo() {
+                    $.getJSON(contextRoot + '/member/getMyLoc.do', {
+                      mno: sessionStorage.getItem('mno')
+                    }, function(results) {
+                      myLoc[0] = parseFloat((results.data[0].latitude));
+                      myLoc[1] = parseFloat((results.data[0].longitude));
+                      myLoc[2] = Number(results.data[0].mno);
+                      myNickname = results.data[0].nickname;
+                      myIntro = results.data[0].introduction;
+                      myPhoto = results.data[0].profilePicture;
+                      mySex = results.data[0].sex;
+                      myAge = results.data[0].age;
+                      myHobby = results.data[0].hobby;
+                      myHometown = results.data[0].hometown;
+                      console.log('initMap() 실행');  
+                      initMap();
+                    });
+                   }
+                     
                  }
               }
            });

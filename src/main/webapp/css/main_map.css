@@ -6,9 +6,6 @@
   width: 100%;
   height: 600px;
 }
-textarea {
-  resize: none;
-}
 
 #finder-box {
   border: 0px solid black;
@@ -16,11 +13,11 @@ textarea {
   position: absolute;
   width: 140px;
   padding: 10px;
-  overflow: auto;
+  overflow: hidden;
 }
 /*반경 설정해주는 버튼 500m, 1km, 2km*/
 .radius-control { 
-  width: 100%;
+  width: 110%;
   left: 10px;
   top: 20px;
 }
@@ -67,7 +64,7 @@ textarea {
   padding: 7px;
 }
 .panel-member {
-   height: 455px;   
+   height: 423px;   
    width: 400px;
    overflow-y: scroll
 }
@@ -78,7 +75,7 @@ textarea {
 .addfriend-btn {
   position: relative;
   float: right;
-  right: 5%;
+  right: 38%;
 }
 .addfriend-btn-adding.nohover {
   background-color: #229611;  
@@ -142,6 +139,17 @@ textarea {
 }
 .panel-icon-align {
   vertical-align: text-bottom;
+}
+.myPanel-none {
+    font-size: 1rem;
+    color: darkgray;
+    text-align: center;
+    margin-top: 118px;
+    float: left;
+    position: absolute;
+    left: 12%;
+    margin-left: 1%;
+    margin-right: 24%;
 }
 /*friendBox 끝*/
 
@@ -215,7 +223,7 @@ textarea {
 .iw-desc{
   text-align: left;
   font-weight: 500;
-  font-size: 1.2em;
+  font-size: 1em;
   padding: 2px;
 }
 .iw-myTable {

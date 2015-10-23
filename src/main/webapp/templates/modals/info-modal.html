@@ -84,12 +84,8 @@
   <!-- /.modal -->
 </div>
 
-
 <script>
-
-
 function initAutocomplete() { /* 초기화 함수*/
-  
   var myHome = [];
   var map;
   
@@ -131,7 +127,6 @@ function initAutocomplete() { /* 초기화 함수*/
     markers = [];
 
     var bounds = new google.maps.LatLngBounds();
-    
     places.forEach(function (place) {
       markers.push(new google.maps.Marker({
         map: map,
@@ -178,7 +173,4 @@ function initAutocomplete() { /* 초기화 함수*/
    map.setCenter(center); 
   }
 }
-  
 </script>
-
-

@@ -10,7 +10,7 @@
     <result column="cre_dt"      property="createDate" />
     <result column="max_headcnt" property="maxHeadCount"/>
     <result column="current_cnt" property="currentCount"/>
-    <result column="meet_time" property="meetTime"/>
+    <result column="meet_time"   property="meetTime"/>
     <result column="attachFile1" property="attachFile1"/>
     <result column="attachFile2" property="attachFile2"/>
     <result column="attachFile3" property="attachFile3"/>
