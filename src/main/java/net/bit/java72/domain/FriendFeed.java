@@ -32,7 +32,7 @@ public class FriendFeed implements Serializable {
   protected String attachFile3;
   protected String profilePicture;
   protected List<FriendFeed> joinfrd;
-
+  protected String opacity;
 
   public List<FriendFeed> getJoinfrd() {
     return joinfrd;
@@ -250,5 +250,11 @@ public class FriendFeed implements Serializable {
 
   public void setDday(String dday) {
     this.Dday = dday;
+  }
+  public String getOpacity() {
+    return opacity;
+  }
+  public void setOpacity(String opacity) {
+    this.opacity = opacity;
   }
 }

@@ -162,9 +162,7 @@ body p {
 .detail_cont{
    font-size: 85%;
 }
-.detail-user-name {
-	left: 10px;
-}
+
 .detail-nick{
   margin-left: 6%;
 }
@@ -183,6 +181,7 @@ body p {
   margin-top: 5%;
 }
 .detail-user-name{
+	 left: 10px;
   margin-top: 2%;
   margin-left: 7%;
   font-size: 85%;
@@ -206,13 +205,21 @@ body p {
    font-size: 75%;
 }
 .comment-insert {
-	width: 525px;
+   width: 520px;
+   font-size: 70%;
+   height: 35px;
 }
 
-.comment-insrtbtn {
-	height: 46px;
-	margin-bottom: 5px;
+.comment-insrtbtn{
+  background-color: #48b5e9;
+  color: white;
+  width: 50px;
+  height: 41px;
+  margin-bottom: 15%;
+  margin-left: 10%;
 }
+
+
 
 .commentTable {
 	text-align: left;
@@ -248,6 +255,14 @@ body p {
 }
 .nfeed_Count{
    margin-left: 5%;
+}
+.detail_photo{
+  width: 40px;
+  height: 40px;
+  margin-bottom: 3%;
+}
+.detail_man_woman{
+  margin-top: 5%;
 }
 
 /*==== detailModal 관련 끝 ====*/

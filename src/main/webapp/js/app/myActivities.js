@@ -5,15 +5,18 @@
       app.controller('activityCtrl', ['$http','$scope','$window', function ($http,$scope,$window) {
         var parent_scope = this;
         var w = angular.element($window);
-    
-        w.bind('resize', function(){
-          
-        })
         
+        
+        //화면 resize --> 화면크기 바꿀시 refresh 하는 기능  html 에서 resize 써진  영역 감시
+        w.bind('resize', function(){
+          window.location.reload();
+        })
+       
       $scope.mainAct = function() {$http.get('feed/myActivity.do',{params : {mno: sessionStorage.getItem('mno') }}).success(function (result) {
-          $scope.activities = result.activity;
+        $scope.activities = result.activity;
         })
         };
+        // 여기서 speed duration 으로 뿌려주는 속도 지정할수 있음  selector로 지정할수 있음 애니메이션은 width 한칸 넓이
          $scope.$on('onRepeatLast', function(scope, element, attrs) {
            $("#activity-container").gridalicious({
                selector: ".item",
@@ -21,16 +24,17 @@
                width: 330,
                animationOptions: {
                    queue: true,
-                   speed: 50,
-                   duration: 300,
+                   speed: 200,
+                   duration: 800,
                    effect: 'fadeInOnAppear',
                }
            });
        });
+         //$scope.mainAct 펑션 밑에 놔주세요..
          $scope.mainAct(); 
          
          
-         
+         // 댓글 가져오기
          $scope.getComment = function(fno){$http.get('feed/comment.do',{
            params : {
              fno : fno
@@ -49,7 +53,7 @@
           }
          })
          };  
-         
+         // 화면 
        $scope.sizeUp = function (index,sizeDown,fno){
          var item = fno;
          // 댓글 목록불러오기
@@ -146,6 +150,8 @@
        
   
   }]);
+      
+      //grid 시스템 뿌려주는거 완료후 동작시작 뿌려주는 모양 바꿔주는 기능  html 에서 on-last-repeat <-- 써진곳을 바꿔줌
       app.directive('onLastRepeat', function($window) {
         return function(scope, element, attrs) {
             if (scope.$last)
@@ -154,13 +160,7 @@
                 }, 1);
         };
     });
-      
-      app.directive('detailModal', function () {
-        return {
-          restrict: 'E',
-          templateUrl: 'templates/modals/actdetail-modal.html'
-        };
-      }); 
+ 
       
       app.directive('actModal',['Upload', function (Upload) {
         return {
@@ -195,7 +195,7 @@
                    dataType: 'json',
                    data: {
                      mno: sessionStorage.getItem('mno'),
-                      category : $('#category').val(),
+                      category : $('.insertCategory').val(),
                       title: $('#title').val(), 
                       content: $('#content').val(),
                       maxHeadCount: $('#maxHeadCount').val(),

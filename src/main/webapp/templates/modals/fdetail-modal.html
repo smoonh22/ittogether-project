@@ -19,10 +19,12 @@
               <span id="detail-mTime" class="chatTime">{{details.meetDday}}</span>
               <img src="images/icons/multiple.png">
               <span id="detail-headCnt" class="chatTime">{{details.currentCount}}/{{details.maxHeadCount}}</span>
-              <img src="images/icons/time.png"><span>    </span>
-              <span id="detail-createDate" class="chatTime">{{details.dday}}</span>
-             <span><button type="button" class="btn btn-info btn-xs detail-btn" id="join-btn" ng-click="joinbtn(details.fno)">참여하기</button>
-             <button type="button" class="btn btn-info btn-xs detail-btn" id="out-btn" ng-click="outbtn(details.fno)">나가기</button></span>            </div>
+              <img src="images/icons/time.png">
+              <span id="detail-createDate" class="chatTime detail_dday">{{details.dday}}</span>
+                           <span>
+             <button type="button" class="btn btn-info btn-xs detail-btn" id="join-btn" ng-click="joinbtn(details.fno)">참여하기</button>
+             <button type="button" class="btn btn-info btn-xs detail-btn" id="out-btn" ng-click="outbtn(details.fno)">나가기</button></span></div>
+            <h15 class="detail_man_woman">참여인원:<img ng-repeat ='de in details.joinfrd' src="{{de.profilePicture}}" class="img-circle detail_photo"/></h15>                        
             <div class="form-group">
               <pre class="detail-content detail_cont" id="detail-content">{{details.content}}</pre>
             </div>
@@ -54,17 +56,21 @@
             <tr><td><b>{{comment.nickname}}</b></td></tr>
             <tr><td rowspan="5"><div ng-hide='commentArea(comment.cno)' id='commentarea{{comment.cno}}' class="comment_content">{{comment.content}}</div>
             <div ng-show='updateArea(comment.cno)'><textarea ng-model='rewriteComment' class='commentInputArea'>{{comment.content}}</textarea>
-            <button ng-click='updateCmt($index,comment.cno,comment.fno,rewriteComment)' class='comment-updatebtn'>등록</button><button ng-click='cancelBtn($index,comment.cno)' class='comment-updatebtn'>취소</button></div></td></tr>
+            <button ng-click='updateCmt($index,comment.cno,comment.fno,rewriteComment)' class='btn btn-primary btn-xs comment-updatebtn'>등록</button>
+            <button ng-click='cancelBtn($index,comment.cno)' class='btn btn-info btn-xs comment-updatebtn'>취소</button></div></td></tr>
             </table>
             </div>
             <div ng-show='checkAuthority(comment.mno)' class='checkAuthority'>
-              <span ng-click='openUpdateArea(comment.cno,rewriteComment)' class='commentBtn' role='button'>수정</span>|<span class='commentBtn' ng-click=deleteCmt(comment.cno,comment.fno); role='button'>삭제</span>
+              <button type="button" ng-click='openUpdateArea(comment.cno,rewriteComment)' class='btn btn-primary btn-xs btn_update'>수정</button>
+              <button type="button" class='btn btn-info btn-xs btn-delete' ng-click=deleteCmt(comment.cno,comment.fno); >삭제</button>
             </div>
           </div>
     </div>
         <table>
          <tr><td><textarea class='comment-insert' placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다.
-댓글 작성 시 타인에 대한 배려와 책임을 담아주세요." ng-model='content' /></td><td><button type="reset" class='comment-insrtbtn' ng-click='commentinsert(details.fno,content)'>등록</button></td></tr>
+댓글 작성 시 타인에 대한 배려와 책임을 담아주세요." ng-model='content' /></td>
+<td><button type="reset" class="btn btn-info comment-insrtbtn" id="succ_Btn" ng-click='commentinsert(details.fno,content)'>등록</button></td></tr>   
+        
         </table>
 
       </div>

@@ -14,9 +14,14 @@
 					<option value="1" class="Goodmeeting">모임</option>
 					<option value="2" class="Gooddivide">나눔</option>
 					<option value="3" class="Goodinvite">요청</option>
-				</select> <input type="text" id="title" placeholder="제목을 입력하세요(10자 내외)"
-					class="insertTitle" maxlength="10" />
-				<textarea id="content" placeholder="내용을 입력하세요" rows="5"
+				</select>
+				<form>
+					<div class="form-group">
+						<input class="form-control detail-form-control" id="title"
+							placeholder="제목을 입력하세요(30자 내외)" maxlength="30" />
+					</div>
+				</form>
+				<textarea id="content" placeholder="&nbsp; &nbsp;내용을 입력하세요" rows="5"
 					style="resize: none;" class="insertContent"></textarea>
 				<small class="text-muted"> <label>인원수</label> <input
 					type="number" value="1" min="1" max="10" id="maxHeadCount">
@@ -39,11 +44,8 @@
 						ngf-multiple="true" ngf-pattern="'image/*,application/pdf'"
 						id='piicture2'>
 				</div>
-
-
 				<!-- Footer -->
 				<div class="modal-footer">
-
 					<button type="button" id="btn" class="btn btn-custom"
 						ng-click="btnClick()">새 활동 만들기</button>
 					<button type="button" class="btn btn-primary" data-dismiss="modal">닫기</button>
