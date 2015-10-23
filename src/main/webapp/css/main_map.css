@@ -67,7 +67,7 @@ textarea {
   padding: 7px;
 }
 .panel-member {
-   height: 455px;   
+   height: 423px;   
    width: 400px;
    overflow-y: scroll
 }
@@ -144,13 +144,15 @@ textarea {
   vertical-align: text-bottom;
 }
 .myPanel-none {
-  font-size: 0.9rem;
-  color: darkgray;
-  text-align: center;
-  margin-top: 118px;
-  float: left;
-  position: absolute;
-  left: 34px;
+    font-size: 1rem;
+    color: darkgray;
+    text-align: center;
+    margin-top: 118px;
+    float: left;
+    position: absolute;
+    left: 12%;
+    margin-left: 1%;
+    margin-right: 24%;
 }
 /*friendBox 끝*/
 
