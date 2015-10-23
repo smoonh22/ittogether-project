@@ -11,7 +11,12 @@ define(function () {
         mno: sessionStorage.getItem('mno')
       }
     }).success(function (result) {
+      if (result.data == '') {
+          $('.empty-friend-feed').text('최근 친구들의 활동이 없습니다.');
+      }else {
+        $('.empty-friend-feed').css('display','none');
       parent.feeds = result.data;
+      }
     });
     
     //비친구 최근 게시물
@@ -20,9 +25,13 @@ define(function () {
        mno: sessionStorage.getItem('mno')
     }
     }).success(function(result){
-      console.log(result.data);
-        parent.nfeeds = result.data;
-    })
+      if (result.data == '') {
+        $('.empty-nonefriend-feed').text('주변 회원들의 활동이 없습니다.');
+    }else {
+      parent.nfeeds = result.data;
+      $('.empty-nonefriend-feed').css('display','none');
+    }
+    });
     
     //디테일 정보
     $scope.detailview =  function (fno){

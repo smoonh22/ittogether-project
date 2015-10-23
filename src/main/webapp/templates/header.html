@@ -59,7 +59,7 @@
 										<div class="panel-body nav-friendList-body">
 											<div class='row'
 												ng-repeat-start="findList in mFCtrl.searchLists">
-												<div class='col-md-2'>
+												<div class='col-md-2 col-xs-2 col-sm-2 col-lg-2'>
 													<img class="img-circle header-image"
 														src="{{findList.profilePicture}}" />
 												</div>
@@ -96,11 +96,11 @@
 										<div class="panel-body nav-friendList-body">
 											<div class='row nav-friendList'
 												ng-repeat="frdList in frdLists">
-												<div class='col-md-2'>
+												<div class='col-md-3 col-xs-3 col-sm-3 col-lg-3'>
 													<img class="img-circle header-image"
 														src="{{frdList.profilePicture}}" />
 												</div>
-												<div class='col-md-7'>
+												<div class='col-md-7 col-xs-7 col-sm-7 col-lg-7'>
 													<table>
 														<tr>
 															<td class="nav-friend-desc">이름 : {{frdList.name}}</td>
@@ -113,7 +113,7 @@
 														</tr>
 													</table>
 												</div>
-												<div class='col-md-2'>
+												<div class='col-md-2 col-xs-2 col-sm-2 col-lg-2'>
 													<button ng-click='delfrd(frdList.mno)'
 														class='delfrdbtn btn btn-xs btn-custom'>삭제</button>
 													<button href='#' ng-click="startChatting(frdList.mno);"
@@ -137,11 +137,11 @@
 										<div class="panel-body  nav-friendList-body2"
 											ng-repeat="applyList in applyLists">
 											<div class='row nav-friendList'>
-												<div class='col-md-2'>
+												<div class='col-md-3 col-xs-3 col-sm-3 col-lg-3'>
 													<img class="img-circle header-image"
 														src="{{applyList.profilePicture}}" />
 												</div>
-												<div class='col-md-7'>
+												<div class='col-md-7 col-xs-7 col-sm-7 col-lg-7'>
 													<table>
 														<tr>
 															<td class="nav-friend-desc">이름 : {{applyList.name}}</td>
@@ -156,7 +156,7 @@
 														</tr>
 													</table>
 												</div>
-												<div class='col-md-2'>
+												<div class='col-md-2 col-xs-2 col-sm-2 col-lg-2'>
 													<button ng-click="applyfrd(applyList.mno)"
 														class="btn btn-success btn-xs">수락하기</button>
 												</div>
@@ -165,11 +165,11 @@
 										<div class="panel-body nav-friendList-body2"
 											ng-repeat="applyList2 in applyList2s">
 											<div class='row nav-friendList'>
-												<div class='col-md-2'>
+												<div class='col-md-3 col-xs-3 col-sm-3 col-lg-3'>
 													<img class="img-circle header-image"
 														src="{{applyList2.profilePicture}}" />
 												</div>
-												<div class='col-md-7'>
+												<div class='col-md-7 col-xs-7 col-sm-7 col-lg-7'>
 													<table>
 														<tr>
 															<td class="nav-friend-desc">이름 : {{applyList2.name}}</td>
@@ -184,8 +184,7 @@
 														</tr>
 													</table>
 												</div>
-												<div class='col-md-2'>
-													<br>
+												<div class='col-md-2 col-xs-2 col-sm-2 col-lg-2'>
 													<input type="button"
 														class="btn btn-default btn-xs addfriend-btn addfriend-btn-adding"
 														value="요청중">

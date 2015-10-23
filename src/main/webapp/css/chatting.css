@@ -18,7 +18,7 @@
   position: fixed;
   bottom: 1px;
   right: 10px;
-  width: 300px;
+  width: 301px;
    display:none;
 }
 
@@ -27,7 +27,7 @@
   position: fixed;
   bottom: 1px;
   right: 320px;
-  width: 300px;
+  width: 301px;
   display:none;
 }
 
@@ -36,11 +36,11 @@
   position: fixed;
   bottom: 1px;
   right: 630px;
-  width: 300px;
+  width: 301px;
   display:none;
 }
 .chat-body {
-  width: 300px;
+  width: 298px;
   height: 360px;
   padding:5px;
   margin-bottom: 1px;
@@ -48,26 +48,73 @@
 }
 
 .chat-body input {
-  width: 210px;
+	margin:0;
+  width: 230px;
   height: 38px;
-  background-color: aliceblue;
+  margin-left:-3px;
 }
 .chat-body button {
-  width: 65px;
-  height: 38px;
-  margin-left:6px;
-  background: rgb(130, 224, 255);
+  width: 60px;
+  height: 35px;
+  margin-left:3px;
+  background-color: #48b5e9;
   border: none;
 }
 #messages1 {
-  width: 300px;
+  width: 298px;
   height: 100%;
+   word-break:keep-all; word-wrap:break-word
 }
 #messages2 {
-  width: 300px;
+  width: 298px;
   height: 100%;
+   word-break:keep-all; word-wrap:break-word
 }
 #messages3 {
-  width: 100%;
+  width: 298px;
   height: 100%;
+   word-break:keep-all; word-wrap:break-word
+}
+.chat-panel-head {
+  background-color: #48b5e9;
+  color: white;
+}
+.yourDiv {
+	float:left;
+  width: 250px;
+  margin: 2px 2px 0px 2px;
+   word-break:keep-all; word-wrap:break-word
+  
+}
+.yourImg {
+	float:left;
+}
+
+.yourMsg {
+	float:left;
+	width:150px;
+	background-color: rgba(173, 199, 254, 0.6);
+	margin: 2px 2px 2px 4px;
+	border-radius: 5px;
+	padding:10px;
+	 word-break:keep-all; word-wrap:break-word
+	white-space:normal;
+}
+.yourMsg:after {
+	float:none;
+}
+.myMsg {
+	float:right;
+	width: 180px;
+	background-color: rgba(206, 252, 252,0.8);
+	margin: 2px 5px 2px 2px;
+	padding: 10px;
+	border-radius: 5px;
+	text-align:right;
+	 word-break:keep-all; word-wrap:break-word
+	white-space:normal;
+	
+}
+.myMsg:after {
+	float:none;
 }

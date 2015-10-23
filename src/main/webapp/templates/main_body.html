@@ -8,8 +8,10 @@
   <div ng-controller="friendFeedCtrl as ffCtrl" >
   <div class="leftside-div">
   <div id='left-section'>
-    <div id="left-feed-title">친구들의 활동</div>
+    <div id="left-feed-title"><div>친구들의 활동</div><hr class="left-hr"/></div>
+   
 			</div>
+			<div class="empty-friend-feed"></div>
       <div id="left-feed" ng-repeat="feed in ffCtrl.feeds">
           <div class='feed-row'>
               <div class="friend-panel">
@@ -33,7 +35,7 @@
 										class="text-muted"><img src="images/icons/time.png">
 										{{feed.dday}}</small>
 								</h5>
-								<hr>
+								<hr/>
 								<div id="feed-content">{{feed.title}}</div>
 							</div>
 		         
@@ -45,8 +47,10 @@
 		</div>
 		<div class="rightside-div">
 	<div id='right-section'>
-      <div id="right-feed-title">주변 회원들의 활동</div>
+      <div id="right-feed-title"><div>주변 회원들의 활동</div><hr class="right-hr"/></div>
+
       </div>
+        <div class="empty-nonefriend-feed"></div>
       <div id='right-feed' ng-repeat="nfeed in ffCtrl.nfeeds">
         <div class='feed-row'>
               <div class="nonefriend-panel">
@@ -70,7 +74,7 @@
                     class="text-muted"><img src="images/icons/time.png">
                     {{nfeed.dday}}</small>
                 </h5>
-                <hr>
+                <hr/>
                 <div id="feed-content">{{nfeed.title}}</div>
               </div>
              </a> 

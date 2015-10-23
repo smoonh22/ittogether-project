@@ -22,7 +22,7 @@ function login() {
 
 $('#signup-button').click(function (event) {
 
-  if ($('#email').val() == '' || $('#name').val() == '' || $('#password').val() == '' || $('#pac-input').val() == '') {
+  if ($('#email').val() == '' || $('#name').val() == '' || $('#password').val() == '' || $('#pac-input').val() == '' || $('.signup-lat')=='') {
     alert('값을 모두 입력해 주세요');
   } else {
     $.ajax(contextRoot + '/auth/signup.do', {

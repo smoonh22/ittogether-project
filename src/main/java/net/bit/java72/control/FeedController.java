@@ -44,6 +44,7 @@ public class FeedController {
     result.put("data",test);
     
   } catch (Exception e) {
+    e.printStackTrace();
   }
   
   return result;  

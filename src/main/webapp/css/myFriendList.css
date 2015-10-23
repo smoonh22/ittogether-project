@@ -1,10 +1,29 @@
-.dropdown-menu {
-  width : 350%;
-}
+
+@media ( min-width : 700px) {
 .header-image {
+  width: 40px;
+  height: 40px;
+}
+.nav-friend-desc {
+  font-size: 0.6rem;
+  font-weight: 300;
+}
+
+}
+@media ( min-width : 1200px) {	
+	.header-image {
   width: 50px;
   height: 50px;
 }
+.nav-friend-desc {
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+}
+.dropdown-menu {
+  width : 350%;
+}
+
 .friendlist-panel {
   border:none;
 }
@@ -28,12 +47,12 @@
   padding: 8px;
 }
 .nav-friendList-body{ 
-  width: 115%;
+  width: 100%;
 }
 .delfrdbtn {
   position: relative;
   float: right;
-  right: 20px;
+  right: 1%;
   margin: 2%;
   background-color: #48b5e9;
   color: white;
@@ -42,10 +61,8 @@
   background-color: rgb(101, 168, 235);
   color: white;
 }
-.nav-friend-desc {
-  font-size: 0.9rem;
-  font-weight: 400;
-}
+
+
 .nav-tabs-header {
   height: 50px;
 }
@@ -69,7 +86,13 @@ margin-top: 0px;
   padding-right: 5px;
   padding-left: 5px;
   margin-top: 0px;
+  border: 1px solid red;
 }
 .panel-search-padding {
   padding: 10px;
+}
+
+.addfriend-btn-adding {
+	margin-top: 5%;
+	margin-right: 2%;
 }

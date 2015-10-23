@@ -37,8 +37,8 @@
   <bored-modal></bored-modal>
 
    <div class="chat-panel">
-   <div class="panel-info panel1">
-   <div class="panel-heading" role="tab" id="headingOne">
+   <div class="panel panel1">
+   <div class="panel-heading chat-panel-head" role="tab" id="headingOne">
       <h4 class="panel-title">
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
         </a>
@@ -51,8 +51,8 @@
       </div>
     </div>
      </div>
-     <div class="panel-info panel2">
-    <div class="panel-heading" role="tab" id="headingTwo">
+     <div class="panel panel2">
+    <div class="panel-heading chat-panel-head" role="tab" id="headingTwo">
       <h4 class="panel-title">
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
         </a>
@@ -65,8 +65,8 @@
       </div>
     </div>
      </div>
-    <div class="panel-info panel3">
-    <div class="panel-heading" role="tab" id="headingThree">
+    <div class="panel panel3">
+    <div class="panel-heading chat-panel-head" role="tab" id="headingThree">
       <h4 class="panel-title">
         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
         </a>
@@ -89,15 +89,49 @@
   <script src="js/lib/socket.io/node_modules/socket.io-client/socket.io.js"></script>
   <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
   <script>
+  function newMap() {
+    var map = {};
+    map.value = {};
+    map.getKey = function(id) {
+      return "k_"+id;
+    };
+    map.put = function(id, value) {
+      var key = map.getKey(id);
+      map.value[key] = value;
+    };
+    map.contains = function(id) {
+      var key = map.getKey(id);
+      if(map.value[key]) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+    map.get = function(id) {
+      var key = map.getKey(id);
+      if(map.value[key]) {
+        return map.value[key];
+      }
+      return null;
+    };
+    map.remove = function(id) {
+      var key = map.getKey(id);
+      if(map.contains(id)){
+        map.value[key] = undefined;
+      }
+    };
+   
+    return map;
+  }
     //처음 시작할 때 현재 진행중인 채팅이 있는지 확인
-    var checkRoomArr = [];
+    var checkRoomArr = newMap();
     var chatWindowCnt = 1;
-     $(document).ready(function() {
-//      initChat();
-    }); 
+ (function() {
+   initChat();
+ })();
 
       setInterval(function() {
-        $.getJSON('http://54.64.21.8:8889/checkStatus.do', {
+        $.getJSON('http://192.168.1.48:8889/checkStatus.do', {
           mno: sessionStorage.getItem('mno')
         }, function(result) {
           for (var i in result.frdno) { 
@@ -106,19 +140,17 @@
           }
           console.log("--dd" + result.frdno[0].frdno + "-- mno: " + result.frdno[0].mno);
           if (result.data === 'yes') {
-            $.getJSON('http://54.64.21.8:8889/checkRoom.do', {
+            $.getJSON('http://192.168.1.48:8889/checkRoom.do', {
               frdno: result.frdno[i].frdno,
               mno: sessionStorage.getItem('mno')
             }, function(result) {
-              for (var i in checkRoomArr) {
-                if (checkRoomArr[i] == result.data.chno) {
+              if (checkRoomArr.contains(result.data.chno)) {
                   result.exist = 'no';
                   console.log("exist " + result.exist);
                 }
-              }
+              
               if (result.exist === 'yes') {
-
-                checkRoomArr.push(result.data.chno);
+                checkRoomArr.put(result.data.chno, result.data.chno);
                 chatStart(result.data);
               }
             });
@@ -130,7 +162,7 @@
         
       }, 10000);
      function initChat() {
-      $.getJSON('http://54.64.21.8:8889/checkStatus.do', {
+      $.getJSON('http://192.168.1.48:8889/checkStatus.do', {
         mno: sessionStorage.getItem('mno')
       }, function(result) {
         for (var i in result.frdno) { 
@@ -139,19 +171,17 @@
         }
         console.log("--dd" + result.frdno[0].frdno + "-- mno: " + result.frdno[0].mno);
         if (result.data === 'yes') {
-          $.getJSON('http://54.64.21.8:8889/checkRoom.do', {
+          $.getJSON('http://192.168.1.48:8889/checkRoom.do', {
             frdno: result.frdno[i].frdno,
             mno: sessionStorage.getItem('mno')
           }, function(result) {
-            for (var i in checkRoomArr) {
-              if (checkRoomArr[i] == result.data.chno) {
+            if (checkRoomArr.contains(result.data.chno)) {
                 result.exist = 'no';
                 console.log("exist " + result.exist);
               }
-            }
+            
             if (result.exist === 'yes') {
-
-              checkRoomArr.push(result.data.chno);
+              checkRoomArr.put(result.data.chno, result.data.chno);
               chatStart(result.data);
             }
           });
@@ -162,13 +192,19 @@
     });
     }; 
     function startChatting(frdno, mno) {
-      $.getJSON('http://54.64.21.8:8889/checkRoom.do', {
+      $.getJSON('http://192.168.1.48:8889/checkRoom.do', {
         frdno: frdno,
-        mno: mno,
+        mno: mno
       }, function(result) {
+        if (checkRoomArr.contains(result.data.chno)) {
+            result.exist = 'no';
+            console.log("exist " + result.exist);
+          }
+        
         if (result.exist === 'yes') {
+          checkRoomArr.put(result.data.chno, result.data.chno);
            if ( result.data.status == 1) {
-             $.getJSON('http://54.64.21.8:8889/updateStatus.do', {
+             $.getJSON('http://192.168.1.48:8889/updateStatus.do', {
                 roomId: result.data.chno
              }, function(result){
                 console.log('status -> 2');
@@ -186,7 +222,8 @@
 
     //사용자가 친구목록에서 채팅하기 눌렀을 때     
     function chatStart(data) {
-      var socket = io.connect('http://54.64.21.8:8889');
+      console.log('chatStart');
+      var socket = io.connect('http://192.168.1.48:8889',{'multiplex': false});
       var roomId = data.chno;
       var msg = '';
       socket.emit('join:room', {
@@ -196,12 +233,12 @@
       $('.chat-close'+chatWindowCnt).attr('roomno', data.chno);
       
       if( chatWindowCnt < 4) {
-          
+  
       
-      $.getJSON('http://54.64.21.8:8889/selectChatContent.do',{
+      $.getJSON('http://192.168.1.48:8889/selectChatContent.do',{
         chno: data.chno
       }, function(result) {
-        $('#messages'+chatWindowCnt).append('<div id="messages'+data.chno+'" style="margin:0;width:95%;height:90%;overflow:auto;"></div>');
+        $('#messages'+chatWindowCnt).append('<div id="messages'+data.chno+'" style="margin:0;width:98%;height:90%;overflow:auto;"></div>');
         console.log(result);
         if(result.result==='yes'){
         for(var i in result.data) {
@@ -211,16 +248,17 @@
         console.log('chatWindowCnt : ' + chatWindowCnt);
         var parent = '.panel' + chatWindowCnt + ' a';
         $(parent).text(data.nicknm);
-        $('#messages'+chatWindowCnt).append('<form class="chat-form' + data.chno + '" style="position: fixed;bottom: 1px;width: 300px;"><input class="send-text' + 
-            data.chno + '" autocomplete="off" /><button>전송</button></form>');        
+        $('#messages'+chatWindowCnt).append('<form class="chat-form' + data.chno + '" style="position:fixed;bottom: 22px;width: 299px;"><input class="send-text' + 
+            data.chno + '" autocomplete="off" /><button class="chat-send' + data.chno + '" style="position:fixed; bottom:24px;">전송</button></form>');        
       $('.panel' + chatWindowCnt).show();
       
       chatWindowCnt++;
       console.log(chatWindowCnt);
-      $('.chat-form'+data.chno).submit(function() {
+      
+      $('.chat-send'+data.chno).on('click', function() {
         socket.emit('send:message', {
           roomId: roomId,
-          message: '<img src="'+ sessionStorage.getItem('profile-pic') + '" style="width:40px;height=40px;" class="img-circle"> ' +sessionStorage.getItem('nickname') + ': ' + $('.send-text'+data.chno).val()
+          message: sessionStorage.getItem('nickname') +"(&4%2&7@/%" +'<img src="'+ sessionStorage.getItem('profile-pic') + '" style="width:40px;height=40px;" class="img-circle yourImg">  ' +'(&4%2&7@/%'+ $('.send-text'+data.chno).val()
         });
         $('.send-text'+data.chno).val('');
       });
@@ -244,33 +282,54 @@
 
 
       socket.on('send:message' + data.chno, function(msg) {
-        $('#messages' + data.chno).append(' '+ msg + "<br>");
+        var showMsg;
+        var splitData = msg.split('(&4%2&7@/%');
+        if (splitData[0] === sessionStorage.getItem('nickname')) {
+          showMsg = ' '+ '<div class="myMsg">'+ splitData[2] + "</div><br>";
+        $('#messages' + data.chno).append(showMsg);
+          $.getJSON('http://192.168.1.48:8889/insertChatContent.do', {
+            content: showMsg,
+            chno: data.chno
+          }, function(result) {
+          });
+          
+        }else {
+          showMsg = ' '+'<div class="yourDiv">'+splitData[1]+'<div class="yourMsg">' + splitData[2] + "</div></div><br>";
+        $('#messages' + data.chno).append(showMsg);
+        $.getJSON('http://192.168.1.48:8889/insertChatContent.do', {
+          content: showMsg,
+          chno: data.chno
+        }, function(result) {
+        });
+        }
+        
         $('#messages'+data.chno).scrollTop($('#messages'+data.chno)[0].scrollHeight);
         $('#messages'+data.chno).parents('.collapse').addClass('in');
  
-         $.getJSON('http://54.64.21.8:8889/updateStatus.do', {
+         $.getJSON('http://192.168.1.48:8889/updateStatus.do', {
           roomId: data.chno
         }, function(result) {
           console.log('스테이터스 2로 변경');
         }); 
 
-         $.getJSON('http://54.64.21.8:8889/insertChatContent.do', {
-          content: ' ' + msg + '<br>',
-          chno: data.chno
-        }, function(result) {
-        });
+         
         });
       
       $('.chat-close1').on('click', function() {
+        var roomNo = $('.chat-close1').attr('roomno');
+        
+        console.log(checkRoomArr.contains(roomNo));
         console.log($('.chat-close1').attr('roomno') + "roomNO <-");
-        $.getJSON('http://54.64.21.8:8889/changeStatus.do',{
-          roomId: $('.chat-close1').attr('roomno')
+        $.getJSON('http://192.168.1.48:8889/changeStatus.do',{
+          roomId: roomNo
         }, function(result) {
           console.log('변경 성공');
         })
         socket.emit('leave:room', {
-          roomId: $('.chat-close1').attr('roomno')
+          roomId: roomNo
         });
+        checkRoomArr.remove(roomNo);
+        console.log(checkRoomArr.contains(roomNo));
         $('.panel1').css('display','none');
         
       /*   for (var i in checkRoomArr) {
@@ -280,25 +339,38 @@
         } */
    });
       $('.chat-close2').on('click', function() {
-        $.getJSON('http://54.64.21.8:8889/changeStatus.do',{
-          roomId: Number($('.chat-close2').attr('roomno'))
+     var roomNo = $('.chat-close1').attr('roomno');
+        
+        console.log(checkRoomArr.contains(roomNo));
+        console.log($('.chat-close1').attr('roomno') + "roomNO <-");
+        $.getJSON('http://192.168.1.48:8889/changeStatus.do',{
+          roomId: roomNo
         }, function(result) {
           console.log('변경 성공');
         })
         socket.emit('leave:room', {
-          roomId: $('.chat-close2').attr('roomno')
+          roomId: roomNo
         });
+        checkRoomArr.remove(roomNo);
+        console.log(checkRoomArr.contains(roomNo));
         $('.panel2').css('display','none');
+    
    });
       $('.chat-close3').on('click', function() {
-        $.getJSON('http://54.64.21.8:8889/changeStatus.do',{
-          roomId: $('.chat-close3').attr('roomno')
+       var roomNo = $('.chat-close1').attr('roomno');
+        
+        console.log(checkRoomArr.contains(roomNo));
+        console.log($('.chat-close1').attr('roomno') + "roomNO <-");
+        $.getJSON('http://192.168.1.48:8889/changeStatus.do',{
+          roomId: roomNo
         }, function(result) {
           console.log('변경 성공');
         })
         socket.emit('leave:room', {
-          roomId: Number($('.chat-close3').attr('roomno'))
+          roomId: roomNo
         });
+        checkRoomArr.remove(roomNo);
+        console.log(checkRoomArr.contains(roomNo));
         $('.panel3').css('display','none');
    });
     };
