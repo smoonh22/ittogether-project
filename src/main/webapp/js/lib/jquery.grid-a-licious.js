@@ -260,9 +260,11 @@
                 if (queue === true && effect == "fadeInOnAppear") {
                     if (this.isPrepending) items.reverse();
                     $.each(items, function (index, value) {
-                        setTimeout(function () {
+                        
+                      if($(value).hasClass('my-act-opacity')){
+                      setTimeout(function () {
                             $(value).animate({
-                                opacity: '1.0'
+                                opacity: '0.5'
                             }, duration);
                             t++;
                             if (t == items.length) {
@@ -270,6 +272,19 @@
                             }
                         }, i * speed);
                         i++;
+                      } else {
+                        setTimeout(function () {
+                          $(value).animate({
+                              opacity: '1.0'
+                          }, duration);
+                          t++;
+                          if (t == items.length) {
+                              complete.call(undefined, items)
+                          }
+                      }, i * speed);
+                      i++; 
+                      }
+                        
                     });
                 } else if (queue === false && effect == "fadeInOnAppear") {
                     if (this.isPrepending) items.reverse();

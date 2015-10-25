@@ -41,6 +41,7 @@
       <!-- /.modal-dialog -->
     </div>
     </div>
+<div hiden="true"><img class="myHiddenImg" src="images/empty.png"></div>
 
 
 <script>
@@ -109,7 +110,10 @@
             title: '[심심해]축구해요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
             maxHeadCount: '00',
-            meetTime: boredMeetTimeAppointment
+            meetTime: boredMeetTimeAppointment,
+            attachFile1 : $('.myHiddenImg').attr('src'),
+            attachFile2 : $('.myHiddenImg').attr('src'),
+            attachFile3 : $('.myHiddenImg').attr('src')
          },
         success: function(result){
            if (result.data == 'success') {
@@ -117,11 +121,11 @@
 //             $('#activity-container').load('main.html#/activity');
 //             $('#activity-container').load(contextRoot + '/feed/myActivity.do?mno=4');
 //             window.location.reload();
-        $.getJSON(contextRoot + '/feed/myActivity.do', {
-              mno: sessionStorage.getItem('mno')
-            }, function(result) {
-               $('#activity-container').load();
-        });
+//        $.getJSON(contextRoot + '/feed/myActivity.do', {
+//              mno: sessionStorage.getItem('mno')
+//            }, function(result) {
+//               $('#activity-container').load();
+//        });
              
              
            }
