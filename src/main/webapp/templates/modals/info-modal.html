@@ -143,7 +143,14 @@ function initAutocomplete() { /* 초기화 함수*/
     });
     
     map.fitBounds(bounds);
+    zoomChangeBoundsListener = 
+      google.maps.event.addListenerOnce(map, 'bounds_changed', function(event) {
+          if (this.getZoom()){
+              this.setZoom(16);
+          }
+    });
     
+    setTimeout(function(){google.maps.event.removeListener(zoomChangeBoundsListener)}, 2000);
 
     google.maps.event.addListener(map, 'click', function (event) {
       addMarker(event.latLng, map); /* 마커 찍어주는 함수 */

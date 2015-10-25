@@ -26,7 +26,7 @@
                    queue: true,
                    speed: 100,
                    duration: 800,
-                   effect: 'fadeInOnAppear',
+                   effect: 'fadeInOnAppear'
                }
            });
        });

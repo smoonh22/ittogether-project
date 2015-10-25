@@ -216,6 +216,12 @@ font-size: 80%;
   padding: 8px;
   border: 1px solid #EBEBEB ;
 }
+.drop-box {
+  border: 1px solid #CBCBCB;
+  height: 140px;
+  width: 182px;
+  
+}
 .moim-icon-align {
   vertical-align: text-bottom;
 }
