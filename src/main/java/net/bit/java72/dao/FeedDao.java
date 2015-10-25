@@ -26,4 +26,5 @@ public interface FeedDao {
   List<FriendFeed> listFrd(int fno);
   List<FriendFeed> nlistFrd(int fno);
   List<FriendFeed> commentPhotolist(int fno);
+  Feed getPicture(int fno);
 }

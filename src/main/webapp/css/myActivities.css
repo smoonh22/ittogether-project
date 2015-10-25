@@ -228,6 +228,10 @@ font-size: 80%;
   clear:left;
   margin: 10px;
 }
+.Act-Detail-Picture { 
+  width : 100%;
+/*  height :500px;*/
+}
 .my-act-opacity {
 border: 0px solid black;
 opacity : 0.1;

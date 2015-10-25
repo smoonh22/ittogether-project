@@ -43,6 +43,9 @@ define(function () {
           mno : sessionStorage.getItem('mno')
         }
       }).success(function(data, status, headers, config){
+        $scope.fullalert = function(){
+          return true;
+        }
         $scope.details = data.detail;
         $(function(){
           $(".test007").click(function(){
@@ -85,7 +88,12 @@ define(function () {
       });
     }
     // 참가 하기 버튼
-    $scope.joinbtn = function(fno) {
+    $scope.joinbtn = function(fno,current,max) {
+      if(current==max || current > max){
+        $scope.fullalert = function(){
+          return false;
+      }
+      }else {
       $.ajax('feed/friendjoin.do', {
         method: 'get',
         dataType: 'json',
@@ -98,6 +106,7 @@ define(function () {
               return $scope.detailview(fno);
           }
       });
+     }
     };
     // 나가기 버튼
     $scope.outbtn = function (fno) {

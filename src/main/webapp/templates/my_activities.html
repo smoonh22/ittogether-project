@@ -44,7 +44,7 @@
           </div>
 			 	
             <div class='moim-hide-section'>	
-              <div class="moim-attachPics">
+              <div class="moim-attachPics" data-toggle='modal' role='button' href='#picturemodal' ng-click='slidePicture(myact.fno)'>
                 <img src="{{myact.attachFile1}}" class="act-feed-img">
                 <img src="{{myact.attachFile2}}" class="act-feed-img">
                 <img src="{{myact.attachFile3}}" class="act-feed-img">
@@ -70,22 +70,8 @@
           </div>
         </div>	
       </div>
-  
+      <picture-modal></picture-modal>
       </div>
 <act-modal></act-modal>
 
                                   
-                                  
-<!--
-                                  <table class='commentTable'>
-			        	  				<tr><td><span class="comment-nickName">{{comment.nickname}}</span></td></tr>
-			        	  				<tr><td rowspan="5"><div ng-hide='commentArea(comment.cno)' id='commentarea{{comment.cno}}' class="comment-userContent">{{comment.content}}</div>
-			        	  				<div ng-show='updateArea(comment.cno)'><textarea ng-model='rewriteComment' class='commentInputArea'>{{comment.content}}</textarea>
-			        	  				<button ng-click='updateCmt($index,comment.cno,comment.fno,rewriteComment)' class='comment-updatebtn'>등록</button><button ng-click='cancelBtn($index,comment.cno)' class='comment-updatebtn'>취소</button></div></td></tr>
-			        	  			</table>
--->
-                                  
-                                  
-                                  
-			        	  	
-

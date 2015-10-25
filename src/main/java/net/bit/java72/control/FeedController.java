@@ -3,6 +3,8 @@ package net.bit.java72.control;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -87,7 +89,6 @@ public class FeedController {
     List<FriendFeed> frdList = new ArrayList<>();
     
     for(Member member : distanceList){
-      System.out.println(member);
       double lat2 = Double.parseDouble(member.getLatitude());
       double lon2 = Double.parseDouble(member.getLongitude());
       
@@ -105,7 +106,19 @@ public class FeedController {
         }
         }
       }
-    }  
+    } 
+    Collections.sort(frdList, new Comparator<FriendFeed>(){
+      public int compare(FriendFeed obj1, FriendFeed obj2)
+      {
+        int compare = obj1.getCreateDate().compareTo(obj2.getCreateDate());
+        if(compare > 0){
+          return -1;
+        } else if (compare < 0){
+          return 1;
+        }
+        return 0;
+      }
+    }); 
     
     result.put("data", frdList);
   } catch (Exception e) {e.printStackTrace();}
@@ -236,6 +249,17 @@ public class FeedController {
      
    }
   
+   
+   @RequestMapping("/actpicture")
+   public Object getPicture(int fno) throws Exception {
+     Map<String,Object> result = new HashMap<>();
+     
+     Feed feed = feedService.getPicture(fno);
+     
+     result.put("result",feed);
+     
+     return result;
+   }
   
    public String CalcTime(Date meetTime){
      Calendar calendar = Calendar.getInstance();
