@@ -116,14 +116,7 @@
              $('#boredModal').modal('toggle');
 //             $('#activity-container').load('main.html#/activity');
 //             $('#activity-container').load(contextRoot + '/feed/myActivity.do?mno=4');
-//             window.location.reload();
-        $.getJSON(contextRoot + '/feed/myActivity.do', {
-              mno: sessionStorage.getItem('mno')
-            }, function(result) {
-               $('#activity-container').load();
-        });
-             
-             
+              window.location.reload();
            }
         }
      });

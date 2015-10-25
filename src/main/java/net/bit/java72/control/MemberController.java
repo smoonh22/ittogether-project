@@ -48,10 +48,6 @@ public class MemberController {
     
     int count = memberService.update(member);
     
-    System.out.println(member.getAddress());
-    System.out.println(member.getLatitude());
-    System.out.println(member.getLongitude());
-    
     if ( count > 0) {
       result.put("data", "success");
     } else {
@@ -83,11 +79,9 @@ public class MemberController {
       System.out.println("\n[[[[ 나의 위치: " + lat + ", " + lon + " ]]]]");
       
       List<Member> distanceList = memberService.getFriends(frdno);
-//      System.out.println("distanceList: " + distanceList);
-      
       List<Member> friendMarks = new ArrayList<>();
       List<Integer> distances = new ArrayList<>();
-      
+      if (!distanceList.isEmpty()) {
       for(Member member : distanceList){
         double lat2 = Double.parseDouble(member.getLatitude());
         double lon2 = Double.parseDouble(member.getLongitude());
@@ -105,16 +99,19 @@ public class MemberController {
           for(Member temp : members){
             if( temp != null){
               friendMarks.add(temp);
-            }
-          }
+            }          }
          }
       }
       System.out.println("나와 친구와의 거리: " + distances.toString());
       
       result.put("distance", distances);
       result.put("data", friendMarks);
+      } else {
+        result.put("data", "nothingFound");
+      }
+      
     } catch (Exception e) {
-      result.put("data", "nothingFound");
+      e.printStackTrace();
     }
     
     return result;
@@ -133,6 +130,7 @@ public class MemberController {
       
       List<Member> noneFriendMarks = new ArrayList<>();
       List<Integer> distances = new ArrayList<>();
+      if (!distanceList.isEmpty()) {
       for(Member member : distanceList){
         double lat2 = Double.parseDouble(member.getLatitude());
         double lon2 = Double.parseDouble(member.getLongitude());
@@ -140,7 +138,6 @@ public class MemberController {
         double distanceDouble = CalculateDistance.getDistance(lat,lon,lat2,lon2);
         int distance = (int)Math.floor(distanceDouble);
         
-        System.out.println("*회원" + member.getMno() + "의 거리: " + distance + "m");
         
         if (distance <= 2000){
            distances.add(distance);
@@ -153,11 +150,20 @@ public class MemberController {
           }
         }
       }
-      
+      if (noneFriendMarks.isEmpty()) {
+        result.put("data", "nothingFound");
+        return result;
+      } else {
       result.put("distance", distances);
       result.put("data", noneFriendMarks);
+      }
+      
+      } else {
+        result.put("data", "nothingFound");
+      }
+    
     } catch (Exception e) {
-      result.put("data", "nothingFound");
+      e.printStackTrace();
     }
     return result;
   }    

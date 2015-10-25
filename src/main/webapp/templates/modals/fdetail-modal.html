@@ -1,7 +1,7 @@
 <!-- modal start -->
 <div id="detailModal" class="modal fade">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content detailModal-content">
       
       <div class="modal-header detailModal-head">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -9,11 +9,16 @@
         <input type="hidden" id="detail-number"/>
       </div>
       
-      <div class="modal-body"  >
-        
-        <form role="form">
-          
-          <div class="form-group detail-detail">
+      <div class="modal-body detail-modal-body">
+      <div class='row detail-info-wrap'>
+          <div class="detail-user-info col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <div><img class="img-circle" src="{{details.profilePicture}}" id="detail-profilePicture"></div>
+            <div class="detail-user-name">
+            <span id="detail-name"></span>{{details.nickname}}
+            <span id="detail-nickname"></span>
+              </div>
+          </div>
+          <div class="detail-detail col-xs-9 col-sm-9 col-md-9 col-lg-9">
             <div class="form-group">
               <img src="images/icons/calendar.png">
               <span id="detail-mTime" class="chatTime">{{details.meetDday}}</span>
@@ -21,55 +26,44 @@
               <span id="detail-headCnt" class="chatTime">{{details.currentCount}}/{{details.maxHeadCount}}</span>
               <img src="images/icons/time.png">
               <span id="detail-createDate" class="chatTime detail_dday">{{details.dday}}</span>
-                           <span>
-             <button type="button" class="btn btn-info btn-xs detail-btn" id="join-btn" ng-click="joinbtn(details.fno)">참여하기</button>
-             <button type="button" class="btn btn-info btn-xs detail-btn" id="out-btn" ng-click="outbtn(details.fno)">나가기</button></span></div>
-            <h15 class="detail_man_woman">참여인원:<img ng-repeat ='de in details.joinfrd' src="{{de.profilePicture}}" class="img-circle detail_photo"/></h15>                        
-            <div class="form-group">
+             <button type="button" class="btn btn-info btn-md detail-btn" id="join-btn" ng-click="joinbtn(details.fno)">참여하기</button>
+             <button type="button" class="btn btn-info btn-md detail-btn" id="out-btn" ng-click="outbtn(details.fno)">나가기</button></div>
+            <h15 class="detail_man_woman">참여인원: <img ng-repeat ='de in details.joinfrd' src="{{de.profilePicture}}" class="img-circle detail_photo"/></h15>                        
               <pre class="detail-content detail_cont" id="detail-content">{{details.content}}</pre>
-            </div>
           </div>
-          
-          
-          
-          <div class="detail-user-info">
-            <div><img class="img-circle" src="{{details.profilePicture}}" id="detail-profilePicture"></div>
-            <div class="detail-user-name">
-            <span id="detail-name"></span>{{details.nickname}}
-            <span id="detail-nickname"></span>
-              </div>
           </div>
-          
-        </form>
-          <img src="images/default-img.png" class="dtail-default-img1">
-          <img src="images/default-img.png" class="dtail-default-img2">
-          <img src="images/default-img.png" class="dtail-default-img3">
+        <div class='row detail-images'>
+          <img src="images/default-img.png" class="dtail-default-img1 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <img src="images/default-img.png" class="dtail-default-img2 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <img src="images/default-img.png" class="dtail-default-img3 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          </div>
       </div>
       
       <div class="modal-footer comment-screen">
         <div ng-repeat="comment in ffCtrl.comments">
  
           <div class='row commentFeed'>
-            <div class='col-md-2'><img src='{{comment.profilePicture}}' class='detailImg img-circle'/></div>
-            <div class='col-md-8'>
+            <div class='col-xs-1 col-sm-1 col-md-1 col-lg-1'><img src='{{comment.profilePicture}}' class='detailImg img-circle'/></div>
+            <div class='col-xs-9 col-sm-9 col-md-9 col-lg-9'>
             <table class='commentTable'>
-            <tr><td><b>{{comment.nickname}}</b></td></tr>
-            <tr><td rowspan="5"><div ng-hide='commentArea(comment.cno)' id='commentarea{{comment.cno}}' class="comment_content">{{comment.content}}</div>
+            <tr><td><b class="comment-user-name">{{comment.nickname}}</b></td></tr>
+            <tr>
+            <td rowspan="5">
+            <div ng-hide='commentArea(comment.cno)' id='commentarea{{comment.cno}}' class="comment_content">{{comment.content}}</div>
             <div ng-show='updateArea(comment.cno)'><textarea ng-model='rewriteComment' class='commentInputArea'>{{comment.content}}</textarea>
             <button ng-click='updateCmt($index,comment.cno,comment.fno,rewriteComment)' class='btn btn-primary btn-xs comment-updatebtn'>등록</button>
             <button ng-click='cancelBtn($index,comment.cno)' class='btn btn-info btn-xs comment-updatebtn'>취소</button></div></td></tr>
             </table>
             </div>
-            <div ng-show='checkAuthority(comment.mno)' class='checkAuthority'>
+            <div ng-show='checkAuthority(comment.mno)' class='checkAuthority col-xs-2 col-sm-2 col-md-2 col-lg-2'>
               <button type="button" ng-click='openUpdateArea(comment.cno,rewriteComment)' class='btn btn-primary btn-xs btn_update'>수정</button>
               <button type="button" class='btn btn-info btn-xs btn-delete' ng-click=deleteCmt(comment.cno,comment.fno); >삭제</button>
             </div>
           </div>
     </div>
-        <table>
-         <tr><td><textarea class='comment-insert' placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다.
-댓글 작성 시 타인에 대한 배려와 책임을 담아주세요." ng-model='content' /></td>
-<td><button type="reset" class="btn btn-info comment-insrtbtn" id="succ_Btn" ng-click='commentinsert(details.fno,content)'>등록</button></td></tr>   
+        <table style="width:100%;">
+         <tr class='row' style="padding:0px;"><td class="col-xs-11 col-sm-11 col-md-11 col-lg-11"><textarea class='comment-insert' placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요." ng-model='content' /></td>
+<td class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><button class="btn btn-info comment-insrtbtn btn-md" id="succ_Btn" ng-click='commentinsert(details.fno,content)'>등록</button></td></tr>   
         
         </table>
 

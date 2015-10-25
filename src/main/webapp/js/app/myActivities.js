@@ -24,7 +24,7 @@
                width: 330,
                animationOptions: {
                    queue: true,
-                   speed: 200,
+                   speed: 100,
                    duration: 800,
                    effect: 'fadeInOnAppear',
                }
@@ -188,7 +188,7 @@
             };
              
 
-             $('#btn').click(function (event) {
+             $('#create-newAct').click(function (event) {
                $.ajax('feed/insertUser.do',
                   {
                    method: 'POST',
@@ -206,7 +206,6 @@
                    },
                   success: function(result){
                      if (result.data == 'success') {
-                       alert('등록되었습니다');
                        $('#actModal').modal('toggle');
                        window.location.reload();
                      }
