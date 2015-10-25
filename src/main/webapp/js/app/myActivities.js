@@ -146,6 +146,18 @@
            }
          }
        }
+       $scope.slidePicture = function(fno){
+         $http({
+           method: 'POST',
+           url : 'feed/actpicture.do',
+           params : {
+             fno : fno,
+           }
+         }).success(function(data, status, headers, config){
+           $scope.pictures = data.result;
+         })
+       }
+         
        
        
   
@@ -170,7 +182,7 @@
             
             
             parent_scope.uploadFiles2 = function(file,no) {
-              
+               console.log("하하하");
               Upload.upload({
                 url: contextRoot + '/file/upload.do',
                 data: {file: file[0]}
@@ -222,5 +234,11 @@
           templateUrl: 'templates/modals/insert-modal.html'
         };
       }]); 
+      app.directive('pictureModal', function () {
+        return {
+          restrict: 'E',
+          templateUrl: 'templates/modals/picture-modal.html'
+        }
+      });
       
 });

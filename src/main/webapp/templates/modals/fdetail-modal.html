@@ -26,16 +26,17 @@
               <span id="detail-headCnt" class="chatTime">{{details.currentCount}}/{{details.maxHeadCount}}</span>
               <img src="images/icons/time.png">
               <span id="detail-createDate" class="chatTime detail_dday">{{details.dday}}</span>
-             <button type="button" class="btn btn-info btn-md detail-btn" id="join-btn" ng-click="joinbtn(details.fno)">참여하기</button>
+             <button type="button" class="btn btn-info btn-md detail-btn" id="join-btn" ng-click="joinbtn(details.fno,details.currentCount,details.maxHeadCount)">참여하기</button>
+             <span class='detail-fullalert' ng-hide='fullalert()'>참여인원 초과입니다.</span>
              <button type="button" class="btn btn-info btn-md detail-btn" id="out-btn" ng-click="outbtn(details.fno)">나가기</button></div>
             <h15 class="detail_man_woman">참여인원: <img ng-repeat ='de in details.joinfrd' src="{{de.profilePicture}}" class="img-circle detail_photo"/></h15>                        
               <pre class="detail-content detail_cont" id="detail-content">{{details.content}}</pre>
           </div>
           </div>
         <div class='row detail-images'>
-          <img src="images/default-img.png" class="dtail-default-img1 col-xs-4 col-sm-4 col-md-4 col-lg-4">
-          <img src="images/default-img.png" class="dtail-default-img2 col-xs-4 col-sm-4 col-md-4 col-lg-4">
-          <img src="images/default-img.png" class="dtail-default-img3 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <img src="{{details.attachFile1}}" class="dtail-default-img1 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <img src="{{details.attachFile2}}" class="dtail-default-img2 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <img src="{{details.attachFile3}}" class="dtail-default-img3 col-xs-4 col-sm-4 col-md-4 col-lg-4">
           </div>
       </div>
       

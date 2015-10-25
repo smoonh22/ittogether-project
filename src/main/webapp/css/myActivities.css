@@ -236,3 +236,7 @@ opacity : 0.1;
   width: 97%; 
   font-size: 80%; 
 }
+.Act-Detail-Picture{
+	width : 100%;
+	height: 500px;
+}

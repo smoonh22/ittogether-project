@@ -42,7 +42,7 @@
         </div>
         
         <div class='moim-hide-section'> 
-          <div class="moim-attachPics">
+          <div class="moim-attachPics" data-toggle='modal' role='button' href='#picturemodal' ng-click='slidePicture(myact.fno)'>
                 <img src="{{myact.attachFile1}}" class="act-feed-img">
                 <img src="{{myact.attachFile2}}" class="act-feed-img">
                 <img src="{{myact.attachFile3}}" class="act-feed-img">
@@ -66,6 +66,7 @@
             </div>
           </div>  
         </div>
+        <picture-modal></picture-modal>
       </div>
 <act-modal></act-modal>
 

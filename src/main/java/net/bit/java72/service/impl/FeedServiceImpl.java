@@ -101,6 +101,11 @@ public class FeedServiceImpl implements FeedService {
   public List<FriendFeed> commentPhotolist(int fno) {
     return feedDao.commentPhotolist(fno);
   }
+  @Override
+  public Feed getPicture(int fno) {
+    return feedDao.getPicture(fno);
+  }
+  
 }
 
 

@@ -482,4 +482,6 @@ max-width: 30px;
   margin: 10% 1% 0% 1%;	
 	
 }
-
+.detail-fullalert {
+	color : red;
+}
