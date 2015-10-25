@@ -14,6 +14,9 @@ src:url(//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix) f
 * {
 	font-family:'NanumBarunGothic';
 }
+.navbar-brand > img {
+  width: 100px;
+}
 html {
 	font-size: 62.5%;
 	font-family:'NanumBarunGothic';
@@ -21,7 +24,7 @@ html {
 
 body {
 	font-size: 1rem;
-	background-color: rgba(225, 247, 253,0.5);
+/*	background-color: rgba(225, 247, 253,0.5);*/
 }
 
 @media ( max-width : 300px) {

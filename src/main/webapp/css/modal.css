@@ -15,62 +15,6 @@ body p {
 .modal-title {
   text-align: center;
 }
-
-/*==== infoModal 관련 시작 ====*/
-#map {
-  height: 100%;
-}
-#infoModal {
-  margin-top:2%;
-  z-index: 20;   
-}
-.modal-backdrop{
-    z-index: 10;        
-}
-.controls {
-  margin-top: 10px;
-  border: 1px solid transparent;
-  border-radius: 2px 0 0 2px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  height: 32px;
-  outline: none;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-.pac-container {
-  background-color: #FFF;
-  z-index: 20;
-  position: fixed;
-  display: inline-block;
-  float: left;
-  font-family: Roboto;
-}
-#pac-input {
-  background-color: #fff;
-  font-family: Roboto;
-  font-size: 15px;
-  font-weight: 300;
-  margin-left: 12px;
-  padding: 0 11px 0 13px;
-  text-overflow: ellipsis;
-  width: 230px;
-}
-#pac-input:focus {
-  border-color: #21A7E5;
-}
-#type-selector {
-  color: #fff;
-  background-color: #4d90fe;
-  padding: 5px 11px 0px 11px;
-}
-
-#type-selector label {
-  font-family: Roboto;
-  font-size: 13px;
-  font-weight: 300;
-}
-/*==== infoModal 관련 끝 ====*/
-
 #signupModal {
   margin-top:1%;
 }
@@ -83,6 +27,7 @@ body p {
 #detailModal {
   margin-top: 20%;
 }
+
 /*==== detailModal 관련 시작 ====*/
 .detail-user-info {
 	/*  position: absolute;*/
@@ -263,7 +208,10 @@ body p {
 .detail_man_woman{
   margin-top: 5%;
 }
-
+.drop-box {
+   border: 1px solid #CBCBCB;
+  height: 140px;
+}
 /*==== detailModal 관련 끝 ====*/
 
 #addfriendModal{

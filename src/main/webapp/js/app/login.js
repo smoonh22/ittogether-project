@@ -102,6 +102,7 @@ $('#nickname').on('keyup', function (event) {
 
 // 지도 관련 시작 
 function initAutocomplete() { /* 초기화 함수*/
+  console.log('initAutocomplete();');
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {
       lat: 37.497943,

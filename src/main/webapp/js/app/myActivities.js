@@ -24,8 +24,8 @@
                width: 330,
                animationOptions: {
                    queue: true,
-                   speed: 200,
-                   duration: 800,
+                   speed: 100,
+                   duration: 400,
                    effect: 'fadeInOnAppear',
                }
            });

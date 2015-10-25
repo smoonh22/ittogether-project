@@ -1,8 +1,8 @@
 @CHARSET "UTF-8";
 .myActList{
-
-float : left;
-width : 33%;
+  float : left;
+  width : 33%;
+  padding: -12px;
 }
 
 div {
@@ -16,13 +16,14 @@ pre {
   padding:2px;
 }
 .act-feed-content {
-display:inline-block;
-text-align : left;
-background-color: white;
-border-radius : 8px;
-margin-top : 1%;
-height: 98%;
-width: 99%;
+  display:inline-block;
+  text-align : left;
+  background-color: white;
+  border-radius : 8px;
+  margin-top : 1%;
+  height: 98%;
+  width: 99%;
+  border: 1px solid #E4E4E4;
 }
 .act-feed-img {
 width : 31%;
@@ -40,7 +41,7 @@ margin : 4% 1%;
 }
 .act-feed-title {
 float : left;
-width : 70%;
+width : 100%;
 padding-left: 3%;
 border: 1px red;
 }
@@ -105,6 +106,8 @@ height: 30px;
 
 .moim-title-info-LSH {
   font-size: 0.8rem;
+  padding-left: 90px;
+  padding-top: 5px;
 }
 .nanum-section {
 width :96%;
@@ -215,6 +218,10 @@ font-size: 80%;
 }
 .moim-icon-align {
   vertical-align: text-bottom;
+}
+.moim-participants {
+  font-size: 0.8rem;
+  padding: 5px;
 }
 .act-content {
   background-color: white;

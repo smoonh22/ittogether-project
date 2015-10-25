@@ -109,8 +109,15 @@
   
   var picSrc;  var nameVal;
 (function() {
-  getMyFriendsInfo();
-  getMyMembers(1);
+  if (getMyFriendsInfo().length > 1) {
+    console.log('주변에 친구 존재');
+    getMyFriendsInfo();
+    getMyMembers(1);
+  } else {
+    console.log('주변에 친구가 없음');
+    getMyInfo();
+  }
+  
 })(); // 데이터 로딩 함수 끝
 
   function getMyInfo() {

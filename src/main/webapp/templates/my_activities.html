@@ -13,59 +13,64 @@
       </div>
    </div>
 </div>   
-		<div id='activity-container'>
+  
+      <div id='activity-container'>
 		<div ng-repeat="myact in activities" class='myActList' on-last-repeat> 
-		   	<div class='my-{{myact.opacity}} act-feed-content item backgroud-color-{{myact.category}}'>
-				<div class='moim-section' role='button' ng-click='sizeUp($index,myActHide($index,myact),myact.fno)'>
-					<div class='act-feed-header'>
-						<div class='act-feed-prof-img'>
-							<img class='moim-profile-img img-circle' src='{{myact.profilePicture}}'>
-						</div>
-						<div class='act-feed-title'>
-							<div class='moim-title-font'><img src="images/icons/nanum.png">&nbsp;{{myact.title}}</div>
-                              <div class="moim-title-info-LSH">
-                                <img src="images/icons/calendar2.png" class="moim-icon-align">&nbsp;{{myact.meetDday}}&nbsp;
-                                <img src="images/icons/time2.png" class="moim-icon-align">&nbsp;{{myact.dday}}&nbsp;
-                                <div class='act-joinfrd-section'>
-					            <div class='joined-frd-none' ng-if='myact.joinfrd[0] == null'>
-                                  <img src="images/icons/multiple2.png" class="moim-icon-align">({{myact.currentCount}}/{{myact.maxHeadCount}})
-                                </div>
-                                <div class="joined-frd-exist" ng-if='myact.joinfrd[0] != null'>
-                                  <img src="images/icons/multiple2.png" class="moim-icon-align">({{myact.currentCount}}/{{myact.maxHeadCount}})
-                                  <img class='img-circle joined-frd-picture' ng-repeat-start='pic in myact.joinfrd' src='{{pic.profilePicture}}'>
-                                <span ng-repeat-end ng-if='$index==4'/>
-                              </div>
-                              </div>
-                            </div>
-						</div>
-					</div>
-				</div>
+          <div class='my-{{myact.opacity}} act-feed-content item backgroud-color-{{myact.category}}'>
+            <div class='moim-section' role='button' ng-click='sizeUp($index,myActHide($index,myact),myact.fno)'>
+              
+              <div class='act-feed-header'>
+                
+              <div class='act-feed-title'>
+                <div class='act-feed-prof-img'><img class='moim-profile-img img-circle' src='{{myact.profilePicture}}'></div>
+                <div class="moim-title-info-LSH">
+                  <div class='moim-title-font'><img src="images/icons/nanum.png">&nbsp;{{myact.title}}</div>
+                </div>
+                <div class="moim-title-info-LSH">
+                  <img src="images/icons/calendar2.png" class="moim-icon-align">&nbsp;{{myact.meetDday}}&nbsp;
+                </div>
+                <div class="moim-title-info-LSH">
+                  <img src="images/icons/time2.png" class="moim-icon-align">&nbsp;{{myact.dday}}&nbsp;
+                  <img src="images/icons/multiple2.png" class="moim-icon-align">&nbsp;{{myact.currentCount}}/{{myact.maxHeadCount}}
+                </div>
+                <span class="moim-participants">참여인원:&nbsp;</span>
+                <span class='joined-frd-none' ng-if='myact.joinfrd[0] == null'></span>
+                <span class="joined-frd-exist" ng-if='myact.joinfrd[0] != null'>
+                  <img class='img-circle joined-frd-picture' ng-repeat-start='pic in myact.joinfrd' src='{{pic.profilePicture}}'>
+                  <span ng-repeat-end ng-if='$index==4'/>
+                </span>
+              </div>
+            
+          </div>
 			 	
-				<div class='moim-hide-section'>	
-					<div class="moim-attachPics">
-         				<img src="{{myact.attachFile1}}" class="act-feed-img">
-         				<img src="{{myact.attachFile2}}" class="act-feed-img">
-         				<img src="{{myact.attachFile3}}" class="act-feed-img">
-     			 	</div>
-				</div>
-                <div ng-show='myActHide($index)'>
-                  <pre class='act-content'>{{myact.content}}</pre>
-                  <div ng-repeat="comment in comments">
-                    <div class='comment-userFeed'>
+            <div class='moim-hide-section'>	
+              <div class="moim-attachPics">
+                <img src="{{myact.attachFile1}}" class="act-feed-img">
+                <img src="{{myact.attachFile2}}" class="act-feed-img">
+                <img src="{{myact.attachFile3}}" class="act-feed-img">
+              </div>
+            </div>
+              </div>
+            
+            <div ng-show='myActHide($index)'>
+              <pre class='act-content'>{{myact.content}}</pre>
+                <div ng-repeat="comment in comments">
+                  <div class='comment-userFeed'>
                       <div ng-hide='commentArea(comment.cno)' id='commentarea{{comment.cno}}' class="comment-userContent">
-                        <img  src='{{comment.profilePicture}}' class='detailImg comment-proPic img-circle'/><span class="comment-bg">{{comment.content}}</span>
-                        <div ng-show='updateArea(comment.cno)'>
-                          <textarea ng-model='rewriteComment' class='commentInputArea'>{{comment.content}}</textarea>
-                          <button ng-click='updateCmt($index,comment.cno,comment.fno,rewriteComment)' class='comment-updatebtn'>등록</button>
-                          <button ng-click='cancelBtn($index,comment.cno)' class='comment-updatebtn'>취소</button>
-                        </div>
+                      <img  src='{{comment.profilePicture}}' class='detailImg comment-proPic img-circle'/><span class="comment-bg">{{comment.content}}</span>
+                      <div ng-show='updateArea(comment.cno)'>
+                        <textarea ng-model='rewriteComment' class='commentInputArea'>{{comment.content}}</textarea>
+                        <button ng-click='updateCmt($index,comment.cno,comment.fno,rewriteComment)' class='comment-updatebtn'>등록</button>
+                        <button ng-click='cancelBtn($index,comment.cno)' class='comment-updatebtn'>취소</button>
                       </div>
-                    </div>
+                      </div>
                   </div>
                 </div>
             </div>
-          </div>	
-        </div>
+          </div>
+        </div>	
+      </div>
+  
       </div>
 <act-modal></act-modal>
 

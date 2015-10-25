@@ -35,7 +35,7 @@ public class FeedController {
   Map<String,Object> result = new HashMap<String,Object>();
   try {
     List<FriendFeed> test = feedService.list(mno);
-    SimpleDateFormat format = new SimpleDateFormat("MM월 dd일 E요일");
+    SimpleDateFormat format = new SimpleDateFormat("MM월 dd일 E요일 hh시 mm분");
     for(FriendFeed feed : test){
       String meetdate = format.format(feed.getMeetTime());
       feed.setMeetDday(meetdate);
@@ -56,7 +56,7 @@ public class FeedController {
   public Object feedlist(int mno) {  
     Map<String,Object> result = new HashMap<String,Object>();
     List<FriendFeed> test = feedService.myActivityList(mno);
-    SimpleDateFormat format = new SimpleDateFormat("MM월 dd일 E요일");
+    SimpleDateFormat format = new SimpleDateFormat("MM월 dd일 E요일 hh시 mm분");
     for(FriendFeed feed : test){
       String meetdate = format.format(feed.getMeetTime());
       feed.setMeetDday(meetdate);
@@ -95,7 +95,7 @@ public class FeedController {
       
       if(distance <= 2000){
         List<FriendFeed> feeds = feedService.noneFriendFeed(member.getMno());
-        SimpleDateFormat format = new SimpleDateFormat("MM월 dd일 E요일");
+        SimpleDateFormat format = new SimpleDateFormat("MM월 dd일 E요일 hh시 mm분");
         for(FriendFeed test : feeds){
         if( test != null){
           String meetdate = format.format(test.getMeetTime());
@@ -133,7 +133,7 @@ public class FeedController {
     Map<String,Object> result = new HashMap<String,Object>();
     FriendFeed friendFeed = feedService.getDetail(fno);
     Feed feed = feedService.checkFeed(fno, mno);
-    SimpleDateFormat format = new SimpleDateFormat("MM월 dd일 E요일");
+    SimpleDateFormat format = new SimpleDateFormat("MM월 dd일 E요일 hh시 mm분");
     String meetdate = format.format(friendFeed.getMeetTime());
     
     friendFeed.setMeetDday(meetdate);
