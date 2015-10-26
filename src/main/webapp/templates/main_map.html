@@ -113,7 +113,7 @@
     getMyFriendsInfo();
     getMyMembers(1);
     console.log('주변에 친구가 없음');
-    getMyInfo();
+//    getMyInfo();
   
 })(); // 데이터 로딩 함수 끝
 
@@ -129,7 +129,7 @@
       myIntro = results.data[0].introduction;
       myPhoto = results.data[0].profilePicture;
       mySex = results.data[0].sex;
-      myAge = results.data[0].age;
+      myAge = Number(results.data[0].age);
       myHobby = results.data[0].hobby;
       myHometown = results.data[0].hometown;
       console.log('initMap() 실행');  
@@ -152,7 +152,7 @@
           results.data[i].profilePicture,     // 4
           results.distance[i],                // 5
           results.data[i].sex,                // 6
-          results.data[i].age,                // 7
+          Number(results.data[i].age),                // 7
           results.data[i].hobby,              // 8
           results.data[i].hometown,           // 9
           results.data[i].mno,                //10
@@ -177,7 +177,7 @@
     $.getJSON(contextRoot + '/member/getMembers.do', {
       mno: sessionStorage.getItem('mno')
     }, function(results) {
-      console.log(results.data);
+//      console.log(results.data);
       if (results.data != 'nothingFound') {
       for (var i = 0; i < results.data.length; i++) {
         var tempArr = [
@@ -189,7 +189,7 @@
           results.distance[i],
           Number(results.data[i].mno),
           results.data[i].sex,
-          results.data[i].age,
+          Number(results.data[i].age),
           results.data[i].hobby,
           results.data[i].hometown,
           results.data[i].name
@@ -230,6 +230,7 @@
       assignButtonBlock(i, frdmno);
       friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
       if ((mySwitch == 1) && (i == notFriendLocArr.length - 1)) {
+        console.log('getete2');
         getMyInfo();
       }
       });

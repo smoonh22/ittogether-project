@@ -1,3 +1,47 @@
+   
+insert into memb_t(name, nicknm, email, pwd, addr, lat, lon, age, sex, hobby, hometwn, intro, cre_dt)
+values('강슬기', '강비글', 'kangSK@hoit.com', '1234', '서울시 강남구', '', '', '25', '2', '영화', '수원', '으힣힣히힣ㅎㅎ스읍~', now());
+insert into memb_t(name, nicknm, email, pwd, addr, lat, lon, age, sex, hobby, hometwn, intro, cre_dt)
+values('김다솔', '도덕선생님', 'kangSK@hoit.com', '1234', '서울시 강남구', '', '', '26', '2', '연애', '수원', '세이! 수원~', now());
+insert into memb_t(name, nicknm, email, pwd, addr, lat, lon, age, sex, hobby, hometwn, intro, cre_dt)
+values('김슬기', '김반장', 'kimSK@hoit.com', '1234', '서울시 강남구', '', '', '25', '2', '제사', '목포', '방가방가 김슬기라고해.', now());
+insert into memb_t(name, nicknm, email, pwd, addr, lat, lon, age, sex, hobby, hometwn, intro, cre_dt)
+values('김웅찬', '웅찬님', 'kimWC@hoit.com', '1234', '서울시 강남구', '', '', '32', '1', '코딩', '서울', '방가방가 김웅찬이라고해.', now());
+insert into memb_t(name, nicknm, email, pwd, addr, lat, lon, age, sex, hobby, hometwn, intro, cre_dt)
+values('김지수', '지수님', 'kimJS@hoit.com', '1234', '서울시 강남구', '', '', '29', '1', '코딩', '인천', '방가방가 김지수라고해.', now());
+insert into memb_t(name, nicknm, email, pwd, addr, lat, lon, age, sex, hobby, hometwn, intro, cre_dt)
+values('방재경', '미스터방', 'bangJK@hoit.com', '1234', '서울시 강남구', '', '', '28', '1', '자전거', '성남', '방가방가 방재경이라고해.', now());
+--insert into memb_t(name, nicknm, email, pwd, addr, lat, lon, age, sex, hobby, hometwn, intro, cre_dt)
+--values('변재민', '미스터변', 'byurnJM@hoit.com', '1234', '서울시 강남구', '', '', '25', '1', '오유', '서울', '방가방가 변재민이라고해.', now());
+--insert into memb_t(name, nicknm, email, pwd, addr, lat, lon, age, sex, hobby, hometwn, intro, cre_dt)
+--values('송문혁', '오유인', 'songMH@hoit.com', '1234', '서울시 강남구', '', '', '28', '1', '오유', '서울', '당연한건 대답안해요.', now());
+insert into memb_t(name, nicknm, email, pwd, addr, lat, lon, age, sex, hobby, hometwn, intro, cre_dt)
+values('송한나', '몽한나', 'songHN@hoit.com', '1234', '서울시 강남구', '', '', '29', '2', '오유', '충남', '일주일에 5일 술 같이 드실분~', now());
+insert into memb_t(name, nicknm, email, pwd, addr, lat, lon, age, sex, hobby, hometwn, intro, cre_dt)
+values('엄진영', '좋아요', 'eomJY@hoit.com', '1234', '서울시 강남구', '', '', '28', '1', '페북', '서울', '좋아요~', now());
+insert into memb_t(name, nicknm, email, pwd, addr, lat, lon, age, sex, hobby, hometwn, intro, cre_dt)
+values('이규호', '지릴뻔했어', 'leeKH@hoit.com', '1234', '서울시 강남구', '', '', '25', '1', '에펨', '서울', '형 믿지?', now());
+insert into memb_t(name, nicknm, email, pwd, addr, lat, lon, age, sex, hobby, hometwn, intro, cre_dt)
+values('이승호', '마더빠더젠틀맨', 'leeSH@hoit.com', '1234', '서울시 강남구', '', '', '28', '1', '코딩', '경기도', '...', now());
+insert into memb_t(name, nicknm, email, pwd, addr, lat, lon, age, sex, hobby, hometwn, intro, cre_dt)
+values('이재준', '재주니', 'leeJJ@hoit.com', '1234', '서울시 강남구', '', '', '25', '1', '코딩', '서울', '...', now());
+insert into memb_t(name, nicknm, email, pwd, addr, lat, lon, age, sex, hobby, hometwn, intro, cre_dt)
+values('이재훈', '재후니', 'leeJH@hoit.com', '1234', '서울시 강남구', '', '', '32', '1', '코딩', '서울', '방가방가 이재훈이라고해...', now());
+insert into memb_t(name, nicknm, email, pwd, addr, lat, lon, age, sex, hobby, hometwn, intro, cre_dt)
+values('정채훈', '채후니', 'chungCH@hoit.com', '1234', '서울시 강남구', '', '', '32', '1', '코딩', '서울', '방가방가 정채훈이라고해...', now());
+insert into memb_t(name, nicknm, email, pwd, addr, lat, lon, age, sex, hobby, hometwn, intro, cre_dt)
+values('주형진', '셜록주', 'jooHJ@hoit.com', '1234', '서울시 강남구', '', '', '32', '1', '코딩', '서울', '코딩 공부 같이 하실분.', now());
+insert into memb_t(name, nicknm, email, pwd, addr, lat, lon, age, sex, hobby, hometwn, intro, cre_dt)
+values('진혜란', '마구마구', 'jinHR@hoit.com', '1234', '서울시 강남구', '', '', '31', '2', '야구', '서울', '야구 좋아하시는 분?', now());
+insert into memb_t(name, nicknm, email, pwd, addr, lat, lon, age, sex, hobby, hometwn, intro, cre_dt)
+values('최승인', '퍼밋최', 'choiSI@hoit.com', '1234', '서울시 강남구', '', '', '29', '1', '코딩', '인천', '코딩 공부 같이 해요', now());
+insert into memb_t(name, nicknm, email, pwd, addr, lat, lon, age, sex, hobby, hometwn, intro, cre_dt)
+values('최종혁', '모두의종혁', 'choiJH@hoit.com', '1234', '서울시 강남구', '', '', '26', '1', '코딩', '하남', '커피 마시러가요~', now());
+insert into memb_t(name, nicknm, email, pwd, addr, lat, lon, age, sex, hobby, hometwn, intro, cre_dt)
+values('한영주', '녕주님', 'HangYJ@hoit.com', '1234', '서울시 강남구', '', '', '31', '1', '코딩', '서울', '방가방가 한영주라고해..', now());
+
+
+
 CREATE TABLE `COMMENT_T` (
    `CNO`    INTEGER    NOT NULL COMMENT 'CNO', -- CNO
    `FNO`    INTEGER    NOT NULL COMMENT 'FNO', -- FNO
