@@ -142,7 +142,7 @@
   from MEMB_T t1 inner join FEED_T t2 on t1.mno=t2.mno
   where t2.mno = #{values}  
   or t2.fno IN (select t3.fno from JOINEDFRD_T t3 inner join feed_t t4 on t3.fno=t4.fno where t3.mno=#{values}) 
-  ORDER by t2.cre_dt desc
+  ORDER by t2.MEET_TIME desc
   </select>
  
   <select id="myActivityListFrd" resultMap="FriendFeedMap" parameterType="int">

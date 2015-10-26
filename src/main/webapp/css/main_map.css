@@ -39,7 +39,7 @@
 /*친구 추천 박스 */
 #friend-box {
   position: absolute;
-  height: 50%;
+  height: 500px;
 /*  width: 24%;*/
   width: 250px;
 /*  min-width: 250px;*/
@@ -85,6 +85,7 @@
 }
 .addfriend-btn-adding {
   cursor: default !important;
+  margin-top: -5px;
 }
 .panel-friend-title {
   text-align: center;
@@ -96,7 +97,9 @@
 }
 .myPanel-head {
   background-color: rgba(179, 210, 249, 0.79);
-  color: rgba(227, 55, 11, 0.79);
+  /* color: rgba(227, 55, 11, 0.79); */
+  color:white;
+  font-weight:bold;
   border: 1px solid #5bc0de;
   
 }
@@ -121,9 +124,8 @@
   padding: 5px;
 }
 .panel-member-name {
-  font-size: 1.1rem;
-  font-weight: 700;
   color: #47BEE8;
+  overflow:hidden;
 }
 .panel-member-append{
   font-size: 0.8rem;

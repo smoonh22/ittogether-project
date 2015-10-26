@@ -34,7 +34,7 @@ box-sizing: border-box;
 }
 
 *:focus {
-	outline: none;
+  outline: none;
 }
 #map {
   height: 300px;
@@ -64,7 +64,7 @@ box-sizing: border-box;
     background-repeat: none;
     opacity: 0;
     z-index: 0;
-	-webkit-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
     -webkit-animation: imageAnimation 36s linear infinite 0s;
     animation: imageAnimation 36s linear infinite 0s; 
 }
@@ -155,14 +155,14 @@ box-sizing: border-box;
 }
 /* Show at least something when animations not supported */
 .no-cssanimations .cb-slideshow li span{
-	opacity: 1;
+  opacity: 1;
 }
 header {
-	position:fixed;
-	top:50;
-	height: 70px;
-	width: 100%;
-	color: #ffffff;
+  position:fixed;
+  top:50;
+  height: 70px;
+  width: 100%;
+  color: #ffffff;
   text-align: center;
 }
 
@@ -170,7 +170,7 @@ header {
 
 
 footer {
-	height: 70px;
+  height: 70px;
   width: 100%;
   color: white;
   text-align: center;
@@ -388,12 +388,12 @@ html, body {
 }
 
 .signupModal-head {
-	background-color: #48b5e9;
+  background-color: #48b5e9;
   color: white;
 }
 
 .btn-custom {
-	background-color: #48b5e9;
+  background-color: #48b5e9;
   color: white;
 }
 .btn-custom:hover {
@@ -401,6 +401,6 @@ html, body {
    color: white;
 }
 .fileinput-button {
-	margin-top: 10px;
-	margin-left: 20px;
+  margin-top: 10px;
+  margin-left: 20px;
 }

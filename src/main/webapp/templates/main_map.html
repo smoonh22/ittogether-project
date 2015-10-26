@@ -129,7 +129,7 @@
       myIntro = results.data[0].introduction;
       myPhoto = results.data[0].profilePicture;
       mySex = results.data[0].sex;
-      myAge = results.data[0].age;
+      myAge = Number(results.data[0].age);
       myHobby = results.data[0].hobby;
       myHometown = results.data[0].hometown;
       console.log('initMap() 실행');  
@@ -152,7 +152,7 @@
           results.data[i].profilePicture,     // 4
           results.distance[i],                // 5
           results.data[i].sex,                // 6
-          results.data[i].age,                // 7
+          Number(results.data[i].age),                // 7
           results.data[i].hobby,              // 8
           results.data[i].hometown,           // 9
           results.data[i].mno,                //10
@@ -189,7 +189,7 @@
           results.distance[i],
           Number(results.data[i].mno),
           results.data[i].sex,
-          results.data[i].age,
+          Number(results.data[i].age),
           results.data[i].hobby,
           results.data[i].hometown,
           results.data[i].name
@@ -1777,9 +1777,12 @@ function friendList(i) {
       })
     });
     
+  var check=0;
   // friendbox에서 '친구추가' 버튼
   $(document).on('click', '.addfriend-btn-add', function() {
     var parent = this;
+    console.log('여기야!!!!');
+    if ( check == 0) {
     $.ajax(contextRoot + '/frd/insert.do', {
         method: 'post',
         dataType: 'json',
@@ -1788,6 +1791,7 @@ function friendList(i) {
             mno: sessionStorage.getItem('mno')
         },
       success: function(result) {
+        check=1;
         var mno = sessionStorage.getItem('mno');
         var frdmno = $(parent).attr('mno-data');
         $(parent).hide();
@@ -1820,11 +1824,10 @@ function friendList(i) {
         }
        }
       })
+    }
+    check=0;
   });
-  // friendbox에서 '요청중' 버튼
-  $(document).on('click', '.addfriend-btn-adding', function(e) {
-    e.preventDefault();
-    });
+  
   // friendbox에서 '수락하기' 버튼
   $(document).on('click', '.addfriend-btn-accepting', function() {
       var parent = this;

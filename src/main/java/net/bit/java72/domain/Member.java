@@ -21,7 +21,7 @@ public class Member implements Serializable{
   protected int    sex;
   protected String hobby;
   protected String introduction;
-  protected int    age;
+  protected String age;
   
   
   public int getMno() {
@@ -108,10 +108,10 @@ public class Member implements Serializable{
   public void setIntroduction(String introduction) {
     this.introduction = introduction;
   }
-  public int getAge() {
+  public String getAge() {   
     return age;
   }
-  public void setAge(int age) {
+  public void setAge(String age) {
     this.age = age;
   }
   

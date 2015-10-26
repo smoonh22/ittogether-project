@@ -7,13 +7,17 @@
         var w = angular.element($window);
         
         
-        //화면 resize --> 화면크기 바꿀시 refresh 하는 기능  html 에서 resize 써진  영역 감시
-        w.bind('resize', function(){
-          window.location.reload();
-        })
+//        화면 resize --> 화면크기 바꿀시 refresh 하는 기능  html 에서 resize 써진  영역 감시
+//        w.bind('resize', function(){
+//          window.location.reload();
+//        })
        
       $scope.mainAct = function() {$http.get('feed/myActivity.do',{params : {mno: sessionStorage.getItem('mno') }}).success(function (result) {
         $scope.activities = result.activity;
+        if (result.activity[0] == null){
+          $scope.resultdatanone1 = "활동 내역이 없습니다.";
+          $scope.resultdatanone2 = "'새 활동 만들기' 버튼을 눌러 친구들과 소통해보세요.";
+        }
         })
         };
         // 여기서 speed duration 으로 뿌려주는 속도 지정할수 있음  selector로 지정할수 있음 애니메이션은 width 한칸 넓이

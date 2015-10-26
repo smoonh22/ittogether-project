@@ -13,18 +13,36 @@
       </div>
    </div>
 </div>   
-  
+     <div class='act-activities'>
+          <div class='text-activities-none'>{{resultdatanone1}}</div>
+          <div class='text-activities-none'>{{resultdatanone2}}</div>
+        </div>
+        
       <div id='activity-container'>
 		<div ng-repeat="myact in activities" class='myActList' on-last-repeat> 
           <div class='my-{{myact.opacity}} act-feed-content item backgroud-color-{{myact.category}}'>
             <div class='moim-section' role='button' ng-click='sizeUp($index,myActHide($index,myact),myact.fno)'>
               
               <div class='act-feed-header'>
+  
                 
               <div class='act-feed-title'>
-                <div class='act-feed-prof-img'><img class='moim-profile-img img-circle' src='{{myact.profilePicture}}'></div>
+                <div class='act-feed-prof-img'>
+                <img class='moim-profile-img img-circle' src='{{myact.profilePicture}}'></div>
                 <div class="moim-title-info-LSH">
-                  <div class='moim-title-font'><img src="images/icons/nanum.png">&nbsp;{{myact.title}}</div>
+                  <div class='moim-title-font'><div ng-switch on='myact.category'>
+        <div ng-switch-when='1'>
+        <img src="images/icons/meeting.png" class="main_category_meeting">
+      </div>
+      <div ng-switch-when='2'>
+       <img src="images/icons/divide.png" class="main_category_divide">
+      </div>
+      <div ng-switch-when='3'>
+       <img src="images/icons/help.png" class="main_category_help">
+     </div>
+       <div ng-switch-default>
+      </div>
+                </div><br>{{myact.title}}</div>
                 </div>
                 <div class="moim-title-info-LSH">
                   <img src="images/icons/calendar2.png" class="moim-icon-align">&nbsp;{{myact.meetDday}}&nbsp;
@@ -33,7 +51,7 @@
                   <img src="images/icons/time2.png" class="moim-icon-align">&nbsp;{{myact.dday}}&nbsp;
                   <img src="images/icons/multiple2.png" class="moim-icon-align">&nbsp;{{myact.currentCount}}/{{myact.maxHeadCount}}
                 </div>
-                <span class="moim-participants">참여인원:&nbsp;</span>
+                <span class="moim-participants">참여인원&nbsp</span>
                 <span class='joined-frd-none' ng-if='myact.joinfrd[0] == null'></span>
                 <span class="joined-frd-exist" ng-if='myact.joinfrd[0] != null'>
                   <img class='img-circle joined-frd-picture' ng-repeat-start='pic in myact.joinfrd' src='{{pic.profilePicture}}'>
@@ -42,22 +60,22 @@
               </div>
             
           </div>
+              </div>
 			 	
             <div class='moim-hide-section'>	
               <div class="moim-attachPics" data-toggle='modal' role='button' href='#picturemodal' ng-click='slidePicture(myact.fno)'>
-                <img src="{{myact.attachFile1}}" class="act-feed-img">
-                <img src="{{myact.attachFile2}}" class="act-feed-img">
-                <img src="{{myact.attachFile3}}" class="act-feed-img">
+                <img src="{{myact.attachFile1}}" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 act-feed-img ">
+                <img src="{{myact.attachFile2}}" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 act-feed-img ">
+                <img src="{{myact.attachFile3}}" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 act-feed-img ">
               </div>
             </div>
-              </div>
             
             <div ng-show='myActHide($index)'>
               <pre class='act-content'>{{myact.content}}</pre>
                 <div ng-repeat="comment in comments">
                   <div class='comment-userFeed'>
                       <div ng-hide='commentArea(comment.cno)' id='commentarea{{comment.cno}}' class="comment-userContent">
-                      <img  src='{{comment.profilePicture}}' class='detailImg comment-proPic img-circle'/><span class="comment-bg">{{comment.content}}</span>
+                      <img  src='{{comment.profilePicture}}' class='detailImg comment-proPic img-circle'/><span class="comment-bg"><span style="color:#48b5e9;">{{comment.nickname}}</span>&nbsp{{comment.content}}</span>
                       <div ng-show='updateArea(comment.cno)'>
                         <textarea ng-model='rewriteComment' class='commentInputArea'>{{comment.content}}</textarea>
                         <button ng-click='updateCmt($index,comment.cno,comment.fno,rewriteComment)' class='comment-updatebtn'>등록</button>
@@ -73,5 +91,6 @@
       <picture-modal></picture-modal>
       </div>
 <act-modal></act-modal>
+
 
                                   
