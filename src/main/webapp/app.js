@@ -24,7 +24,6 @@ requirejs.config({
       'friendsFeed': 'js/app/friendsFeed',
       'tour': 'js/app/tour',
       'myActivities': 'js/app/myActivities',
-      'myFriendList': 'js/app/myFriendList',
       'info-modal': 'js/app/info-modal',
       'common': 'js/app/common'
     },

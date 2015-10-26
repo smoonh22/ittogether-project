@@ -264,7 +264,7 @@
                       if($(value).hasClass('my-act-opacity')){
                       setTimeout(function () {
                             $(value).animate({
-                                opacity: '0.5'
+                                opacity: '0.6'
                             }, duration);
                             t++;
                             if (t == items.length) {

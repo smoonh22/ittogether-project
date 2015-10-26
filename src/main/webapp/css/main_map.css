@@ -126,6 +126,7 @@
 .panel-member-name {
   color: #47BEE8;
   overflow:hidden;
+  width: 151px;
 }
 .panel-member-append{
   font-size: 0.8rem;

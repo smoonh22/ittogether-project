@@ -180,13 +180,13 @@ font-size: 80%;
   height: 2px;
 }
 .backgroud-color-1 {
-  background-color: rgba(73, 240, 142, 0.15);
+  background-color: rgba(184, 224, 248,0.45);
 }
 .backgroud-color-2 {
-  background-color: rgba(50, 180, 223, 0.15)
+  background-color: rgba(188, 250, 212,0.45);
 }
 .backgroud-color-3 {
-  background-color: rgba(49, 138, 229, 0.15);
+  background-color: rgba(236, 226, 253,0.65);
 }
 .backgroud-color-4 {
   background-color: rgba(241, 242, 255, 0.83)
