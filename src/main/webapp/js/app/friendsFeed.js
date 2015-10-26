@@ -219,7 +219,16 @@ define(function () {
 
     
   }]);
-
+  app.directive('onTourStart', function($window) {
+    return function(scope, element, attrs) {
+        if (scope.$last) {
+          if(sessionStorage.getItem("tour-start")==0){
+            sessionStorage.setItem("tour-start",1);
+          tour.start();
+            }
+          }
+      };
+  });
   
   app.directive('fdetailModal', function () {
     return {

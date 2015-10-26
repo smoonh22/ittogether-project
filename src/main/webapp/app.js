@@ -18,6 +18,7 @@ requirejs.config({
       'ng-file-upload-shim': 'bower_components/ng-file-upload/ng-file-upload-shim',
       'kendo-ui':'bower_components/kendo-ui/kendo-ui',
       'gridalicious': 'js/lib/jquery.grid-a-licious',
+      'bootstrap-tour':'bower_components/bootstrap-tour/build/js/bootstrap-tour',
       //컨트롤러
       'main': 'js/app/main',
       'myFriendList': 'js/app/myFriendList',
@@ -48,6 +49,9 @@ requirejs.config({
     'bootstrap.min': {
       deps: ['jquery']
     },
+    'bootstrap-tour':{
+      deps:['jquery']
+    },
     'tour': {
       deps:['bootstrap-tour']
     },
@@ -55,7 +59,7 @@ requirejs.config({
       deps:['jquery']
     },
     'main': {
-      deps: ['angular-route', 'ng-file-upload', 'friendsFeed', 'bootstrap.min', 'tour','myFriendList','myActivities','common','gridalicious']
+      deps: ['angular-route', 'ng-file-upload', 'friendsFeed', 'bootstrap.min', 'tour','myFriendList','myActivities','common','gridalicious','bootstrap-tour']
     },
     'friendsFeed': {
       deps: ['angular']

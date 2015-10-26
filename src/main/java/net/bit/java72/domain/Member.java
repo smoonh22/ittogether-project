@@ -22,6 +22,7 @@ public class Member implements Serializable{
   protected String hobby;
   protected String introduction;
   protected String age;
+  protected int tour;
   
   
   public int getMno() {
@@ -113,6 +114,12 @@ public class Member implements Serializable{
   }
   public void setAge(String age) {
     this.age = age;
+  }
+  public int getTour() {
+    return tour;
+  }
+  public void setTour(int tour) {
+    this.tour = tour;
   }
   
   

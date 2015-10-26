@@ -66,7 +66,7 @@
   <select id="unFriendList" parameterType="Search" resultMap="MemberMap">
   	SELECT * 
   	FROM MEMB_T
-  	WHERE mno IN (select frdno from frd_t where mno=#{mno} and state=2) and mno !=#{mno}
+  	WHERE mno IN (select frdno from FRD_T where mno=#{mno} and state=2) and mno !=#{mno}
   	<include refid='search'></include>
   </select>
   

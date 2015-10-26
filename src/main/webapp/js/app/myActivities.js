@@ -14,7 +14,7 @@
        
       $scope.mainAct = function() {$http.get('feed/myActivity.do',{params : {mno: sessionStorage.getItem('mno') }}).success(function (result) {
         $scope.activities = result.activity;
-        if (result.activity[0] == null){
+        if (result.activity == ''){
           $scope.resultdatanone1 = "활동 내역이 없습니다.";
           $scope.resultdatanone2 = "'새 활동 만들기' 버튼을 눌러 친구들과 소통해보세요.";
         }

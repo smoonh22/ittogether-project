@@ -2,153 +2,172 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Czompatible" content="IE=edge">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <title>1인가구를 위한 SNS - itTogether</title>
-    <link rel='stylesheet' href="bower_components/bootstrap/dist/css/bootstrap.css" />
-  <link rel='stylesheet' href="bower_components/bootstrap-tour/build/css/bootstrap-tour.css">
-  <link rel='stylesheet' href="bower_components/bootstrap/dist/css/bootstrap-theme.css" />
-  <link rel='stylesheet' href="css/logo-nav.css" />
-  <link rel='stylesheet' href="css/modal.css" />
-  <link rel='stylesheet' href="css/myActivities.css" />
-  <link rel='stylesheet' href="css/main.css" />
-  <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.common.min.css"> 
-  <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.rtl.min.css"> 
-  <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.default.min.css">
-  <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.mobile.all.min.css">
-  <link rel='stylesheet' href="bower_components/font-awesome/css/font-awesome.css" />
-  <link rel='stylesheet' href="bower_components/blueimp-file-upload/css/jquery.fileupload.css" />
-  <link rel='stylesheet' href="bower_components/blueimp-file-upload/css/jquery.fileupload-ui.css" />
-  <link rel='stylesheet' href="css/info-modal.css" />
-  <link rel='stylesheet' href="css/chatting.css" />
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Czompatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>1인가구를 위한 SNS - itTogether</title>
+<link rel='stylesheet'
+	href="bower_components/bootstrap/dist/css/bootstrap.css" />
+<link rel='stylesheet'
+	href="bower_components/bootstrap-tour/build/css/bootstrap-tour.css">
+<link rel='stylesheet'
+	href="bower_components/bootstrap/dist/css/bootstrap-theme.css" />
+<link rel='stylesheet' href="css/logo-nav.css" />
+<link rel='stylesheet' href="css/modal.css" />
+<link rel='stylesheet' href="css/myActivities.css" />
+<link rel='stylesheet' href="css/main.css" />
+<link rel="stylesheet"
+	href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.common.min.css">
+<link rel="stylesheet"
+	href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.rtl.min.css">
+<link rel="stylesheet"
+	href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.default.min.css">
+<link rel="stylesheet"
+	href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.mobile.all.min.css">
+<link rel='stylesheet'
+	href="bower_components/font-awesome/css/font-awesome.css" />
+<link rel='stylesheet'
+	href="bower_components/blueimp-file-upload/css/jquery.fileupload.css" />
+<link rel='stylesheet'
+	href="bower_components/blueimp-file-upload/css/jquery.fileupload-ui.css" />
+<link rel='stylesheet' href="css/info-modal.css" />
+<link rel='stylesheet' href="css/chatting.css" />
 </head>
 
 <body>
-  <!-- 네비게이션 directive-->
-  <show-nav></show-nav>
+	<!-- 네비게이션 directive-->
+	<show-nav></show-nav>
 
-  <div ng-view></div>
-  <!-- 개인정보 모달 창  -->
-  <info-modal></info-modal>
+	<div ng-view></div>
+	<!-- 개인정보 모달 창  -->
+	<info-modal></info-modal>
 
-  <!--  심심해 모달창  -->
-  <bored-modal></bored-modal>
+	<!--  심심해 모달창  -->
+	<bored-modal></bored-modal>
 
-   <div class="chat-panel">
-   <div class="panel panel1">
-   <div class="panel-heading chat-panel-head" role="tab" id="headingOne">
-      <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-        </a>
-           <button type="button" class="close chat-close1" aria-hidden="true">&times;</button> 
-      </h4>
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-      <div class="panel-body chat-body">
-        <div id="messages1"> </div>
-      </div>
-    </div>
-     </div>
-     <div class="panel panel2">
-    <div class="panel-heading chat-panel-head" role="tab" id="headingTwo">
-      <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        </a>
-        <button type="button" class="close chat-close2" aria-hidden="true">&times;</button> 
-      </h4>
-    </div>
-    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-      <div class="panel-body chat-body">
-        <div id="messages2"> </div>
-      </div>
-    </div>
-     </div>
-    <div class="panel panel3">
-    <div class="panel-heading chat-panel-head" role="tab" id="headingThree">
-      <h4 class="panel-title">
-        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-        </a>
-        <button type="button" class="close chat-close3" aria-hidden="true">&times;</button> 
-      </h4>
-    </div>
-    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-      <div class="panel-body chat-body">
-        <div id="messages3"> </div>
-      </div>
-    </div>
-     </div>
-  </div> 
+	<div class="chat-panel">
+		<div class="panel panel1">
+			<div class="panel-heading chat-panel-head" role="tab" id="headingOne">
+				<h4 class="panel-title">
+					<a class="collapsed" role="button" data-toggle="collapse"
+						data-parent="#accordion" href="#collapseOne" aria-expanded="false"
+						aria-controls="collapseOne"> </a>
+					<button type="button" class="close chat-close1" aria-hidden="true">&times;</button>
+				</h4>
+			</div>
+			<div id="collapseOne" class="panel-collapse collapse" role="tabpanel"
+				aria-labelledby="headingOne">
+				<div class="panel-body chat-body">
+					<div id="messages1"></div>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel2">
+			<div class="panel-heading chat-panel-head" role="tab" id="headingTwo">
+				<h4 class="panel-title">
+					<a class="collapsed" role="button" data-toggle="collapse"
+						data-parent="#accordion" href="#collapseTwo" aria-expanded="false"
+						aria-controls="collapseTwo"> </a>
+					<button type="button" class="close chat-close2" aria-hidden="true">&times;</button>
+				</h4>
+			</div>
+			<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
+				aria-labelledby="headingTwo">
+				<div class="panel-body chat-body">
+					<div id="messages2"></div>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel3">
+			<div class="panel-heading chat-panel-head" role="tab"
+				id="headingThree">
+				<h4 class="panel-title">
+					<a class="collapsed" role="button" data-toggle="collapse"
+						data-parent="#accordion" href="#collapseThree"
+						aria-expanded="false" aria-controls="collapseThree"> </a>
+					<button type="button" class="close chat-close3" aria-hidden="true">&times;</button>
+				</h4>
+			</div>
+			<div id="collapseThree" class="panel-collapse collapse"
+				role="tabpanel" aria-labelledby="headingThree">
+				<div class="panel-body chat-body">
+					<div id="messages3"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 
 
 
 
-  <script src="js/lib/socket.io/node_modules/socket.io-client/socket.io.js"></script>
-  <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-  <script>
-  function newMap() {
-    var map = {};
-    map.value = {};
-    map.getKey = function(id) {
-      return "k_"+id;
-    };
-    map.put = function(id, value) {
-      var key = map.getKey(id);
-      map.value[key] = value;
-    };
-    map.contains = function(id) {
-      var key = map.getKey(id);
-      if(map.value[key]) {
-        return true;
-      } else {
-        return false;
-      }
-    };
-    map.get = function(id) {
-      var key = map.getKey(id);
-      if(map.value[key]) {
-        return map.value[key];
-      }
-      return null;
-    };
-    map.remove = function(id) {
-      var key = map.getKey(id);
-      if(map.contains(id)){
-        map.value[key] = undefined;
-      }
-    };
-   
-    return map;
-  }
+	<script
+		src="js/lib/socket.io/node_modules/socket.io-client/socket.io.js"></script>
+	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+	<script>
+    function newMap() {
+      var map = {};
+      map.value = {};
+      map.getKey = function(id) {
+        return "k_" + id;
+      };
+      map.put = function(id, value) {
+        var key = map.getKey(id);
+        map.value[key] = value;
+      };
+      map.contains = function(id) {
+        var key = map.getKey(id);
+        if (map.value[key]) {
+          return true;
+        } else {
+          return false;
+        }
+      };
+      map.get = function(id) {
+        var key = map.getKey(id);
+        if (map.value[key]) {
+          return map.value[key];
+        }
+        return null;
+      };
+      map.remove = function(id) {
+        var key = map.getKey(id);
+        if (map.contains(id)) {
+          map.value[key] = undefined;
+        }
+      };
+
+      return map;
+    }
     //처음 시작할 때 현재 진행중인 채팅이 있는지 확인
     var checkRoomArr = newMap();
     var chatWindowCnt = 1;
- (function() {
-   initChat();
- })();
+    (function() {
+      initChat();
+    })();
 
-      setInterval(function() {
-        $.getJSON('http://192.168.1.48:8889/checkStatus.do', {
-          mno: sessionStorage.getItem('mno')
-        }, function(result) {
-          for (var i in result.frdno) { 
+    setInterval(function() {
+      $.getJSON('http://hoit.kro.kr:8889/checkStatus.do', {
+        mno : sessionStorage.getItem('mno')
+      }, function(result) {
+        for ( var i in result.frdno) {
           if (result.frdno[i].frdno == sessionStorage.getItem('mno')) {
             result.frdno[i].frdno = result.frdno[i].mno;
           }
-          console.log("--dd" + result.frdno[0].frdno + "-- mno: " + result.frdno[0].mno);
+          console.log("--dd" + result.frdno[0].frdno + "-- mno: "
+              + result.frdno[0].mno);
           if (result.data === 'yes') {
-            $.getJSON('http://192.168.1.48:8889/checkRoom.do', {
-              frdno: result.frdno[i].frdno,
-              mno: sessionStorage.getItem('mno')
+            $.getJSON('http://hoit.kro.kr:8889/checkRoom.do', {
+              frdno : result.frdno[i].frdno,
+              mno : sessionStorage.getItem('mno')
             }, function(result) {
               if (checkRoomArr.contains(result.data.chno)) {
-                  result.exist = 'no';
-                  console.log("exist " + result.exist);
-                }
-              
+                result.exist = 'no';
+                console.log("exist " + result.exist);
+              }
+
               if (result.exist === 'yes') {
                 checkRoomArr.put(result.data.chno, result.data.chno);
                 chatStart(result.data);
@@ -159,227 +178,245 @@
           }
         }
       });
-        
-      }, 10000);
-     function initChat() {
-      $.getJSON('http://192.168.1.48:8889/checkStatus.do', {
-        mno: sessionStorage.getItem('mno')
+
+    }, 10000);
+    function initChat() {
+      $.getJSON('http://hoit.kro.kr:8889/checkStatus.do', {
+        mno : sessionStorage.getItem('mno')
       }, function(result) {
-        for (var i in result.frdno) { 
-        if (result.frdno[i].frdno == sessionStorage.getItem('mno')) {
-          result.frdno[i].frdno = result.frdno[i].mno;
-        }
-        console.log("--dd" + result.frdno[0].frdno + "-- mno: " + result.frdno[0].mno);
-        if (result.data === 'yes') {
-          $.getJSON('http://192.168.1.48:8889/checkRoom.do', {
-            frdno: result.frdno[i].frdno,
-            mno: sessionStorage.getItem('mno')
-          }, function(result) {
-            if (checkRoomArr.contains(result.data.chno)) {
+        for ( var i in result.frdno) {
+          if (result.frdno[i].frdno == sessionStorage.getItem('mno')) {
+            result.frdno[i].frdno = result.frdno[i].mno;
+          }
+          console.log("--dd" + result.frdno[0].frdno + "-- mno: "
+              + result.frdno[0].mno);
+          if (result.data === 'yes') {
+            $.getJSON('http://hoit.kro.kr:8889/checkRoom.do', {
+              frdno : result.frdno[i].frdno,
+              mno : sessionStorage.getItem('mno')
+            }, function(result) {
+              if (checkRoomArr.contains(result.data.chno)) {
                 result.exist = 'no';
                 console.log("exist " + result.exist);
               }
-            
-            if (result.exist === 'yes') {
-              checkRoomArr.put(result.data.chno, result.data.chno);
-              chatStart(result.data);
-            }
-          });
-        } else {
-          console.log('활성화된 채팅창 없음');
+
+              if (result.exist === 'yes') {
+                checkRoomArr.put(result.data.chno, result.data.chno);
+                chatStart(result.data);
+              }
+            });
+          } else {
+            console.log('활성화된 채팅창 없음');
+          }
         }
-      }
-    });
-    }; 
+      });
+    };
     function startChatting(frdno, mno) {
-      $.getJSON('http://192.168.1.48:8889/checkRoom.do', {
-        frdno: frdno,
-        mno: mno
+      $.getJSON('http://hoit.kro.kr:8889/checkRoom.do', {
+        frdno : frdno,
+        mno : mno
       }, function(result) {
         if (checkRoomArr.contains(result.data.chno)) {
-            result.exist = 'no';
-            console.log("exist " + result.exist);
-          }
-        
+          result.exist = 'no';
+          console.log("exist " + result.exist);
+        }
+
         if (result.exist === 'yes') {
           checkRoomArr.put(result.data.chno, result.data.chno);
-           if ( result.data.status == 1) {
-             $.getJSON('http://192.168.1.48:8889/updateStatus.do', {
-                roomId: result.data.chno
-             }, function(result){
-                console.log('status -> 2');
-             });
-           }
+          if (result.data.status == 1) {
+            $.getJSON('http://hoit.kro.kr:8889/updateStatus.do', {
+              roomId : result.data.chno
+            }, function(result) {
+              console.log('status -> 2');
+            });
+          }
           chatStart(result.data);
         } else if (result.exist === 'no') {
           chatStart(result.newData[0]);
         }
       });
 
-
     };
-
 
     //사용자가 친구목록에서 채팅하기 눌렀을 때     
     function chatStart(data) {
       console.log('chatStart');
-      var socket = io.connect('http://192.168.1.48:8889',{'multiplex': false});
+      var socket = io.connect('http://hoit.kro.kr:8889', {
+        'multiplex' : false
+      });
       var roomId = data.chno;
       var msg = '';
       socket.emit('join:room', {
-        roomId: roomId
-      });
-      
-      $('.chat-close'+chatWindowCnt).attr('roomno', data.chno);
-      
-      if( chatWindowCnt < 4) {
-  
-      
-      $.getJSON('http://192.168.1.48:8889/selectChatContent.do',{
-        chno: data.chno
-      }, function(result) {
-        $('#messages'+chatWindowCnt).append('<div id="messages'+data.chno+'" style="margin:0;width:98%;height:90%;overflow:auto;"></div>');
-        console.log(result);
-        if(result.result==='yes'){
-        for(var i in result.data) {
-            $('#messages'+data.chno).append(result.data[i].content);
-        }
-        }
-        console.log('chatWindowCnt : ' + chatWindowCnt);
-        var parent = '.panel' + chatWindowCnt + ' a';
-        $(parent).text(data.nicknm);
-        $('#messages'+chatWindowCnt).append('<form class="chat-form' + data.chno + '" style="position:fixed;bottom: 22px;width: 299px;"><input class="send-text' + 
-            data.chno + '" autocomplete="off" /><button class="chat-send' + data.chno + '" style="position:fixed; bottom:24px;">전송</button></form>');        
-      $('.panel' + chatWindowCnt).show();
-      
-      chatWindowCnt++;
-      console.log(chatWindowCnt);
-      
-      $('.chat-send'+data.chno).on('click', function() {
-        socket.emit('send:message', {
-          roomId: roomId,
-          message: sessionStorage.getItem('nickname') +"(&4%2&7@/%" +'<img src="'+ sessionStorage.getItem('profile-pic') + '" style="width:40px;height=40px;" class="img-circle yourImg">  ' +'(&4%2&7@/%'+ $('.send-text'+data.chno).val()
-        });
-        $('.send-text'+data.chno).val('');
+        roomId : roomId
       });
 
-        
+      $('.chat-close' + chatWindowCnt).attr('roomno', data.chno);
 
-      });
+      if (chatWindowCnt < 4) {
+
+        $
+            .getJSON(
+                'http://hoit.kro.kr:8889/selectChatContent.do',
+                {
+                  chno : data.chno
+                },
+                function(result) {
+                  $('#messages' + chatWindowCnt)
+                      .append(
+                          '<div id="new-msgs'
+                              + data.chno
+                              + '" style="margin:0;width:98%;height:90%;overflow:auto;"></div>');
+                  console.log(result);
+                  if (result.result === 'yes') {
+                    for ( var i in result.data) {
+                      $('#new-msgs' + data.chno).append(result.data[i].content);
+                    }
+                  }
+                  console.log('chatWindowCnt : ' + chatWindowCnt);
+                  var parent = '.panel' + chatWindowCnt + ' a';
+                  $(parent).text(data.nicknm);
+                  $('#messages' + chatWindowCnt)
+                      .append(
+                          '<form class="chat-form' + data.chno + '" style="position:fixed;bottom: 22px;width: 299px;"><input class="send-text' + 
+            data.chno + '" autocomplete="off" /><button class="chat-send' + data.chno + '" style="position:fixed; bottom:24px;">전송</button></form>');
+                  $('.panel' + chatWindowCnt).show();
+
+                  chatWindowCnt++;
+                  console.log(chatWindowCnt);
+
+                  $('.chat-send' + data.chno)
+                      .on(
+                          'click',
+                          function() {
+                            socket
+                                .emit(
+                                    'send:message',
+                                    {
+                                      roomId : roomId,
+                                      message : sessionStorage
+                                          .getItem('nickname')
+                                          + "(&4%2&7@/%"
+                                          + '<img src="'
+                                          + sessionStorage
+                                              .getItem('profile-pic')
+                                          + '" style="width:40px;height=40px;" class="img-circle yourImg">  '
+                                          + '(&4%2&7@/%'
+                                          + $('.send-text' + data.chno).val()
+                                    });
+                            $('.send-text' + data.chno).val('');
+                          });
+
+                });
       } else {
-        var originalroom =$('.chat-close3').attr('roomNo');
+        var originalroom = $('.chat-close3').attr('roomNo');
         socket.emit('leave:room', {
-          roomId: $('.chat-close3').attr('roomNo')
+          roomId : $('.chat-close3').attr('roomNo')
         });
         $('.panel3 a').text('');
-        $('#messages'+ originalroom).text('');
-        chatWindowCnt =3;
+        $('#new-msgs' + originalroom).text('');
+        chatWindowCnt = 3;
         console.log(chatWindowCnt + " chat : ");
         chatStart(data);
       }
-      
-      
-
 
       socket.on('send:message' + data.chno, function(msg) {
         var showMsg;
         var splitData = msg.split('(&4%2&7@/%');
         if (splitData[0] === sessionStorage.getItem('nickname')) {
-          showMsg = ' '+ '<div class="myMsg">'+ splitData[2] + "</div><br>";
-        $('#messages' + data.chno).append(showMsg);
-          $.getJSON('http://192.168.1.48:8889/insertChatContent.do', {
-            content: showMsg,
-            chno: data.chno
+          showMsg = ' ' + '<div class="myMsg">' + splitData[2] + "</div><br>";
+          $('#new-msgs' + data.chno).append(showMsg);
+          $.getJSON('http://hoit.kro.kr:8889/insertChatContent.do', {
+            content : showMsg,
+            chno : data.chno
           }, function(result) {
           });
-          
-        }else {
-          showMsg = ' '+'<div class="yourDiv">'+splitData[1]+'<div class="yourMsg">' + splitData[2] + "</div></div><br>";
-        $('#messages' + data.chno).append(showMsg);
-        $.getJSON('http://192.168.1.48:8889/insertChatContent.do', {
-          content: showMsg,
-          chno: data.chno
-        }, function(result) {
-        });
+
+        } else {
+          showMsg = ' ' + '<div class="yourDiv">' + splitData[1]
+              + '<div class="yourMsg">' + splitData[2] + "</div></div><br>";
+          $('#new-msgs' + data.chno).append(showMsg);
+          $.getJSON('http://hoit.kro.kr:8889/insertChatContent.do', {
+            content : showMsg,
+            chno : data.chno
+          }, function(result) {
+          });
         }
-        
-        $('#messages'+data.chno).scrollTop($('#messages'+data.chno)[0].scrollHeight);
-        $('#messages'+data.chno).parents('.collapse').addClass('in');
- 
-         $.getJSON('http://192.168.1.48:8889/updateStatus.do', {
-          roomId: data.chno
+
+        $('#new-msgs' + data.chno).scrollTop(
+            $('#new-msgs' + data.chno)[0].scrollHeight);
+        /* $('#messages'+data.chno).parents('.collapse').addClass('in'); */
+
+        $.getJSON('http://hoit.kro.kr:8889/updateStatus.do', {
+          roomId : data.chno
         }, function(result) {
           console.log('스테이터스 2로 변경');
-        }); 
-
-         
         });
-      
+
+      });
+
       $('.chat-close1').on('click', function() {
         var roomNo = $('.chat-close1').attr('roomno');
-        
-        console.log(checkRoomArr.contains(roomNo));
-        console.log($('.chat-close1').attr('roomno') + "roomNO <-");
-        $.getJSON('http://192.168.1.48:8889/changeStatus.do',{
-          roomId: roomNo
-        }, function(result) {
-          console.log('변경 성공');
-        })
-        socket.emit('leave:room', {
-          roomId: roomNo
-        });
-        checkRoomArr.remove(roomNo);
-        console.log(checkRoomArr.contains(roomNo));
-        $('.panel1').css('display','none');
-        
-      /*   for (var i in checkRoomArr) {
-           if(checkRoomArr[i] ==  roomData) {
-             checkRoomArr.slice(i,1);
-           }
-        } */
-   });
-      $('.chat-close2').on('click', function() {
-     var roomNo = $('.chat-close1').attr('roomno');
-        
-        console.log(checkRoomArr.contains(roomNo));
-        console.log($('.chat-close1').attr('roomno') + "roomNO <-");
-        $.getJSON('http://192.168.1.48:8889/changeStatus.do',{
-          roomId: roomNo
-        }, function(result) {
-          console.log('변경 성공');
-        })
-        socket.emit('leave:room', {
-          roomId: roomNo
-        });
-        checkRoomArr.remove(roomNo);
-        console.log(checkRoomArr.contains(roomNo));
-        $('.panel2').css('display','none');
-    
-   });
-      $('.chat-close3').on('click', function() {
-       var roomNo = $('.chat-close1').attr('roomno');
-        
-        console.log(checkRoomArr.contains(roomNo));
-        console.log($('.chat-close1').attr('roomno') + "roomNO <-");
-        $.getJSON('http://192.168.1.48:8889/changeStatus.do',{
-          roomId: roomNo
-        }, function(result) {
-          console.log('변경 성공');
-        })
-        socket.emit('leave:room', {
-          roomId: roomNo
-        });
-        checkRoomArr.remove(roomNo);
-        console.log(checkRoomArr.contains(roomNo));
-        $('.panel3').css('display','none');
-   });
-    };
 
-      
+        console.log(checkRoomArr.contains(roomNo));
+        console.log($('.chat-close1').attr('roomno') + "roomNO <-");
+        $.getJSON('http://hoit.kro.kr:8889/changeStatus.do', {
+          roomId : roomNo
+        }, function(result) {
+          console.log('변경 성공');
+        })
+        socket.emit('leave:room', {
+          roomId : roomNo
+        });
+        checkRoomArr.remove(roomNo);
+        console.log(checkRoomArr.contains(roomNo));
+        $('.panel1').css('display', 'none');
+
+        /*   for (var i in checkRoomArr) {
+             if(checkRoomArr[i] ==  roomData) {
+               checkRoomArr.slice(i,1);
+             }
+          } */
+      });
+      $('.chat-close2').on('click', function() {
+        var roomNo = $('.chat-close1').attr('roomno');
+
+        console.log(checkRoomArr.contains(roomNo));
+        console.log($('.chat-close1').attr('roomno') + "roomNO <-");
+        $.getJSON('http://hoit.kro.kr:8889/changeStatus.do', {
+          roomId : roomNo
+        }, function(result) {
+          console.log('변경 성공');
+        })
+        socket.emit('leave:room', {
+          roomId : roomNo
+        });
+        checkRoomArr.remove(roomNo);
+        console.log(checkRoomArr.contains(roomNo));
+        $('.panel2').css('display', 'none');
+
+      });
+      $('.chat-close3').on('click', function() {
+        var roomNo = $('.chat-close1').attr('roomno');
+
+        console.log(checkRoomArr.contains(roomNo));
+        console.log($('.chat-close1').attr('roomno') + "roomNO <-");
+        $.getJSON('http://hoit.kro.kr:8889/changeStatus.do', {
+          roomId : roomNo
+        }, function(result) {
+          console.log('변경 성공');
+        })
+        socket.emit('leave:room', {
+          roomId : roomNo
+        });
+        checkRoomArr.remove(roomNo);
+        console.log(checkRoomArr.contains(roomNo));
+        $('.panel3').css('display', 'none');
+      });
+    };
   </script>
 
 
-  <script data-main='app.js' src='bower_components/requirejs/require.js'></script>
+	<script data-main='app.js' src='bower_components/requirejs/require.js'></script>
 
 </body>
 

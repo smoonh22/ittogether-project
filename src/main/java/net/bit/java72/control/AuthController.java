@@ -32,6 +32,7 @@ public class AuthController {
       result.put("data", "yes");
       result.put("nickname", member.getNickname());
       result.put("mno", member.getMno());
+      result.put("tour",member.getTour());
       result.put("profilePic", member.getProfilePicture());
     }
     return result;

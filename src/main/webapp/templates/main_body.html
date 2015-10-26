@@ -5,7 +5,7 @@
     </div>
   </div>
   <div class="main-background-div">
-  <div ng-controller="friendFeedCtrl as ffCtrl" >
+  <div ng-controller="friendFeedCtrl as ffCtrl" on-tour-start>
   <div class="leftside-div">
   <div id='left-section'>
     <div id="left-feed-title"><div>친구들의 활동</div><hr class="left-hr"/></div>
@@ -65,7 +65,7 @@
 
       </div>
         <div class="empty-nonefriend-feed"></div>
-      <div id='right-feed' ng-repeat="nfeed in ffCtrl.nfeeds">
+      <div id='right-feed' ng-repeat="nfeed in ffCtrl.nfeeds" on-tour-start>
         <div class='feed-row'>
               <div class="nonefriend-panel">
                 <div class="panel-heading category-panel" id='category-color-{{nfeed.category}}'></div>

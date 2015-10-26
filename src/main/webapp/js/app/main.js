@@ -127,6 +127,7 @@ define(function () {
       var parent_scope = $scope;
       $scope.subview = 'before_html';
       $scope.toggleMap = function() {
+          tour.end();
           parent_scope.subview= 'map_html';
           
       }
