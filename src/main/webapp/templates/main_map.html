@@ -120,7 +120,6 @@
 }; // 데이터 로딩 함수 끝
 
   function getMyInfo() {
-  console.log('11e233123');
     $.getJSON(contextRoot + '/member/getMyLoc.do', {
       mno: sessionStorage.getItem('mno')
     }, function(results) {
@@ -134,7 +133,7 @@
       myAge = Number(results.data[0].age);
       myHobby = results.data[0].hobby;
       myHometown = results.data[0].hometown;
-      console.log('initMap() 실행');  
+      /* console.log('initMap() 실행'); */  
       initMap();
     });
   }
@@ -165,7 +164,6 @@
       }
       }
       if (mySwitchForModal == 1) {
-        console.log('append();');
         
         $('.modal-title').text(nameVal+'님과 친구가 되었습니다.');
         $('.addfriend-modal-body2').remove();
@@ -197,14 +195,13 @@
           results.data[i].name
         ];
         notFriendLocArr.push(tempArr);
-        console.log("주변회원" + i + ": " + notFriendLocArr[i][0]+"/"+
-                    notFriendLocArr[i][5]+"/"+notFriendLocArr[i][6]);        
+        /* console.log("주변회원" + i + ": " + notFriendLocArr[i][0]+"/"+
+                    notFriendLocArr[i][5]+"/"+notFriendLocArr[i][6]);    */     
       }
         for (var i = 0; i < notFriendLocArr.length; i++){
           checkRelationMembers(i, mySwitch); 
       }
       } else {
-        console.log('getete');
         getMyInfo();
       }
     })
@@ -227,7 +224,6 @@
         checkStateMB[i] = 0;
         console.log("checkStateM" + notFriendLocArr[i][6] + "(" + sessionStorage.getItem("mno") + "-" + notFriendLocArr[i][0] +"["+ notFriendLocArr[i][6]+ "]): " + checkStateM[i]);
       }
-//          console.log(checkStateM[i]);
       assignButton(i, frdmno);
       assignButtonBlock(i, frdmno);
       friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC);
@@ -774,7 +770,6 @@ function friendList(i) {
     
     
     if (friendLocArr.length == 0 && notFriendLocArr.length == 0) {
-/*        alert('hfh'); */
       queryString5 = '<div class="myPanel-none"><div>회원님의 친구 또는 주변 회원이 없습니다.</div>'
       console.log(queryString5);
       $('.myPanel-none').remove();

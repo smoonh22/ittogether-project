@@ -1,4 +1,4 @@
 define(function() {
-  window.contextRoot = '/ittogether';
-//  window.contextRoot = 'http://hoit.kro.kr';
+//  window.contextRoot = '/ittogether';
+  window.contextRoot = 'http://hoit.kro.kr';
 });

@@ -184,7 +184,6 @@
             
             
             parent_scope.uploadFiles2 = function(file,no) {
-               console.log("하하하");
               Upload.upload({
                 url: contextRoot + '/file/upload.do',
                 data: {file: file[0]}

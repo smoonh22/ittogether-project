@@ -76,7 +76,6 @@ public class MemberController {
       Member myInfo = memberService.getOne(mno);
       double lat = Double.parseDouble(myInfo.getLatitude());
       double lon = Double.parseDouble(myInfo.getLongitude());
-      System.out.println("\n[[[[ 나의 위치: " + lat + ", " + lon + " ]]]]");
       
       List<Member> distanceList = memberService.getFriends(frdno);
       List<Member> friendMarks = new ArrayList<>();
@@ -89,8 +88,6 @@ public class MemberController {
         double distanceDouble = CalculateDistance.getDistance(lat,lon,lat2,lon2);
         int distance = (int)Math.floor(distanceDouble);
         
-        System.out.println
-        ("#친구"+member.getMno()+"("+member.getNickname()+")의 거리: "+distance+"m");
         
         if(distance <= 2000){
           distances.add(distance);
@@ -105,7 +102,6 @@ public class MemberController {
             }          }
          }
       }
-      System.out.println("나와 친구와의 거리: " + distances.toString());
       
       result.put("distance", distances);
       result.put("data", friendMarks);

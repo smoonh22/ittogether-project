@@ -1,5 +1,5 @@
-//window.contextRoot = 'http://hoit.kro.kr';
-  window.contextRoot = '/ittogether';
+window.contextRoot = 'http://hoit.kro.kr';
+//  window.contextRoot = '/ittogether';
 
 function login() {
   event.preventDefault();
@@ -24,11 +24,6 @@ function login() {
 $('#signup-button').click(function (event) {
 
   if ($('#email').val() == '' || $('#name').val() == '' || $('#password').val() == '' || $('#pac-input').val() == '' || $('.signup-lat')=='') {
-    console.log('email : ' + $('#email').val());
-    console.log('name : ' + $('#name').val());
-    console.log('password : ' + $('#password').val());
-    console.log('pac-input : ' + $('#pac-input').val());
-    console.log('signup-lat : ' + $('.signup-lat').val());
     alert('값을 모두 입력해 주세요');
   } else {
     $.ajax(contextRoot + '/auth/signup.do', {
@@ -47,7 +42,6 @@ $('#signup-button').click(function (event) {
       },
       success: function (result) {
         if (result.result === 'success') {
-          alert('가입 축하드립니다.');
           $('#signupModal').modal('toggle');
           window.location.reload(true);
         } else {
@@ -109,7 +103,6 @@ $('#nickname').on('keyup', function (event) {
 
 // 지도 관련 시작 
 function initAutocomplete() { /* 초기화 함수*/
-  console.log('initAutocomplete();');
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {
       lat: 37.497943,

@@ -33,7 +33,6 @@ public class FeedController {
 
   @RequestMapping("/friendFeed")
   public Object list(int mno) {
-    
   Map<String,Object> result = new HashMap<String,Object>();
   try {
     List<FriendFeed> test = feedService.list(mno);
