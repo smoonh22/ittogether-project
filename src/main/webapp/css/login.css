@@ -189,18 +189,18 @@ article {
 background-color: rgba(20, 21, 30, 0.20);
 }
 .login-title {
-  margin-top:4%;
+  margin-top:8%;
   font-family: LotteMartHappy;
   font-size: 11rem;
 }
 .login-comment {
   font-family: Daum;
   font-size: 4rem;
-  margin-top: -2%;
+  margin-top: -4%;
 }
 
 .login {
-margin: 12% auto;
+margin: 24% auto;
 width: 400px;
 height: auto;
 }
@@ -404,3 +404,6 @@ html, body {
   margin-top: 10px;
   margin-left: 20px;
 }
+.mainImageHoit{
+  width: 220px;
+	}

@@ -108,11 +108,16 @@
   var queryString1 = [];  var queryString2 = [];  var queryString3 = [];  var queryString4 = []; var queryString5;
   
   var picSrc;  var nameVal;
-(function() {
+
+  (function() {
+    startSearchingMap();
+  })();
+  
+  function startSearchingMap() {
     getMyFriendsInfo();
     getMyMembers(1);
   
-})(); // 데이터 로딩 함수 끝
+}; // 데이터 로딩 함수 끝
 
   function getMyInfo() {
   console.log('11e233123');
@@ -547,7 +552,7 @@ function friendList(i) {
       }
       
   }
-    queryString5 = '<div class="myPanel-none"><div>조건에 일치하는 회원이 없습니다.</div><div>조건을 바꿔서 검색해보세요</div></div>';
+    queryString5 = '<div class="myPanel-none"><div>일치하는 회원이 없습니다.</div><div>조건을 바꿔서 검색해보세요</div></div>';
 }
   
   function friendListCreater(distant, sex, age, ageMin, ageMax, myHobbyC, myHometownC) {
@@ -891,7 +896,7 @@ function friendList(i) {
             "</tr>" +
           "</table>" +
           "<div class='iw-subTitle'>" +
-          "<input type='txt' class='form-control input-xs' value=" + friendLocArr[i][3] + ">" +
+          "<div class='iw-myIntro'>" + friendLocArr[i][3] + "</div>" +
           "</div>" +
           "</div>" +
           "</div>" +
@@ -909,7 +914,7 @@ function friendList(i) {
 //          "<div class='iw-notfriend-desc'><img src='images/icons/hobby.png'>&nbsp;취미: "+friendLocArr[i][9]+"</div>" +
 //          "<div class='iw-notfriend-desc'><img src='images/icons/hometown.png'>&nbsp;고향: "+friendLocArr[i][10]+"</div></div>" +
 //          "<div class='iw-subTitle'>" +
-//          "<input type='txt' class='form-control input-xs' value=" + friendLocArr[i][3] + ">" +
+//          "<input type='text' class='form-control input-xs' value=" + friendLocArr[i][3] + ">" +
 //          "</div>" +
 //          "</div>" +
 //          "</div>" +
@@ -972,7 +977,7 @@ function friendList(i) {
             "</tr>" +
           "</table>" +
           "<div class='iw-subTitle'>" +
-          "<input type='txt' class='form-control input-xs' value=" + notFriendLocArr[i][3] + ">" +
+          "<input type='text' class='form-control input-xs' value=" + notFriendLocArr[i][3] + ">" +
           buttonTypesB[i] + 
           "</div>" +
           "</div>" +

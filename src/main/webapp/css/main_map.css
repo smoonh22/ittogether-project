@@ -257,3 +257,10 @@
   font-weight: 400;
   border-radius: 0.3em 0.3em 0em 0em;
 }
+.iw-myIntro{
+	border: 1px solid lightgrey;
+	font-size: 1rem;
+	border-radius: 2px;
+	min-height: 80px;
+	padding:5px 2px 5px 2px
+}

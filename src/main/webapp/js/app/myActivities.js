@@ -7,10 +7,8 @@
         var w = angular.element($window);
         
         
-//        화면 resize --> 화면크기 바꿀시 refresh 하는 기능  html 에서 resize 써진  영역 감시
-//        w.bind('resize', function(){
-//          window.location.reload();
-//        })
+       
+    
        
       $scope.mainAct = function() {$http.get('feed/myActivity.do',{params : {mno: sessionStorage.getItem('mno') }}).success(function (result) {
         $scope.activities = result.activity;
