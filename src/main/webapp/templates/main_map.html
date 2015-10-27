@@ -1690,7 +1690,8 @@ function friendList(i) {
     
   
   // popup창에서  '친구추가' 버튼
-  $(document).on('click', '.btn-addfriend-popup', function() {
+  $(document).on('click', '.btn-addfriend-popup', function(event) {
+    event.preventDefault();
       var parent = this;
     $.ajax(contextRoot + '/frd/insert.do', {
         method: 'post',

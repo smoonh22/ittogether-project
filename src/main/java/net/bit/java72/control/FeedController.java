@@ -62,7 +62,7 @@ public class FeedController {
     for(FriendFeed feed : test){
       String meetdate = format.format(feed.getMeetTime());
       feed.setMeetDday(meetdate);
-      if(!CalcTime(feed.getMeetTime()).equals("yoyo")){
+      if(!CalcTime(feed.getMeetTime()).equals("expired")){
         feed.setOpacity("act-opacity");
       }
       feed.setDday(CalcTime(feed.getCreateDate()));
@@ -266,7 +266,6 @@ public class FeedController {
      calendar.setTime(meetTime);
      long orderTime = calendar.getTimeInMillis();
      long currentTime = System.currentTimeMillis();
-     System.out.println(currentTime);
      
      long calcTime = (currentTime - orderTime)/1000;
     if (calcTime > 0){ 
@@ -280,7 +279,7 @@ public class FeedController {
           return "1분 전";
         }
       } else if (calcTime < 0){
-        return "방금 전";
+        return "expired";
       }
     return "기한초과지롱(나올일없지롱)";
      }

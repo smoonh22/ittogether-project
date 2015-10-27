@@ -34,7 +34,6 @@
               <td class="boredTable"><a href=""><img src="images/icons/random.png" class="boredIcon" id="bored9"></a><div class="boredDesc">아무거나</div></td>
             </tr>
           </table>
-          
         </div>
         <!-- /.modal-content -->
       </div>
@@ -73,32 +72,7 @@
     }
   }
   
-//    var now = new Date();
-//  
-//  var boredRightNow = new Date(now);                                         
-//  boredRightNow.setMinutes(boredRightNow.getMinutes() + 10);
-//  
-//  var boredAfter30m = new Date(boredRightNow);
-//  boredAfter30m.setMinutes(boredRightNow.getMinutes() + 30);
-//  
-//  var boredAfter60m = new Date(boredRightNow);
-//  boredAfter60m.setHours(boredRightNow.getHours() + 1);
-//  
-//  function radioValueCheck(radioValue) {
-//    if (radioValue == 0) {
-//      boredMeetTimeAppointment = boredRightNow; 
-//      console.log('boredRightNow');
-//    } else if (radioValue == 30) {
-//      boredMeetTimeAppointment = boredAfter30m; 
-//      console.log('boredAfter30m');
-//    } else if (radioValue == 60) {
-//      boredMeetTimeAppointment = boredAfter60m; 
-//      console.log('boredAfter60m');
-//    }
-//  }
-  
     $(document).on('click', '#bored1', function() {
-      var myHiddenImage = $('.myHiddenImg').attr('src');
       radioValueCheck($('.active').find('.boredTimeButton').val());
       $.ajax('feed/insertUser.do',
         {
@@ -109,11 +83,11 @@
             category : '4',
             title: '[심심해]축구해요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
-            maxHeadCount: '00',
+            maxHeadCount: 10,
             meetTime: boredMeetTimeAppointment,
-            attachFile1 : myHiddenImage,
-            attachFile2 : myHiddenImage,
-            attachFile3 : myHiddenImage
+            attachFile1 : "images/empty.png",
+            attachFile2 : "images/empty.png",
+            attachFile3 : "images/empty.png"
          },
         success: function(result){
            if (result.data == 'success') {
@@ -125,7 +99,6 @@
     });
   
     $(document).on('click', '#bored2', function() {
-      var myHiddenImage = $('.myHiddenImg').attr('src');
       radioValueCheck($('.active').find('.boredTimeButton').val());
       $.ajax('feed/insertUser.do',
         {
@@ -136,11 +109,11 @@
             category : '4',
             title: '[심심해]농구해요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
-            maxHeadCount: '00',
+            maxHeadCount: 10,
             meetTime: boredMeetTimeAppointment,
-            attachFile1 : myHiddenImage,
-            attachFile2 : myHiddenImage,
-            attachFile3 : myHiddenImage
+            attachFile1 : "images/empty.png",
+            attachFile2 : "images/empty.png",
+            attachFile3 : "images/empty.png"
          },
         success: function(result){
            if (result.data == 'success') {
@@ -152,7 +125,6 @@
     });
   
     $(document).on('click', '#bored3', function() {
-      var myHiddenImage = $('.myHiddenImg').attr('src');
       radioValueCheck($('.active').find('.boredTimeButton').val());
       $.ajax('feed/insertUser.do',
         {
@@ -163,11 +135,11 @@
             category : '4',
             title: '[심심해]배드민턴 쳐요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
-            maxHeadCount: '00',
+            maxHeadCount: 10,
             meetTime: boredMeetTimeAppointment,
-            attachFile1 : myHiddenImage,
-            attachFile2 : myHiddenImage,
-            attachFile3 : myHiddenImage
+            attachFile1 : "images/empty.png",
+            attachFile2 : "images/empty.png",
+            attachFile3 : "images/empty.png"
          },
         success: function(result){
            if (result.data == 'success') {
@@ -179,7 +151,6 @@
     });
   
     $(document).on('click', '#bored4', function() {
-      var myHiddenImage = $('.myHiddenImg').attr('src');
       radioValueCheck($('.active').find('.boredTimeButton').val());
       $.ajax('feed/insertUser.do',
         {
@@ -190,11 +161,11 @@
             category : '4',
             title: '[심심해]커피 한잔 해요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
-            maxHeadCount: '00',
+            maxHeadCount: 10,
             meetTime: boredMeetTimeAppointment,
-            attachFile1 : myHiddenImage,
-            attachFile2 : myHiddenImage,
-            attachFile3 : myHiddenImage
+            attachFile1 : "images/empty.png",
+            attachFile2 : "images/empty.png",
+            attachFile3 : "images/empty.png"
          },
         success: function(result){
            if (result.data == 'success') {
@@ -206,7 +177,6 @@
     });
   
     $(document).on('click', '#bored5', function() {
-      var myHiddenImage = $('.myHiddenImg').attr('src');
       radioValueCheck($('.active').find('.boredTimeButton').val());
       $.ajax('feed/insertUser.do',
         {
@@ -217,11 +187,11 @@
             category : '4',
             title: '[심심해]같이 맥주 한잔 해요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
-            maxHeadCount: '00',
+            maxHeadCount: 10,
             meetTime: boredMeetTimeAppointment,
-            attachFile1 : myHiddenImage,
-            attachFile2 : myHiddenImage,
-            attachFile3 : myHiddenImage
+            attachFile1 : "images/empty.png",
+            attachFile2 : "images/empty.png",
+            attachFile3 : "images/empty.png"
          },
         success: function(result){
            if (result.data == 'success') {
@@ -233,7 +203,6 @@
     });
   
     $(document).on('click', '#bored6', function() {
-      var myHiddenImage = $('.myHiddenImg').attr('src');
       radioValueCheck($('.active').find('.boredTimeButton').val());
       $.ajax('feed/insertUser.do',
         {
@@ -244,11 +213,11 @@
             category : '4',
             title: '[심심해]같이 밥 한끼 해요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
-            maxHeadCount: '00',
+            maxHeadCount: 10,
             meetTime: boredMeetTimeAppointment,
-            attachFile1 : myHiddenImage,
-            attachFile2 : myHiddenImage,
-            attachFile3 : myHiddenImage
+            attachFile1 : "images/empty.png",
+            attachFile2 : "images/empty.png",
+            attachFile3 : "images/empty.png"
          },
         success: function(result){
            if (result.data == 'success') {
@@ -260,7 +229,6 @@
     });
   
     $(document).on('click', '#bored7', function() {
-      var myHiddenImage = $('.myHiddenImg').attr('src');
       radioValueCheck($('.active').find('.boredTimeButton').val());
       $.ajax('feed/insertUser.do',
         {
@@ -271,11 +239,11 @@
             category : '4',
             title: '[심심해]같이 요리 해먹어요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
-            maxHeadCount: '00',
+            maxHeadCount: 10,
             meetTime: boredMeetTimeAppointment,
-            attachFile1 : myHiddenImage,
-            attachFile2 : myHiddenImage,
-            attachFile3 : myHiddenImage
+            attachFile1 : "images/empty.png",
+            attachFile2 : "images/empty.png",
+            attachFile3 : "images/empty.png"
          },
         success: function(result){
            if (result.data == 'success') {
@@ -287,7 +255,6 @@
     });
 
     $(document).on('click', '#bored8', function() {
-      var myHiddenImage = $('.myHiddenImg').attr('src');
       radioValueCheck($('.active').find('.boredTimeButton').val());
       $.ajax('feed/insertUser.do',
         {
@@ -298,11 +265,11 @@
             category : '4',
             title: '[심심해]같이 쇼핑 해요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
-            maxHeadCount: '00',
+            maxHeadCount: 10,
             meetTime: boredMeetTimeAppointment,
-            attachFile1 : myHiddenImage,
-            attachFile2 : myHiddenImage,
-            attachFile3 : myHiddenImage
+            attachFile1 : "images/empty.png",
+            attachFile2 : "images/empty.png",
+            attachFile3 : "images/empty.png"
          },
         success: function(result){
            if (result.data == 'success') {
@@ -313,7 +280,6 @@
      });
     });
     $(document).on('click', '#bored9', function() {
-      var myHiddenImage = $('.myHiddenImg').attr('src');
       radioValueCheck($('.active').find('.boredTimeButton').val());
       $.ajax('feed/insertUser.do',
         {
@@ -324,11 +290,11 @@
             category : '4',
             title: '[심심해]같이 암거나 해요',
             content: '심심해 버튼을 통해 생성된 글입니다.',
-            maxHeadCount: '00',
+            maxHeadCount: 10,
             meetTime: boredMeetTimeAppointment,
-            attachFile1 : myHiddenImage,
-            attachFile2 : myHiddenImage,
-            attachFile3 : myHiddenImage
+            attachFile1 : "images/empty.png",
+            attachFile2 : "images/empty.png",
+            attachFile3 : "images/empty.png"
          },
         success: function(result){
            if (result.data == 'success') {

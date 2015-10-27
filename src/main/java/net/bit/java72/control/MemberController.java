@@ -98,6 +98,9 @@ public class MemberController {
           List<Member> members = memberService.getFriendMarks(member.getMno());
           for(Member temp : members){
             if( temp != null){
+                if (temp.getAge() == null) {
+                  
+                }
               friendMarks.add(temp);
             }          }
          }
