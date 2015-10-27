@@ -259,8 +259,9 @@
 }
 .iw-myIntro{
 	border: 1px solid lightgrey;
-	font-size: 1rem;
-	border-radius: 2px;
-	min-height: 80px;
-	padding:5px 2px 5px 2px
+	font-size: 0.8em;
+	border-radius: 4px;
+	min-height: 60px;
+	padding:5px 2px 5px 2px;
+	text-align: left;
 }
