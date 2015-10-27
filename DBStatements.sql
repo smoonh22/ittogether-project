@@ -45,7 +45,6 @@ values('한영주', '녕주님', 'HangYJ@hoit.com', '1234', '서울시 강남구
 
 
 
-
 CREATE TABLE `COMMENT_T` (
    `CNO`    INTEGER    NOT NULL COMMENT 'CNO', -- CNO
    `FNO`    INTEGER    NOT NULL COMMENT 'FNO', -- FNO
@@ -216,14 +215,14 @@ CREATE TABLE MEMB_T (
   ADDR    VARCHAR(255) NOT NULL COMMENT '주소', -- 주소
   LAT     varchar(100) NOT NULL COMMENT '위도', -- 위도
   LON     varchar(100) NOT NULL COMMENT '경도', -- 경도
-  HOMETWN varchar(100) NULL     COMMENT '출신지', -- 출신지
+  HOMETWN varchar(100) NULL default ''    COMMENT '출신지', -- 출신지
   SEX     INTEGER      NULL     COMMENT '성별', -- 성별
   MPHOTO  VARCHAR(255) NULL     COMMENT '사진경로', -- 사진경로
   CRE_DT  DATETIME     NULL     COMMENT '가입일',
-  AGE VARCHAR(10) NULL DEFAULT ' ',
-  HOBBY VARCHAR(200),
-  INTRO VARCHAR(200),
-  SHOWINFO INTEGER NULL
+  AGE VARCHAR(10) NULL DEFAULT '',
+  HOBBY VARCHAR(200) default '',
+  INTRO VARCHAR(200) default '',
+  tour INTEGER NULL
   -- 가입일
 )
 COMMENT 'MEMB_T';
@@ -286,86 +285,5 @@ ALTER TABLE FEED_T
     
     
 
---
---* 친구&멤버 인서트문 
---insert into MEMB_T(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
---values('test01nickname', 'test01@test.com', '1234', 'test01name', '서울시 강남구 test1구', '37.497129', '127.027612', '1', '축구', '서울', '안녕하세요1');
---insert into MEMB_T(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
---values('test02nickname', 'test02@test.com', '1234', 'test02name', '서울시 강남구 test2구', '37.496708', '127.026865', '1', '축구', '서울', '안녕하세요2');
---insert into MEMB_T(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
---values('test03nickname', 'test03@test.com', '1234', 'test03name', '서울시 강남구 test3구', '37.498308', '127.026312', '1', '축구', '서울', '안녕하세요3');
---insert into MEMB_T(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
---values('test04nickname', 'test04@test.com', '1234', 'test04name', '서울시 강남구 test4구', '37.497380', '127.027294', '1', '야구', '부산', '안녕하세요4');
---insert into MEMB_T(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
---values('test05nickname', 'test05@test.com', '1234', 'test05name', '서울시 강남구 test5구', '37.501042348146726', '127.01761722564697', '2', '야구', '부산', '안녕하세요5');
---insert into MEMB_T(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
---values('test06nickname', 'test06@test.com', '1234', 'test06name', '서울시 강남구 test6구', '37.49908570947168', '127.02193021774292', '2', '축구', '서울', '안녕하세요6');
---insert into MEMB_T(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
---values('test07nickname', 'test07@test.com', '1234', 'test07name', '서울시 강남구 test7구', '37.49837070962823', '127.0185399055481', '2', '축구', '서울', '안녕하세요7');
---insert into MEMB_T(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
---values('test08nickname', 'test08@test.com', '1234', 'test08name', '서울시 강남구 test8구', '37.487917311280015', '127.02768087387085', '2', '축구', '부산', '안녕하세요8');
---insert into MEMB_T(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
---values('test09nickname', 'test09@test.com', '1234', 'test09name', '서울시 강남구 test9구', '37.50472141350399', '127.1066665649414', '2', '농구', '부산', '안녕하세요9');
---insert into MEMB_T(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
---values('test10nickname', 'test10@test.com', '1234', 'test10name', '서울시 강남구 test10구', '37.499528324991495', '127.03165054321289', '1', '농구', '광주', '안녕하세요10');
---insert into MEMB_T(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
---values('test11nickname', 'test11@test.com', '1234', 'test11name', '서울시 강남구 test11구', '37.49986879668296', '127.01948404312134', '1', '농구', '광주', '안녕하세요11');
---insert into MEMB_T(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
---values('test12nickname', 'test12@test.com', '1234', 'test12name', '서울시 강남구 test12구', '37.50062687260705', '127.01413035392761', '2', '축구', '광주', '안녕하세요12');
---insert into MEMB_T(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
---values('test13nickname', 'test13@test.com', '1234', 'test13name', '서울시 강남구 test13구', '37.497781920204915', '127.02861696481705', '2', '축구', '서울', '안녕하세요13');
---insert into MEMB_T(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
---values('test14nickname', 'test14@test.com', '1234', 'test14name', '서울시 강남구 test14구', '37.43828735129878', '127.01654434204102', '1', '야구', '서울', '안녕하세요14');
---insert into MEMB_T(nicknm, email, pwd, name, addr, lat, lon, sex, hobby, hometwn, intro)
---values('test15nickname', 'test15@test.com', '1234', 'test15name', '서울시 강남구 test15구', '37.49764074039292', '127.02837288379669', '1', '야구', '부산', '안녕하세요15');
---
---
---
---insert into MARKER_T(MNO, MLAT, MLON, MTITLE, MCONTNT, MPHOTO)
---values('1', '37.496708', '127.026865', '카페베네', '여기 프라푸치노 개맛남','/images/markers/cafebene.png');
---insert into MARKER_T(MNO, MLAT, MLON, MTITLE, MCONTNT, MPHOTO)
---values('1', '37.498308', '127.026312', '세탁소', '여기 와이샤스 잘 펴요', '/images/markers/laundary.png');
---insert into MARKER_T(MNO, MLAT, MLON, MTITLE, MCONTNT, MPHOTO)
---values('1', '37.497380', '127.027294', '씨유 편의점', '여기 알바 예쁨', '/images/markers/cu.png');
---insert into MARKER_T(MNO, MLAT, MLON, MTITLE, MCONTNT, MPHOTO)
---values('1', '37.498674', '127.028249', '온누리 약국', '약은 약사에게..', '/images/markers/pharm.png');
---
---
---
---insert into MEMB_T(nicknm, email, pwd, name, addr, lat, lon)
---values('test01nickname', 'test01@test.com', '1234', 'test01name', '서울시 강남구 test1구', '37.497129', '127.027612');
---insert into MEMB_T(nicknm, email, pwd, name, addr, lat, lon)
---values('test02nickname', 'test02@test.com', '1234', 'test02name', '서울시 강남구 test2구', '37.496708', '127.026865');
---insert into MEMB_T(nicknm, email, pwd, name, addr, lat, lon)
---values('test03nickname', 'test03@test.com', '1234', 'test03name', '서울시 강남구 test3구', '37.498308', '127.026312');
---insert into MEMB_T(nicknm, email, pwd, name, addr, lat, lon)
---values('test04nickname', 'test04@test.com', '1234', 'test04name', '서울시 강남구 test4구', '37.497380', '127.027294');
---insert into MEMB_T(nicknm, email, pwd, name, addr, lat, lon)
---values('test05nickname', 'test05@test.com', '1234', 'test05name', '서울시 강남구 test5구', '37.498674', '127.028249');
---
---
---insert into feed_t (mno, categry, contnt, cre_dt, title)
---values ('1', '1', 'this is a content test1', '2000/1/1', 'this is a title test1');
---insert into feed_t (mno, categry, contnt, cre_dt, title)
---values ('1', '1', 'this is a content test2', '2000/1/2', 'this is a title test2');
---insert into feed_t (mno, categry, contnt, cre_dt, title)
---values ('2', '1', 'this is a content test3', '2000/1/3', 'this is a title test3');
---insert into feed_t (mno, categry, contnt, cre_dt, title)
---values ('2', '2', 'this is a content test4', '2000/1/4', 'this is a title test4');
---insert into feed_t (mno, categry, contnt, cre_dt, title)
---values ('3', '2', 'this is a content test5', '2000/1/5', 'this is a title test5');
---insert into feed_t (mno, categry, contnt, cre_dt, title)
---values ('3', '2', 'this is a content test6', '2000/1/6', 'this is a title test6');
---insert into feed_t (mno, categry, contnt, cre_dt, title)
---values ('3', '3', 'this is a content test7', '2000/1/7', 'this is a title test7');
---insert into feed_t (mno, categry, contnt, cre_dt, title)
---values ('4', '3', 'this is a content test8', '2000/1/8', 'this is a title test8');
 
-    --
---insert into frd_t (frdno, mno, state, frd_dt) values(1,2,1,now());
---insert into frd_t (frdno, mno, state, frd_dt) values(2,1,1,now());
---insert into frd_t (frdno, mno, state, frd_dt) values(2,3,2,now());
---insert into frd_t (frdno, mno, state, frd_dt) values(2,4,2,now());
---insert into frd_t (frdno, mno, state, frd_dt) values(3,2,2,now());
---insert into frd_t (frdno, mno, state, frd_dt) values(4,2,2,now());
 
