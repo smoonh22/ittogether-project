@@ -19,11 +19,12 @@
     <result column="intro"    property="introduction"/>
     <result column="age"      property="age"/>
     <result column="hobby"    property="hobby"/>
+    <result column="tour"    property="tour"/>
   </resultMap>
   
   <select id="exist" 
           parameterType="map" resultMap="MemberMap">
-    SELECT mno, nicknm, mphoto
+    SELECT mno, nicknm, mphoto, tour
     FROM MEMB_T
     WHERE email=#{email} and pwd=#{password}
   </select>
@@ -126,6 +127,9 @@
 	  WHERE mno = #{value}
   </select>
   
+  <update id="updateTour" parameterType="int">
+   UPDATE MEMB_T SET tour = 1 WHERE mno = #{value}
+  </update>
 </mapper>
 
 

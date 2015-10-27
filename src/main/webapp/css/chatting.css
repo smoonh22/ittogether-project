@@ -88,6 +88,8 @@
 }
 .yourImg {
 	float:left;
+	width:40px;
+	height: 40px;
 }
 
 .yourMsg {

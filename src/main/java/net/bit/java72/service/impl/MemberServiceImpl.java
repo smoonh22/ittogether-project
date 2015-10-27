@@ -83,6 +83,11 @@ public class MemberServiceImpl implements MemberService {
     // TODO Auto-generated method stub
     return memberDao.getFriendMarks(mno);
   }
+  @Override
+  public int updateTour(int mno) {
+    // TODO Auto-generated method stub
+    return memberDao.updateTour(mno);
+  }
  
 
 }

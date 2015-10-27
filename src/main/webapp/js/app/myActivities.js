@@ -24,7 +24,7 @@
          $scope.$on('onRepeatLast', function(scope, element, attrs) {
            $("#activity-container").gridalicious({
                selector: ".item",
-               animate: true,
+               animate: true, 
                width: 330,
                animationOptions: {
                    queue: true,

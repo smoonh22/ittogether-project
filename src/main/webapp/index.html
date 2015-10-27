@@ -82,11 +82,11 @@
             </div>
             <!--            끝 -->
             <div class="basic-info-div">
-              <label>이름 (최대 12자)</label>
-              <input class="form-control signup-input" id="name" maxlength="12">
+              <label>이름 (최대 18자)</label>
+              <input class="form-control signup-input" id="name" maxlength="18">
               <br>
-              <label>닉네임 (최대 12자)</label><span id="check-nickname"></span>
-              <input class="form-control signup-input" id="nickname" maxlength="12">
+              <label>닉네임 (최대 18자)</label><span id="check-nickname"></span>
+              <input class="form-control signup-input" id="nickname" maxlength="18">
               <br>
               <label>이메일</label><span id="check-email"></span>
               <input class="form-control signup-input" id="email">
@@ -119,13 +119,16 @@
  
   <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&libraries=places&callback=initAutocomplete" async defer></script>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&libraries=places&callback=initAutocomplete" async defer></script> -->
   
   <script src="bower_components/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
 
   <script src="bower_components/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
   <!-- The basic File Upload plugin -->
   <script src="bower_components/blueimp-file-upload/js/jquery.fileupload.js"></script>
+  <!-- The main application script -->
+  <script type="text/javascript" src="js/app/login.js"></script>
+  <script type="text/javascript" src="js/app/facebook.js"></script>
 
   
   <script type="text/javascript">
@@ -145,11 +148,11 @@ $(function () {
     });
 });
   
-  
+var script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAg8yCYeg20PYuZR6w_hjMzkmeYfK_F9E4&libraries=places&callback=initAutocomplete';
+document.body.appendChild(script);
   </script>
-  <!-- The main application script -->
-  <script type="text/javascript" src="js/app/login.js"></script>
-  <script type="text/javascript" src="js/app/facebook.js"></script>
   
 <footer>
 

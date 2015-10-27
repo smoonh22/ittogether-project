@@ -34,6 +34,7 @@ public class AuthController {
       result.put("mno", member.getMno());
       result.put("tour",member.getTour());
       result.put("profilePic", member.getProfilePicture());
+      System.out.println("Tour :" + member.getTour());
     }
     return result;
   }
@@ -49,6 +50,7 @@ public class AuthController {
         result.put("result", "success");
       }
     } catch (Exception e ) {
+      e.printStackTrace();
       result.put("result", "failure");
       return result;
     }

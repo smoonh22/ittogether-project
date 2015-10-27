@@ -167,7 +167,23 @@ public class MemberController {
     }
     return result;
   }    
+   
+  
+  @RequestMapping("/updateTour")
+  public Object updateTour(int mno) throws Exception {
+    Map<String,Object> result = new HashMap<String,Object>();
     
+    int count = memberService.updateTour(mno);
+    
+    if (count > 0) {
+      result.put("data", "yes");
+    } else {
+      result.put("data", "yes");
+    }
+    return result;
+    
+    
+  }
     
 
   

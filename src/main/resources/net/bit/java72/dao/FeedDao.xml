@@ -223,7 +223,7 @@
   </delete>
   
   <select id="commentPhotolist" resultMap="FriendFeedMap" parameterType="int">
-  select * from memb_t where mno IN (select mno from joinedfrd_t where fno=#{value});
+  select * from MEMB_T where mno IN (select mno from JOINEDFRD_T where fno=#{value});
   </select>
   <select id="getPicture" parameterType="int" resultType="Feed">
    select * from FEED_T where fno=#{values}

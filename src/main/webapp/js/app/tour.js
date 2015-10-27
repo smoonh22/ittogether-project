@@ -16,7 +16,7 @@
         +"<button class='btn btn-info' data-role='prev'>« 이전</button>"
         +"<span data-role='separator'></span>"
         +"<button class='btn btn-info' data-role='next'>다음 »</button>"
-        +"<button class='btn btn-primary' data-role='end'>도움말 끄기</button>"
+        +"<button class='btn btn-primary tour-close-btn' data-role='end'>도움말 끄기</button>"
         +"</div>"
         +"</div>"
         },
@@ -34,7 +34,7 @@
          +"<button class='btn btn-info' data-role='prev'>« 이전</button>"
          +"<span data-role='separator'></span>"
          +"<button class='btn btn-info' data-role='next'>다음 »</button>"
-         +"<button class='btn btn-primary' data-role='end'>도움말 끄기</button>"
+         +"<button class='btn btn-primary tour-close-btn' data-role='end'>도움말 끄기</button>"
          +"</div>"
          +"</div>"
               },
@@ -52,7 +52,7 @@
               +"<button class='btn btn-info' data-role='prev'>« 이전</button>"
               +"<span data-role='separator'></span>"
               +"<button class='btn btn-info' data-role='next'>다음 »</button>"
-              +"<button class='btn btn-primary' data-role='end'>도움말 끄기</button>"
+              +"<button class='btn btn-primary tour-close-btn' data-role='end'>도움말 끄기</button>"
               +"</div>"
               +"</div>"
         },
@@ -69,7 +69,7 @@
             +"<button class='btn btn-info' data-role='prev'>« 이전</button>"
             +"<span data-role='separator'></span>"
             +"<button class='btn btn-info' data-role='next'>다음 »</button>"
-            +"<button class='btn btn-primary' data-role='end'>도움말 끄기</button>"
+            +"<button class='btn btn-primary tour-close-btn' data-role='end'>도움말 끄기</button>"
             +"</div>"
             +"</div>"
         },
@@ -86,7 +86,7 @@
               +"<button class='btn btn-info' data-role='prev'>« 이전</button>"
               +"<span data-role='separator'></span>"
               +"<button class='btn btn-info' data-role='next'>다음 »</button>"
-              +"<button class='btn btn-primary' data-role='end'>도움말 끄기</button>"
+              +"<button class='btn btn-primary tour-close-btn' data-role='end'>도움말 끄기</button>"
               +"</div>"
               +"</div>"
         },
@@ -103,7 +103,7 @@
               +"<button class='btn btn-info' data-role='prev'>« 이전</button>"
               +"<span data-role='separator'></span>"
               +"<button class='btn btn-info' data-role='next'>다음 »</button>"
-              +"<button class='btn btn-primary' data-role='end'>도움말 끄기</button>"
+              +"<button class='btn btn-primary tour-close-btn tour-close-btn' data-role='end'>도움말 끄기</button>"
               +"</div>"
               +"</div>"
         },
@@ -120,12 +120,25 @@
               +"<button class='btn btn-info' data-role='prev'>« 이전</button>"
               +"<span data-role='separator'></span>"
               +"<button class='btn btn-info' data-role='next'>다음 »</button>"
-              +"<button class='btn btn-primary' data-role='end'>도움말 끄기</button>"
+              +"<button class='btn btn-primary tour-close-btn' data-role='end'>도움말 끄기</button>"
               +"</div>"
               +"</div>"
         }
         
       ]});
        
-       
+       $(document).on('click', '.tour-close-btn', function() {
+         $.ajax('member/updateTour.do', {
+           method: 'get',
+           dataType: 'json',
+           data : {
+                 mno: sessionStorage.getItem('mno'),
+                 },
+           success: function(result) {
+                 if (result.data == 'yes') {
+                 }
+                 
+             }
+         });
+       });
      

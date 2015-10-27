@@ -19,6 +19,7 @@ public interface MemberService {
   List<Member> getFriends(int frdno);
   List<Member> getNoneFriendMarks(int mno);
   List<Member> getFriendMarks(int mno);
+  int updateTour(int mno);
   
  
 }

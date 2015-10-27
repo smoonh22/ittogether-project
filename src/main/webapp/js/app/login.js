@@ -1,4 +1,4 @@
-//window.contextRoot = 'http://hoit.kro.kr:8080';
+//window.contextRoot = 'http://hoit.kro.kr';
   window.contextRoot = '/ittogether';
 
 function login() {
@@ -12,7 +12,7 @@ function login() {
         sessionStorage.setItem('nickname', result.nickname);
         sessionStorage.setItem('mno', result.mno);
         sessionStorage.setItem('profile-pic', result.profilePic);
-        sessionStorage.setItem('tour-start',result.tour)
+        sessionStorage.setItem('tour-start',result.tour);
         window.location = "main.html";
       } else {
         alert('이메일 또는 비밀번호가 맞지 않습니다.');
@@ -24,6 +24,11 @@ function login() {
 $('#signup-button').click(function (event) {
 
   if ($('#email').val() == '' || $('#name').val() == '' || $('#password').val() == '' || $('#pac-input').val() == '' || $('.signup-lat')=='') {
+    console.log('email : ' + $('#email').val());
+    console.log('name : ' + $('#name').val());
+    console.log('password : ' + $('#password').val());
+    console.log('pac-input : ' + $('#pac-input').val());
+    console.log('signup-lat : ' + $('.signup-lat').val());
     alert('값을 모두 입력해 주세요');
   } else {
     $.ajax(contextRoot + '/auth/signup.do', {
