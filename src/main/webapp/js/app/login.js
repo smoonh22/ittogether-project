@@ -47,7 +47,7 @@ $('#signup-button').click(function (event) {
       },
       success: function (result) {
         if (result.result === 'success') {
-          alert('가입 축하드립니다.');
+//          alert('가입 축하드립니다.');
           $('#signupModal').modal('toggle');
           window.location.reload(true);
         } else {

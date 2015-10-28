@@ -37,8 +37,10 @@ body p {
 	margin:0;
 }
 .detail-user-info {
-	padding: 3%;
-	height: 200px;
+	padding-left: 3%;
+	padding-top: 3%;
+	margin-top:2%;
+	height: 150px;
 }
 .detail-info-wrap {
 	margin:0;
@@ -119,9 +121,15 @@ body p {
    margin-right: 3%;
 }
 #detail-profilePicture{
+  width: 90%;
+  height: 90%;
+  margin-top: 5%;
+  margin-left: 1%;
+}
+#detail-profilePicture{
 	width: 90%;
 	height: 90%;
-  margin-top: 5%;
+  margin-top: 7%;
 }
 .detail-user-name{
 	width: 100%;

@@ -5,7 +5,7 @@
       app.controller('activityCtrl', ['$http','$scope','$window', function ($http,$scope,$window) {
         var parent_scope = this;
         var w = angular.element($window);
-        
+       
         
        
     

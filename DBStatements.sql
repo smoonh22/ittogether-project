@@ -1,7 +1,7 @@
 
    
-insert into MEMB_T(name, nicknm, email, pwd, addr, lat, lon, age, sex, hobby, hometwn, intro, cre_dt)
-values('강슬기', '강비글', 'kangSK@hoit.com', '1234', '서울시 강남구', '', '', '25', '2', '영화', '수원', '으힣힣히힣ㅎㅎ스읍~', now());
+insert into MEMB_T(mno, name, nicknm, email, pwd, addr, lat, lon, age, sex, hobby, hometwn, intro, cre_dt)
+values('1','강슬기', '강비글', 'kangSK@hoit.com', '1234', '서울시 강남구', '', '', '25', '2', '영화', '수원', '으힣힣히힣ㅎㅎ스읍~', now());
 insert into MEMB_T(name, nicknm, email, pwd, addr, lat, lon, age, sex, hobby, hometwn, intro, cre_dt)
 values('김다솔', '도덕선생님', 'kangSK@hoit.com', '1234', '서울시 강남구', '', '', '26', '2', '연애', '수원', '세이! 수원~', now());
 insert into MEMB_T(name, nicknm, email, pwd, addr, lat, lon, age, sex, hobby, hometwn, intro, cre_dt)

@@ -1696,7 +1696,7 @@ function friendList(i) {
   
   // popup창에서  '친구추가' 버튼
   $(document).on('click', '.btn-addfriend-popup', function(event) {
-    event.preventDefault();
+    /* event.preventDefault(); */
       var parent = this;
     $.ajax(contextRoot + '/frd/insert.do', {
         method: 'post',
@@ -1780,12 +1780,9 @@ function friendList(i) {
       })
     });
     
-  var check=0;
   // friendbox에서 '친구추가' 버튼
   $(document).on('click', '.addfriend-btn-add', function() {
     var parent = this;
-    console.log('여기야!!!!');
-    if ( check == 0) {
     $.ajax(contextRoot + '/frd/insert.do', {
         method: 'post',
         dataType: 'json',
@@ -1827,8 +1824,6 @@ function friendList(i) {
         }
        }
       })
-    }
-    check=0;
   });
   
   // friendbox에서 '수락하기' 버튼

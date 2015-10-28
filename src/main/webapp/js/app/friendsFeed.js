@@ -134,7 +134,7 @@ define(function () {
                  content : content
                 },
          success : function(result) {
-           
+           $scope.content=$scope.initial;
            return $scope.detailview(fno);
          }
       });
